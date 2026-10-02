@@ -1,0 +1,24 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="15.12" height="14.7897" viewBox="0 0 15.12 14.7897" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="AI Icon">
+<g id="AI">
+<path d="M2.9086 10.6959L2.6794 11.4932H4.34363L4.11443 10.6959C4.00813 10.3505 3.90515 9.99502 3.8055 9.62962C3.71249 9.26422 3.61947 8.90214 3.52646 8.54338C3.4401 8.90878 3.30722 9.27418 3.20757 9.63958C3.11456 9.99834 3.0149 10.3505 2.9086 10.6959ZM0.726157 14.1639L2.64512 8.27189C2.76659 7.89892 3.11429 7.64648 3.50654 7.64648H3.54638C3.93863 7.64648 4.28633 7.89892 4.4078 8.27189L6.32677 14.1639H5.11098L4.60274 12.4H2.41033L1.90209 14.1639H0.726157Z" fill="#5F6166"/>
+<path d="M7.13016 14.1639V7.64648H7.3802C7.88055 7.64648 8.28616 8.05209 8.28616 8.55244V14.1639H7.13016Z" fill="#5F6166"/>
+</g>
+<g id="Vector">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.8856 4.94185C11.8373 4.94185 10.1828 3.27999 10.1828 1.23714C10.1828 3.27999 8.52178 4.94185 6.47997 4.94185C8.52178 4.94185 10.1828 6.59715 10.1828 8.64C10.1828 6.59715 11.8373 4.94185 13.8856 4.94185Z" fill="url(#paint0_linear_0_36)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.12 1.85236C14.0958 1.85236 13.2686 1.02142 13.2686 0C13.2686 1.02142 12.438 1.85236 11.4171 1.85236C12.438 1.85236 13.2686 2.68001 13.2686 3.70143C13.2686 2.68001 14.0958 1.85236 15.12 1.85236Z" fill="url(#paint1_linear_0_36)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_36" x1="13.905" y1="1.3796" x2="9.17713" y2="6.10263" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F67EA"/>
+<stop offset="0.32" stop-color="#FFCB00"/>
+<stop offset="1" stop-color="#D97F02"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_36" x1="13.905" y1="1.3796" x2="9.17713" y2="6.10263" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F67EA"/>
+<stop offset="0.32" stop-color="#FFCB00"/>
+<stop offset="1" stop-color="#D97F02"/>
+</linearGradient>
+</defs>
+</svg>

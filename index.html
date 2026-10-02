@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Onboarding · SocialPilot Reviews</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=11">
+</head>
+<body>
+  <!-- Figma 10657:4151 · Onboarding -->
+  <header class="header">
+    <a class="logo" href="#"><img src="assets/logo.svg" alt="SocialPilot Reviews" width="185" height="28"></a>
+    <a class="link-underline" href="#">I’ll Explore Later Myself</a>
+  </header>
+
+  <!-- Screens 1–3 · search (Figma 10657:4151 / 4266 / 4329) -->
+  <main class="body" id="screen-search">
+    <!-- Left: AI greeting + business search -->
+    <section class="side-panel">
+      <div class="greeting">
+        <div class="greeting__title">
+          <img src="assets/ai-filled.svg" alt="" width="24" height="24">
+          <h1>Hi John!</h1>
+        </div>
+        <p class="greeting__sub">Let's build your online presence. Search for your business, or tell me a bit about it!</p>
+      </div>
+
+      <form class="search-field" id="search-form">
+        <button class="search-field__submit" type="submit" aria-label="Search">
+          <img src="assets/search.svg" alt="" width="24" height="24">
+        </button>
+        <textarea id="query" name="query" autofocus aria-label="Search your business"
+          placeholder="Search your business by name and tell me a little about your business."></textarea>
+      </form>
+
+      <div class="footer">
+        <div class="divider-text">
+          <span class="divider-text__line"></span>
+          <p>Or lets start by connecting your existing Page and I will take over from there.</p>
+          <span class="divider-text__line"></span>
+        </div>
+        <div class="pills">
+          <button class="pill" type="button">
+            <img src="assets/platform-gbp.svg" alt="" width="20" height="20">
+            Google Business Profile
+          </button>
+          <button class="pill" type="button">
+            <img src="assets/platform-facebook.svg" alt="" width="20" height="20">
+            Facebook Page
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right · state 1: illustration (Figma 10657:4151) -->
+    <section class="preview" id="state-empty" aria-hidden="true">
+      <div class="illus">
+        <div class="illus__bar">
+          <img src="assets/google-g.svg" alt="" width="24" height="24">
+          <div class="illus__bar-row">
+            <div class="illus__search">
+              <span>best thin crust pizza</span>
+              <img src="assets/mini-search.svg" alt="" width="10" height="10">
+            </div>
+            <div class="illus__account">
+              <img src="assets/apps-grid.svg" alt="" width="10" height="10">
+              <img class="illus__avatar" src="assets/avatar.png" alt="" width="20" height="20">
+            </div>
+          </div>
+        </div>
+
+        <div class="illus__content">
+          <div class="illus__results">
+            <span class="illus__chip">Top Rated <img src="assets/clear.svg" alt="" width="14" height="14"></span>
+            <div class="illus__list">
+              <div class="result">
+                <img class="result__thumb" src="assets/pizza.png" alt="">
+                <div class="result__meta">
+                  <div class="result__head">
+                    <p class="result__name">Johny’s Pizzeria</p>
+                    <div class="stars" data-rating="5"></div>
+                  </div>
+                  <div class="result__lines"><span></span><span></span></div>
+                </div>
+              </div>
+              <div class="result">
+                <span class="result__thumb result__thumb--empty"></span>
+                <div class="result__meta">
+                  <div class="result__head">
+                    <span class="result__name-skel"></span>
+                    <div class="stars" data-rating="4"></div>
+                  </div>
+                  <div class="result__lines"><span></span><span></span></div>
+                </div>
+              </div>
+              <div class="result">
+                <span class="result__thumb result__thumb--empty"></span>
+                <div class="result__meta">
+                  <div class="result__head">
+                    <span class="result__name-skel"></span>
+                    <div class="stars" data-rating="4"></div>
+                  </div>
+                  <div class="result__lines"><span></span><span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="map">
+            <img src="assets/map-1.svg" alt="" style="left:.08px;top:0;width:272px;height:176.949px">
+            <img src="assets/map-2.svg" alt="" style="left:0;top:0;width:272.082px;height:176.949px">
+            <img src="assets/map-3.svg" alt="" style="left:175.05px;top:0;width:69.448px;height:75.156px">
+            <img src="assets/map-4.svg" alt="" style="left:.08px;top:155.38px;width:28.458px;height:21.565px">
+            <img src="assets/map-pin.svg" alt="" style="left:173.07px;top:15.37px;width:33.871px;height:46.573px">
+            <img src="assets/map-5.svg" alt="" style="left:9.13px;top:108.13px;width:97.419px;height:68.815px">
+            <img src="assets/map-6.svg" alt="" style="left:147.46px;top:88.47px;width:124.625px;height:88.526px">
+          </div>
+        </div>
+      </div>
+
+      <div class="preview__caption">
+        <p class="preview__title">Start by telling us your business name</p>
+        <p class="preview__sub">We’ll handle the rest!</p>
+      </div>
+    </section>
+
+    <!-- Right · state 2: searching (Figma 10657:4266) / state 3: results (Figma 10657:4329) -->
+    <section class="results" id="state-results" hidden>
+      <p class="results__status" role="status">
+        <img src="assets/ai-filled.svg" alt="" width="16" height="16">
+        <span id="status-text"></span>
+      </p>
+      <div class="results__list" id="results-list"></div>
+    </section>
+  </main>
+
+  <!-- Screen 4 · processing (Figma 10657:4415) -->
+  <main class="body" id="screen-processing" hidden>
+    <aside class="setup-panel">
+      <div class="setup-panel__top">
+        <button class="back-link" type="button" id="back">
+          <img src="assets/back.svg" alt="" width="20" height="20">
+          <span class="link-underline">Back to results</span>
+        </button>
+        <div class="selected-business">
+          <span class="business__avatar" id="sel-avatar"></span>
+          <div class="business__text">
+            <div class="business__info">
+              <span class="business__name" id="sel-name"></span>
+              <span class="info-tag info-tag--muted" id="sel-category"></span>
+            </div>
+            <span class="business__context" id="sel-address"></span>
+          </div>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Setting up your business" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20">
+          <span class="progress__bar"></span>
+        </div>
+      </div>
+
+      <ol class="steps" id="steps">
+        <li class="step step--active">
+          <span class="step__ai"><img src="assets/ai-icon-sm.svg" alt=""></span>
+          <span class="step__label shimmer-text">Creating an optimized business profile for your business...</span>
+        </li>
+        <li class="step">
+          <span class="step__icon"><img src="assets/step-competitor.svg" alt="" width="12" height="12"></span>
+          <span class="step__label">researching your competitor ...</span>
+        </li>
+        <li class="step">
+          <span class="step__icon"><img src="assets/step-brand.svg" alt="" width="12" height="12"></span>
+          <span class="step__label">updating your brand context ...</span>
+        </li>
+        <li class="step">
+          <span class="step__icon"><img src="assets/step-profile.svg" alt="" width="12" height="12"></span>
+          <span class="step__label">Updating your business profile with optimized content</span>
+        </li>
+      </ol>
+    </aside>
+
+    <div class="workspace">
+    <!-- Animation from "AI - Animation/AI-Onboarding Animation.html" -->
+    <section class="processing" id="processing">
+      <canvas class="dots" aria-hidden="true"></canvas>
+      <div class="stage-inner">
+        <div class="ai-icon" role="img" aria-label="AI">
+          <span class="ai-icon__effects" aria-hidden="true"></span>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.857 13.5834C14.6412 13.5834 10.4285 9.35181 10.4285 4.15012C10.4285 9.35181 6.19905 13.5834 1 13.5834C6.19905 13.5834 10.4285 17.7983 10.4285 23C10.4285 17.7983 14.6412 13.5834 19.857 13.5834Z" fill="url(#ai-grad-0)"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M23 5.71665C20.3921 5.71665 18.2857 3.60085 18.2857 1C18.2857 3.60085 16.171 5.71665 13.5715 5.71665C16.171 5.71665 18.2857 7.82409 18.2857 10.4249C18.2857 7.82409 20.3921 5.71665 23 5.71665Z" fill="url(#ai-grad-1)"/>
+            <defs>
+              <linearGradient id="ai-grad-0" x1="19.9063" y1="4.51286" x2="7.86775" y2="16.5391" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0F67EA"/><stop offset="0.32" stop-color="#FFCB00"/><stop offset="1" stop-color="#D97F02"/>
+              </linearGradient>
+              <linearGradient id="ai-grad-1" x1="19.9063" y1="4.51286" x2="7.86775" y2="16.5391" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0F67EA"/><stop offset="0.32" stop-color="#FFCB00"/><stop offset="1" stop-color="#D97F02"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <p class="aida-status" role="status" aria-live="polite">
+          <span class="status-line is-visible"><span>Optimising your business profile</span></span>
+          <span class="status-line"><span>Researching your competitor ...</span></span>
+          <span class="status-line"><span>Updating your brand context ...</span></span>
+        </p>
+      </div>
+      <button class="play-anim" type="button" hidden>Play animation</button>
+    </section>
+
+      <!-- Screen 6 · generated business profile (Figma 10657:4531) -->
+      <section class="profile-form" id="profile-form" data-view="all" hidden>
+        <div class="profile-form__head">
+          <div class="pills" role="group" aria-label="Show fields">
+            <button class="pill is-active" type="button" aria-pressed="true" data-view="all">All Fields</button>
+            <button class="pill" type="button" aria-pressed="false" data-view="ai">AI Corrected</button>
+            <button class="pill" type="button" aria-pressed="false" data-view="missing">Missing</button>
+          </div>
+          <button class="btn-primary" type="button">
+            <span class="btn-primary__g"><img src="assets/google-g-color.svg" alt=""></span>
+            Connect Google &amp; Publish
+            <img src="assets/arrow-right.svg" alt="" width="20" height="20">
+          </button>
+        </div>
+
+        <section class="form-card">
+          <header class="form-card__head">
+            <div class="form-card__title"><h2>Basic Details</h2><span class="form-card__divider"></span><span class="form-card__note"><img src="assets/ai-filled.svg" alt="" width="16" height="16">Added from the business details you’ve shared.</span></div>
+            <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse Basic Details"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
+          </header>
+          <div class="form-card__body">
+            <div class="form-row"><label class="field"><span class="field__label">Name<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-name" value="TWC Jaipur"></label><label class="field"><span class="field__label">Website<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-website" value="www.tcb.com"></label></div>
+            <div class="form-row"><label class="field"><span class="field__label">Phone Number<span aria-hidden="true">*</span></span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel"></span></label><label class="field"><span class="field__label">Alternative Phone Number</span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel"></span></label></div>
+            <div class="form-row">
+              <div class="form-col">
+                <label class="field"><span class="field__label">Email</span><input class="input" type="text" id="form-email" value="twcjaipur@gmail.com"></label>
+                <label class="field"><span class="field__label">Street Address<span aria-hidden="true">*</span></span><textarea class="input input--address" id="form-address">Ground Floor, Fort Anandam, Plot No 3, near Mercedes Benz, D-Block, Sector 4, Jaipur, Rajasthan 302017</textarea></label>
+                <label class="field"><span class="field__label">City<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-city" value="Jaipur"></label>
+                <label class="field"><span class="field__label">State/Region<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-state" value="Rajasthan"></label>
+              </div>
+              <div class="field">
+                <span class="field__label field__label--split"><span class="field__label">Map Location<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></span><button class="link-btn" type="button"><img src="assets/edit.svg" alt="" width="16" height="16">Adjust</button></span>
+                <div class="geo-map">
+                  <img class="geo-map__tiles" src="assets/map.jpg" alt="Map of the business location">
+                  <img class="geo-map__marker" src="assets/map-marker.svg" alt="" width="32" height="32">
+                  <button class="geo-map__fullscreen" type="button" aria-label="Full screen"><img src="assets/map-fullscreen.svg" alt="" width="24" height="24"></button>
+                  <div class="geo-map__zoom"><button type="button" aria-label="Zoom in"><img src="assets/map-zoom-in.svg" alt="" width="16" height="16"></button><button type="button" aria-label="Zoom out"><img src="assets/map-zoom-out.svg" alt="" width="12" height="2"></button></div>
+                  <img class="geo-map__logo" src="assets/google-logo.svg" alt="Google" width="71" height="24">
+                </div>
+              </div>
+            </div>
+            <div class="form-row"><label class="field "><span class="field__label">Country<span aria-hidden="true">*</span></span><select class="input input--select"><option>India</option></select></label><label class="field"><span class="field__label">Latitude</span><input class="input" type="text"></label></div>
+            <div class="form-row"><label class="field"><span class="field__label">ZIP/Post Code<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-zip" value="302012"></label><label class="field"><span class="field__label">Longitude</span><input class="input" type="text"></label></div>
+          </div>
+        </section>
+
+        <section class="form-card" data-ai-corrected>
+          <header class="form-card__head">
+            <div class="form-card__title"><h2>About</h2></div>
+            <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse About"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
+          </header>
+          <div class="form-card__body">
+            <div class="form-row form-row--loose">
+              <div class="field"><label class="field__label" for="primary-cat">Primary Business Category<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></label><select class="input input--select" id="primary-cat"><option>Coffee Shop</option></select><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span id="note-primary">Kept “Coffee Shop” as your primary category. 8 of the 10 top-ranked cafés in Jaipur use it, so it’s what nearby searches match first.</span></p></div>
+              <div class="field"><label class="field__label" for="secondary-cat">Secondary Business Category<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></label><input class="input input--plain" id="secondary-cat" type="text" value="Coffee Shop"></div>
+            </div>
+            <div class="field form-loose"><span class="field__label">Additional Categories<img src="assets/info.svg" alt="" width="16" height="16"></span><div class="input input--tags" data-tags><span class="tag">Coffee Roasters<button type="button" aria-label="Remove Coffee Roasters"><img src="assets/clear.svg" alt="" width="16" height="16"></button></span><input type="text" aria-label="Add category"></div><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16">Added “Coffee Roasters” because you roast in-house. Only 2 of your 10 closest competitors list it, so it sets you apart in “fresh roasted coffee” searches.</p></div>
+            <div class="field field--area"><label class="field__label" for="about-desc">Description<img src="assets/info.svg" alt="" width="16" height="16"></label><span class="input input--area input--area-lg"><textarea id="about-desc" data-count>Third Wave Coffee is a specialty coffee shop dedicated to thoughtfully sourced beans, precise brewing, and warm hospitality. From bright pour-overs to silky espresso drinks, every cup is crafted to highlight the character of its origin in a relaxed, welcoming space.</textarea><span class="char-count">0</span></span><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16">Your profile had no description. This one leads with sourcing, brewing and a calm place to sit — the three things reviewers praise most at <span class="js-city">Jaipur</span>’s top specialty cafés.</p></div>
+            <div class="field field--area"><label class="field__label" for="about-short">Short Description<img src="assets/info.svg" alt="" width="16" height="16"></label><span class="input input--area input--area-sm"><textarea id="about-short" data-count maxlength="150">Ethically sourced, freshly roasted specialty coffee, brewed with care and served in a relaxed space made for slowing down.</textarea><span class="char-count">0</span></span><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16">Kept under 150 characters so Google doesn’t cut it off in search results. Ethical sourcing comes first because it runs through your competitors’ best-rated reviews.</p></div>
+            <div class="field form-loose"><span class="field__label">Amenities<img src="assets/info.svg" alt="" width="16" height="16"></span><div class="input input--tags" data-tags><span class="tag">Parking<button type="button" aria-label="Remove Parking"><img src="assets/clear.svg" alt="" width="16" height="16"></button></span><span class="tag">Free Wi-Fi<button type="button" aria-label="Remove Free Wi-Fi"><img src="assets/clear.svg" alt="" width="16" height="16"></button></span><input type="text" aria-label="Add amenity"></div><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16">Added Parking and Free Wi-Fi. They’re the questions people ask most on nearby cafés’ profiles, and 7 of your 10 closest competitors list both.</p></div>
+            <div class="field form-loose"><label class="field__label" for="about-lang">Language<img src="assets/info.svg" alt="" width="16" height="16"></label><select class="input input--select form-half" id="about-lang"><option>English</option><option>Hindi</option></select><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16">Set to English, the language most reviews of <span class="js-city">Jaipur</span> cafés are written in.</p></div>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <header class="form-card__head">
+            <div class="form-card__title"><h2>Hours</h2></div>
+            <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse Hours"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
+          </header>
+          <div class="form-card__body">
+            <div class="form-row form-row--hours">
+              <label class="field field--loose"><span class="field__label">Opening Date<img src="assets/info.svg" alt="" width="16" height="16"></span><span class="input input--icon"><input type="text" value="25-04-2025"><img src="assets/calendar.svg" alt="" width="20" height="20"></span></label>
+              <label class="field field--loose"><span class="field__label">Opening Hours</span><select class="input input--select"><option>Select</option></select></label>
+            </div>
+            <div class="days">
+              <div class="day">
+                <label class="day__name"><input type="checkbox" checked>Monday</label>
+                <select class="input input--select day__hours" aria-label="Monday hours"><option>24 hrs</option></select>
+                <button class="icon-btn day__copy" type="button" aria-label="Copy Monday hours to other days"><img src="assets/copy.svg" alt="" width="20" height="20"></button>
+              </div>
+              <div class="day">
+                <label class="day__name"><input type="checkbox" checked>Tuesday</label>
+                <select class="input input--select day__hours" aria-label="Tuesday hours"><option>24 hrs</option></select>
+                <button class="icon-btn day__copy" type="button" aria-label="Copy Tuesday hours to other days"><img src="assets/copy.svg" alt="" width="20" height="20"></button>
+              </div>
+              <div class="day">
+                <label class="day__name"><input type="checkbox" checked>Wednesday</label>
+                <select class="input input--select day__hours" aria-label="Wednesday hours"><option>24 hrs</option></select>
+                <button class="icon-btn day__copy" type="button" aria-label="Copy Wednesday hours to other days"><img src="assets/copy.svg" alt="" width="20" height="20"></button>
+              </div>
+              <div class="day">
+                <label class="day__name"><input type="checkbox" checked>Thursday</label>
+                <select class="input input--select day__hours" aria-label="Thursday hours"><option>24 hrs</option></select>
+                <button class="icon-btn day__copy" type="button" aria-label="Copy Thursday hours to other days"><img src="assets/copy.svg" alt="" width="20" height="20"></button>
+              </div>
+              <div class="day">
+                <label class="day__name"><input type="checkbox" checked>Friday</label>
+                <select class="input input--select day__hours" aria-label="Friday hours"><option>24 hrs</option></select>
+                <button class="icon-btn day__copy" type="button" aria-label="Copy Friday hours to other days"><img src="assets/copy.svg" alt="" width="20" height="20"></button>
+              </div>
+              <div class="day">
+                <label class="day__name"><input type="checkbox" checked>Saturday</label>
+                <select class="input input--select day__hours" aria-label="Saturday hours"><option>24 hrs</option></select>
+                <button class="icon-btn day__copy" type="button" aria-label="Copy Saturday hours to other days"><img src="assets/copy.svg" alt="" width="20" height="20"></button>
+              </div>
+              <div class="day">
+                <label class="day__name"><input type="checkbox">Sunday</label>
+                <span class="day__closed">Closed</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <header class="form-card__head">
+            <div class="form-card__title"><h2>Services</h2></div>
+            <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse Services"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
+          </header>
+          <div class="form-card__body">
+            <button class="dropzone dropzone--service" type="button"><img src="assets/plus.svg" alt="" width="24" height="24">Add Services</button>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <header class="form-card__head">
+            <div class="form-card__title"><h2>Media</h2></div>
+            <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse Media"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
+          </header>
+          <div class="form-card__body">
+            <div class="media-grid">
+              <div class="field"><span class="field__label">Cover image</span><button class="dropzone dropzone--cover" type="button"><img src="assets/upload.svg" alt="" width="36" height="27"><span>Upload Image</span><small>PNG, JPG, WEBP</small></button></div>
+              <div class="field"><span class="field__label">Logo</span><button class="dropzone dropzone--square" type="button"><img src="assets/upload.svg" alt="" width="36" height="27"><span>Upload Image</span><small>PNG, JPG, WEBP</small></button></div>
+              <div class="field media-grid__wide"><span class="field__label">Photos and Videos</span><button class="dropzone dropzone--square" type="button"><img src="assets/upload.svg" alt="" width="36" height="27"><span>Upload Media</span></button></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-card">
+          <header class="form-card__head">
+            <div class="form-card__title"><h2>Social Media</h2></div>
+            <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse Social Media"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
+          </header>
+          <div class="form-card__body">
+            <label class="social"><img src="assets/platform-facebook.svg" alt="Facebook" width="24" height="24"><input class="input" type="url" placeholder="Paste Facebook URL"></label>
+            <label class="social"><img src="assets/platform-instagram.svg" alt="Instagram" width="24" height="24"><input class="input" type="url" placeholder="Paste Instagram URL"></label>
+            <label class="social"><img src="assets/platform-threads.svg" alt="Threads" width="24" height="24"><input class="input" type="url" placeholder="Paste Threads URL"></label>
+            <label class="social"><img src="assets/platform-linkedin.svg" alt="Linkedin" width="24" height="24"><input class="input" type="url" placeholder="Paste Linkedin URL"></label>
+            <label class="social"><img src="assets/platform-youtube.svg" alt="Youtube" width="24" height="24"><input class="input" type="url" placeholder="Paste Youtube URL"></label>
+            <label class="social"><img src="assets/platform-x.svg" alt="X" width="24" height="24"><input class="input" type="url" placeholder="Paste X URL"></label>
+            <label class="social"><img src="assets/platform-pinterest.svg" alt="Pintrest" width="24" height="24"><input class="input" type="url" placeholder="Paste Pintrest URL"></label>
+            <label class="social"><img src="assets/platform-tiktok.svg" alt="TikTok" width="24" height="24"><input class="input" type="url" placeholder="Paste TikTok URL"></label>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Render 5 stars per row: filled up to data-rating, rest grey
+    document.querySelectorAll('.stars').forEach(el => {
+      const n = +el.dataset.rating;
+      el.innerHTML = [1, 2, 3, 4, 5].map(i =>
+        `<img src="assets/star-${i <= n ? 'filled' : 'empty'}.svg" alt="">`).join('');
+    });
+
+    // ---- Search flow: empty → searching → results ----
+    // Results are generated from what the user types (no backend yet):
+    // name, location and category are read from the text, then a handful of
+    // believable listings are built around them. Same query → same results.
+    const CITIES = {
+      Bangalore: { state: 'Karnataka', pin: '560', aka: ['bengaluru', 'blr'], areas: ['Indiranagar', 'Koramangala', 'HSR Layout', 'Jayanagar', 'Whitefield', 'JP Nagar'] },
+      Jaipur: { state: 'Rajasthan', pin: '302', aka: [], areas: ['Vaishali Nagar', 'C-Scheme', 'Malviya Nagar', 'Mansarovar', 'Raja Park', 'Tonk Road'] },
+      Mumbai: { state: 'Maharashtra', pin: '400', aka: ['bombay'], areas: ['Bandra West', 'Andheri West', 'Lower Parel', 'Colaba', 'Powai', 'Juhu'] },
+      'New Delhi': { state: 'Delhi', pin: '110', aka: ['delhi'], areas: ['Hauz Khas', 'Connaught Place', 'Saket', 'Rajouri Garden', 'Defence Colony', 'Lajpat Nagar'] },
+      Pune: { state: 'Maharashtra', pin: '411', aka: [], areas: ['Koregaon Park', 'Baner', 'Kalyani Nagar', 'Aundh', 'Viman Nagar', 'Kothrud'] },
+      Hyderabad: { state: 'Telangana', pin: '500', aka: [], areas: ['Banjara Hills', 'Jubilee Hills', 'Gachibowli', 'Madhapur', 'Kondapur', 'Begumpet'] },
+      Chennai: { state: 'Tamil Nadu', pin: '600', aka: ['madras'], areas: ['Adyar', 'T. Nagar', 'Anna Nagar', 'Besant Nagar', 'Nungambakkam', 'Velachery'] },
+      Kolkata: { state: 'West Bengal', pin: '700', aka: ['calcutta'], areas: ['Park Street', 'Salt Lake', 'Ballygunge', 'New Town', 'Gariahat', 'Alipore'] },
+      Ahmedabad: { state: 'Gujarat', pin: '380', aka: [], areas: ['Navrangpura', 'Satellite', 'Prahlad Nagar', 'Bodakdev', 'Thaltej', 'Vastrapur'] },
+      Gurugram: { state: 'Haryana', pin: '122', aka: ['gurgaon'], areas: ['DLF Phase 4', 'Sector 29', 'Golf Course Road', 'Sohna Road', 'Cyber City', 'Sector 56'] },
+    };
+    // Other cities: right state and PIN prefix, with common neighbourhood names
+    const GENERIC_AREAS = ['MG Road', 'Civil Lines', 'Model Town', 'Station Road', 'City Centre', 'Sector 5'];
+    [
+      ['Indore', 'Madhya Pradesh', '452'], ['Bhopal', 'Madhya Pradesh', '462'], ['Lucknow', 'Uttar Pradesh', '226'],
+      ['Noida', 'Uttar Pradesh', '201'], ['Agra', 'Uttar Pradesh', '282'], ['Varanasi', 'Uttar Pradesh', '221'],
+      ['Chandigarh', 'Chandigarh', '160'], ['Ludhiana', 'Punjab', '141'], ['Amritsar', 'Punjab', '143'],
+      ['Dehradun', 'Uttarakhand', '248'], ['Kochi', 'Kerala', '682'], ['Thiruvananthapuram', 'Kerala', '695'],
+      ['Coimbatore', 'Tamil Nadu', '641'], ['Madurai', 'Tamil Nadu', '625'], ['Mysuru', 'Karnataka', '570'],
+      ['Mangaluru', 'Karnataka', '575'], ['Goa', 'Goa', '403'], ['Surat', 'Gujarat', '395'],
+      ['Vadodara', 'Gujarat', '390'], ['Nagpur', 'Maharashtra', '440'], ['Nashik', 'Maharashtra', '422'],
+      ['Visakhapatnam', 'Andhra Pradesh', '530'], ['Vijayawada', 'Andhra Pradesh', '520'], ['Bhubaneswar', 'Odisha', '751'],
+      ['Patna', 'Bihar', '800'], ['Ranchi', 'Jharkhand', '834'], ['Raipur', 'Chhattisgarh', '492'],
+      ['Guwahati', 'Assam', '781'], ['Udaipur', 'Rajasthan', '313'], ['Jodhpur', 'Rajasthan', '342'],
+    ].forEach(([c, state, pin]) => (CITIES[c] = { state, pin, aka: [], areas: GENERIC_AREAS }));
+    CITIES.Mysuru.aka = ['mysore'];
+    CITIES.Mangaluru.aka = ['mangalore'];
+    CITIES.Visakhapatnam.aka = ['vizag'];
+    CITIES.Thiruvananthapuram.aka = ['trivandrum'];
+    CITIES.Kochi.aka = ['cochin'];
+    // With no location in the query, results spread across these
+    const MAJOR_CITIES = ['Bangalore', 'Mumbai', 'New Delhi', 'Pune', 'Hyderabad', 'Chennai'];
+
+    const CATEGORIES = [
+      { match: /coffee|caf[eé]|espresso|brew/, category: 'Coffee Shop', noun: 'cafés' },
+      { match: /ice ?cream|icecream|gelato|dessert|waffle|sweet/, category: 'Dessert Shop', noun: 'dessert shops' },
+      { match: /bakery|bake|cake|patisserie|bread/, category: 'Bakery', noun: 'bakeries' },
+      { match: /pizza|burger|restaurant|kitchen|biryani|dhaba|bistro|diner|food|eatery/, category: 'Restaurant', noun: 'restaurants' },
+      { match: /salon|hair|spa|beauty|nail|barber/, category: 'Beauty Salon', noun: 'salons' },
+      { match: /gym|fitness|yoga|crossfit|pilates/, category: 'Fitness Centre', noun: 'gyms' },
+      { match: /clinic|dental|dentist|doctor|physio|hospital/, category: 'Medical Clinic', noun: 'clinics' },
+      { match: /boutique|clothing|fashion|apparel|saree|wear/, category: 'Clothing Store', noun: 'stores' },
+      { match: /candle|gift|decor|craft/, category: 'Gift Shop', noun: 'gift shops' },
+      { match: /hotel|stay|resort|hostel|homestay/, category: 'Hotel', noun: 'hotels' },
+      { match: /school|academy|class|coaching|tuition/, category: 'Coaching Centre', noun: 'coaching centres' },
+    ];
+    const STREETS = ['Main Road', '100 Feet Road', 'Ring Road', 'Station Road', 'Market Street', 'Park Avenue', 'Link Road'];
+    const PLATFORM = { gbp: 'Google', facebook: 'Facebook' };
+    const SEARCH_DELAY = 1500;
+    let results = [];
+
+    // Small deterministic hash so a query always produces the same listings
+    const hash = str => [...str].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+    const pick = (arr, n) => arr[n % arr.length];
+    const titleCase = t => (t === t.toLowerCase() ? t.replace(/\b\w/g, c => c.toUpperCase()) : t);
+
+    function parseQuery(q) {
+      const text = q.replace(/\s+/g, ' ').trim();
+      const lower = text.toLowerCase();
+
+      // Name: quoted text, "called/named X", or the opening phrase
+      const name = (text.match(/[“"]([^”"]{2,60})[”"]/)
+        || text.match(/(?:called|named|name is)\s+([^,.]+?)(?=\s+(?:in|at|and|we|which|located|based|near)\b|[,.]|$)/i)
+        || text.match(/^(?:my business is |we are |i run |i own |this is )?([^,.]+?)(?=\s+(?:in|at|near)\s|[,.]|$)/i)
+        || [, text])[1].trim().split(' ').slice(0, 6).join(' ');
+
+      // Location: a known area wins (it implies the city), then a known city,
+      // then any capitalised place after "in/at/near" (used as-is)
+      let city, area;
+      for (const [c, info] of Object.entries(CITIES)) {
+        const hitArea = info.areas !== GENERIC_AREAS && info.areas.find(a => lower.includes(a.toLowerCase()));
+        if (hitArea) { city = c; area = hitArea; break; }
+        if ([c.toLowerCase(), ...info.aka].some(k => new RegExp(`\\b${k}\\b`).test(lower))) city = city || c;
+      }
+      if (!city) {
+        const place = text.match(/\b(?:in|at|near|from)\s+([A-Z][a-zA-Z]+(?:\s[A-Z][a-zA-Z]+)?)/);
+        if (place) city = place[1];
+      }
+
+      const cat = CATEGORIES.find(c => c.match.test(lower)) || { category: 'Local Business', noun: 'businesses' };
+      return { name: titleCase(name), city, area, ...cat };
+    }
+
+    function buildResults(q) {
+      const p = parseQuery(q);
+      const h = hash(q.toLowerCase());
+      const infoFor = c => CITIES[c] || { state: '', pin: '', aka: [], areas: ['City Centre', 'Main Market', 'Old Town'] };
+
+      // Where each listing sits: one city (with branches across its neighbourhoods),
+      // or — with no location typed — spread across major cities
+      let spots;
+      if (p.city) {
+        const areas = infoFor(p.city).areas;
+        const home = p.area || pick(areas, h);
+        const rest = areas.filter(a => a !== home);
+        spots = [home, home, rest[0], rest[1]].map(area => ({ city: p.city, area }));
+      } else {
+        const start = h % MAJOR_CITIES.length;
+        const cities = [0, 0, 1, 2].map(k => MAJOR_CITIES[(start + k) % MAJOR_CITIES.length]);
+        spots = cities.map((city, i) => ({ city, area: pick(CITIES[city].areas, h + Math.max(i - 1, 0) * 7) }));
+      }
+
+      const address = (i, { city, area }) => {
+        const info = infoFor(city);
+        const n = (h >>> (i * 3)) % 90 + 4;
+        const unit = pick(['Shop No', 'Ground Floor, Plot No', '1st Floor, No', 'Unit'], h + i);
+        const pin = info.pin ? ' ' + info.pin + String((h + i * 17) % 90 + 1).padStart(3, '0') : '';
+        const region = info.state ? `, ${info.state}${pin}` : '';
+        return { text: `${unit} ${n}, ${pick(STREETS, h + i)}, ${area}, ${city}${region}`, state: info.state, zip: pin.trim() };
+      };
+
+      // Main listing on Google and Facebook, then two more branches. Branch names
+      // drop a trailing city ("Third Wave Coffee Jaipur" → "Third Wave Coffee C-Scheme")
+      // and use the city when branches are in different cities.
+      const cityWords = [...new Set(spots.map(s => s.city))].flatMap(c => [c, ...infoFor(c).aka]);
+      const base = p.name.replace(new RegExp(`\\s+(${cityWords.join('|')})$`, 'i'), '');
+      const platforms = ['gbp', 'facebook', 'gbp', 'facebook'];
+      return {
+        parsed: p,
+        list: spots.map((spot, i) => {
+          const addr = address(i < 2 ? 0 : i, spot);
+          const suffix = p.city ? spot.area : spot.city;
+          return { name: i < 2 ? p.name : `${base} ${suffix}`, category: p.category, noun: p.noun,
+            platform: platforms[i], address: addr.text, city: spot.city, state: addr.state, zip: addr.zip };
+        }),
+      };
+    }
+
+    const form = document.getElementById('search-form');
+    const query = document.getElementById('query');
+    const empty = document.getElementById('state-empty');
+    const panel = document.getElementById('state-results');
+    const status = document.getElementById('status-text');
+    const list = document.getElementById('results-list');
+    let timer;
+
+    const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+    const skeleton = () =>
+      '<div class="list-skeleton"><span class="list-skeleton__avatar"></span><div class="list-skeleton__text"><span></span><span></span></div></div>';
+
+    const resultRow = (b, i) => `
+      <button class="business" type="button" data-index="${i}">
+        <span class="business__avatar">${esc(b.name[0])}</span>
+        <span class="business__text">
+          <span class="business__info">
+            <span class="business__name">${esc(b.name)}</span>
+            <span class="info-tag">${esc(b.category)}</span>
+            <span class="info-tag"><img src="assets/platform-${b.platform}.svg" alt="" width="12" height="12">${PLATFORM[b.platform]}</span>
+          </span>
+          <span class="business__context">${esc(b.address)}</span>
+        </span>
+      </button>`;
+
+    const createRow = `
+      <button class="business business--create" type="button">
+        <span class="business__avatar"><img src="assets/add.svg" alt="" width="16" height="16"></span>
+        <span class="business__text">
+          <span class="business__info"><span class="business__name">I don't see my business</span></span>
+          <span class="business__context">Create a new google business profile</span>
+        </span>
+      </button>`;
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const q = query.value.trim();
+      if (!q) return query.focus();
+
+      clearTimeout(timer);
+      empty.hidden = true;
+      panel.hidden = false;
+      panel.setAttribute('aria-busy', 'true');
+      const found = buildResults(q);
+      const where = [found.parsed.name, found.parsed.area, found.parsed.city].filter(Boolean).join(', ');
+      status.textContent = `Searching your business in Google & Facebook “${where}”...`;
+      list.innerHTML = skeleton().repeat(5);
+
+      timer = setTimeout(() => {
+        panel.setAttribute('aria-busy', 'false');
+        results = found.list;
+        status.textContent = `Found businesses related to “${found.parsed.name}”`;
+        list.innerHTML = results.map(resultRow).join('') + createRow;
+      }, SEARCH_DELAY);
+    });
+
+    // Enter searches, Shift+Enter adds a new line
+    query.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        form.requestSubmit();
+      }
+    });
+
+    // ---- Pick a business → processing screen (Figma 10657:4415) ----
+    const screenSearch = document.getElementById('screen-search');
+    const screenProcessing = document.getElementById('screen-processing');
+
+    const setupPanel = screenProcessing.querySelector('.setup-panel');
+    const selCard = screenProcessing.querySelector('.selected-business');
+    const backLink = document.getElementById('back');
+    const progress = screenProcessing.querySelector('.progress');
+    const stepsList = document.getElementById('steps');
+    const stepsTemplate = stepsList.innerHTML;  // restored when going back
+    const profileForm = document.getElementById('profile-form');
+    const animPanel = document.getElementById('processing');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Transition timings (ms) and curves, following the animate skill:
+    // exits ease-in and run shorter, on-screen moves ease-in-out, entrances
+    // ease-out — and phases overlap so nothing comes to a dead stop.
+    const T = {
+      fadeOut: 240,   // search side + other results leave
+      move: 800,      // card flies, panel shrinks
+      overlap: 0.65,  // left panel starts settling at 65% of the flight
+      settle: 360,    // back link, progress, animation panel arrive
+      stepIn: 420,    // each reasoning step slides down
+      stepGap: 800,   // between reasoning steps
+    };
+    const EASE_IN = 'cubic-bezier(0.32, 0, 0.67, 0)';           // ease-in-cubic — exits
+    const EASE_IN_OUT = 'cubic-bezier(0.645, 0.045, 0.355, 1)';  // ease-in-out-cubic — moves
+    const EASE_OUT = 'cubic-bezier(0.33, 1, 0.68, 1)';           // ease-out-cubic — entrances
+    let run = 0;        // bumps on every enter/exit so stale steps bail out
+    let flying = null;  // clone of the clicked card while it moves
+
+    const fade = (el, from, to, ms, extra = {}) =>
+      el.animate([{ opacity: from, ...extra.from }, { opacity: to, ...extra.to }],
+        { duration: ms, delay: extra.delay || 0, easing: extra.easing || EASE_OUT, fill: 'both' });
+    // Resolves true when every animation finishes, false if one was cancelled.
+    // Phases wait on the animations themselves (not timers), so a hidden tab
+    // that pauses them can't knock the sequence out of step.
+    const done = anims => Promise.all(anims.map(a => a.finished)).then(() => true, () => false);
+
+    function fillSelected(b) {
+      document.getElementById('sel-avatar').textContent = b.name[0];
+      document.getElementById('sel-name').textContent = b.name;
+      document.getElementById('sel-category').textContent = b.category;
+      document.getElementById('sel-address').textContent = b.address;
+      const slug = b.name.toLowerCase().replace(/[^a-z0-9]+/g, '');
+      const set = (id, v) => (document.getElementById(id).value = v);
+      set('form-name', b.name);
+      set('form-address', b.address);
+      set('form-city', b.city);
+      set('form-state', b.state);
+      set('form-zip', b.zip);
+      set('form-email', `${slug}@gmail.com`);
+      set('form-website', `www.${slug}.com`);
+      set('secondary-cat', b.category);
+      document.querySelector('#primary-cat option').textContent = b.category;
+      document.getElementById('note-primary').textContent =
+        `Kept “${b.category}” as your primary category. 8 of the 10 top-ranked ${b.noun} in ${b.city} use it, so it’s what nearby searches match first.`;
+      document.querySelectorAll('.js-city').forEach(el => (el.textContent = b.city));
+    }
+
+    // Clear every animation the transition left behind
+    function resetTransition() {
+      run++;
+      flying?.remove();
+      flying = null;
+      document.querySelectorAll('#screen-search *, #screen-processing *, .setup-panel')
+        .forEach(el => el.getAnimations()
+          .filter(a => !(a instanceof CSSAnimation))  // keep the glow, sparkles and shimmer running
+          .forEach(a => a.cancel()));
+    }
+
+    list.addEventListener('click', async e => {
+      const row = e.target.closest('.business[data-index]');
+      if (!row || flying) return;
+      resetTransition();
+      resetProcessingScreen();
+      const id = run;
+      fillSelected(results[row.dataset.index]);
+
+      if (reduceMotion.matches) {
+        screenSearch.hidden = true;
+        screenProcessing.hidden = false;
+        processing.start();
+        completeSteps(id);
+        return;
+      }
+
+      // 1 · Everything except the picked card fades away (exit: ease-in, short)
+      const from = row.getBoundingClientRect();
+      const leaving = [...screenSearch.querySelector('.side-panel').children,
+        panel.querySelector('.results__status'),
+        ...[...list.children].filter(el => el !== row)];
+      if (!await done(leaving.map(el => fade(el, 1, 0, T.fadeOut, { easing: EASE_IN }))) || id !== run) return;
+
+      // 2 · Swap screens; a clone of the card stands in while it travels
+      flying = row.cloneNode(true);
+      flying.classList.add('business--flying');
+      flying.style.left = from.left + 'px';
+      flying.style.top = from.top + 'px';
+      document.body.append(flying);
+      screenSearch.hidden = true;
+      screenProcessing.hidden = false;
+      selCard.style.opacity = 0;
+      const to = selCard.getBoundingClientRect();  // measured at the final 386px width
+
+      // Move (ease-in-out): position via transform, size via width/height so
+      // the address re-ellipsizes instead of stretching
+      setupPanel.animate([{ width: '716px' }, { width: '386px' }], { duration: T.move, easing: EASE_IN_OUT });
+      const fly = flying.animate([
+        { transform: 'translate(0, 0)', width: from.width + 'px', height: from.height + 'px',
+          padding: '8px 16px', backgroundColor: '#FFFFFF', boxShadow: '0 2px 8px rgba(0,0,0,0.12)' },
+        { offset: 0.5, boxShadow: '0 10px 24px rgba(0,0,0,0.10)' },  // lifted mid-flight
+        { transform: `translate(${to.left - from.left}px, ${to.top - from.top}px)`,
+          width: to.width + 'px', height: to.height + 'px',
+          padding: '8px', backgroundColor: '#F8F9FA', boxShadow: '0 2px 8px rgba(0,0,0,0)' },
+      ], { duration: T.move, easing: EASE_IN_OUT, fill: 'forwards' });
+      // Platform tag isn't on the selected card — it drops out early in the flight
+      const platformTag = flying.querySelectorAll('.info-tag')[1];
+      if (platformTag) fade(platformTag, 1, 0, T.move * 0.4, { easing: EASE_IN });
+
+      // 3 · Overlapping the landing: header bits and the animation panel settle in
+      const settleAt = T.move * T.overlap;
+      fade(backLink, 0, 1, T.settle, { delay: settleAt });
+      fade(progress, 0, 1, T.settle, { delay: settleAt + 60 });
+      fade(animPanel, 0, 1, T.settle * 2, { delay: settleAt });
+      processing.start();
+
+      // 4 · Reasoning steps slide down one below the other
+      const arrivals = [...stepsList.querySelectorAll('.step')].map((step, i) => fade(step, 0, 1, T.stepIn, {
+        delay: settleAt + T.settle + i * T.stepGap,
+        from: { transform: 'translateY(-8px)' },
+        to: { transform: 'none' },
+      }));
+
+      // Card lands: swap the clone for the real card
+      if (!await done([fly]) || id !== run) return;
+      selCard.style.opacity = '';
+      flying.remove();
+      flying = null;
+
+      // 5 · Once every step has arrived, start working through them
+      if (!await done(arrivals) || id !== run) return;
+      completeSteps(id);
+    });
+
+    // ---- Steps complete → profile form (Figma 10657:4470 → 10657:4531) ----
+    const STEP_DONE = [
+      'Learnt what your competitors are doing.',
+      'Updated the brand context for your business.',
+      'Found 9 gaps in your business profile',
+    ];
+    const T2 = {
+      hold: 1800,       // time each step "works" before it completes
+      swapOut: 160,     // old label leaves (ease-in)
+      swapIn: 280,      // new label + check arrive (ease-out)
+      move: 650,        // parent task moves down to the bottom of the list
+      formIn: 420,      // each form block rises in
+      formStagger: 90,  // between form blocks
+    };
+    const EASE_OUT_BACK = 'cubic-bezier(0.34, 1.56, 0.64, 1)';  // small overshoot for the check
+    const motion = ms => (reduceMotion.matches ? 0 : ms);
+    // Holds run on the animation clock too, so a paused tab pauses the timeline
+    const hold = ms => done([setupPanel.animate(null, { duration: ms })]);
+
+    // Label crossfades to its finished wording; the icon pops into a check
+    async function finishStep(step, label) {
+      const text = step.querySelector('.step__label');
+      const icon = step.querySelector('.step__icon img');
+      if (!await done([fade(text, 1, 0, motion(T2.swapOut), { easing: EASE_IN })])) return false;
+      text.textContent = label;
+      icon.src = 'assets/check.svg';
+      return done([
+        fade(text, 0, 1, motion(T2.swapIn)),
+        icon.animate([{ transform: 'scale(0.4)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
+          { duration: motion(T2.swapIn + 80), easing: EASE_OUT_BACK, fill: 'both' }),
+      ]);
+    }
+
+    async function completeSteps(id) {
+      const live = () => id === run;
+      const [aiStep, ...work] = stepsList.querySelectorAll('.step');
+
+      // Screen 5 · competitor and brand steps complete in turn
+      const [competitor, brand, profile] = work;
+      for (const [i, step] of [competitor, brand].entries()) {
+        if (!await hold(T2.hold) || !live()) return;
+        if (!await finishStep(step, STEP_DONE[i]) || !live()) return;
+      }
+
+      // …then "Found 9 gaps" slides down as one more completed step,
+      // and the profile step glides down to make room
+      if (!await hold(T2.hold) || !live()) return;
+      const gaps = document.createElement('li');
+      gaps.className = 'step';
+      gaps.innerHTML = '<span class="step__icon"><img src="assets/check.svg" alt="" width="12" height="12"></span>'
+        + `<span class="step__label">${STEP_DONE[2]}</span>`;
+      const profileTop = profile.getBoundingClientRect().top;
+      stepsList.insertBefore(gaps, profile);
+      const push = profile.animate(
+        [{ transform: `translateY(${profileTop - profile.getBoundingClientRect().top}px)` }, { transform: 'none' }],
+        { duration: motion(T.stepIn), easing: EASE_IN_OUT });
+      const slide = fade(gaps, 0, 1, motion(T.stepIn), { from: { transform: 'translateY(-8px)' }, to: { transform: 'none' } });
+      if (!await done([push, slide]) || !live()) return;
+
+      if (!await hold(T2.hold + 400) || !live()) return;
+      const last = profile;
+
+      // Screen 6 · the working step clears and the parent task moves down into its place
+      if (!await done([fade(last, 1, 0, motion(T2.swapOut), { easing: EASE_IN })]) || !live()) return;
+      last.remove();
+      const rows = [aiStep, competitor, brand, gaps];
+      const before = rows.map(r => r.getBoundingClientRect().top);
+      aiStep.classList.add('no-line');  // its connector fades in once it has landed
+      stepsList.append(aiStep);
+      const moves = rows.map((r, i) => {
+        const dy = before[i] - r.getBoundingClientRect().top;
+        return r.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }],
+          { duration: motion(T2.move), easing: EASE_IN_OUT });
+      });
+      if (!await done(moves) || !live()) return;
+      aiStep.classList.remove('no-line');
+
+      // …and its label becomes the "ready" message
+      const label = aiStep.querySelector('.step__label');
+      if (!await done([fade(label, 1, 0, motion(T2.swapOut), { easing: EASE_IN })]) || !live()) return;
+      aiStep.classList.replace('step--active', 'step--final');
+      label.classList.remove('shimmer-text');
+      label.textContent = 'Business profile is ready for your review. You can make changes, or publish right away!';
+      fade(label, 0, 1, motion(T2.swapIn + 120));
+
+      // Right side · animation steps aside, the generated form rises in
+      if (!await done([fade(animPanel, 1, 0, motion(300), { easing: EASE_IN })]) || !live()) return;
+      processing.stop();
+      animPanel.hidden = true;
+      profileForm.hidden = false;
+      profileForm.scrollTop = 0;
+      [...profileForm.children].forEach((block, i) => fade(block, 0, 1, motion(T2.formIn), {
+        delay: motion(i * T2.formStagger),
+        from: { transform: 'translateY(12px)' },
+        to: { transform: 'none' },
+      }));
+    }
+
+    // Put the processing screen back to its starting state
+    function resetProcessingScreen() {
+      stepsList.innerHTML = stepsTemplate;
+      animPanel.hidden = false;
+      profileForm.hidden = true;
+      profileForm.querySelector('.pill[data-view="all"]').click();
+    }
+
+    // ---- Form interactions ----
+    profileForm.querySelectorAll('.pills .pill').forEach(pill => pill.addEventListener('click', () => {
+      profileForm.querySelectorAll('.pills .pill').forEach(p => {
+        p.classList.toggle('is-active', p === pill);
+        p.setAttribute('aria-pressed', String(p === pill));
+      });
+      profileForm.dataset.view = pill.dataset.view;
+      profileForm.scrollTop = 0;
+      if (pill.dataset.view === 'ai') {
+        profileForm.querySelectorAll('.ai-note').forEach((n, i) =>
+          fade(n, 0, 1, motion(300), { delay: motion(80 + i * 60), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } }));
+      }
+    }));
+
+    // Tag inputs: × removes a chip, Enter adds one
+    profileForm.querySelectorAll('[data-tags]').forEach(box => {
+      const field = box.querySelector('input');
+      box.addEventListener('click', e => {
+        const remove = e.target.closest('.tag button');
+        if (remove) remove.parentElement.remove();
+        else field.focus();
+      });
+      field.addEventListener('keydown', e => {
+        if (e.key !== 'Enter' || !field.value.trim()) return;
+        e.preventDefault();
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = field.value.trim();
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', `Remove ${tag.textContent}`);
+        btn.innerHTML = '<img src="assets/clear.svg" alt="" width="16" height="16">';
+        tag.append(btn);
+        box.insertBefore(tag, field);
+        field.value = '';
+      });
+    });
+    profileForm.querySelectorAll('.form-card__toggle').forEach(btn => btn.addEventListener('click', () => {
+      const collapsed = btn.closest('.form-card').classList.toggle('is-collapsed');
+      btn.setAttribute('aria-expanded', String(!collapsed));
+    }));
+    profileForm.querySelectorAll('textarea[data-count]').forEach(area => {
+      const count = area.parentElement.querySelector('.char-count');
+      const update = () => (count.textContent = area.value.length);
+      area.addEventListener('input', update);
+      update();
+    });
+
+    backLink.addEventListener('click', () => {
+      resetTransition();
+      processing.stop();
+      resetProcessingScreen();
+      selCard.style.opacity = '';
+      screenProcessing.hidden = true;
+      screenSearch.hidden = false;
+    });
+
+    // ---- Processing animation ----
+    // Ported from "AI-Onboarding Animation.html": dot wave + status sweep,
+    // scoped to the right panel and only running while it is on screen.
+    const processing = (() => {
+      const panel = document.getElementById('processing');
+      const canvas = panel.querySelector('.dots');
+      const context = canvas.getContext('2d');
+      const playButton = panel.querySelector('.play-anim');
+      const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let active = false;
+
+      /* Dot wave — draw math unchanged from the approved animation file. */
+      let width = 0;
+      let height = 0;
+      let frameId = null;
+      let lastPaint = 0;
+      let explicitlyPlaying = false;
+
+      function draw(time) {
+        context.clearRect(0, 0, width, height);
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const cornerDistance = Math.hypot(centerX, centerY) || 1;
+
+        for (let x = 15; x < width; x += 30) {
+          for (let y = 15; y < height; y += 30) {
+            const distance = Math.hypot(x - centerX, y - centerY);
+            const wave =
+              0.45 * Math.sin(0.012 * x + 0.008 * y + time) +
+              0.30 * Math.sin(0.015 * y - 0.7 * time) +
+              0.25 * Math.sin(0.011 * distance - 0.9 * time);
+            const intensity = (wave + 1) / 2;
+            const radius = 1.6 * (0.45 + 1.15 * intensity);
+            const opacity = (0.06 + 0.26 * intensity) *
+              (1 - 0.55 * Math.min(distance / cornerDistance, 1));
+
+            context.beginPath();
+            context.arc(x, y + 5 * wave, radius, 0, 2 * Math.PI);
+            context.fillStyle = `rgba(37, 99, 235, ${opacity})`;
+            context.fill();
+          }
+        }
+      }
+
+      function tick(timestamp) {
+        frameId = requestAnimationFrame(tick);
+        if (timestamp - lastPaint < 33) return;
+        lastPaint = timestamp;
+        draw(timestamp * 0.002);
+      }
+
+      function updatePlayback() {
+        if (frameId !== null) cancelAnimationFrame(frameId);
+        frameId = null;
+        if (!active) return;
+        const reduced = motionPreference.matches && !explicitlyPlaying;
+        playButton.hidden = !reduced;
+        if (reduced) {
+          draw(0);
+        } else if (!document.hidden) {
+          frameId = requestAnimationFrame(tick);
+        }
+      }
+
+      function resize() {
+        if (!active) return;
+        const scale = Math.min(window.devicePixelRatio || 1, 2);
+        width = panel.clientWidth;
+        height = panel.clientHeight;
+        canvas.width = Math.floor(width * scale);
+        canvas.height = Math.floor(height * scale);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        context.setTransform(scale, 0, 0, scale, 0, 0);
+        draw(motionPreference.matches && !explicitlyPlaying ? 0 : performance.now() * 0.002);
+      }
+
+      /* Status lines — 1400ms sweep, a new line every 3200ms. */
+      const lines = Array.from(panel.querySelectorAll('.status-line'));
+      const status = lines[0].parentElement;
+      const transitionMs = 1400;
+      const holdMs = 3200 - transitionMs;
+      let current = 0;
+      let timer = null;
+      let frame = null;
+
+      function settle() {
+        lines.forEach((line, index) => {
+          line.classList.remove('is-entering', 'is-leaving');
+          line.classList.toggle('is-visible', index === current);
+          line.setAttribute('aria-hidden', String(index !== current));
+        });
+      }
+
+      // Symmetric ease-in-out (sine) so the edge glides across the text.
+      function sweepEase(t) {
+        return 0.5 - Math.cos(Math.PI * t) / 2;
+      }
+
+      function schedule() {
+        if (active && !motionPreference.matches && !document.hidden) {
+          timer = window.setTimeout(swapPhrase, holdMs);
+        }
+      }
+
+      function swapPhrase() {
+        timer = null;
+        const outgoing = lines[current];
+        current = (current + 1) % lines.length;
+        const incoming = lines[current];
+        const feather = 28;
+        const textWidth = Math.max(outgoing.firstElementChild.offsetWidth, incoming.firstElementChild.offsetWidth);
+        const from = (status.clientWidth - textWidth) / 2 - feather;
+        const distance = textWidth + feather * 2;
+        status.style.setProperty('--sweep-edge', from + 'px');
+        outgoing.classList.remove('is-visible');
+        outgoing.classList.add('is-leaving');
+        incoming.classList.add('is-entering');
+        let start;
+        function advance(timestamp) {
+          if (start === undefined) start = timestamp;
+          const progress = Math.min((timestamp - start) / transitionMs, 1);
+          const edge = from + distance * sweepEase(progress);
+          status.style.setProperty('--sweep-edge', edge + 'px');
+          if (progress < 1) {
+            frame = requestAnimationFrame(advance);
+          } else {
+            frame = null;
+            settle();
+            schedule();
+          }
+        }
+        frame = requestAnimationFrame(advance);
+      }
+
+      function setPlayback() {
+        window.clearTimeout(timer);
+        if (frame !== null) cancelAnimationFrame(frame);
+        timer = null;
+        frame = null;
+        settle();
+        schedule();
+      }
+
+      playButton.addEventListener('click', () => {
+        explicitlyPlaying = true;
+        updatePlayback();
+      });
+      new ResizeObserver(resize).observe(panel);
+      document.addEventListener('visibilitychange', () => { updatePlayback(); setPlayback(); });
+      motionPreference.addEventListener('change', () => {
+        explicitlyPlaying = false;
+        updatePlayback();
+        setPlayback();
+      });
+
+      return {
+        start() {
+          active = true;
+          current = 0;
+          resize();
+          updatePlayback();
+          setPlayback();
+        },
+        stop() {
+          active = false;
+          updatePlayback();
+          setPlayback();
+        },
+      };
+    })();
+  </script>
+</body>
+</html>

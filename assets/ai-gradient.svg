@@ -1,0 +1,23 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="BaseAIFilledGradient" clip-path="url(#clip0_0_291)">
+<g id="Vector">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.238 9.05561C9.76083 9.05561 6.95234 6.23454 6.95234 2.76674C6.95234 6.23454 4.1327 9.05561 0.666667 9.05561C4.1327 9.05561 6.95234 11.8655 6.95234 15.3333C6.95234 11.8655 9.76083 9.05561 13.238 9.05561Z" fill="url(#paint0_linear_0_291)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.3333 3.8111C13.5947 3.8111 12.1905 2.40057 12.1905 0.666667C12.1905 2.40057 10.7807 3.8111 9.04766 3.8111C10.7807 3.8111 12.1905 5.21606 12.1905 6.94996C12.1905 5.21606 13.5947 3.8111 15.3333 3.8111Z" fill="url(#paint1_linear_0_291)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_291" x1="13.2708" y1="3.00857" x2="5.24517" y2="11.0261" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F67EA"/>
+<stop offset="0.32" stop-color="#FFCB00"/>
+<stop offset="1" stop-color="#D97F02"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_291" x1="13.2708" y1="3.00857" x2="5.24517" y2="11.0261" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F67EA"/>
+<stop offset="0.32" stop-color="#FFCB00"/>
+<stop offset="1" stop-color="#D97F02"/>
+</linearGradient>
+<clipPath id="clip0_0_291">
+<rect width="16" height="16" fill="white"/>
+</clipPath>
+</defs>
+</svg>
