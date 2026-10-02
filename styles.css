@@ -956,9 +956,10 @@ button { font: inherit; color: inherit; }
 /* Social links */
 .social { display: flex; align-items: center; gap: 9px; }
 
-/* AI Corrected view — only sections the AI changed, with its reasoning */
+/* AI reasoning under each field it changed — shown in every view;
+   the AI Corrected view narrows the form to just those sections */
 .ai-note {
-  display: none;
+  display: flex;
   align-items: flex-start;
   gap: var(--sp-8);
   margin-top: 4px;
@@ -966,7 +967,6 @@ button { font: inherit; color: inherit; }
   color: var(--txt-secondary);
 }
 .ai-note img { flex-shrink: 0; }
-.profile-form[data-view="ai"] .ai-note { display: flex; }
 .profile-form[data-view="ai"] .form-card:not([data-ai-corrected]) { display: none; }
 
 .input--plain { background: transparent; border-color: transparent; }
