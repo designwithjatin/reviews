@@ -858,43 +858,9 @@ button { font: inherit; color: inherit; }
   color: var(--txt-secondary);
 }
 
-/* Map */
-.geo-map { position: relative; height: 258px; border-radius: 2px; overflow: hidden; }
-.geo-map__tiles { width: 100%; height: 100%; object-fit: cover; }
-.geo-map__marker { position: absolute; left: 222px; top: 113px; }
-.geo-map__logo { position: absolute; left: 8px; bottom: 8px; }
-.geo-map__fullscreen {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  display: flex;
-  padding: var(--sp-4);
-  border: 1px solid var(--brd-surface-secondary);
-  border-radius: 2px;
-  background: var(--srf-page);
-  cursor: pointer;
-}
-.geo-map__zoom {
-  position: absolute;
-  right: 12px;
-  bottom: 8px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--brd-surface-secondary);
-  border-radius: var(--br-4);
-  background: var(--srf-card);
-  overflow: hidden;
-}
-.geo-map__zoom button {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  background: var(--srf-page);
-  cursor: pointer;
-}
+/* Map — live Google map embed */
+.geo-map { position: relative; height: 258px; border-radius: 2px; overflow: hidden; background: var(--srf-input); }
+.geo-map iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* Hours */
 .days { display: flex; flex-direction: column; gap: var(--sp-16); }
@@ -1005,3 +971,12 @@ button { font: inherit; color: inherit; }
   white-space: nowrap;
 }
 .tag button { display: flex; padding: 0; border: 0; background: none; cursor: pointer; }
+
+/* Missing view — only fields still to be filled; sections with none are hidden */
+.profile-form[data-view="missing"] .form-card:not(.has-missing),
+.profile-form[data-view="missing"] .is-filled { display: none; }
+/* Keep two-column fields at half width when their neighbour is hidden */
+.profile-form[data-view="missing"] .form-row > * { flex: 0 0 calc(50% - 15px); }
+/* "Added from the business details…" describes filled fields — not relevant here */
+.profile-form[data-view="missing"] .form-card__divider,
+.profile-form[data-view="missing"] .form-card__note { display: none; }

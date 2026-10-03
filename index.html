@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=12">
+  <link rel="stylesheet" href="styles.css?v=16">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -242,16 +242,14 @@
               <div class="field">
                 <span class="field__label field__label--split"><span class="field__label">Map Location<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></span><button class="link-btn" type="button"><img src="assets/edit.svg" alt="" width="16" height="16">Adjust</button></span>
                 <div class="geo-map">
-                  <img class="geo-map__tiles" src="assets/map.jpg" alt="Map of the business location">
-                  <img class="geo-map__marker" src="assets/map-marker.svg" alt="" width="32" height="32">
-                  <button class="geo-map__fullscreen" type="button" aria-label="Full screen"><img src="assets/map-fullscreen.svg" alt="" width="24" height="24"></button>
-                  <div class="geo-map__zoom"><button type="button" aria-label="Zoom in"><img src="assets/map-zoom-in.svg" alt="" width="16" height="16"></button><button type="button" aria-label="Zoom out"><img src="assets/map-zoom-out.svg" alt="" width="12" height="2"></button></div>
-                  <img class="geo-map__logo" src="assets/google-logo.svg" alt="Google" width="71" height="24">
+                  <iframe id="form-map" title="Map of the business location" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://maps.google.com/maps?q=26.8553,75.8053&amp;z=15&amp;output=embed"></iframe>
                 </div>
               </div>
             </div>
-            <div class="form-row"><label class="field "><span class="field__label">Country<span aria-hidden="true">*</span></span><select class="input input--select"><option>India</option></select></label><label class="field"><span class="field__label">Latitude</span><input class="input" type="text"></label></div>
-            <div class="form-row"><label class="field"><span class="field__label">ZIP/Post Code<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-zip" value="302012"></label><label class="field"><span class="field__label">Longitude</span><input class="input" type="text"></label></div>
+            <div class="form-row"><label class="field "><span class="field__label">Country<span aria-hidden="true">*</span></span><select class="input input--select"><option>India</option></select></label><label class="field"><span class="field__label">Latitude</span><input class="input" type="text" id="form-lat" value="26.8553"></label></div>
+            <div class="form-row"><label class="field"><span class="field__label">ZIP/Post Code<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-zip" value="302012"></label><label class="field"><span class="field__label">Longitude</span><input class="input" type="text" id="form-lng" value="75.8053"></label></div>
           </div>
         </section>
 
@@ -409,6 +407,48 @@
     CITIES.Visakhapatnam.aka = ['vizag'];
     CITIES.Thiruvananthapuram.aka = ['trivandrum'];
     CITIES.Kochi.aka = ['cochin'];
+    // City centre coordinates — the map pin (and Latitude/Longitude) sit near these
+    const COORDS = {
+      Bangalore: [12.9716, 77.5946], Jaipur: [26.9124, 75.7873], Mumbai: [19.0760, 72.8777],
+      'New Delhi': [28.6139, 77.2090], Pune: [18.5204, 73.8567], Hyderabad: [17.3850, 78.4867],
+      Chennai: [13.0827, 80.2707], Kolkata: [22.5726, 88.3639], Ahmedabad: [23.0225, 72.5714],
+      Gurugram: [28.4595, 77.0266], Indore: [22.7196, 75.8577], Bhopal: [23.2599, 77.4126],
+      Lucknow: [26.8467, 80.9462], Noida: [28.5355, 77.3910], Agra: [27.1767, 78.0081],
+      Varanasi: [25.3176, 82.9739], Chandigarh: [30.7333, 76.7794], Ludhiana: [30.9010, 75.8573],
+      Amritsar: [31.6340, 74.8723], Dehradun: [30.3165, 78.0322], Kochi: [9.9312, 76.2673],
+      Thiruvananthapuram: [8.5241, 76.9366], Coimbatore: [11.0168, 76.9558], Madurai: [9.9252, 78.1198],
+      Mysuru: [12.2958, 76.6394], Mangaluru: [12.9141, 74.8560], Goa: [15.4909, 73.8278],
+      Surat: [21.1702, 72.8311], Vadodara: [22.3072, 73.1812], Nagpur: [21.1458, 79.0882],
+      Nashik: [19.9975, 73.7898], Visakhapatnam: [17.6868, 83.2185], Vijayawada: [16.5062, 80.6480],
+      Bhubaneswar: [20.2961, 85.8245], Patna: [25.5941, 85.1376], Ranchi: [23.3441, 85.3096],
+      Raipur: [21.2514, 81.6296], Guwahati: [26.1445, 91.7362], Udaipur: [24.5854, 73.7125],
+      Jodhpur: [26.2389, 73.0243],
+    };
+
+    // Neighbourhood coordinates for the 10 detailed cities
+    const AREA_COORDS = {
+      Indiranagar: [12.9784, 77.6408], Koramangala: [12.9352, 77.6245], 'HSR Layout': [12.9116, 77.6474],
+      Jayanagar: [12.9308, 77.5838], Whitefield: [12.9698, 77.7500], 'JP Nagar': [12.9063, 77.5857],
+      'Vaishali Nagar': [26.9115, 75.7435], 'C-Scheme': [26.9076, 75.8043], 'Malviya Nagar': [26.8549, 75.8243],
+      Mansarovar: [26.8505, 75.7628], 'Raja Park': [26.8986, 75.8291], 'Tonk Road': [26.8634, 75.7975],
+      'Bandra West': [19.0596, 72.8295], 'Andheri West': [19.1363, 72.8277], 'Lower Parel': [18.9977, 72.8376],
+      Colaba: [18.9067, 72.8147], Powai: [19.1176, 72.9060], Juhu: [19.1075, 72.8263],
+      'Hauz Khas': [28.5494, 77.2001], 'Connaught Place': [28.6315, 77.2167], Saket: [28.5245, 77.2066],
+      'Rajouri Garden': [28.6492, 77.1222], 'Defence Colony': [28.5733, 77.2307], 'Lajpat Nagar': [28.5677, 77.2433],
+      'Koregaon Park': [18.5362, 73.8940], Baner: [18.5590, 73.7868], 'Kalyani Nagar': [18.5463, 73.9033],
+      Aundh: [18.5580, 73.8075], 'Viman Nagar': [18.5679, 73.9143], Kothrud: [18.5074, 73.8077],
+      'Banjara Hills': [17.4156, 78.4347], 'Jubilee Hills': [17.4325, 78.4073], Gachibowli: [17.4401, 78.3489],
+      Madhapur: [17.4483, 78.3915], Kondapur: [17.4630, 78.3637], Begumpet: [17.4447, 78.4664],
+      Adyar: [13.0012, 80.2565], 'T. Nagar': [13.0418, 80.2341], 'Anna Nagar': [13.0850, 80.2101],
+      'Besant Nagar': [13.0003, 80.2667], Nungambakkam: [13.0569, 80.2425], Velachery: [12.9815, 80.2180],
+      'Park Street': [22.5535, 88.3520], 'Salt Lake': [22.5867, 88.4171], Ballygunge: [22.5276, 88.3653],
+      'New Town': [22.5958, 88.4795], Gariahat: [22.5180, 88.3658], Alipore: [22.5293, 88.3307],
+      Navrangpura: [23.0365, 72.5611], Satellite: [23.0300, 72.5170], 'Prahlad Nagar': [23.0120, 72.5108],
+      Bodakdev: [23.0389, 72.5114], Thaltej: [23.0504, 72.5050], Vastrapur: [23.0383, 72.5290],
+      'DLF Phase 4': [28.4646, 77.0816], 'Sector 29': [28.4677, 77.0610], 'Golf Course Road': [28.4560, 77.1000],
+      'Sohna Road': [28.4080, 77.0418], 'Cyber City': [28.4950, 77.0895], 'Sector 56': [28.4253, 77.1031],
+    };
+
     // With no location in the query, results spread across these
     const MAJOR_CITIES = ['Bangalore', 'Mumbai', 'New Delhi', 'Pune', 'Hyderabad', 'Chennai'];
 
@@ -501,8 +541,14 @@
         list: spots.map((spot, i) => {
           const addr = address(i < 2 ? 0 : i, spot);
           const suffix = p.city ? spot.area : spot.city;
+          // Pin near the neighbourhood (~400 m) when we know it, else near the city centre (~2 km)
+          const known = AREA_COORDS[spot.area];
+          const centre = known || COORDS[spot.city];
+          const spread = known ? 80 : 400;
+          const nudge = k => ((hash(spot.area + k) % (spread * 2)) - spread) / 20000;
+          const [lat, lng] = centre ? [centre[0] + nudge('lat'), centre[1] + nudge('lng')].map(v => v.toFixed(4)) : ['', ''];
           return { name: i < 2 ? p.name : `${base} ${suffix}`, category: p.category, noun: p.noun,
-            platform: platforms[i], address: addr.text, city: spot.city, state: addr.state, zip: addr.zip };
+            platform: platforms[i], address: addr.text, city: spot.city, state: addr.state, zip: addr.zip, lat, lng };
         }),
       };
     }
@@ -623,6 +669,9 @@
       set('form-city', b.city);
       set('form-state', b.state);
       set('form-zip', b.zip);
+      set('form-lat', b.lat);
+      set('form-lng', b.lng);
+      updateMap(b.lat && b.lng ? `${b.lat},${b.lng}` : b.address);
       set('form-email', `${slug}@gmail.com`);
       set('form-website', `www.${slug}.com`);
       set('secondary-cat', b.category);
@@ -829,6 +878,7 @@
         p.classList.toggle('is-active', p === pill);
         p.setAttribute('aria-pressed', String(p === pill));
       });
+      if (pill.dataset.view === 'missing') markMissing();
       profileForm.dataset.view = pill.dataset.view;
       profileForm.scrollTop = 0;
       if (pill.dataset.view === 'ai') {
@@ -836,6 +886,47 @@
           fade(n, 0, 1, motion(300), { delay: motion(80 + i * 60), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } }));
       }
     }));
+
+    // ---- Map: a real Google map (no API key needed for the embed) ----
+    const map = document.getElementById('form-map');
+    const updateMap = place => {
+      const src = `https://maps.google.com/maps?q=${encodeURIComponent(place)}&z=15&output=embed`;
+      if (map.src !== src) map.src = src;
+    };
+    ['form-lat', 'form-lng'].forEach(id => document.getElementById(id).addEventListener('change', () => {
+      const lat = document.getElementById('form-lat').value.trim();
+      const lng = document.getElementById('form-lng').value.trim();
+      if (lat && lng) updateMap(`${lat},${lng}`);
+    }));
+
+    // ---- Missing view: only fields still to be filled ----
+    // A "slot" is one thing the user fills in: a field, a social link or the Services tile.
+    const SLOT = '.field, .social, .dropzone--service';
+    function isEmpty(slot) {
+      if (slot.querySelector('.geo-map')) return false;                       // map location is set
+      const drop = slot.matches('.dropzone') ? slot : slot.querySelector('.dropzone');
+      if (drop) return !drop.dataset.filled;                                  // nothing uploaded yet
+      const tags = slot.querySelector('[data-tags]');
+      if (tags) return !tags.querySelector('.tag');
+      const select = slot.querySelector('select');
+      if (select) return select.value === 'Select';
+      const inputs = [...slot.querySelectorAll('input:not([type=checkbox]), textarea')];
+      return inputs.length > 0 && inputs.every(el => !el.value.trim());
+    }
+
+    // Hide what's filled: slots, the layout wrappers around them, and whole sections.
+    // Runs when the view is opened, so fields don't vanish mid-edit.
+    function markMissing() {
+      profileForm.querySelectorAll('.form-card').forEach(card => {
+        const body = card.querySelector('.form-card__body');
+        const blocks = body.querySelectorAll(`:scope > *, .form-row > *, .form-col > *, .media-grid > *`);
+        blocks.forEach(el => {
+          const slots = el.matches(SLOT) ? [el] : [...el.querySelectorAll(SLOT)];
+          el.classList.toggle('is-filled', slots.every(s => !isEmpty(s)));
+        });
+        card.classList.toggle('has-missing', [...body.querySelectorAll(SLOT)].some(isEmpty));
+      });
+    }
 
     // Tag inputs: × removes a chip, Enter adds one
     profileForm.querySelectorAll('[data-tags]').forEach(box => {
