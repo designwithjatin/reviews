@@ -6,6 +6,7 @@
   /* Brand */
   --brand-primary: #0F67EA;
   --brand-primary-subtle: #ECF3FD;
+  --brand-primary-disabled: #C5DBFA;
 
   /* Text */
   --txt-primary: #18181A;
@@ -197,7 +198,6 @@ button { font: inherit; color: inherit; }
   padding: var(--sp-8) 0 var(--sp-16);
   background: var(--srf-card);
   border-radius: var(--br-8);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
 }
 
 .illus__bar {
@@ -208,7 +208,7 @@ button { font: inherit; color: inherit; }
   padding: var(--sp-8) var(--sp-16);
   border-bottom: 0.5px solid var(--brd-surface-secondary);
 }
-.illus__bar-row { width: 459px; display: flex; align-items: center; justify-content: space-between; }
+.illus__bar-row { width: 448px; display: flex; align-items: center; gap: 19px; }
 .illus__search {
   width: 379px;
   display: flex;
@@ -224,7 +224,7 @@ button { font: inherit; color: inherit; }
 .illus__avatar { border-radius: 50%; }
 
 .illus__content { width: 503px; display: flex; align-items: center; justify-content: space-between; }
-.illus__results { width: 201px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.illus__results { width: 215px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 
 .illus__chip {
   display: inline-flex;
@@ -237,15 +237,27 @@ button { font: inherit; color: inherit; }
   color: var(--txt-primary);
 }
 
-.illus__list { width: 100%; display: flex; flex-direction: column; gap: var(--sp-16); }
-.result { display: flex; align-items: center; gap: 9px; }
-.result:first-child { align-items: flex-start; }
-.result__thumb { width: 52px; height: 52px; flex-shrink: 0; border-radius: 10px; object-fit: cover; }
+.illus__list { width: 100%; display: flex; flex-direction: column; gap: var(--sp-4); }
+/* Each result is a card; the first is highlighted as the top pick (Figma 10673:3491) */
+.result {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: var(--sp-8);
+  border: 1px solid transparent;
+  border-radius: var(--br-8);
+  background: var(--srf-card);
+}
+.result--top {
+  border-color: var(--brand-primary-disabled);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+}
+.result__thumb { width: 52px; height: 52px; flex-shrink: 0; border-radius: var(--br-4); object-fit: cover; }
 .result__thumb--empty { background: var(--srf-page); }
-.result__meta { width: 140px; display: flex; flex-direction: column; gap: 5px; }
+.result__meta { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
 .result__head { width: 94.2px; display: flex; flex-direction: column; gap: var(--sp-4); }
 .result__name { font: 600 10px/14px var(--font); color: #2B3544; white-space: nowrap; }
-.result__name-skel { width: 62px; height: 8px; border-radius: 12px; background: var(--srf-recessed); }
+.result__name-skel { width: 62px; height: 8px; margin: 3.5px 0; border-radius: 12px; background: var(--srf-recessed); }
 
 .stars { display: flex; gap: 5px; }
 .stars img { width: 14.84px; height: 14.84px; padding: 1.12px 1.38px 2.13px; }
