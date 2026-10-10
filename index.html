@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=17">
+  <link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -160,6 +160,7 @@
         </div>
       </div>
 
+      <div class="milestones" id="milestones"></div>
       <ol class="steps" id="steps">
         <li class="step step--active">
           <span class="step__ai"><img src="assets/ai-icon-sm.svg" alt=""></span>
@@ -217,7 +218,7 @@
             <button class="pill" type="button" aria-pressed="false" data-view="ai">AI Corrected</button>
             <button class="pill" type="button" aria-pressed="false" data-view="missing">Missing</button>
           </div>
-          <button class="btn-primary" type="button">
+          <button class="btn-primary" type="button" id="connect-open">
             <span class="btn-primary__g"><img src="assets/google-g-color.svg" alt=""></span>
             Connect Google &amp; Publish
             <img src="assets/arrow-right.svg" alt="" width="20" height="20">
@@ -231,7 +232,7 @@
           </header>
           <div class="form-card__body">
             <div class="form-row"><label class="field"><span class="field__label">Name<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-name" value="TWC Jaipur"></label><label class="field"><span class="field__label">Website<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-website" value="www.tcb.com"></label></div>
-            <div class="form-row"><label class="field"><span class="field__label">Phone Number<span aria-hidden="true">*</span></span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel"></span></label><label class="field"><span class="field__label">Alternative Phone Number</span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel"></span></label></div>
+            <div class="form-row"><label class="field"><span class="field__label">Phone Number<span aria-hidden="true">*</span></span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel" id="form-phone"></span></label><label class="field"><span class="field__label">Alternative Phone Number</span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel" id="form-phone-alt"></span></label></div>
             <div class="form-row">
               <div class="form-col">
                 <label class="field"><span class="field__label">Email</span><input class="input" type="text" id="form-email" value="twcjaipur@gmail.com"></label>
@@ -361,8 +362,122 @@
           </div>
         </section>
       </section>
+
+      <!-- Screens 9–10 · listing publishers: loading (Figma 10677:33177) → list (10677:33282) -->
+      <section class="publishers" id="publishers" hidden>
+        <div class="publishers__view" id="pub-loading">
+          <p class="results__status"><img src="assets/ai-filled.svg" alt="" width="16" height="16">Finding relevant publishers for your business to be listed on ...</p>
+          <div class="pub-group" aria-hidden="true">
+            <div class="pub-group__head"><span class="skel skel--head"></span></div>
+            <div class="pub-card pub-card--lead"><span class="skel skel--row"></span></div>
+          </div>
+          <div class="pub-group" aria-hidden="true">
+            <div class="pub-group__head"><span class="skel skel--head"></span></div>
+            <div class="pub-list"><div class="pub-row"><span class="skel skel--row"></span></div><div class="pub-row"><span class="skel skel--row"></span></div><div class="pub-row"><span class="skel skel--row"></span></div><div class="pub-row"><span class="skel skel--row"></span></div><div class="pub-row"><span class="skel skel--row"></span></div><div class="pub-row"><span class="skel skel--row"></span></div><div class="pub-row"><span class="skel skel--row"></span></div></div>
+          </div>
+          <div class="pub-group" aria-hidden="true">
+            <div class="pub-group__head"><span class="skel skel--head"></span></div>
+            <div class="pub-card pub-card--lead"><span class="skel skel--row"></span></div>
+          </div>
+        </div>
+
+        <div class="publishers__view" id="pub-ready" hidden>
+          <div class="publishers__head">
+            <h2>Found 10 Publishers relevant to your business</h2>
+            <button class="btn-primary btn-primary--md" type="button" id="list-all">
+              <img src="assets/listings.svg" alt="" width="20" height="20">Get Listed in All<img src="assets/arrow-right.svg" alt="" width="20" height="20">
+            </button>
+          </div>
+          <div class="pub-group">
+            <div class="pub-group__head">Active Listings</div>
+            <div class="pub-card pub-card--lead">
+              <img src="assets/platform-gbp.svg" alt="" width="24" height="24">
+              <div>
+                <p class="pub-name">Google Business Profile <a class="pub-ext" href="#" aria-label="Open Google Business Profile"><img src="assets/external-16.svg" alt="" width="16" height="16"></a></p>
+                <p class="pub-sub" id="pub-gbp-name">TWC Jaipur</p>
+              </div>
+            </div>
+          </div>
+          <div class="pub-group">
+            <div class="pub-group__head"><label class="check check--sm"><input type="checkbox" id="pub-all"><span>Direct Opt-in</span></label></div>
+            <div class="pub-list" id="pub-list"></div>
+          </div>
+          <div class="pub-group">
+            <div class="pub-group__head pub-group__head--note">Opt-in into more platforms later in the product</div>
+            <div class="pub-card pub-card--lead pub-card--more">
+              <span class="logo-stack" aria-hidden="true">
+                <img src="assets/more-1.svg" alt=""><img src="assets/more-2.svg" alt=""><img src="assets/more-3b.png" alt="">
+                <span class="logo-stack__mq"><img src="assets/more-4.svg" alt=""></span><span class="logo-stack__more">+94</span>
+              </span>
+              <button class="link-btn" type="button">View All Publishers<img src="assets/arrow-down.svg" alt="" width="20" height="20"></button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
+
+  <!-- Connect Google Business Profile (Figma 10677:32959) -->
+  <div class="modal" id="connect-modal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="connect-title">
+      <header class="modal__head">
+        <div class="modal__tab"><span class="modal__tab-label" id="connect-title"><img src="assets/gbp-store.svg" alt="" width="16" height="16">Connect Google Business Profile</span></div>
+        <div class="modal__actions"><button class="icon-btn" type="button" data-close aria-label="Close"><img src="assets/close-24.svg" alt="" width="24" height="24"></button></div>
+      </header>
+      <div class="modal__body">
+        <div class="connect">
+          <nav class="gbp-groups" aria-label="GBP groups">
+            <p class="gbp-groups__title">GBP Groups</p>
+            <ul id="gbp-groups"></ul>
+          </nav>
+          <div class="gbp-locations">
+            <label class="search-box"><input type="search" id="loc-search" placeholder="Search" aria-label="Search locations"><img src="assets/search-24.svg" alt="" width="24" height="24"></label>
+            <div class="loc-grid" id="loc-grid" role="radiogroup" aria-label="Locations"></div>
+          </div>
+        </div>
+      </div>
+      <footer class="modal__foot">
+        <label class="check"><input type="checkbox" id="optin-listings" checked><span>Opt-in for listings</span></label>
+        <button class="btn-solid" type="button" id="connect-btn">Connect</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Opt-in to publishers (Figma 10677:33911) -->
+  <div class="modal" id="optin-modal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__panel modal__panel--tall" role="dialog" aria-modal="true" aria-labelledby="optin-title">
+      <header class="modal__head">
+        <div class="modal__tab"><span class="modal__tab-label" id="optin-title">Opt-in</span></div>
+        <div class="modal__actions">
+          <button class="icon-btn" type="button" aria-label="Help"><img src="assets/help.svg" alt="" width="24" height="24"></button>
+          <button class="icon-btn" type="button" data-close aria-label="Close"><img src="assets/close-24.svg" alt="" width="24" height="24"></button>
+        </div>
+      </header>
+      <div class="modal__body modal__body--stack">
+        <div class="optin-summary">
+          <div class="optin-summary__icons" id="optin-icons"></div>
+          <p>Opting in will sync your current location details with the publisher and automatically apply future updates as they happen.</p>
+        </div>
+        <div class="optin-details">
+          <div class="optin-details__head">
+            <button class="link-btn" type="button"><img src="assets/external-24.svg" alt="" width="24" height="24">Edit Location Details</button>
+            <span class="optin-details__edited">Last edited <span id="optin-edited"></span><img src="assets/refresh.svg" alt="" width="24" height="24"></span>
+          </div>
+          <dl class="optin-fields" id="optin-fields"></dl>
+        </div>
+      </div>
+      <footer class="modal__foot">
+        <button class="btn-solid" type="button" id="optin-btn">Opt-in</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" hidden>
+    <span id="toast-text"></span>
+    <button type="button" aria-label="Dismiss"><img src="assets/toast-close.svg" alt="" width="16" height="16"></button>
+  </div>
 
   <script>
     // Render 5 stars per row: filled up to data-rating, rest grey
@@ -469,6 +584,7 @@
     const PLATFORM = { gbp: 'Google', facebook: 'Facebook' };
     const SEARCH_DELAY = 1500;
     let results = [];
+    let lastSearch = null;
 
     // Small deterministic hash so a query always produces the same listings
     const hash = str => [...str].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
@@ -598,6 +714,7 @@
       panel.hidden = false;
       panel.setAttribute('aria-busy', 'true');
       const found = buildResults(q);
+      lastSearch = found;
       const where = [found.parsed.name, found.parsed.area, found.parsed.city].filter(Boolean).join(', ');
       status.textContent = `Searching your business in Google & Facebook “${where}”...`;
       list.innerHTML = skeleton().repeat(5);
@@ -662,6 +779,7 @@
       document.getElementById('sel-name').textContent = b.name;
       document.getElementById('sel-category').textContent = b.category;
       document.getElementById('sel-address').textContent = b.address;
+      picked = b;
       const slug = b.name.toLowerCase().replace(/[^a-z0-9]+/g, '');
       const set = (id, v) => (document.getElementById(id).value = v);
       set('form-name', b.name);
@@ -831,25 +949,8 @@
       // Screen 6 · the working step clears and the parent task moves down into its place
       if (!await done([fade(last, 1, 0, motion(T2.swapOut), { easing: EASE_IN })]) || !live()) return;
       last.remove();
-      const rows = [aiStep, competitor, brand, gaps];
-      const before = rows.map(r => r.getBoundingClientRect().top);
-      aiStep.classList.add('no-line');  // its connector fades in once it has landed
-      stepsList.append(aiStep);
-      const moves = rows.map((r, i) => {
-        const dy = before[i] - r.getBoundingClientRect().top;
-        return r.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }],
-          { duration: motion(T2.move), easing: EASE_IN_OUT });
-      });
-      if (!await done(moves) || !live()) return;
-      aiStep.classList.remove('no-line');
-
-      // …and its label becomes the "ready" message
-      const label = aiStep.querySelector('.step__label');
-      if (!await done([fade(label, 1, 0, motion(T2.swapOut), { easing: EASE_IN })]) || !live()) return;
-      aiStep.classList.replace('step--active', 'step--final');
-      label.classList.remove('shimmer-text');
-      label.textContent = 'Business profile is ready for your review. You can make changes, or publish right away!';
-      fade(label, 0, 1, motion(T2.swapIn + 120));
+      if (!await settleParent(aiStep, [competitor, brand, gaps],
+        'Business profile is ready for your review. You can make changes, or publish right away!') || !live()) return;
 
       // Right side · animation steps aside, the generated form rises in
       if (!await done([fade(animPanel, 1, 0, motion(300), { easing: EASE_IN })]) || !live()) return;
@@ -864,13 +965,325 @@
       }));
     }
 
+    // The parent (AI) step glides to the bottom of the list, then its label
+    // becomes the finished message. Resolves false if interrupted.
+    async function settleParent(aiStep, others, finalText) {
+      const rows = [aiStep, ...others];
+      const before = rows.map(r => r.getBoundingClientRect().top);
+      aiStep.classList.add('no-line');  // its connector fades in once it has landed
+      stepsList.append(aiStep);
+      const moves = rows.map((r, i) => {
+        const dy = before[i] - r.getBoundingClientRect().top;
+        return r.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }],
+          { duration: motion(T2.move), easing: EASE_IN_OUT });
+      });
+      if (!await done(moves)) return false;
+      aiStep.classList.remove('no-line');
+      const label = aiStep.querySelector('.step__label');
+      if (!await done([fade(label, 1, 0, motion(T2.swapOut), { easing: EASE_IN })])) return false;
+      aiStep.classList.replace('step--active', 'step--final');
+      label.classList.remove('shimmer-text');
+      label.textContent = finalText;
+      fade(label, 0, 1, motion(T2.swapIn + 120));
+      return true;
+    }
+
     // Put the processing screen back to its starting state
     function resetProcessingScreen() {
       stepsList.innerHTML = stepsTemplate;
+      milestones.innerHTML = '';
+      backLink.hidden = false;
+      progressBar.style.width = '';
       animPanel.hidden = false;
       profileForm.hidden = true;
+      publishers.hidden = true;
+      closeModal(connectModal, true);
+      closeModal(optinModal, true);
+      hideToast(true);
+      processing.setPhrases(DEFAULT_PHRASES);
       profileForm.querySelector('.pill[data-view="all"]').click();
     }
+
+
+    // =====================================================================
+    // Connect GBP → publishers → opt-in  (Figma 10677:32796 … 10677:34497)
+    // =====================================================================
+    let picked = null;
+    const milestones = document.getElementById('milestones');
+    const progressBar = screenProcessing.querySelector('.progress__bar');
+    const publishers = document.getElementById('publishers');
+    const pubLoading = document.getElementById('pub-loading');
+    const pubReady = document.getElementById('pub-ready');
+    const pubList = document.getElementById('pub-list');
+    const connectModal = document.getElementById('connect-modal');
+    const optinModal = document.getElementById('optin-modal');
+    const DEFAULT_PHRASES = ['Optimising your business profile', 'Researching your competitor ...', 'Updating your brand context ...'];
+    const T3 = {
+      modalIn: 260, modalOut: 180,   // modal enter / exit
+      phase: 3500,                   // AI "thinking" before publishers load
+      loading: 2500,                 // skeleton before the list
+      rowStagger: 60,                // list rows rising in
+      toast: 4000,                   // toast stays this long
+    };
+    const PUBLISHERS = [
+      { id: 'apple', name: 'Apple' }, { id: 'bing', name: 'Bing' }, { id: 'foursquare', name: 'Foursquare' },
+      { id: 'tripadvisor', name: 'Tripadvisor' }, { id: 'uber', name: 'Uber' }, { id: 'here', name: 'Here' },
+      { id: 'angi', name: 'Angi' },
+    ];
+    const GROUPS = ['Barista Coffee', 'Nothing Before Coffee', 'Sleepy Owl Coffee', 'Blue Tokai Coffee', 'Chaayos'];
+
+    // ---- Modal + toast helpers ----
+    let lastFocus = null;
+    function openModal(modal) {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      fade(modal.querySelector('.modal__overlay'), 0, 1, motion(T3.modalIn));
+      fade(modal.querySelector('.modal__panel'), 0, 1, motion(T3.modalIn),
+        { from: { transform: 'translateY(8px) scale(0.99)' }, to: { transform: 'none' } });
+      modal.querySelector('.modal__panel').focus();
+    }
+    async function closeModal(modal, instant = false) {
+      if (modal.hidden) return;
+      if (!instant) {
+        await done([
+          fade(modal.querySelector('.modal__overlay'), 1, 0, motion(T3.modalOut), { easing: EASE_IN }),
+          fade(modal.querySelector('.modal__panel'), 1, 0, motion(T3.modalOut),
+            { easing: EASE_IN, to: { transform: 'translateY(4px)' } }),
+        ]);
+      }
+      modal.hidden = true;
+      modal.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      lastFocus?.focus?.();
+    }
+    [connectModal, optinModal].forEach(modal => {
+      modal.querySelector('.modal__panel').tabIndex = -1;
+      modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(modal)));
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      [connectModal, optinModal].forEach(m => !m.hidden && closeModal(m));
+    });
+
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(text) {
+      clearTimeout(toastTimer);
+      document.getElementById('toast-text').textContent = text;
+      toast.hidden = false;
+      fade(toast, 0, 1, motion(300), { from: { transform: 'translateY(-8px)' }, to: { transform: 'none' } });
+      toastTimer = setTimeout(() => hideToast(), T3.toast);
+    }
+    async function hideToast(instant = false) {
+      clearTimeout(toastTimer);
+      if (toast.hidden) return;
+      if (!instant) await done([fade(toast, 1, 0, motion(200), { easing: EASE_IN })]);
+      toast.hidden = true;
+      toast.getAnimations().forEach(a => a.cancel());
+    }
+    toast.querySelector('button').addEventListener('click', () => hideToast());
+
+    // ---- Left panel building blocks ----
+    const stepHTML = ({ ai, icon, label }) => ai
+      ? `<li class="step step--active"><span class="step__ai"><img src="assets/ai-icon-sm.svg" alt=""></span><span class="step__label shimmer-text">${label}</span></li>`
+      : `<li class="step"><span class="step__icon"><img src="assets/${icon}" alt="" width="12" height="12"></span><span class="step__label">${label}</span></li>`;
+
+    // Swap the steps list for a new phase: old steps fade, new ones slide down in turn
+    async function showSteps(steps) {
+      if (!await done([fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN })])) return false;
+      stepsList.getAnimations().forEach(a => a.cancel());
+      stepsList.innerHTML = steps.map(stepHTML).join('');
+      const items = [...stepsList.children];
+      return done(items.map((li, i) => fade(li, 0, 1, motion(T.stepIn), {
+        delay: motion(i * 400), from: { transform: 'translateY(-8px)' }, to: { transform: 'none' },
+      })));
+    }
+
+    // A finished milestone ("✓ We have fixed 9 profile gaps!") pinned above the steps
+    function addMilestone(title, sub) {
+      const block = document.createElement('div');
+      block.className = 'milestone';
+      block.innerHTML = `<img src="assets/done-filled.svg" alt="" width="20" height="20">
+        <div><p class="milestone__title">${title}</p><p class="milestone__sub">${sub}</p></div>`;
+      milestones.append(block);
+      return fade(block, 0, 1, motion(T.stepIn), { from: { transform: 'translateY(-8px)' }, to: { transform: 'none' } });
+    }
+
+    // Right side: fade one panel out and another in
+    async function swapPanel(from, to) {
+      if (!await done([fade(from, 1, 0, motion(250), { easing: EASE_IN })])) return false;
+      from.hidden = true;
+      from.getAnimations().forEach(a => a.cancel());
+      to.hidden = false;
+      fade(to, 0, 1, motion(350));
+      return true;
+    }
+
+    // ---- 1 · Connect modal ----
+    let groupIndex = 0;
+    let selectedLoc = 0;
+    function locationsFor(gi) {
+      const city = picked.city;
+      const areas = (CITIES[city] || { areas: ['City Centre', 'Main Market', 'Old Town'] }).areas;
+      const where = area => [area, city, picked.state].filter(Boolean).join(', ');
+      if (gi === 0) {
+        // The picked business first, then its branches from the search, then more branches
+        const base = lastSearch ? lastSearch.parsed.name : picked.name;
+        const seen = new Set();
+        const list = [picked, ...results].filter(r => !seen.has(r.name) && seen.add(r.name))
+          .map(r => ({ name: r.name, address: r.address }));
+        areas.filter(a => !list.some(l => l.name.endsWith(a) || l.address.includes(a)))  // skip areas already covered
+          .forEach(a => list.length < 8 && list.push({ name: `${base} ${a}`, address: where(a) }));
+        return list;
+      }
+      return areas.slice(0, 4 + gi % 3).map(a => ({ name: `${GROUPS[gi - 1]} ${a}`, address: where(a) }));
+    }
+    function renderGroups() {
+      const names = [lastSearch ? lastSearch.parsed.name : picked.name, ...GROUPS];
+      document.getElementById('gbp-groups').innerHTML = names.map((n, i) =>
+        `<li><button type="button" class="gbp-group${i === groupIndex ? ' is-active' : ''}" data-i="${i}" aria-current="${i === groupIndex}">${esc(n)}</button></li>`).join('');
+    }
+    function renderLocations() {
+      const q = document.getElementById('loc-search').value.trim().toLowerCase();
+      const locs = locationsFor(groupIndex).map((l, i) => ({ ...l, i }))
+        .filter(l => !q || (l.name + ' ' + l.address).toLowerCase().includes(q));
+      document.getElementById('loc-grid').innerHTML = locs.length ? locs.map(l => `
+        <button type="button" class="loc-card${l.i === selectedLoc ? ' is-selected' : ''}" role="radio" aria-checked="${l.i === selectedLoc}" data-i="${l.i}">
+          <img src="assets/${l.i === selectedLoc ? 'check-circle-selected.svg' : 'location-photo.png'}" alt="" width="32" height="32">
+          <span class="loc-card__text"><span class="loc-card__name">${esc(l.name)}</span><span class="loc-card__addr">${esc(l.address)}</span></span>
+        </button>`).join('') : '<p class="loc-empty">No locations match your search.</p>';
+    }
+    document.getElementById('gbp-groups').addEventListener('click', e => {
+      const btn = e.target.closest('.gbp-group');
+      if (!btn) return;
+      groupIndex = +btn.dataset.i;
+      selectedLoc = 0;
+      renderGroups();
+      renderLocations();
+    });
+    document.getElementById('loc-grid').addEventListener('click', e => {
+      const card = e.target.closest('.loc-card');
+      if (!card) return;
+      selectedLoc = +card.dataset.i;
+      renderLocations();
+    });
+    document.getElementById('loc-search').addEventListener('input', renderLocations);
+
+    document.getElementById('connect-open').addEventListener('click', () => {
+      groupIndex = 0;
+      selectedLoc = 0;
+      document.getElementById('loc-search').value = '';
+      renderGroups();
+      renderLocations();
+      openModal(connectModal);
+    });
+
+    // ---- 2 · Connect → reasoning → loading → publishers ----
+    document.getElementById('connect-btn').addEventListener('click', async () => {
+      const loc = locationsFor(groupIndex)[selectedLoc];
+      const optIn = document.getElementById('optin-listings').checked;
+      await closeModal(connectModal);
+      showToast('Business details updated on google');
+      if (!optIn) return;  // connected without listings: stay on the profile form
+      resetTransition();
+      const id = run;
+      const live = () => id === run;
+      document.getElementById('pub-gbp-name').textContent = loc.name;
+
+      // Left: back link steps aside, progress moves on, gaps milestone + new steps
+      fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(() => (backLink.hidden = true), () => {});
+      progressBar.style.width = '120px';  // final width set directly so later resets keep it
+      progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      addMilestone('We have fixed 9 profile gaps!', 'Your business will be easier to find in Google by your customers.');
+      const stepsIn = showSteps([
+        { ai: true, label: 'Finding most relevant publishers for your business...' },
+        { icon: 'step-brand.svg', label: 'updating your brand context ...' },
+      ]);
+
+      // Right: form steps aside, the AI animation comes back
+      processing.setPhrases(['Finding relevant listing publishers..', `Matching your category with local publishers ...`,
+        `Checking where ${picked.noun} in ${picked.city} are listed ...`]);
+      if (!await swapPanel(profileForm, animPanel) || !live()) return;
+      processing.start();
+      if (!await stepsIn || !await hold(T3.phase) || !live()) return;
+
+      // Skeleton while publishers load
+      pubLoading.hidden = false;
+      pubReady.hidden = true;
+      processing.stop();
+      if (!await swapPanel(animPanel, publishers) || !await hold(T3.loading) || !live()) return;
+
+      // Publishers arrive
+      pubList.innerHTML = PUBLISHERS.map(pb => `
+        <div class="pub-row">
+          <span class="pub-row__name"><img src="assets/pub-${pb.id}.svg" alt="" class="pub-logo">${pb.name}</span>
+          <button class="link-btn" type="button" data-pub="${pb.id}">Opt-in</button>
+        </div>`).join('');
+      if (!await swapPanel(pubLoading, pubReady) || !live()) return;
+      [...pubReady.querySelectorAll('.publishers__head, .pub-group, .pub-row')].forEach((el, i) =>
+        fade(el, 0, 1, motion(T2.formIn), { delay: motion(i * T3.rowStagger), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
+
+      // Left: brand step completes, the parent task moves down with the result
+      const [aiStep, brandStep] = stepsList.children;
+      if (!await finishStep(brandStep, 'Updated the brand context for your business.') || !live()) return;
+      await settleParent(aiStep, [brandStep], 'Found the most relevant publishers for your business');
+    });
+
+    // ---- 3 · Opt-in modal ----
+    let optinFor = [];
+    function openOptin(ids) {
+      optinFor = PUBLISHERS.filter(pb => ids.includes(pb.id));
+      document.getElementById('optin-icons').innerHTML =
+        '<img src="assets/gbp-location.svg" alt="Google Business Profile" width="24" height="24"><span class="optin-arrow" aria-hidden="true"><img src="assets/sync-arrow.svg" alt=""></span>'
+        + optinFor.map(pb => `<img src="assets/pub-${pb.id}.svg" alt="${pb.name}" class="pub-logo pub-logo--color">`).join('');
+      const now = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      document.getElementById('optin-edited').textContent =
+        `${pad(now.getDate())}-${pad(now.getMonth() + 1)}-${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+      // The location details that will sync, read from the profile form
+      const v = id => (document.getElementById(id)?.value || '').trim() || '-';
+      const tags = sel => [...document.querySelectorAll(`${sel} .tag`)].map(t => t.textContent.trim()).join(', ') || '-';
+      const [catTags, amenityTags] = document.querySelectorAll('[data-tags]');
+      catTags.id ||= 'tags-categories';
+      amenityTags.id ||= 'tags-amenities';
+      const field = (label, value, cls = '') => `<div class="optin-field ${cls}"><dt>${label}</dt><dd>${esc(value)}</dd></div>`;
+      document.getElementById('optin-fields').innerHTML =
+        field('Name', v('form-name')) + field('Website', v('form-website'))
+        + field('Phone Number', v('form-phone')) + field('Alternative Phone Number', v('form-phone-alt'))
+        + `<div class="optin-col">${field('Email', v('form-email'))}${field('Street Address', v('form-address'))}${field('City', v('form-city'))}${field('State/Region', v('form-state'))}</div>`
+        + `<div class="optin-field"><dt>Map Location</dt><dd><div class="geo-map"><iframe title="Map of the business location" loading="lazy" src="${document.getElementById('form-map').src}"></iframe></div></dd></div>`
+        + field('Country', document.querySelector('#profile-form select:not(#primary-cat):not(#about-lang)').value) + field('Latitude', v('form-lat'))
+        + field('ZIP/Post Code', v('form-zip')) + field('Longitude', v('form-lng'))
+        + field('Business Category', v('primary-cat')) + field('Additional Categories', tags('#tags-categories'))
+        + field('Amenities', tags('#tags-amenities')) + field('Language', v('about-lang'))
+        + field('Description', v('about-desc'), 'optin-field--wide');
+      optinModal.querySelector('.optin-details').scrollTop = 0;
+      openModal(optinModal);
+    }
+    document.getElementById('list-all').addEventListener('click', () => openOptin(PUBLISHERS.map(pb => pb.id)));
+    pubList.addEventListener('click', e => {
+      const btn = e.target.closest('[data-pub]');
+      if (btn) openOptin([btn.dataset.pub]);
+    });
+
+    // ---- 4 · Opt-in → learning from reviews ----
+    document.getElementById('optin-btn').addEventListener('click', async () => {
+      const n = optinFor.length;
+      await closeModal(optinModal);
+      resetTransition();
+      const id = run;
+      const live = () => id === run;
+      showToast(`Opt-in request submitted for ${n} publisher${n === 1 ? '' : 's'}.`);
+      addMilestone('Opted in!', `Your business will be visible across ${n + 1} publishers!`);
+      const stepsIn = showSteps([
+        { ai: true, label: 'Learning from your reviews' },
+        { icon: 'step-brand.svg', label: 'Reading your past reviews...' },
+        { icon: 'step-profile.svg', label: 'Learning your reply pattern...' },
+      ]);
+      processing.setPhrases(['Learning from your reviews...', 'Reading your past reviews ...', 'Learning your reply pattern ...']);
+      if (!await swapPanel(publishers, animPanel) || !live()) return;
+      processing.start();
+      await stepsIn;
+    });
 
     // ---- Form interactions ----
     profileForm.querySelectorAll('.pills .pill').forEach(pill => pill.addEventListener('click', () => {
@@ -1049,8 +1462,8 @@
       }
 
       /* Status lines — 1400ms sweep, a new line every 3200ms. */
-      const lines = Array.from(panel.querySelectorAll('.status-line'));
-      const status = lines[0].parentElement;
+      const status = panel.querySelector('.aida-status');
+      let lines = Array.from(status.querySelectorAll('.status-line'));
       const transitionMs = 1400;
       const holdMs = 3200 - transitionMs;
       let current = 0;
@@ -1138,6 +1551,14 @@
         stop() {
           active = false;
           updatePlayback();
+          setPlayback();
+        },
+        // Swap the cycling status phrases (each phase of onboarding has its own)
+        setPhrases(phrases) {
+          status.innerHTML = phrases.map((t, i) =>
+            `<span class="status-line${i ? '' : ' is-visible'}"><span>${t}</span></span>`).join('');
+          lines = Array.from(status.querySelectorAll('.status-line'));
+          current = 0;
           setPlayback();
         },
       };
