@@ -1831,9 +1831,9 @@ button { font: inherit; color: inherit; }
 
 /* 3 · Feedback Form */
 .tool__art--form .phone { left: 93.2px; top: 61.3px; width: 181.5px; height: 268.3px; display: flex; flex-direction: column; gap: 11.8px; }
-.form__brand { display: flex; align-items: center; justify-content: center; gap: 4.7px; height: 20.5px; padding-top: 4.7px; }
+.form__brand { display: flex; align-items: center; justify-content: flex-start; gap: 4.7px; height: 20.5px; padding: 4.7px 8px 0 56px; }
 .form__logo { display: grid; place-items: center; width: 15.8px; height: 15.8px; border-radius: 50%; background: var(--brand-primary-disabled); font: 700 7.9px/1 var(--font); color: var(--brand-primary); }
-.form__brand b { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 9.5px/1.2 var(--font); color: var(--txt-secondary); }
+.form__brand b { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 9.5px/1.2 var(--font); color: var(--txt-secondary); }
 .form__q { font: 600 11px/14.2px var(--font); color: var(--txt-primary); text-align: center; white-space: nowrap; }
 .form__box { padding: 9.5px; border: 0.8px solid var(--brd-surface-secondary); border-radius: 6.3px; }
 .form__stars { display: flex; justify-content: center; gap: 4.7px; }
