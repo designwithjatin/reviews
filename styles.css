@@ -1481,7 +1481,8 @@ button { font: inherit; color: inherit; }
 .split-btn__more { width: 32px; box-shadow: inset 1px 0 0 #fff; }
 
 .select-row { height: 36px; flex-shrink: 0; display: flex; align-items: center; gap: var(--sp-16); padding: 0 var(--sp-8); }
-.select-row .link-btn { height: 36px; }
+.select-row .link-btn { height: 36px; flex-shrink: 0; }
+.select-row .check { min-width: 0; white-space: nowrap; }
 .select-row--accounts { justify-content: space-between; padding: 0 var(--sp-16); }
 .check input:indeterminate { background-image: url("assets/checkbox-mixed.svg"); }
 
