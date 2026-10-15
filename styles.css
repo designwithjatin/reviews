@@ -1736,7 +1736,126 @@ button { font: inherit; color: inherit; }
 
 .tools { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-16); }
 .tool { width: 324.67px; border-radius: var(--br-8); overflow: hidden; }
-.tool > img { width: 100%; height: 248px; object-fit: cover; border-radius: var(--br-8); background: var(--srf-page); }
+/* Tool card illustrations — built in HTML (Figma 10758:17571 / 17623 / 17823) */
+.tool__art { position: relative; height: 248px; overflow: hidden; border-radius: var(--br-8); background: var(--srf-page); }
+.tool__art img { display: block; }
+.tool__title { position: absolute; left: 0; right: 0; top: 18.5px; font: var(--body-sm); color: var(--txt-primary); text-align: center; }
+.tool__art b { font-weight: 600; }
+.tool__art small { display: block; }
+
+/* Phone frame — every inner size scales with --u (1u = one Figma base pixel) */
+.phone {
+  position: absolute;
+  padding: calc(12 * var(--u)) calc(16 * var(--u)) 0;
+  background: var(--srf-card);
+  border: var(--u) solid var(--brd-surface-secondary);
+  border-bottom: 0;
+  border-radius: calc(32 * var(--u)) calc(32 * var(--u)) 0 0;
+}
+.phone__bar { position: relative; display: flex; align-items: center; justify-content: space-between; height: calc(16 * var(--u)); }
+.phone__bar > span:first-child { font: 600 calc(11 * var(--u)) / 1 var(--font); color: var(--txt-tertiary); }
+.phone__notch { position: absolute; left: 50%; top: 0; width: calc(64 * var(--u)); height: 100%; transform: translateX(-50%); border-radius: 999px; background: var(--dvdr-secondary); }
+.phone__sig { display: flex; align-items: flex-end; gap: calc(3 * var(--u)); }
+.phone__sig i { width: calc(3 * var(--u)); border-radius: var(--u); background: var(--txt-disabled); }
+.phone__sig i:nth-child(1) { height: calc(5 * var(--u)); }
+.phone__sig i:nth-child(2) { height: calc(7 * var(--u)); }
+.phone__sig i:nth-child(3) { height: calc(9 * var(--u)); }
+.phone__sig b { width: calc(14 * var(--u)); height: calc(8 * var(--u)); margin-left: calc(3 * var(--u)); border: calc(1.5 * var(--u)) solid var(--txt-disabled); border-radius: calc(2 * var(--u)); }
+
+/* Skeleton text lines */
+.skel { display: flex; flex-direction: column; gap: 5px; }
+.skel i { display: block; height: 4.3px; border-radius: 1.4px; background: var(--dvdr-secondary); }
+
+/* Floating chips */
+.req__contact, .req__sent, .qr__chip, .form__chip { position: absolute; background: var(--srf-card); white-space: nowrap; }
+
+/* 1 · Quick Review Request */
+.tool__art--request .phone { left: 79.6px; top: 55.5px; width: 163.9px; height: 242.2px; }
+.tool__art--request .phone > :not(.phone__bar) { position: absolute; left: 11.4px; }
+.req__from { top: 33.5px; display: flex; align-items: center; gap: 5.7px; }
+.req__badge { display: grid; place-items: center; width: 22.8px; height: 22.8px; border-radius: 5.7px; background: #FFF8ED; }
+.req__badge img { width: 13px; height: 13px; }
+.req__from b { display: block; max-width: 110px; overflow: hidden; text-overflow: ellipsis; font: 600 8.55px/11.4px var(--font); color: var(--txt-primary); }
+.req__from small { font: 7.8px/10px var(--font); color: var(--txt-tertiary); }
+.req__rule { top: 64.1px; width: 139.6px; height: 0.7px; background: var(--dvdr-secondary); }
+.req__hi { top: 72.7px; font: 8.55px/11.4px var(--font); color: var(--txt-primary); }
+.req__l1 { top: 90.5px; }
+.req__btn { top: 113.8px; display: flex; align-items: center; height: 22px; padding: 0 11.4px; border-radius: 1.4px; background: var(--brand-primary-subtle); font: 8px/1 var(--font); color: var(--brand-primary); }
+.req__l2 { top: 157.5px; }
+.req__arrow { position: absolute; left: 4.8px; top: 27px; width: 313.5px; height: 256.5px; }
+.req__contact {
+  left: 10.6px; top: 200.8px;
+  display: flex; align-items: center; gap: 5.7px;
+  padding: 4px 11.4px 4px 7.1px;
+  border-radius: 5.7px;
+  filter: drop-shadow(0 1.4px 2.85px rgba(0, 0, 0, 0.12));
+}
+.req__avatar { display: grid; place-items: center; flex: none; width: 22.8px; height: 22.8px; border-radius: 50%; background: var(--srf-page); font: 600 10px/1 var(--font); color: var(--txt-primary); }
+.req__contact > span:last-child { width: 70.5px; }
+.req__contact b { display: block; font: 600 8px/12.8px var(--font); color: var(--txt-primary); }
+.req__contact small { font: 7px/1.2 var(--font); color: var(--txt-secondary); }
+.req__sent {
+  left: 230.8px; top: 95.4px;
+  display: flex; align-items: center; gap: 4.3px;
+  padding: 5.7px 8.55px;
+  border: 0.7px solid var(--brd-surface-secondary);
+  border-radius: 5.7px;
+  filter: drop-shadow(0 1.4px 2.85px rgba(0, 0, 0, 0.12));
+  font: 600 8.55px/11.4px var(--font); color: var(--txt-primary);
+}
+.req__sent img { width: 11.4px; height: 11.4px; }
+
+/* 2 · QR Code */
+.tool__art--qr .phone { left: 70.3px; top: 57px; width: 181.5px; height: 219.1px; display: flex; flex-direction: column; align-items: center; gap: 9.7px; }
+.tool__art--qr .phone__bar { align-self: stretch; }
+.qr__scan { position: relative; display: flex; align-items: center; justify-content: center; width: 96.7px; height: 116px; padding-top: 19.3px; }
+.qr__scan img { width: 76px; height: 76px; }
+.qr__corner { position: absolute; width: 17.4px; height: 17.4px; border: 0 solid var(--brand-primary); }
+.qr__corner--tl { left: 0; top: 19.3px; border-width: 1.9px 0 0 1.9px; border-top-left-radius: 5.2px; }
+.qr__corner--tr { right: 0; top: 19.3px; border-width: 1.9px 1.9px 0 0; border-top-right-radius: 5.2px; }
+.qr__corner--bl { left: 0; bottom: 0; border-width: 0 0 1.9px 1.9px; border-bottom-left-radius: 5.2px; }
+.qr__corner--br { right: 0; bottom: 0; border-width: 0 1.9px 1.9px 0; border-bottom-right-radius: 5.2px; }
+.qr__chip {
+  display: flex; align-items: center; gap: 5.2px;
+  padding: 5.2px 7.7px 5.2px 5.2px;
+  border-radius: 5.2px;
+  filter: drop-shadow(0 1.3px 2.6px rgba(0, 0, 0, 0.12));
+}
+.qr__chip--google { left: 25.3px; top: 111.1px; }
+.qr__chip--facebook { left: 225.8px; top: 166.6px; }
+.qr__chip > img { width: 14px; height: 14px; }
+.qr__chip > span { display: flex; flex-direction: column; gap: 1.3px; }
+.qr__chip b { font: 600 8px/12px var(--font); color: var(--txt-primary); }
+.qr__stars { display: flex; gap: 0.65px; }
+.qr__stars img { width: 7.1px; height: 7.1px; }
+
+/* 3 · Feedback Form */
+.tool__art--form .phone { left: 93.2px; top: 61.3px; width: 181.5px; height: 268.3px; display: flex; flex-direction: column; gap: 11.8px; }
+.form__brand { display: flex; align-items: center; justify-content: center; gap: 4.7px; height: 20.5px; padding-top: 4.7px; }
+.form__logo { display: grid; place-items: center; width: 15.8px; height: 15.8px; border-radius: 50%; background: var(--brand-primary-disabled); font: 700 7.9px/1 var(--font); color: var(--brand-primary); }
+.form__brand b { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 9.5px/1.2 var(--font); color: var(--txt-secondary); }
+.form__q { font: 600 11px/14.2px var(--font); color: var(--txt-primary); text-align: center; white-space: nowrap; }
+.form__box { padding: 9.5px; border: 0.8px solid var(--brd-surface-secondary); border-radius: 6.3px; }
+.form__stars { display: flex; justify-content: center; gap: 4.7px; }
+.form__stars img { width: 17.4px; height: 17.4px; }
+.form__checks { display: flex; flex-direction: column; gap: 7.9px; }
+.form__checks span { display: flex; align-items: center; gap: 6.3px; }
+.form__checks i { display: block; height: 4.7px; border-radius: 1.6px; background: var(--dvdr-secondary); }
+.form__checks i:first-child { width: 9.5px; height: 9.5px; background: none; border: 0.8px solid var(--brd-surface-primary); }
+.form__checks i.is-on { background: var(--brand-primary); border-color: var(--brand-primary); }
+.form__chip {
+  left: 12.7px; top: 53px; width: 134.1px;
+  display: flex; flex-direction: column; gap: 6.3px;
+  padding: 7.9px 9.5px;
+  border-radius: 6.3px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
+}
+.form__who { display: flex; align-items: center; gap: 6.3px; }
+.form__who .req__avatar { width: 18.9px; height: 18.9px; font-size: 11px; }
+.form__who b { flex: 1; font: 600 12px/1.25 var(--font); color: var(--txt-primary); }
+.form__who img { width: 11px; height: 11px; }
+.form__chip .skel { gap: 6.3px; }
+.form__chip .skel i { height: 4.7px; border-radius: 1.6px; }
 .tool__more {
   display: flex;
   flex-direction: column;

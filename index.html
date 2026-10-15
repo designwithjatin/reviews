@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=25">
+  <link rel="stylesheet" href="styles.css?v=26">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -615,21 +615,63 @@
     </div>
     <div class="tools">
       <article class="tool">
-        <img src="assets/card-quick-request.png" alt="Quick Review Request: a review request sent to a customer's phone" width="325" height="248">
+        <div class="tool__art tool__art--request" role="img" aria-label="Quick Review Request: a review request sent to a customer's phone">
+          <p class="tool__title">Quick Review Request</p>
+          <div class="phone" style="--u: 0.7125px">
+            <div class="phone__bar"><span>8:15</span><i class="phone__notch"></i><span class="phone__sig"><i></i><i></i><i></i><b></b></span></div>
+            <div class="req__from"><span class="req__badge"><img src="assets/star-yellow.svg" alt=""></span><span><b class="js-biz-name">TWC Jaipur</b><small>to John Doe</small></span></div>
+            <i class="req__rule"></i>
+            <p class="req__hi">Hi John,</p>
+            <span class="skel req__l1"><i style="width:139.6px"></i><i style="width:122.5px"></i></span>
+            <span class="req__btn">Leave a review</span>
+            <span class="skel req__l2"><i style="width:125.4px"></i><i style="width:67px"></i></span>
+          </div>
+          <img class="req__arrow" src="assets/tool-dotted-arrow.svg" alt="">
+          <div class="req__contact"><span class="req__avatar">J</span><span><b>John Doe</b><small>john@email.com</small></span></div>
+          <div class="req__sent"><img src="assets/done-filled.svg" alt="">Request sent</div>
+        </div>
         <div class="tool__more">
           <p>Send bulk review requests to customers with an intelligent campaign system for quick reviews.</p>
           <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Send Quick Review Request</button>
         </div>
       </article>
       <article class="tool">
-        <img src="assets/card-qr-code.png" alt="QR Code: customers scan to leave a review on Google or Facebook" width="325" height="248">
+        <div class="tool__art tool__art--qr" role="img" aria-label="QR Code: customers scan to leave a review on Google or Facebook">
+          <p class="tool__title">QR Code</p>
+          <div class="phone" style="--u: 0.6446px">
+            <div class="phone__bar"><span>8:15</span><i class="phone__notch"></i><span class="phone__sig"><i></i><i></i><i></i><b></b></span></div>
+            <div class="qr__scan">
+              <img src="assets/qr-code.svg" alt="">
+              <i class="qr__corner qr__corner--tl"></i><i class="qr__corner qr__corner--tr"></i><i class="qr__corner qr__corner--bl"></i><i class="qr__corner qr__corner--br"></i>
+            </div>
+          </div>
+          <div class="qr__chip qr__chip--google"><img src="assets/platform-gbp.svg" alt=""><span><b>Google</b><span class="qr__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></span></span></div>
+          <div class="qr__chip qr__chip--facebook"><img src="assets/platform-facebook.svg" alt=""><span><b>Facebook</b><span class="qr__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></span></span></div>
+        </div>
         <div class="tool__more">
           <p>Print a QR code for your counter or tables so customers can leave a review in seconds.</p>
           <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Create QR Code</button>
         </div>
       </article>
       <article class="tool">
-        <img src="assets/card-feedback-form.png" alt="Feedback Form: customers rate their experience" width="325" height="248">
+        <div class="tool__art tool__art--form" role="img" aria-label="Feedback Form: customers rate their experience">
+          <p class="tool__title">Feedback Form</p>
+          <div class="phone" style="--u: 0.789px">
+            <div class="phone__bar"><span>8:15</span><i class="phone__notch"></i><span class="phone__sig"><i></i><i></i><i></i><b></b></span></div>
+            <div class="form__brand"><span class="form__logo js-biz-initial">T</span><b class="js-biz-name">TWC Jaipur</b></div>
+            <p class="form__q">How was your experience?</p>
+            <div class="form__box form__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></div>
+            <div class="form__box form__checks">
+              <span><i class="is-on"></i><i style="width:93.9px"></i></span>
+              <span><i></i><i style="width:74.2px"></i></span>
+              <span><i class="is-on"></i><i style="width:86px"></i></span>
+            </div>
+          </div>
+          <div class="form__chip">
+            <span class="form__who"><span class="req__avatar">J</span><b>John Doe</b><img src="assets/star-yellow.svg" alt=""></span>
+            <span class="skel"><i style="width:113.6px"></i><i style="width:79.7px"></i></span>
+          </div>
+        </div>
         <div class="tool__more">
           <p>Collect private feedback first, and invite happy customers to post it as a public review.</p>
           <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Create Feedback Form</button>
@@ -1845,6 +1887,10 @@
       screenProcessing.getAnimations().forEach(a => a.cancel());
       exploreLater.hidden = true;
       screenFinal.hidden = false;
+      if (picked) {
+        screenFinal.querySelectorAll('.js-biz-name').forEach(el => { el.textContent = picked.name; });
+        screenFinal.querySelectorAll('.js-biz-initial').forEach(el => { el.textContent = picked.name.charAt(0).toUpperCase(); });
+      }
       window.scrollTo(0, 0);
       [...screenFinal.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * 120), from: { transform: 'translateY(12px)' }, to: { transform: 'none' } }));
