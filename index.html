@@ -6,8 +6,8 @@
   <title>Onboarding · SocialPilot Reviews</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=18">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=24">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -363,6 +363,100 @@
         </section>
       </section>
 
+
+      <!-- Screens 13–15 · Reviews Inbox: loading (Figma 10677:34560) → drafts (10677:34964) → automate (10677:35306) -->
+      <section class="inbox" id="inbox" hidden>
+        <div class="inbox__head">
+          <p class="inbox__title">Reviews Inbox<span class="dot" aria-hidden="true"></span><span class="inbox__count">130 Reviews</span></p>
+          <button class="btn-primary btn-primary--md inbox__send" type="button" id="send-replies" disabled>
+            <img src="assets/send.svg" alt="" width="20" height="20"><span>Send Replies</span>
+          </button>
+        </div>
+
+        <div class="inbox__view" id="inbox-loading">
+          <div class="review-card" aria-hidden="true">
+            <div class="review-card__skel-profile"><span class="skel-bar skel-bar--circle"></span><span class="skel-bar" style="width:208px;height:8px"></span></div>
+            <span class="skel-bar" style="width:98%"></span><span class="skel-bar" style="width:90%"></span><span class="skel-bar" style="width:47%"></span>
+            <span class="skel-bar skel-bar--reply"></span>
+          </div>
+          <div class="review-card" aria-hidden="true">
+            <div class="review-card__skel-profile"><span class="skel-bar skel-bar--circle"></span><span class="skel-bar" style="width:208px;height:8px"></span></div>
+            <span class="skel-bar" style="width:98%"></span><span class="skel-bar" style="width:90%"></span><span class="skel-bar" style="width:47%"></span>
+            <span class="skel-bar skel-bar--reply"></span>
+          </div>
+          <div class="review-card" aria-hidden="true">
+            <div class="review-card__skel-profile"><span class="skel-bar skel-bar--circle"></span><span class="skel-bar" style="width:208px;height:8px"></span></div>
+            <span class="skel-bar" style="width:98%"></span><span class="skel-bar" style="width:90%"></span><span class="skel-bar" style="width:47%"></span>
+            <span class="skel-bar skel-bar--reply"></span>
+          </div>
+          <div class="review-card" aria-hidden="true">
+            <div class="review-card__skel-profile"><span class="skel-bar skel-bar--circle"></span><span class="skel-bar" style="width:208px;height:8px"></span></div>
+            <span class="skel-bar" style="width:98%"></span><span class="skel-bar" style="width:90%"></span><span class="skel-bar" style="width:47%"></span>
+            <span class="skel-bar skel-bar--reply"></span>
+          </div>
+          <div class="review-card" aria-hidden="true">
+            <div class="review-card__skel-profile"><span class="skel-bar skel-bar--circle"></span><span class="skel-bar" style="width:208px;height:8px"></span></div>
+            <span class="skel-bar" style="width:98%"></span><span class="skel-bar" style="width:90%"></span><span class="skel-bar" style="width:47%"></span>
+            <span class="skel-bar skel-bar--reply"></span>
+          </div>
+        </div>
+
+        <div class="inbox__view" id="inbox-ready" hidden>
+          <div class="style-card">
+            <div class="style-card__head">
+              <span class="style-card__title"><img src="assets/ai-gradient-16.svg" alt="" width="16" height="16">Your Reply Writing Style</span>
+              <button class="link-underline link-underline--btn" type="button" data-open-style>View Detailed Writing Style</button>
+            </div>
+            <ul class="style-card__list">
+              <li>User prefers warm, appreciative responses without sounding overly excited.</li>
+              <li>Frequently thanks customers by name when available.</li>
+              <li>Avoids generic phrases like "We value your business."</li>
+            </ul>
+          </div>
+          <div class="review-list" id="review-list"></div>
+        </div>
+
+        <div class="inbox__view" id="inbox-done" hidden>
+          <div class="style-card style-card--static">
+            <div class="style-card__head">
+              <span class="style-card__title"><img src="assets/ai-gradient-16.svg" alt="" width="16" height="16">Your Reply Writing Style</span>
+              <button class="link-underline link-underline--btn" type="button" data-open-style>View Detailed Writing Style</button>
+            </div>
+            <ul class="style-card__list">
+              <li>User prefers warm, appreciative responses without sounding overly excited.</li>
+              <li>Frequently thanks customers by name when available.</li>
+              <li>Avoids generic phrases like "We value your business."</li>
+            </ul>
+          </div>
+          <div class="automate">
+            <div class="style-card">
+              <div class="style-card__head"><span class="style-card__title"><img src="assets/reply-automate.svg" alt="" width="16" height="16">Automate Replies</span></div>
+              <div class="automate__body">
+                <div class="automate__box">
+                  <div class="automate__row">
+                    <div>
+                      <p class="automate__title">Positive Reviews</p>
+                      <p class="automate__includes">Includes: <span>5<img src="assets/star-filled-16.svg" alt=" stars" width="16" height="16"></span><span>4<img src="assets/star-filled-16.svg" alt=" stars" width="16" height="16"></span>
+                        <span class="info-tag info-tag--success"><img src="assets/recommend.svg" alt="" width="12" height="12">Recommends</span></p>
+                    </div>
+                    <label class="toggle"><input type="checkbox" checked aria-label="Automatically reply to positive reviews"><span></span></label>
+                  </div>
+                  <div class="automate__row">
+                    <div>
+                      <p class="automate__title">Negative Reviews</p>
+                      <p class="automate__includes">Includes: <span>1<img src="assets/star-filled-16.svg" alt=" star" width="16" height="16"></span><span>2<img src="assets/star-filled-16.svg" alt=" stars" width="16" height="16"></span><span>3<img src="assets/star-filled-16.svg" alt=" stars" width="16" height="16"></span>
+                        <span class="info-tag"><img src="assets/recommend.svg" alt="" width="12" height="12">Does not Recommend</span></p>
+                    </div>
+                    <label class="toggle"><input type="checkbox" checked aria-label="Automatically reply to negative reviews"><span></span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="automate__note"><img src="assets/info.svg" alt="" width="12" height="12">We will use your writing style to generate replies to your reviews and automatically send them within an hour of receiving the review.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- Screens 9–10 · listing publishers: loading (Figma 10677:33177) → list (10677:33282) -->
       <section class="publishers" id="publishers" hidden>
         <div class="publishers__view" id="pub-loading">
@@ -414,6 +508,133 @@
           </div>
         </div>
       </section>
+
+      <!-- Screens 18–19 · Social Posts (Figma 10754:16531) → all selected (10754:16648) -->
+      <section class="share-panel" id="social" hidden>
+        <div class="inbox__head">
+          <p class="inbox__title">Social Posts</p>
+          <div class="social__actions">
+            <button class="link-btn" type="button" id="posts-later">I’ll do it later</button>
+            <div class="split-btn">
+              <button class="split-btn__main" type="button" id="share-now"><img src="assets/share-now.svg" alt="" width="20" height="20">Share Now</button>
+              <button class="split-btn__more" type="button" aria-label="More sharing options"><img src="assets/arrow-down-white.svg" alt="" width="20" height="20"></button>
+            </div>
+          </div>
+        </div>
+        <div class="social__body">
+          <div class="posts">
+            <div class="select-row">
+              <label class="check"><input type="checkbox" id="posts-all"><span id="posts-all-label">Select All Posts</span></label>
+              <button class="link-btn" type="button" id="posts-clear" hidden>Clear All</button>
+            </div>
+            <div class="posts__grid" id="posts-grid"></div>
+          </div>
+          <div class="accounts">
+            <div class="select-row select-row--accounts">
+              <label class="check"><input type="checkbox" id="accounts-all"><span id="accounts-all-label">Select All</span></label>
+              <button class="link-btn" type="button" id="accounts-select" hidden>Select All</button>
+            </div>
+            <div class="accounts__list" id="accounts-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screen 20 · Website Testimonial Widget (Figma 10758:17323) -->
+      <section class="share-panel widget" id="widget" hidden>
+        <div class="inbox__head">
+          <div>
+            <p class="inbox__title">Website Testimonial Widget</p>
+            <p class="widget__sub">We have generated a summary of your reviews and an embeddable widget is ready for your website.</p>
+          </div>
+          <button class="btn-solid" type="button" id="widget-continue">Continue</button>
+        </div>
+        <div class="browser">
+          <div class="browser__bar">
+            <span class="browser__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="browser__url">yourwebsite.com</span>
+          </div>
+          <div class="browser__page">
+            <h3 class="wgt__title">What our customers say about us</h3>
+            <div class="wgt__score"><strong id="wgt-score">5.0</strong><img src="assets/widget-stars.svg" alt="5 stars" width="116" height="20"><span>(120)</span></div>
+            <div class="wgt__summary">
+              <p class="wgt__summary-title"><img src="assets/summary-ai.svg" alt="" width="24" height="24">AI Summary</p>
+              <div class="wgt__chips">
+                <span><img src="assets/summary-approve.svg" alt="" width="15" height="14">Good Service</span>
+                <span><img src="assets/summary-approve.svg" alt="" width="15" height="14">Great Product</span>
+                <span><i class="wgt__tilde" aria-hidden="true">~</i>No parking</span>
+                <span><img src="assets/summary-minus.svg" alt="" width="16" height="16">Poor maintenance</span>
+              </div>
+              <p class="wgt__summary-text" id="wgt-summary"></p>
+            </div>
+            <div class="wgt__carousel">
+              <button class="wgt__nav wgt__nav--prev" type="button" aria-label="Previous reviews"><img src="assets/arrow-right-20.svg" alt="" width="20" height="20"></button>
+              <div class="wgt__track" id="wgt-track"></div>
+              <button class="wgt__nav" type="button" aria-label="Next reviews"><img src="assets/arrow-right-20.svg" alt="" width="20" height="20"></button>
+            </div>
+          </div>
+        </div>
+        <div class="code-card">
+          <div class="code-card__head">
+            <p class="inbox__title">HTML Code</p>
+            <div class="code-card__actions">
+              <button class="link-btn" type="button" id="code-email">Send as Email</button>
+              <button class="btn-outline" type="button" id="code-copy">Copy</button>
+            </div>
+          </div>
+          <pre class="code-card__code" id="widget-code"><span>&lt;div </span><span class="code-attr">data-uuid</span><span>="7ff98510-220a-404c-a581-463c0ba97bb5"&gt;&lt;/div&gt;</span>
+<span>&lt;script </span><span class="code-attr">src</span><span>="https://grwapi.net/widget.min.js"&gt;&lt;/script&gt;</span></pre>
+          <p class="code-card__note"><img src="assets/info-12.svg" alt="" width="12" height="12">Copy the HTML code and paste in your website to make your customers see this widget</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Screen 21 · Final: next milestone (Figma 10758:17527) -->
+  <main class="final" id="screen-final" hidden>
+    <div class="final__head">
+    <h2 class="final__title">Get <span class="final__hl">75 more 5-star reviews</span> to reach 4.0 Stars</h2>
+    <div class="goal" role="img" aria-label="Your rating today is 3.8 stars. Next milestone: 4.0 stars.">
+      <span class="goal__note goal__note--today">Your rating today</span>
+      <span class="goal__note goal__note--next">Next milestone!</span>
+      <div class="goal__track">
+        <span class="goal__fill"></span>
+        <i style="left:136px"></i><i style="left:274px"></i><i style="left:488px"></i>
+        <span class="goal__marker"><img src="assets/goal-star.svg" alt="" width="20" height="20"></span>
+      </div>
+      <div class="goal__labels">
+        <span style="left:0">1.0</span><span style="left:131px">2.0</span><span style="left:268px">3.0</span>
+        <span class="goal__strong goal__strong--center" style="left:366px">3.8<img src="assets/goal-star-12.svg" alt="" width="12" height="12"></span>
+        <span class="goal__strong" style="left:473px">4.0<img src="assets/goal-flag.svg" alt="" width="12" height="12"></span>
+        <span style="left:619px">5.0</span>
+      </div>
+    </div>
+    </div>
+    <div class="final__ctas">
+      <button class="btn-outline btn-outline--wide" type="button">Go to Dashboard</button>
+      <button class="link-btn link-btn--32" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Send First Review Request</button>
+    </div>
+    <div class="tools">
+      <article class="tool">
+        <img src="assets/card-quick-request.png" alt="Quick Review Request: a review request sent to a customer's phone" width="325" height="248">
+        <div class="tool__more">
+          <p>Send bulk review requests to customers with an intelligent campaign system for quick reviews.</p>
+          <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Send Quick Review Request</button>
+        </div>
+      </article>
+      <article class="tool">
+        <img src="assets/card-qr-code.png" alt="QR Code: customers scan to leave a review on Google or Facebook" width="325" height="248">
+        <div class="tool__more">
+          <p>Print a QR code for your counter or tables so customers can leave a review in seconds.</p>
+          <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Create QR Code</button>
+        </div>
+      </article>
+      <article class="tool">
+        <img src="assets/card-feedback-form.png" alt="Feedback Form: customers rate their experience" width="325" height="248">
+        <div class="tool__more">
+          <p>Collect private feedback first, and invite happy customers to post it as a public review.</p>
+          <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Create Feedback Form</button>
+        </div>
+      </article>
     </div>
   </main>
 
@@ -470,6 +691,30 @@
       </div>
       <footer class="modal__foot">
         <button class="btn-solid" type="button" id="optin-btn">Opt-in</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Brand Context / Writing Style (Figma 10677:35415, 10754:16053) -->
+  <div class="modal" id="style-modal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__panel modal__panel--style" role="dialog" aria-modal="true" aria-label="Brand context and writing style">
+      <header class="modal__head">
+        <div class="tabs" role="tablist">
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="brand"><img src="assets/tab-brand-context.svg" alt="" width="16" height="16">Brand Context</button>
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="style"><img src="assets/tab-writing-style.svg" alt="" width="16" height="16">Writing Style</button>
+        </div>
+        <div class="modal__actions modal__actions--lg">
+          <button class="icon-btn" type="button" aria-label="Help"><img src="assets/help-20.svg" alt="" width="20" height="20"></button>
+          <button class="icon-btn" type="button" data-close aria-label="Close"><img src="assets/close-20.svg" alt="" width="20" height="20"></button>
+        </div>
+      </header>
+      <div class="modal__body">
+        <div class="style-sheet" id="style-sheet" role="tabpanel"></div>
+      </div>
+      <footer class="modal__foot modal__foot--split">
+        <p class="style-note" id="style-note" hidden><img src="assets/info.svg" alt="" width="20" height="20">Brand context will be used to personalize AI-generated content where applicable.</p>
+        <button class="btn-solid btn-solid--icon" type="button" id="regen-style"><img src="assets/ai-filled-white.svg" alt="" width="20" height="20"><span>Regenerate Writing Style</span></button>
       </footer>
     </div>
   </div>
@@ -997,8 +1242,17 @@
       animPanel.hidden = false;
       profileForm.hidden = true;
       publishers.hidden = true;
+      inbox.hidden = true;
+      social.hidden = true;
+      widget.hidden = true;
+      screenFinal.hidden = true;
+      exploreLater.hidden = false;
+      delete sendAll.dataset.done;
+      sendAll.querySelector('img').hidden = false;
+      sendAll.querySelector('span').textContent = 'Send Replies';
       closeModal(connectModal, true);
       closeModal(optinModal, true);
+      closeModal(styleModal, true);
       hideToast(true);
       processing.setPhrases(DEFAULT_PHRASES);
       profileForm.querySelector('.pill[data-view="all"]').click();
@@ -1282,7 +1536,456 @@
       processing.setPhrases(['Learning from your reviews...', 'Reading your past reviews ...', 'Learning your reply pattern ...']);
       if (!await swapPanel(publishers, animPanel) || !live()) return;
       processing.start();
-      await stepsIn;
+      if (!await stepsIn || !await hold(T3.phase) || !live()) return;
+      runReviews(id);
+    });
+
+    // =====================================================================
+    // Reviews: load → AI drafts replies → send → automate  (Figma 10677:34560 … 35306)
+    // =====================================================================
+    const inbox = document.getElementById('inbox');
+    const inboxLoading = document.getElementById('inbox-loading');
+    const inboxReady = document.getElementById('inbox-ready');
+    const inboxDone = document.getElementById('inbox-done');
+    const reviewList = document.getElementById('review-list');
+    const sendAll = document.getElementById('send-replies');
+    // Sample reviews with drafts written in the learnt style: warm, thanks by name, no stock phrases
+    const REVIEWS = [
+      { name: 'Sarah Jones', when: '2 Days ago', stars: 4,
+        text: 'The café has a relaxing environment and is a good place to spend an afternoon. The coffee was enjoyable, and the dessert was fresh and nicely presented. However, I found the prices to be slightly higher than expected for the portion sizes. The overall experience was still good, but I think offering a little more value would make it even better.',
+        reply: "Thank you, Sarah! We're glad the space and the coffee made for a relaxing afternoon. Your note on portion sizes is fair, and we've shared it with the kitchen team as we look at our dessert servings. Hope to see you again soon." },
+      { name: 'Aarav Mehta', when: '3 Days ago', stars: 5,
+        text: 'Absolutely loved this café! The cappuccino was rich and smooth, and the croissant was perfectly flaky. The staff made us feel welcome, and the cozy atmosphere made it easy to spend a couple of hours here. Will definitely be back!',
+        reply: "Thank you so much, Aarav! A smooth cappuccino and a flaky croissant is exactly the pairing we hope people come back for. The team will be happy to hear they made you feel at home. See you on your next visit!" },
+      { name: 'Priya Sharma', when: '4 Days ago', stars: 3,
+        text: "I was looking forward to trying this café after hearing so many good things, but unfortunately, my experience didn't match my expectations. My latte arrived only slightly warm, and my grilled sandwich took nearly 30 minutes to arrive.",
+        reply: "Thank you for the honest feedback, Priya, and we're sorry the visit fell short. A lukewarm latte and a 30-minute wait aren't the standard we aim for. We're looking into both with the team, and we'd love the chance to make it right next time." },
+      { name: 'Rohan Gupta', when: '5 Days ago', stars: 5,
+        text: 'Best pour-over in Jaipur, hands down. The baristas actually take the time to explain the beans, and you can taste the difference. Great spot to work from too, the Wi-Fi is fast and the seating is comfortable.',
+        reply: "Thank you, Rohan! Our baristas love talking beans, so it's great to hear that came through in your cup. Glad the space works for your workdays too. See you at the pour-over bar again soon." },
+      { name: 'Neha Kapoor', when: '1 Week ago', stars: 4,
+        text: 'Lovely ambience and friendly staff. The cold brew was excellent. It does get quite crowded on weekends, so finding a table took a while, but the wait was worth it.',
+        reply: "Thank you, Neha! Happy the cold brew hit the spot. You're right that weekends get busy; we're working on making seating easier during the rush. Thanks for waiting it out with us." },
+      { name: 'Vikram Singh', when: '1 Week ago', stars: 5,
+        text: 'Came in for a quick coffee and ended up staying for brunch. The avocado toast and the hazelnut latte were both fantastic. Service was quick even though it was busy.',
+        reply: "Thank you, Vikram! A quick coffee turning into brunch is our favourite kind of visit. Glad the avocado toast and hazelnut latte delivered, and that the team kept things moving. Come back hungry!" },
+    ];
+    const starsHTML = n => [1, 2, 3, 4, 5].map(i =>
+      `<img src="assets/review-star${i <= n ? '' : '-empty'}.svg" alt="" class="review-card__star">`).join('');
+    const reviewHTML = (r, i) => `
+      <article class="review-card" data-i="${i}">
+        <div class="review-card__profile">
+          <img src="assets/platform-gbp.svg" alt="Google" width="24" height="24">
+          <span class="review-card__name">${r.name}</span><span class="dot" aria-hidden="true"></span>
+          <span class="review-card__when">${r.when}</span><span class="dot" aria-hidden="true"></span>
+          <span class="review-card__stars" role="img" aria-label="${r.stars} out of 5 stars">${starsHTML(r.stars)}</span>
+          <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
+        </div>
+        <p class="review-card__text">${r.text}</p>
+        <div class="review-card__reply">
+          <span class="review-card__label">Draft</span><span class="dot" aria-hidden="true"></span>
+          <span class="review-card__draft">${r.reply}</span>
+          <span class="review-card__actions">
+            <button class="link-btn" type="button" data-act="edit"><img src="assets/edit.svg" alt="" width="16" height="16"><span>Edit</span></button>
+            <button class="link-btn" type="button" data-act="send"><img src="assets/check-blue.svg" alt="" width="16" height="16">Send Reply</button>
+          </span>
+        </div>
+      </article>`;
+
+    async function runReviews(id) {
+      const live = () => id === run;
+      // Reviews start loading; the inbox replaces the animation
+      inboxLoading.hidden = false;
+      inboxReady.hidden = true;
+      inboxDone.hidden = true;
+      sendAll.disabled = true;
+      processing.stop();
+      if (!await swapPanel(animPanel, inbox) || !live()) return;
+      const [aiStep, readStep, patternStep] = stepsList.children;
+      if (!await finishStep(readStep, 'Read all your past review replies') || !live()) return;
+      if (!await hold(T3.loading + 1000) || !live()) return;
+
+      // Drafts arrive
+      reviewList.innerHTML = REVIEWS.map(reviewHTML).join('');
+      if (!await swapPanel(inboxLoading, inboxReady) || !live()) return;
+      [...inboxReady.querySelectorAll('.style-card, .review-card')].forEach((el, i) =>
+        fade(el, 0, 1, motion(T2.formIn), { delay: motion(i * T3.rowStagger * 1.5), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
+      sendAll.disabled = false;
+
+      // Left: pattern step completes, two finished steps join, the parent settles
+      if (!await finishStep(patternStep, 'Learnt your writing style') || !live()) return;
+      const added = ['Generated replies to your unanswered reviews', 'Updated your brand context'].map(label => {
+        const li = document.createElement('li');
+        li.className = 'step';
+        li.innerHTML = `<span class="step__icon"><img src="assets/check.svg" alt="" width="12" height="12"></span><span class="step__label">${label}</span>`;
+        stepsList.append(li);
+        return li;
+      });
+      const slides = added.map((li, i) => fade(li, 0, 1, motion(T.stepIn),
+        { delay: motion(i * 400), from: { transform: 'translateY(-8px)' }, to: { transform: 'none' } }));
+      if (!await done(slides) || !live()) return;
+      await settleParent(aiStep, [readStep, patternStep, ...added],
+        'Learnt your reply pattern and generated replies for 130 reviews');
+    }
+
+
+    // ---- Save and Continue → creating social proof (Figma 10754:16462) ----
+    async function runSocialProof() {
+      resetTransition();
+      const id = run;
+      const live = () => id === run;
+      sendAll.disabled = true;
+      progressBar.style.width = '250px';
+      progressBar.animate([{ width: '184px' }, { width: '250px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      stepsList.getAnimations().forEach(a => a.cancel());
+      const stepsIn = showSteps([
+        { ai: true, label: 'Creating Social Proof...' },
+        { icon: 'step-brand.svg', label: 'Picking your top 6 reviews from your inbox...' },
+        { icon: 'step-profile.svg', label: 'Getting your posts and website widget ready...' },
+      ]);
+      processing.setPhrases(['Creating Social Posts', 'Picking your top reviews ...', 'Designing your website review widget ...']);
+      if (!await swapPanel(inbox, animPanel) || !live()) return;
+      processing.start();
+      if (!await stepsIn || !live()) return;
+
+      // Left: both working steps complete, then the parent settles at the bottom
+      const [aiStep, pickStep, readyStep] = stepsList.children;
+      if (!await hold(T2.hold) || !live()) return;
+      if (!await finishStep(pickStep, 'Picked reviews with the strongest praise') || !live()) return;
+      if (!await hold(T2.hold) || !live()) return;
+      if (!await finishStep(readyStep, 'Created your posts and website widget') || !live()) return;
+      if (!await settleParent(aiStep, [pickStep, readyStep], 'Turned top Customer Reviews into testimonials') || !live()) return;
+
+      // Right: the generated posts and accounts replace the animation
+      renderPosts();
+      renderAccounts();
+      processing.stop();
+      if (!await swapPanel(animPanel, social) || !live()) return;
+      [...postsGrid.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
+        { delay: motion(i * T3.rowStagger * 1.5), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
+    }
+
+    // =====================================================================
+    // Social Posts → Website widget → Final  (Figma 10754:16531 … 10758:17527)
+    // =====================================================================
+    const social = document.getElementById('social');
+    const postsGrid = document.getElementById('posts-grid');
+    const postsAll = document.getElementById('posts-all');
+    const postsClear = document.getElementById('posts-clear');
+    const accountsList = document.getElementById('accounts-list');
+    const accountsAll = document.getElementById('accounts-all');
+    const accountsSelect = document.getElementById('accounts-select');
+    const shareNow = document.getElementById('share-now');
+    const widget = document.getElementById('widget');
+    const screenFinal = document.getElementById('screen-final');
+    const exploreLater = document.querySelector('.header .link-underline');
+    // Best reviews first: the six posts are made from them
+    const topReviews = () => [...REVIEWS].sort((a, b) => b.stars - a.stars);
+    const smallStars = n => [1, 2, 3, 4, 5].map(i =>
+      `<img src="assets/review-star${i <= n ? '' : '-empty'}.svg" alt="">`).join('');
+
+    function renderPosts() {
+      postsGrid.innerHTML = topReviews().map((r, i) => `
+        <label class="post">
+          <input type="checkbox" aria-label="Post ${i + 1}: review by ${esc(r.name)}">
+          <div class="post__art" aria-hidden="true">
+            <img src="assets/platform-gbp.svg" alt="">
+            <p class="post__name">${esc(r.name)}</p>
+            <span class="post__stars">${smallStars(r.stars)}</span>
+            <p class="post__quote">“${esc(r.text)}”</p>
+            <p class="post__when">${esc(r.when)}</p>
+          </div>
+        </label>`).join('');
+      syncPosts();
+    }
+    function syncPosts() {
+      const boxes = [...postsGrid.querySelectorAll('input')];
+      const n = boxes.filter(b => b.checked).length;
+      boxes.forEach(b => b.closest('.post').classList.toggle('is-selected', b.checked));
+      postsAll.checked = n === boxes.length;
+      postsAll.indeterminate = n > 0 && n < boxes.length;
+      document.getElementById('posts-all-label').textContent =
+        n ? `${n} Post${n === 1 ? '' : 's'} Selected` : 'Select All Posts';
+      postsClear.hidden = !n;
+      syncShare();
+    }
+    postsGrid.addEventListener('change', syncPosts);
+    postsAll.addEventListener('change', () => {
+      const on = postsAll.checked;  // a partial selection becomes "all"
+      postsGrid.querySelectorAll('input').forEach(b => (b.checked = on));
+      syncPosts();
+    });
+    postsClear.addEventListener('click', () => {
+      postsGrid.querySelectorAll('input').forEach(b => (b.checked = false));
+      syncPosts();
+    });
+
+    // Connected accounts — named after the picked business
+    function renderAccounts() {
+      const slug = picked.name.toLowerCase().replace(/[^a-z0-9]+/g, '');
+      const ACCOUNTS = [
+        { icon: 'facebook', name: picked.name },
+        { icon: 'instagram', name: `@${slug}` },
+        { icon: 'gbp', name: picked.name, sub: picked.address },
+        { icon: 'linkedin', name: picked.name },
+        { icon: 'youtube', name: picked.name },
+        { icon: 'tiktok', name: `@${slug}` },
+        { icon: 'x', name: `@${slug}`, verified: true },
+        { icon: 'pinterest', name: picked.name },
+        { icon: 'threads', name: `@${slug}` },
+        { icon: 'bluesky', name: `${slug}.bsky.social`, off: true },
+        { icon: 'tumblr', name: slug },
+      ];
+      accountsList.innerHTML = ACCOUNTS.map(a => `
+        <label class="account check">
+          <input type="checkbox"${a.off ? '' : ' checked'}>
+          <img src="assets/platform-${a.icon}.svg" alt="${a.icon}">
+          <span class="account__text">
+            <span class="account__name">${esc(a.name)}${a.verified ? '<img src="assets/verified-gold.svg" alt="Verified">' : ''}</span>
+            ${a.sub ? `<span class="account__sub">${esc(a.sub)}</span>` : ''}
+          </span>
+        </label>`).join('');
+      syncAccounts();
+    }
+    function syncAccounts() {
+      const boxes = [...accountsList.querySelectorAll('input')];
+      const n = boxes.filter(b => b.checked).length;
+      accountsAll.checked = n === boxes.length;
+      accountsAll.indeterminate = n > 0 && n < boxes.length;
+      document.getElementById('accounts-all-label').textContent =
+        n ? `${n} Account${n === 1 ? '' : 's'} selected.` : 'Select All';
+      accountsSelect.hidden = !n || n === boxes.length;
+      syncShare();
+    }
+    accountsList.addEventListener('change', syncAccounts);
+    accountsAll.addEventListener('change', () => {
+      const on = accountsAll.checked;
+      accountsList.querySelectorAll('input').forEach(b => (b.checked = on));
+      syncAccounts();
+    });
+    accountsSelect.addEventListener('click', () => {
+      accountsList.querySelectorAll('input').forEach(b => (b.checked = true));
+      syncAccounts();
+    });
+    // Sharing needs at least one post and one account
+    function syncShare() {
+      shareNow.disabled = !postsGrid.querySelector('input:checked') || !accountsList.querySelector('input:checked');
+    }
+
+    // ---- Share Now / I'll do it later → website widget ----
+    let wgtStart = 0;
+    function renderWidget() {
+      const five = topReviews().filter(r => r.stars === 5);
+      const pool = five.length >= 3 ? five : topReviews();
+      const shown = [0, 1, 2].map(k => pool[(wgtStart + k) % pool.length]);
+      document.getElementById('wgt-track').innerHTML = shown.map(r => `
+        <article class="wgt-review">
+          <div class="wgt-review__head">
+            <div class="wgt-review__who">
+              <span class="wgt-review__avatar" aria-hidden="true">${esc(r.name[0])}</span>
+              <div>
+                <p class="wgt-review__name">${esc(r.name)}</p>
+                <p class="wgt-review__when">${esc(r.when.toLowerCase())}</p>
+                <span class="wgt-review__stars" role="img" aria-label="${r.stars} out of 5 stars">${smallStars(r.stars)}</span>
+              </div>
+            </div>
+            <img src="assets/platform-gbp.svg" alt="Google" width="16" height="16">
+          </div>
+          <p class="wgt-review__text">${esc(r.text)}</p>
+        </article>`).join('');
+    }
+    widget.querySelectorAll('.wgt__nav').forEach(btn => btn.addEventListener('click', () => {
+      wgtStart += btn.classList.contains('wgt__nav--prev') ? -1 : 1;
+      wgtStart = (wgtStart + REVIEWS.length) % REVIEWS.length;
+      renderWidget();
+      const track = document.getElementById('wgt-track');
+      fade(track, 0, 1, motion(250));
+    }));
+
+    async function runWidget(scheduled) {
+      resetTransition();
+      const id = run;
+      const live = () => id === run;
+      shareNow.disabled = true;
+      if (scheduled) showToast(`${scheduled} Post${scheduled === 1 ? '' : 's'} Scheduled.`);
+      progressBar.style.width = '316px';
+      progressBar.animate([{ width: '250px' }, { width: '316px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      wgtStart = 0;
+      document.getElementById('wgt-summary').textContent =
+        `Customers frequently rave about ${picked.name}, noting its inviting atmosphere, exceptional coffee, and attentive service. Reviewers often emphasise the cozy seating arrangements, delightful ambiance, and thoughtfully crafted food options that enhance their experience. Many appreciate the attention to detail in both the decor and the menu, making it a perfect spot for relaxation or socializing.`;
+      renderWidget();
+      if (!await swapPanel(social, widget) || !live()) return;
+      [...widget.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
+        { delay: motion(i * 120), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
+    }
+    shareNow.addEventListener('click', () => runWidget(postsGrid.querySelectorAll('input:checked').length));
+    document.getElementById('posts-later').addEventListener('click', () => runWidget(0));
+
+    // Copy / email the embed code
+    const codeText = () => document.getElementById('widget-code').textContent;
+    const copyBtn = document.getElementById('code-copy');
+    copyBtn.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(codeText()); } catch { /* clipboard blocked: still confirm */ }
+      copyBtn.textContent = 'Copied';
+      showToast('HTML code copied');
+      setTimeout(() => (copyBtn.textContent = 'Copy'), 2000);
+    });
+    document.getElementById('code-email').addEventListener('click', () => {
+      location.href = `mailto:?subject=${encodeURIComponent('Review widget for our website')}&body=${encodeURIComponent(
+        `Hi,\n\nPlease add this code to our website where the reviews widget should appear:\n\n${codeText()}\n`)}`;
+    });
+
+    // ---- Continue → final screen (no side panel) ----
+    document.getElementById('widget-continue').addEventListener('click', async () => {
+      resetTransition();
+      const id = run;
+      hideToast(true);
+      if (!await done([fade(screenProcessing, 1, 0, motion(250), { easing: EASE_IN })]) || id !== run) return;
+      screenProcessing.hidden = true;
+      screenProcessing.getAnimations().forEach(a => a.cancel());
+      exploreLater.hidden = true;
+      screenFinal.hidden = false;
+      window.scrollTo(0, 0);
+      [...screenFinal.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
+        { delay: motion(i * 120), from: { transform: 'translateY(12px)' }, to: { transform: 'none' } }));
+      // The rating bar fills up to today's 3.8, then the star lands on it
+      screenFinal.querySelector('.goal__fill').animate([{ transform: 'scaleX(0)' }, { transform: 'none' }],
+        { duration: motion(900), delay: motion(300), easing: EASE_OUT, fill: 'backwards' });
+      screenFinal.querySelector('.goal__marker').animate(
+        [{ transform: 'scale(0.4)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+        { duration: motion(360), delay: motion(1100), easing: EASE_OUT_BACK, fill: 'backwards' });
+    });
+
+    // ---- Brand Context / Writing Style modal (Figma 10677:35415, 10754:16053) ----
+    const styleModal = document.getElementById('style-modal');
+    const styleSheet = document.getElementById('style-sheet');
+    const STYLE = [
+      { title: '5-Star Reviews / Facebook Recommends', stars: 5, tag: 'Recommends',
+        points: ['User prefers warm, appreciative responses without sounding overly excited.', 'Frequently thanks customers by name when available.', 'Avoids generic phrases like "We value your business."', 'Likes acknowledging a specific compliment mentioned in the review.', 'Keeps replies concise, typically 2-4 sentences.', 'Prefers ending with an invitation to return rather than promotional messaging.', 'Avoids excessive punctuation, emojis, and exclamation marks.', 'Uses phrases such as: "We\'re glad you enjoyed..." "Thank you for sharing your experience..." "It means a lot to hear..."', 'Rarely mentions management or ownership teams.'],
+        pattern: 'Thank → Recognize positive feedback → Address improvement opportunity → Invite them back' },
+      { title: '4-Star Reviews', stars: 4,
+        points: ['User treats 4-star reviews as positive but looks for opportunities to improve.', 'Thanks the customer first before addressing any concerns.', 'Prefers subtle acknowledgment of missing expectations rather than apologizing excessively.', 'Avoids defensive explanations.', 'Often includes a statement about continuous improvement.', 'Tone remains optimistic but slightly more thoughtful than 5-star replies.', 'Uses phrases such as: "We appreciate your feedback." "We\'re pleased you enjoyed..." "We\'ll keep working to make every visit even better."'],
+        pattern: 'Thank → Recognize positive feedback → Address improvement opportunity → Invite them back' },
+      { title: '3-Star Reviews', stars: 3,
+        points: ['User views 3-star reviews as mixed experiences requiring careful acknowledgment.', 'Prefers balanced replies that recognize both positive and negative feedback.', 'Uses empathy but avoids sounding scripted.', 'Does not over-apologize.', 'Often thanks customers for taking the time to share detailed feedback.', 'Prefers offering improvement without making promises that cannot be guaranteed.', 'Uses phrases such as: "We appreciate the honest feedback." "We\'re sorry some aspects didn\'t meet expectations." "Your comments help us improve."'],
+        pattern: 'Thank → Acknowledge concerns → Express intent to improve → Encourage another visit' },
+      { title: '2-Star Reviews', stars: 2,
+        points: ['User prefers a calm, professional tone.', 'Begins with an apology when a clear service issue exists.', 'Focuses on understanding the issue rather than defending the business.', 'Avoids challenging customer claims publicly.', 'Often invites the customer to continue the conversation offline.', 'Does not offer compensation publicly.', 'Uses phrases such as: "We\'re sorry to hear about your experience." "This isn\'t the standard we aim to provide." "We\'d appreciate the opportunity to learn more."'],
+        pattern: 'Apologize → Acknowledge issue → State commitment to improvement → Invite direct contact' },
+      { title: '1-Star Reviews / Facebook Doesn\'t Recommend', stars: 1, tag: 'Does not Recommend',
+        points: ['User prioritises professionalism regardless of review sentiment.', 'Avoids emotional or defensive language.', 'Never argues with reviewers in public responses.', 'Prefers concise replies rather than lengthy explanations.', 'Acknowledges the customer\'s dissatisfaction even when details are limited.', 'Requests offline follow-up whenever possible.', 'Avoids admitting fault before facts are confirmed.', 'Uses phrases such as: "We\'re sorry your experience did not meet expectations." "We take feedback seriously." "We\'d welcome the opportunity to discuss this further."', 'If the review appears unfair or lacks context, user still prefers a respectful response rather than disputing the review publicly.'],
+        pattern: 'Apologize → Acknowledge issue → State commitment to improvement → Invite direct contact' },
+      { title: 'Cross-Rating Behavioral Patterns',
+        points: ['Replies are conversational rather than corporate.', 'Typically 50-120 words.', 'Avoids marketing language and sales pitches.', 'Avoids excessive exclamation marks.', 'References specific review details whenever available.', 'Uses the business name sparingly.', 'Maintains a calm and professional tone even for negative reviews.', 'Focuses on the customer\'s experience more than the business\'s perspective.', 'Prefers authentic appreciation over formulaic customer service language.'],
+        pattern: 'Apologize → Acknowledge issue → State commitment to improvement → Invite direct contact' },
+    ];
+    const ratingHTML = n => `<span class="style-sec__stars" role="img" aria-label="${n} star reviews">${[1, 2, 3, 4, 5].map(i =>
+      `<span class="style-sec__star"><img src="assets/rating-star${i <= n ? '' : '-empty'}.svg" alt=""></span>`).join('')}</span>`;
+    // While regenerating, bullets and the pattern become skeleton bars (headings stay)
+    const SKEL_WIDTHS = [58, 75, 69, 75, 60, 75, 69, 75, 58, 44, 75];
+    const skelLines = n => `<div class="style-sec__skel" aria-hidden="true">${Array.from({ length: n }, (_, i) =>
+      `<span class="skel-bar" style="width:${SKEL_WIDTHS[i % SKEL_WIDTHS.length]}%"></span>`).join('')}</div>`;
+    const styleHTML = (loading = false) => STYLE.map(sec => `
+      <section class="style-sec">
+        <div class="style-sec__head">
+          <h3>${esc(sec.title)}</h3>
+          ${sec.stars ? `<div class="style-sec__rating">${ratingHTML(sec.stars)}${sec.tag ? `<span class="style-sec__slash" aria-hidden="true">/</span><span class="info-tag info-tag--pill${sec.stars === 5 ? ' info-tag--success' : ''}"><img src="assets/recommend.svg" alt="" width="12" height="12">${sec.tag}</span>` : ''}</div>` : ''}
+        </div>
+        ${loading ? skelLines(sec.points.length + 2) : `<ul class="style-sec__points">${sec.points.map(pt => `<li>${esc(pt)}</li>`).join('')}</ul>`}
+        <div class="style-sec__pattern"><h4>Typical Reply Pattern</h4>${loading ? '<span class="skel-bar" style="width:70%;margin-top:12px"></span>' : `<p>${esc(sec.pattern)}</p>`}</div>
+      </section>`).join('');
+    // Brand context: what the AI knows about the business, read from the profile form
+    const brandHTML = () => {
+      const v = id => (document.getElementById(id)?.value || '').trim() || '-';
+      const tags = box => [...box.querySelectorAll('.tag')].map(t => t.textContent.trim()).join(', ') || '-';
+      const [cats, amenities] = document.querySelectorAll('[data-tags]');
+      const block = (title, text) => `<section class="style-sec"><div class="style-sec__head"><h3>${title}</h3></div><p class="style-sec__text">${esc(text)}</p></section>`;
+      return block('Business', `${v('form-name')} · ${v('primary-cat')} · ${v('form-city')}`)
+        + block('Short Description', v('about-short'))
+        + block('Description', v('about-desc'))
+        + block('Additional Categories', tags(cats))
+        + block('Amenities', tags(amenities));
+    };
+    function showTab(tab) {
+      styleModal.querySelectorAll('.tab').forEach(t => {
+        const on = t.dataset.tab === tab;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      styleSheet.innerHTML = tab === 'style' ? styleHTML() : brandHTML();
+      styleSheet.scrollTop = 0;
+      document.getElementById('style-note').hidden = tab !== 'brand';
+      document.getElementById('regen-style').hidden = tab !== 'style';
+    }
+    styleModal.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+    styleModal.querySelector('.modal__panel').tabIndex = -1;
+    styleModal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(styleModal)));
+    document.addEventListener('keydown', e => e.key === 'Escape' && !styleModal.hidden && closeModal(styleModal));
+    inbox.addEventListener('click', e => {
+      if (!e.target.closest('[data-open-style]')) return;
+      showTab('style');
+      openModal(styleModal);
+    });
+    // Regenerate: a short "thinking" state, then the sections refresh
+    document.getElementById('regen-style').addEventListener('click', async e => {
+      const btn = e.currentTarget;
+      const label = btn.querySelector('span');
+      btn.disabled = true;
+      label.textContent = 'Regenerating...';
+      styleSheet.innerHTML = styleHTML(true);
+      await new Promise(r => setTimeout(r, 2000));
+      styleSheet.innerHTML = styleHTML();
+      [...styleSheet.children].forEach((el, i) => fade(el, 0, 1, motion(300), { delay: motion(i * 60) }));
+      label.textContent = 'Regenerate Writing Style';
+      btn.disabled = false;
+      showToast('Writing style regenerated');
+    });
+
+    // Edit a draft in place; Send Reply sends just that one
+    function markReplied(card) {
+      card.classList.add('is-replied');
+      card.querySelector('.review-card__label').textContent = 'Replied';
+      card.querySelector('.review-card__draft').contentEditable = 'false';
+    }
+    reviewList.addEventListener('click', e => {
+      const btn = e.target.closest('[data-act]');
+      if (!btn) return;
+      const card = btn.closest('.review-card');
+      const draft = card.querySelector('.review-card__draft');
+      if (btn.dataset.act === 'edit') {
+        const editing = card.classList.toggle('is-editing');
+        draft.contentEditable = String(editing);
+        btn.querySelector('span').textContent = editing ? 'Done' : 'Edit';
+        if (editing) draft.focus();
+      } else {
+        markReplied(card);
+        showToast('Review reply sent');
+      }
+    });
+
+    // Send every remaining draft, then offer automation
+    sendAll.addEventListener('click', async () => {
+      if (sendAll.dataset.done) return runSocialProof();  // now "Save and Continue"
+      const pending = [...reviewList.querySelectorAll('.review-card:not(.is-replied)')];
+      const total = reviewList.children.length;
+      resetTransition();
+      const id = run;
+      const live = () => id === run;
+      sendAll.disabled = true;
+      pending.forEach(markReplied);
+      showToast(`${pending.length} review ${pending.length === 1 ? 'reply' : 'replies'} sent`);
+      progressBar.style.width = '184px';
+      progressBar.animate([{ width: '120px' }, { width: '184px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      addMilestone(`Replied to ${total} Reviews`, 'Ensuring no review goes unanswered!');
+      fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN }).finished.then(() => (stepsList.innerHTML = ''), () => {});
+      if (!await hold(400) || !live()) return;
+      if (!await swapPanel(inboxReady, inboxDone) || !live()) return;
+      [...inboxDone.children].forEach((el, i) =>
+        fade(el, 0, 1, motion(T2.formIn), { delay: motion(i * 120), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
+      sendAll.querySelector('img').hidden = true;
+      sendAll.querySelector('span').textContent = 'Save and Continue';
+      sendAll.disabled = false;
+      sendAll.dataset.done = 'true';
     });
 
     // ---- Form interactions ----
