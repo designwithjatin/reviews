@@ -1594,7 +1594,7 @@ button { font: inherit; color: inherit; }
   padding: var(--sp-16);
   border: 1px solid #FFCB00;
   border-radius: var(--br-8);
-  background: linear-gradient(100deg, #fff 55%, #FFFBEA);
+  background: var(--srf-card);
 }
 .wgt__summary-title { display: flex; align-items: center; gap: var(--sp-8); font: 600 14px/18px var(--font); color: var(--txt-secondary); }
 .wgt__chips { display: flex; flex-wrap: wrap; gap: var(--sp-8); }
