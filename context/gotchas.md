@@ -16,6 +16,9 @@
 - **Shortcuts corrupt the left steps.** Calling `runReviews()` or `runSocialProof()` without the preceding phase's `showSteps()` leaves old steps in the list, and `settleParent` then moves the wrong row. The owner once saw this in the shared pane and thought the animation was broken. Reproduce the real phase sequence, and remember the owner can see the pane.
 - The `ai-onboarding-reviews` server gets stopped by the app; restart it with `preview_start`.
 
+## Maps
+- The preview pane doesn't render Google Maps embeds (all map iframes are blank there, including the old profile-form map). They work on the live site. Don't chase it as a bug.
+
 ## Figma
 - Large nodes exceed the MCP output limit, so the result is saved to a file: `jq -r '.[0].text' file`, or fetch child nodes.
 - Asset URLs expire after 7 days, so download them locally.

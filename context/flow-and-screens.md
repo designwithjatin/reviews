@@ -8,6 +8,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | 1 | Search: empty | 10657:4151 | Illustration (updated 10673:3461) | Greeting "Hi John!" + search textarea |
 | 2 | Searching | 10657:4266 | Skeleton rows | — |
 | 3 | Results | 10657:4329 | `.business` cards (hover: shadow + `#698EC4` outline) | — |
+| 3b | Create a new profile ("I don't see my business") | 10768:18579 | `main#screen-create`, full width: description textarea, location search + live map (opens on the searched city). **Create Profile** (disabled until both filled) → screen 4, then the normal flow | No side panel. Back link on later screens = "Back to profile details" → returns here |
 | 4 | Processing | 10657:4415 | AI dot-wave animation | Card flies to top-left; panel shrinks 716→386; steps stack in one by one. Progress **70 (unchanged on purpose)** |
 | 5 | Steps completing | 10657:4470 | Animation | Competitor ✓ "Learnt what your competitors are doing." → Brand ✓ "Updated the brand context for your business." → slides in ✓ "Found 9 gaps in your business profile" |
 | 6 | Profile form | 10657:4531, 10670:3742 | `#profile-form` with All / AI Corrected / Missing pills, AI reasoning notes, live map | Last working step "Updating your business profile with optimized content" fades; parent → "Business profile is ready for your review. You can make changes, or publish right away!" |

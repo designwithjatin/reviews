@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=34">
+  <link rel="stylesheet" href="styles.css?v=35">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -135,6 +135,35 @@
       </p>
       <div class="results__list" id="results-list"></div>
     </section>
+  </main>
+
+  <!-- Screen 3b · "I don't see my business" → create a new profile (Figma 10768:18579) -->
+  <main class="create" id="screen-create" hidden>
+    <div class="create__head">
+      <h2 class="create__title">Create a new profile</h2>
+      <button class="btn-solid btn-solid--icon create__go" type="button" id="create-go" disabled>
+        <img src="assets/ai-create-white.svg" alt="" width="20" height="20">Create Profile
+      </button>
+    </div>
+    <div class="create__body">
+      <section class="create-card">
+        <label class="create-card__label" for="create-desc">Tell us what your business does</label>
+        <textarea class="create-card__desc" id="create-desc" rows="3" placeholder="eg : We’re a specialty coffee shop"></textarea>
+      </section>
+      <section class="create-card">
+        <label class="create-card__label" for="create-where">Where is it located?</label>
+        <form class="create-search" id="create-search">
+          <input class="create-search__input" id="create-where" type="text" autocomplete="street-address" placeholder="Eg : Sindhu Bhavan Road">
+          <button class="icon-btn" type="submit" aria-label="Find on map"><img src="assets/search-20.svg" alt="" width="20" height="20"></button>
+        </form>
+        <div class="create-map">
+          <p class="create-map__label"><img src="assets/location-16.svg" alt="" width="16" height="16">Pin your location</p>
+          <div class="create-map__frame">
+            <iframe id="create-map" title="Map of your business location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <!-- Screen 4 · processing (Figma 10657:4415) -->
@@ -1091,7 +1120,7 @@
       run++;
       flying?.remove();
       flying = null;
-      document.querySelectorAll('#screen-search *, #screen-processing *, .setup-panel')
+      document.querySelectorAll('#screen-search *, #screen-create *, #screen-processing *, .setup-panel')
         .forEach(el => el.getAnimations()
           .filter(a => !(a instanceof CSSAnimation))  // keep the glow, sparkles and shimmer running
           .forEach(a => a.cancel()));
@@ -1103,6 +1132,8 @@
       resetTransition();
       resetProcessingScreen();
       const id = run;
+      cameFrom = 'search';
+      backLink.querySelector('.link-underline').textContent = 'Back to results';
       fillSelected(results[row.dataset.index]);
 
       if (reduceMotion.matches) {
@@ -2183,7 +2214,101 @@
       resetProcessingScreen();
       selCard.style.opacity = '';
       screenProcessing.hidden = true;
-      screenSearch.hidden = false;
+      (cameFrom === 'create' ? screenCreate : screenSearch).hidden = false;  // back to where they started
+    });
+
+    // =====================================================================
+    // "I don't see my business" → create a new profile (Figma 10768:18579)
+    // The user describes the business and its address, then joins the same
+    // flow as a found business: steps → location details form → GBP → publishers.
+    // =====================================================================
+    let cameFrom = 'search';
+    const screenCreate = document.getElementById('screen-create');
+    const createDesc = document.getElementById('create-desc');
+    const createWhere = document.getElementById('create-where');
+    const createGo = document.getElementById('create-go');
+    const createMap = document.getElementById('create-map');
+    // zoom: country → city → street, depending on how much we know
+    const showCreateMap = (place, zoom = 15) => {
+      const src = `https://maps.google.com/maps?q=${encodeURIComponent(place)}&z=${zoom}&output=embed`;
+      if (createMap.src !== src) createMap.src = src;
+    };
+    const searchedCity = () => lastSearch?.parsed.city || '';
+
+    list.addEventListener('click', async e => {
+      if (!e.target.closest('.business--create') || flying) return;
+      resetTransition();
+      const id = run;
+      const leaving = [...screenSearch.children].map(el => fade(el, 1, 0, motion(T.fadeOut), { easing: EASE_IN }));
+      if (!await done(leaving) || id !== run) return;
+      screenSearch.hidden = true;
+      screenSearch.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      [...screenSearch.children].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      screenCreate.hidden = false;
+      showCreateMap(searchedCity() || 'India', searchedCity() ? 12 : 4);
+      [...screenCreate.querySelectorAll('.create__head, .create-card')].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
+        { delay: motion(i * T2.formStagger * 1.5), from: { transform: 'translateY(12px)' }, to: { transform: 'none' } }));
+      createDesc.focus();
+    });
+
+    // Both answers are needed before a profile can be built
+    const syncCreate = () => (createGo.disabled = !createDesc.value.trim() || !createWhere.value.trim());
+    [createDesc, createWhere].forEach(el => el.addEventListener('input', syncCreate));
+    document.getElementById('create-search').addEventListener('submit', e => {
+      e.preventDefault();
+      const where = createWhere.value.trim();
+      if (!where) return createWhere.focus();
+      const city = searchedCity();
+      showCreateMap(city && !where.toLowerCase().includes(city.toLowerCase()) ? `${where}, ${city}` : where);
+    });
+
+    // The new business: name from the search, category from the description
+    // (falling back to the search), address and city from the location typed
+    function businessFromCreate() {
+      const where = createWhere.value.trim();
+      const searched = lastSearch?.parsed;
+      const fromDesc = parseQuery(createDesc.value.trim());
+      const fromWhere = parseQuery(where);
+      const kind = fromDesc.category !== 'Local Business' || !searched ? fromDesc : searched;
+      const city = fromWhere.city || searchedCity();
+      const info = CITIES[city];
+      const centre = (fromWhere.area && AREA_COORDS[fromWhere.area]) || COORDS[city];
+      const [lat, lng] = centre ? centre.map(v => v.toFixed(4)) : ['', ''];
+      return {
+        name: searched?.name || 'Your Business', category: kind.category, noun: kind.noun, platform: 'gbp',
+        address: city && !where.toLowerCase().includes(city.toLowerCase()) ? `${where}, ${city}` : where,
+        city, state: info?.state || '', zip: info ? info.pin + String(100 + (hash(where) % 900)) : '', lat, lng,
+      };
+    }
+
+    createGo.addEventListener('click', async () => {
+      if (createGo.disabled || flying) return;
+      resetTransition();
+      resetProcessingScreen();
+      const id = run;
+      cameFrom = 'create';
+      const created = businessFromCreate();
+      fillSelected(created);
+      updateMap(created.address);  // the street they pinned, not the city centre
+      backLink.querySelector('.link-underline').textContent = 'Back to profile details';
+
+      // Create screen steps aside; the left panel and AI animation settle in,
+      // then the reasoning steps stack one by one (as after picking a business)
+      const leaving = [...screenCreate.children].map(el => fade(el, 1, 0, motion(T.fadeOut), { easing: EASE_IN }));
+      if (!await done(leaving) || id !== run) return;
+      screenCreate.hidden = true;
+      [...screenCreate.children].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      screenProcessing.hidden = false;
+      processing.start();
+      if (reduceMotion.matches) return completeSteps(id);
+      [selCard, backLink, progress].forEach((el, i) => fade(el, 0, 1, T.settle,
+        { delay: i * 60, from: { transform: 'translateY(-6px)' }, to: { transform: 'none' } }));
+      fade(animPanel, 0, 1, T.settle * 2);
+      const arrivals = [...stepsList.querySelectorAll('.step')].map((step, i) => fade(step, 0, 1, T.stepIn, {
+        delay: T.settle + i * T.stepGap, from: { transform: 'translateY(-8px)' }, to: { transform: 'none' },
+      }));
+      if (!await done(arrivals) || id !== run) return;
+      completeSteps(id);
     });
 
     // ---- Processing animation ----

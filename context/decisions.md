@@ -28,6 +28,13 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-15 · Share Now disabled until ≥1 post and ≥1 account** (agent; Figma shows it always enabled).
 - **2026-10-15 · "I'll do it later" skips to the widget without the toast** (agent).
 
+## Create a new profile
+- **2026-10-16 · "I don't see my business" opens a create screen, then the same flow until publishers and beyond** (owner; Figma 10768:18579).
+- **2026-10-16 · Create Profile disabled (40%) until both fields are filled** (agent; Figma shows it enabled).
+- **2026-10-16 · Name from the search, category from the description, address/city from the location; the form map pins the typed street** (agent).
+- **2026-10-16 · Back link on this path reads "Back to profile details" and returns to the create screen with inputs kept** (agent).
+- **2026-10-16 · No way back from the create screen to the results** (agent; Figma has none). Flagged to the owner.
+
 ## Connect GBP
 - **2026-10-16 · No "Back to results" after connecting GBP** (owner). Applies to both connect paths. The hide doesn't depend on the fade finishing, so a cancelled fade can't bring the link back.
 

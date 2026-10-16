@@ -8,6 +8,8 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 ## Open questions (waiting on the owner)
 | Since | Question | Context |
 |---|---|---|
+| 2026-10-16 | Create-profile path: the steps still say "Found 9 gaps in your business profile" and Connect offers existing GBP locations. Should new businesses get their own wording (e.g. "Created your Google Business Profile")? | Built as "same flow" per the owner. |
+| 2026-10-16 | Should the create screen have a way back to the search results? | Figma has none; the header link is the only exit. |
 | 2026-10-16 | Should the left QR-code chip say "Google" (built) or "Facebook" (as in Figma)? | Figma shows the Google icon labelled "Facebook", which looks like a slip. |
 | 2026-10-16 | Real copy for the **QR Code** and **Feedback Form** card descriptions and links | Figma reuses the Quick Review Request text on all three cards, so placeholder copy was written. |
 | 2026-10-16 | Exact **reply (↳) icon** from Figma | A hand-drawn SVG (`assets/reply.svg`) is used until the owner shares the node. |
@@ -20,6 +22,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-10-16: "I don't see my business" → Create a new profile screen → same flow (steps, form, Connect, publishers).
 - 2026-10-16: Send Replies → Automate Replies transition rebuilt (cascade, beat, cards drop away, Automate rises in under the fixed writing-style card). Real-time feel not yet seen in the preview pane (it froze); the order was verified.
 - 2026-10-16: "Back to results" hidden after connecting GBP (both paths).
 - 2026-10-16: Restored the Writing Style + Automate Replies step (10677:35306) after the temporary replied state; Save and Continue → social posts.

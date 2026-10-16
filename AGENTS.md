@@ -73,6 +73,12 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The result card has a simple hover state: white bg, `--shadow-bottom-sm`, 1px `#698EC4` outline, radius 8.
 - The back link copy is **"Back to results"**. It's **hidden once GBP is connected**, with or without the listings opt-in, and never comes back in later steps.
 
+**"I don't see my business" → Create a new profile** (Figma 10768:18579)
+- A full-width screen (no side panel) with "Tell us what your business does" and "Where is it located?" (search + "Pin your location" live map).
+- **Create Profile** stays at 40% opacity until both are filled. It then joins the **same flow** as a found business: reasoning steps → location details form → Connect GBP → listing publishers → and on.
+- The new business is built from the inputs: the name from the search, the category from the description, and the address and city from the location.
+- The form's map pins the typed street. The back link reads **"Back to profile details"** and returns to the filled-in create screen.
+
 **Business-select transition**
 - The left panel shrinks, and the selected business card flies to the top of the left panel. Then reasoning starts, with steps stacking one by one.
 - The transition is slow and natural. An alternative "easier" transition (index-v2) was **rejected**.

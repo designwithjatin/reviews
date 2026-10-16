@@ -17,6 +17,7 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 |---|---|---|
 | Header | `header.header` | Logo + "I'll Explore Later Myself" link (`exploreLater`, hidden on the final screen) |
 | Screens 1–3 | `main#screen-search` | Left greeting + `#search-form`; right panel states: illustration → searching skeleton → results `.business[data-index]` |
+| Screen 3b | `main#screen-create` | Create a new profile: `#create-desc`, `#create-search` / `#create-where`, `#create-map`, `#create-go`. Entered from the results' `.business--create` row |
 | Screens 4+ | `main#screen-processing` | `aside.setup-panel` (back link, selected business, `.progress`, `#milestones`, `ol#steps`) + `.workspace` |
 | Workspace panels (one visible at a time) | `#processing` (AI dot-wave animation), `#profile-form`, `#publishers`, `#inbox` (`#inbox-loading` / `#inbox-ready` / `#inbox-done`), `#social`, `#widget` | Swapped with `swapPanel(from, to)` |
 | Final | `main#screen-final` | Heading + `.goal` rating bar + CTAs + `.tools` cards (HTML illustrations) |
@@ -26,6 +27,7 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 
 ## Script layout (in order)
 1. **Search:** `CITIES`, `CATEGORIES`, `parseQuery(q)`, `buildResults(q)` (deterministic: same query → same results), `resultRow`.
+2a. **Create a new profile:** `cameFrom` (`'search'` / `'create'`, used by the back link), `showCreateMap(place, zoom)`, `syncCreate`, `businessFromCreate()` (builds a `picked`-shaped object from the inputs + `lastSearch`), and the `#create-go` handler (fades the create screen, settles the left panel, stacks the steps, then `completeSteps(id)`). It lives just after the back-link handler.
 2. **Business pick → processing:** `T` timings, easings `EASE_IN/OUT/IN_OUT/OUT_BACK`, `fade()`, `done()`, `fillSelected(b)` (sets `picked`, fills the form), `resetTransition()`, the card-flight click handler.
 3. **Steps → profile form:** `T2`, `hold()`, `motion()`, `finishStep()`, `completeSteps()`, `settleParent()`, `resetProcessingScreen()`.
 4. **Connect → publishers → opt-in:** `T3`, `PUBLISHERS`, `GROUPS`, modal and toast helpers, `stepHTML`, `showSteps()`, `addMilestone()`, `swapPanel()`, connect/locations rendering, the opt-in handler.

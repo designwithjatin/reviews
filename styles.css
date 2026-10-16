@@ -1893,3 +1893,45 @@ button { font: inherit; color: inherit; }
 }
 .tool__more p { font: var(--body-xs); color: var(--txt-secondary); }
 .tool:hover .tool__more, .tool:focus-within .tool__more { opacity: 1; transform: none; }
+
+/* ==========================================================
+   Screen 3b · Create a new profile (Figma 10768:18579)
+   "I don't see my business" → describe it + pin the address
+   ========================================================== */
+.create { flex: 1; min-height: 740px; display: flex; flex-direction: column; gap: var(--sp-24); padding: var(--sp-24); background: var(--srf-page); }
+.create__head { display: flex; align-items: center; justify-content: space-between; }
+.create__title { font: 600 16px/20px var(--font); color: var(--txt-secondary); }
+.create__go { border-radius: var(--br-4); }
+.create__go:disabled { background: var(--brand-primary); opacity: 0.4; }  /* same disabled language as Share Now */
+.create__body { display: flex; flex-direction: column; align-items: center; gap: var(--sp-24); }
+.create-card { width: min(984px, 100%); display: flex; flex-direction: column; gap: var(--sp-8); padding: var(--sp-16); border-radius: var(--br-8); background: var(--srf-card); }
+.create-card__label { font: var(--body-sm); color: var(--txt-primary); }
+.create-card__desc {
+  min-height: 64px;
+  padding: var(--sp-16);
+  border: 1px solid var(--brd-input-secondary);
+  border-radius: var(--br-4);
+  background: var(--srf-input);
+  font: var(--body-sm);
+  color: var(--txt-primary);
+  resize: vertical;
+  outline: 0;
+}
+.create-card__desc::placeholder, .create-search__input::placeholder { color: var(--txt-disabled); }
+.create-card__desc:focus, .create-search:focus-within { border-color: var(--brd-input-active); }
+.create-search {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  padding: 0 var(--sp-4) 0 var(--sp-8);
+  border: 1px solid var(--brd-input-secondary);
+  border-radius: 2px;
+  background: var(--srf-input);
+}
+.create-search__input { flex: 1; min-width: 0; border: 0; background: none; font: var(--body-sm); color: var(--txt-primary); outline: 0; }
+.create-search .icon-btn { width: 28px; height: 28px; }
+.create-map { display: flex; flex-direction: column; gap: var(--sp-8); padding: var(--sp-4) 0; margin-top: var(--sp-8); }
+.create-map__label { display: flex; align-items: center; gap: var(--sp-4); font: var(--body-sm); color: var(--txt-secondary); }
+.create-map__frame { height: 200px; border-radius: var(--br-8); overflow: hidden; background: var(--srf-input); }
+.create-map__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
