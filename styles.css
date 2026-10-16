@@ -1476,7 +1476,9 @@ button { font: inherit; color: inherit; }
 }
 .split-btn button:hover { background: #004FD2; }
 .split-btn button:active { background: #0037BA; }
-.split-btn button:disabled { background: var(--brand-primary-disabled); cursor: default; }
+/* Disabled: the whole split button dims to 40% so both halves read as off */
+.split-btn:has(.split-btn__main:disabled) { opacity: 0.4; }
+.split-btn:has(.split-btn__main:disabled) button { background: var(--brand-primary); cursor: default; pointer-events: none; }
 .split-btn__main { padding: 0 var(--sp-16); }
 .split-btn__more { width: 32px; box-shadow: inset 1px 0 0 #fff; }
 
