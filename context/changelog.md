@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-10-16 · Create profile: real address lookup for city/state/PIN/coords; no website for new profiles
+- (pending) · 2026-10-16 · New business: Google sign-in → listings → first-100-reviews final screen
+- cd26fe2 · 2026-10-16 · Create profile: real address lookup for city/state/PIN/coords; no website for new profiles
 - ee4e2f6 · 2026-10-16 · Add Create a new profile screen (I don't see my business) into the same flow
 - 2f89bd0 · 2026-10-16 · Connected transition from replied reviews to Automate Replies
 - 7adaca4 · 2026-10-16 · Hide Back to results once GBP is connected

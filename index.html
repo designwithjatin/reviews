@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=35">
+  <link rel="stylesheet" href="styles.css?v=36">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -620,7 +620,7 @@
 
   <!-- Screen 21 · Final: next milestone (Figma 10758:17527) -->
   <main class="final" id="screen-final" hidden>
-    <div class="final__head">
+    <div class="final__head" data-for="existing">
     <h2 class="final__title">Get <span class="final__hl">75 more 5-star reviews</span> to reach 4.0 Stars</h2>
     <div class="goal" role="img" aria-label="Your rating today is 3.8 stars. Next milestone: 4.0 stars.">
       <span class="goal__note goal__note--today">Your rating today</span>
@@ -637,6 +637,22 @@
         <span style="left:619px">5.0</span>
       </div>
     </div>
+    </div>
+    <!-- New business (Figma 10773:18776): starting from zero reviews -->
+    <div class="final__head" data-for="new" hidden>
+      <h2 class="final__title">Get <span class="final__hl">your first 100</span> 5 Star Reviews</h2>
+      <div class="goal" role="img" aria-label="Starting out with no reviews. Next milestone: 100 five-star reviews.">
+        <span class="goal__note" style="left:0">Starting out</span>
+        <span class="goal__note goal__note--end">Next milestone!</span>
+        <div class="goal__track">
+          <span class="goal__fill" style="width:0"></span>
+          <i style="left:136px"></i><i style="left:349px"></i>
+          <span class="goal__marker" style="left:0"><img src="assets/goal-star.svg" alt="" width="20" height="20"></span>
+        </div>
+        <div class="goal__labels">
+          <span style="left:131px">10</span><span style="left:343px">50</span><span style="left:619px">100</span>
+        </div>
+      </div>
     </div>
     <div class="final__ctas">
       <button class="btn-outline btn-outline--wide" type="button">Go to Dashboard</button>
@@ -708,6 +724,37 @@
       </article>
     </div>
   </main>
+
+  <!-- Google sign-in · choose an account (Figma 10773:18769). Prototype only: no real
+       sign-in, nothing is entered or sent; choosing a row just continues the flow. -->
+  <div class="gauth" id="gauth" hidden>
+    <div class="gauth__card" role="dialog" aria-modal="true" aria-labelledby="gauth-title">
+      <div class="gauth__bar"><img src="assets/google-g-color.svg" alt="" width="16" height="17">Sign in with Google</div>
+      <div class="gauth__body">
+        <div class="gauth__intro">
+          <img src="assets/socialpilot-wordmark.svg" alt="SocialPilot" width="133" height="31">
+          <h2 id="gauth-title">Choose an account</h2>
+        </div>
+        <div class="gauth__side">
+          <ul class="gauth__list">
+            <li><button class="gauth__account" type="button" data-account>
+              <img src="assets/avatar.png" alt="" width="28" height="28">
+              <span><b>Jatin Solanki</b><small>jatinsolanki@socialpilot.co</small></span>
+            </button></li>
+            <li><button class="gauth__account" type="button" data-account>
+              <span class="gauth__other" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" stroke="#444746" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="#444746" stroke-width="1.6"/><path d="M6.5 18.2c1.3-2 3.2-3 5.5-3s4.2 1 5.5 3" stroke="#444746" stroke-width="1.6"/></svg></span>
+              <span><b>Use another account</b></span>
+            </button></li>
+          </ul>
+          <p class="gauth__legal">Before using this app, you can review SocialPilot’s <a href="#" onclick="return false">Privacy Policy</a> and <a href="#" onclick="return false">Terms of Service</a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="gauth__foot">
+      <span class="gauth__lang">English (United States)<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 3.5 5 6.5 8 3.5" fill="#444746"/></svg></span>
+      <span class="gauth__links"><a href="#" onclick="return false">Help</a><a href="#" onclick="return false">Privacy</a><a href="#" onclick="return false">Terms</a></span>
+    </div>
+  </div>
 
   <!-- Connect Google Business Profile (Figma 10677:32959) -->
   <div class="modal" id="connect-modal" hidden>
@@ -1496,6 +1543,7 @@
     document.getElementById('loc-search').addEventListener('input', renderLocations);
 
     document.getElementById('connect-open').addEventListener('click', () => {
+      if (cameFrom === 'create') return openGauth();  // new business: Google sign-in, not the GBP picker
       groupIndex = 0;
       selectedLoc = 0;
       document.getElementById('loc-search').value = '';
@@ -1515,10 +1563,15 @@
       const hideBack = () => (backLink.hidden = true);
       fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);
       if (!optIn) return;  // connected without listings: stay on the profile form
+      startListings(loc.name);
+    });
+
+    // Connected → AI finds publishers → listings screen (shared by both connect paths)
+    async function startListings(gbpName) {
       resetTransition();
       const id = run;
       const live = () => id === run;
-      document.getElementById('pub-gbp-name').textContent = loc.name;
+      document.getElementById('pub-gbp-name').textContent = gbpName;
 
       // Left: progress moves on, gaps milestone + new steps
       progressBar.style.width = '120px';  // final width set directly so later resets keep it
@@ -1556,6 +1609,28 @@
       const [aiStep, brandStep] = stepsList.children;
       if (!await finishStep(brandStep, 'Updated the brand context for your business.') || !live()) return;
       await settleParent(aiStep, [brandStep], 'Found the most relevant publishers for your business');
+    }
+
+    // ---- New business: Google sign-in (Figma 10773:18769) ----
+    // A stand-in for Google's account chooser. No real auth: picking any row continues.
+    const gauth = document.getElementById('gauth');
+    function openGauth() {
+      gauth.hidden = false;
+      fade(gauth, 0, 1, motion(T3.modalIn));
+      fade(gauth.querySelector('.gauth__card'), 0, 1, motion(T3.modalIn + 80),
+        { from: { transform: 'translateY(8px)' }, to: { transform: 'none' } });
+      gauth.querySelector('[data-account]').focus();
+    }
+    gauth.addEventListener('click', async e => {
+      if (!e.target.closest('[data-account]')) return;
+      await done([fade(gauth, 1, 0, motion(T3.modalOut), { easing: EASE_IN })]);
+      gauth.hidden = true;
+      gauth.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      gauth.getAnimations().forEach(a => a.cancel());
+      showToast('Your Google Business Profile has been created');
+      const hideBack = () => (backLink.hidden = true);
+      fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);
+      startListings(picked.name);
     });
 
     // ---- 3 · Opt-in modal ----
@@ -1604,6 +1679,10 @@
       const live = () => id === run;
       showToast(`Opt-in request submitted for ${n} publisher${n === 1 ? '' : 's'}.`);
       addMilestone('Opted in!', `Your business will be visible across ${n + 1} publishers!`);
+      if (cameFrom === 'create') {  // brand-new business: no reviews to learn from yet
+        if (!await hold(1200) || !live()) return;
+        return showFinal(true);
+      }
       const stepsIn = showSteps([
         { ai: true, label: 'Learning from your reviews' },
         { icon: 'step-brand.svg', label: 'Reading your past reviews...' },
@@ -1913,7 +1992,10 @@
     });
 
     // ---- Continue → final screen (no side panel) ----
-    document.getElementById('widget-continue').addEventListener('click', async () => {
+    document.getElementById('widget-continue').addEventListener('click', () => showFinal(false));
+
+    // isNew: the "first 100 reviews" variant (Figma 10773:18776) for a business created from scratch
+    async function showFinal(isNew) {
       resetTransition();
       const id = run;
       hideToast(true);
@@ -1926,14 +2008,16 @@
         screenFinal.querySelectorAll('.js-biz-name').forEach(el => { el.textContent = picked.name; });
         screenFinal.querySelectorAll('.js-biz-initial').forEach(el => { el.textContent = picked.name.charAt(0).toUpperCase(); });
       }
+      screenFinal.querySelectorAll('.final__head').forEach(h => (h.hidden = h.dataset.for !== (isNew ? 'new' : 'existing')));
       window.scrollTo(0, 0);
-      [...screenFinal.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
+      [...screenFinal.children].filter(el => !el.hidden).forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * 120), from: { transform: 'translateY(12px)' }, to: { transform: 'none' } }));
       // The star pops in at 1.0, then travels to today's 3.8 with the bar filling
       // behind it (fill width and star move on the same curve so they stay together)
-      const marker = screenFinal.querySelector('.goal__marker');
-      const travel = marker.offsetLeft;  // 347px: from the start of the track to 3.8
-      const goalFill = screenFinal.querySelector('.goal__fill');
+      const goal = screenFinal.querySelector('.final__head:not([hidden]) .goal');
+      const marker = goal.querySelector('.goal__marker');
+      const travel = marker.offsetLeft;  // 347px from the start of the track to 3.8 (0 when starting out)
+      const goalFill = goal.querySelector('.goal__fill');
       const goalFillW = goalFill.offsetWidth;
       marker.animate(
         [{ scale: '0.4', opacity: 0 }, { scale: '1', opacity: 1 }],
@@ -1942,7 +2026,7 @@
       // `translate` (not transform) so the pop's `scale` doesn't shrink the distance travelled
       marker.animate([{ translate: `${-travel}px 0` }, { translate: '0 0' }], run1);
       goalFill.animate([{ width: `${goalFillW - travel}px`, opacity: 0 }, { width: `${goalFillW - travel}px`, opacity: 1, offset: 0.01 }, { width: `${goalFillW}px`, opacity: 1 }], run1);
-    });
+    }
 
     // ---- Brand Context / Writing Style modal (Figma 10677:35415, 10754:16053) ----
     const styleModal = document.getElementById('style-modal');

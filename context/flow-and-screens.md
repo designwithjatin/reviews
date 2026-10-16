@@ -9,6 +9,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | 2 | Searching | 10657:4266 | Skeleton rows | — |
 | 3 | Results | 10657:4329 | `.business` cards (hover: shadow + `#698EC4` outline) | — |
 | 3b | Create a new profile ("I don't see my business") | 10768:18579 | `main#screen-create`, full width: description textarea, location search + live map (opens on the searched city). **Create Profile** (disabled until both filled) → screen 4, then the normal flow | No side panel. Back link on later screens = "Back to profile details" → returns here |
+| 3c | Google sign-in (new business only) | 10773:18769 | `#gauth`, a full-page Google-style account chooser opened by "Connect Google & Publish" when `cameFrom === 'create'`. Picking a row → toast "Your Google Business Profile has been created" → screens 8–10 (listings) | Back link hidden |
 | 4 | Processing | 10657:4415 | AI dot-wave animation | Card flies to top-left; panel shrinks 716→386; steps stack in one by one. Progress **70 (unchanged on purpose)** |
 | 5 | Steps completing | 10657:4470 | Animation | Competitor ✓ "Learnt what your competitors are doing." → Brand ✓ "Updated the brand context for your business." → slides in ✓ "Found 9 gaps in your business profile" |
 | 6 | Profile form | 10657:4531, 10670:3742 | `#profile-form` with All / AI Corrected / Missing pills, AI reasoning notes, live map | Last working step "Updating your business profile with optimized content" fades; parent → "Business profile is ready for your review. You can make changes, or publish right away!" |
@@ -24,6 +25,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | 16 | Creating social proof | 10754:16462 | Animation ("Creating Social Posts") | Steps "Creating Social Proof..." / "Picking your top 6 reviews from your inbox..." / "Getting your posts and website widget ready..." → ✓ "Picked reviews with the strongest praise", ✓ "Created your posts and website widget"; parent → "Turned top Customer Reviews into testimonials". Progress **250** |
 | 17–18 | Social posts / all selected | 10754:16531 / 16648 | `#social`: 3×2 posts built from the top reviews (checkbox on hover), accounts list (10 of 11 preselected), "I'll do it later", Share Now split button | Unchanged |
 | 19 | Website widget | 10758:17323 | `#widget`: browser frame, 5.0 ★ (120), AI Summary (white, yellow border), 3-card review carousel, HTML code card (Copy / Send as Email) | Toast "N Posts Scheduled." (Share Now only). Progress **316** |
+| 20b | Final, new business | 10773:18776 | Same `#screen-final`, `[data-for=new]` head: "Get **your first 100** 5 Star Reviews", star at "Starting out", marks 10 / 50 / 100. Reached from Opt-in (screen 11) on the create path, about 1.2s after the toast | — |
 | 20 | Final | 10758:17527 (cards 10758:17567) | `#screen-final`, no side panel: "Get **75 more 5-star reviews** to reach 4.0 Stars", rating bar (star pops at 1.0, slides with the fill to 3.8), "Go to Dashboard", "Send First Review Request", 3 tool cards (hover reveals text + link) | Header link hidden |
 
 ## Copy that the owner set

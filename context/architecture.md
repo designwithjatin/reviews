@@ -20,8 +20,8 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 | Screen 3b | `main#screen-create` | Create a new profile: `#create-desc`, `#create-search` / `#create-where`, `#create-map`, `#create-go`. Entered from the results' `.business--create` row |
 | Screens 4+ | `main#screen-processing` | `aside.setup-panel` (back link, selected business, `.progress`, `#milestones`, `ol#steps`) + `.workspace` |
 | Workspace panels (one visible at a time) | `#processing` (AI dot-wave animation), `#profile-form`, `#publishers`, `#inbox` (`#inbox-loading` / `#inbox-ready` / `#inbox-done`), `#social`, `#widget` | Swapped with `swapPanel(from, to)` |
-| Final | `main#screen-final` | Heading + `.goal` rating bar + CTAs + `.tools` cards (HTML illustrations) |
-| Overlays | `#connect-modal`, `#optin-modal`, `#style-modal`, `#toast` | `openModal` / `closeModal`, `showToast` |
+| Final | `main#screen-final` | Two `.final__head` variants (`data-for=existing` / `new`), each with its own `.goal` bar, + CTAs + `.tools` cards (HTML illustrations) |
+| Overlays | `#gauth` (Google account chooser, create path), `#connect-modal`, `#optin-modal`, `#style-modal`, `#toast` | `openModal` / `closeModal`, `showToast` |
 
 `#inbox-done` is the Writing Style + Automate Replies view shown after the temporary replied state (Figma 10677:35306).
 
@@ -30,10 +30,11 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 2a. **Create a new profile:** `cameFrom` (`'search'` / `'create'`, used by the back link), `showCreateMap(place, zoom)`, `locate(where)` (Nominatim lookup → `{area, city, state, zip, lat, lng}`, cached, null on failure) and `geo` (the result for the current field value; cleared on typing), `syncCreate`, `businessFromCreate()` (builds a `picked`-shaped object with `isNew: true` from `geo` + the inputs + `lastSearch`; falls back to the old heuristics if there's no lookup result), and the `#create-go` handler (fades the create screen, settles the left panel, stacks the steps, then `completeSteps(id)`). It lives just after the back-link handler.
 2. **Business pick → processing:** `T` timings, easings `EASE_IN/OUT/IN_OUT/OUT_BACK`, `fade()`, `done()`, `fillSelected(b)` (sets `picked`, fills the form), `resetTransition()`, the card-flight click handler.
 3. **Steps → profile form:** `T2`, `hold()`, `motion()`, `finishStep()`, `completeSteps()`, `settleParent()`, `resetProcessingScreen()`.
-4. **Connect → publishers → opt-in:** `T3`, `PUBLISHERS`, `GROUPS`, modal and toast helpers, `stepHTML`, `showSteps()`, `addMilestone()`, `swapPanel()`, connect/locations rendering, the opt-in handler.
+4. **Connect → publishers → opt-in:** `startListings(gbpName)` runs the listings phase for both connect paths; `openGauth()` + the `#gauth` click handler (create path); the opt-in handler branches on `cameFrom` (create → `showFinal(true)`, else reviews).
+4a. (original list) `T3`, `PUBLISHERS`, `GROUPS`, modal and toast helpers, `stepHTML`, `showSteps()`, `addMilestone()`, `swapPanel()`, connect/locations rendering, the opt-in handler.
 5. **Reviews:** `REVIEWS` (6 café reviews with drafted replies), `reviewHTML`, `runReviews(id)`.
 6. **Social proof:** `runSocialProof()`, which runs the steps, settles the parent, then shows `#social`.
-7. **Social posts / widget / final:** `renderPosts`, `syncPosts`, `renderAccounts`, `syncAccounts`, `syncShare`, `renderWidget`, `runWidget(scheduled)`, copy/email, `#widget-continue` → final screen (rating bar animation lives here).
+7. **Social posts / widget / final:** `renderPosts`, `syncPosts`, `renderAccounts`, `syncAccounts`, `syncShare`, `renderWidget`, `runWidget(scheduled)`, copy/email, `showFinal(isNew)` (picks the head variant, runs the rating-bar animation on the visible `.goal`; `#widget-continue` calls `showFinal(false)`).
 8. **Writing-style modal:** `STYLE`, `styleHTML(loading)`, `skelLines`, `brandHTML`, `showTab`, regenerate.
 9. **Reviews interactions:** `markReplied(card, delay)` (async, eases the card height, resolves when settled), the review list click handler (`more` / `edit` / `send`), the `sendAll` handler: 1st click cascades the replied state, holds ~0.9s, scrolls to the top, fades the review cards out, then swaps `#inbox-ready` → `#inbox-done` without fading the shared writing-style card and relabels the button "Save and Continue" (`dataset.done`); 2nd click → `runSocialProof()`.
 10. **Form interactions:** pills (All / AI Corrected / Missing), map embed, `markMissing()`.

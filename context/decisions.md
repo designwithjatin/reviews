@@ -34,6 +34,9 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-16 · Name from the search, category from the description** (agent).
 - **2026-10-16 · City/state/PIN/coordinates from a real address lookup, not the search** (owner: "city state you can get from the map results itself"). Uses OpenStreetMap Nominatim (Google's geocoder needs an API key). The typed street is kept, the locality and city are appended if missing, and it falls back to heuristics if the lookup finds nothing.
 - **2026-10-16 · New profiles have no website** (owner).
+- **2026-10-16 · Google sign-in replaces the Connect GBP modal for new businesses** (owner; Figma 10773:18769). Rebuilt in HTML (the Figma frame is a screenshot). The footer says "SocialPilot's" Privacy Policy (the Figma screenshot said "Claude's") (agent). The account row uses the name/email from Figma. "Use another account" also just continues (agent).
+- **2026-10-16 · New businesses skip reviews/posts/widget: Opt-in → "Get your first 100 5 Star Reviews"** (owner: "this would be the step after listings"; the Opt-in trigger is the agent's reading).
+- **2026-10-16 · Toast after sign-in: "Your Google Business Profile has been created"** (agent).
 - **2026-10-16 · Back link on this path reads "Back to profile details" and returns to the create screen with inputs kept** (agent).
 - **2026-10-16 · No way back from the create screen to the results** (agent; Figma has none). Flagged to the owner.
 

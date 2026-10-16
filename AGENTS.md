@@ -78,7 +78,9 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - **Create Profile** stays at 40% opacity until both are filled. It then joins the **same flow** as a found business: reasoning steps → location details form → Connect GBP → listing publishers → and on.
 - The new business is built from the inputs: the name from the search and the category from the description.
 - **City, state, PIN and coordinates come from the address lookup** (OpenStreetMap Nominatim), the way a map search would, not from the search query. The typed street is kept as written, with the locality and city added if missing. The form's map pins the exact coordinates.
-- **New profiles have no website**: the Website field stays empty. The back link reads **"Back to profile details"** and returns to the filled-in create screen.
+- **New profiles have no website**: the Website field stays empty.
+- **Connect = Google sign-in, not the GBP picker** (Figma 10773:18769). "Connect Google & Publish" opens a full-page Google "Choose an account" screen. It's a stand-in only: no real auth, nothing is typed or sent, and either row continues. Then: toast "Your Google Business Profile has been created" → the listings (publishers) screen.
+- **After the listings → "Get your first 100 5 Star Reviews"** final screen (Figma 10773:18776). The star stays at "Starting out", with marks at 10 / 50 / 100. New businesses have no reviews, so the reviews inbox, posts and widget are skipped. The back link reads **"Back to profile details"** and returns to the filled-in create screen.
 
 **Business-select transition**
 - The left panel shrinks, and the selected business card flies to the top of the left panel. Then reasoning starts, with steps stacking one by one.
