@@ -1902,10 +1902,11 @@
       const goalFill = screenFinal.querySelector('.goal__fill');
       const goalFillW = goalFill.offsetWidth;
       marker.animate(
-        [{ scale: '0.4', opacity: 0 }, { scale: '1', opacity: 1 }],  // scale, not transform, so it layers under the slide
+        [{ scale: '0.4', opacity: 0 }, { scale: '1', opacity: 1 }],
         { duration: motion(300), delay: motion(400), easing: EASE_OUT_BACK, fill: 'backwards' });
       const run1 = { duration: motion(1100), delay: motion(700), easing: EASE_IN_OUT, fill: 'backwards' };
-      marker.animate([{ transform: `translateX(${-travel}px)` }, { transform: 'none' }], run1);
+      // `translate` (not transform) so the pop's `scale` doesn't shrink the distance travelled
+      marker.animate([{ translate: `${-travel}px 0` }, { translate: '0 0' }], run1);
       goalFill.animate([{ width: `${goalFillW - travel}px`, opacity: 0 }, { width: `${goalFillW - travel}px`, opacity: 1, offset: 0.01 }, { width: `${goalFillW}px`, opacity: 1 }], run1);
     });
 
