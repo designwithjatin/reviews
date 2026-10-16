@@ -1726,7 +1726,7 @@ button { font: inherit; color: inherit; }
 .final__hl {
   font-weight: 600;
   color: var(--brand-primary);
-  background: linear-gradient(rgba(255, 203, 0, 0.3), rgba(255, 203, 0, 0.3)) 0 28px / 100% 9px no-repeat;
+  background: linear-gradient(rgba(255, 203, 0, 0.3), rgba(255, 203, 0, 0.3)) 0 20.5px / 100% 9px no-repeat;  /* Figma: 3.5px above to 5.5px below the baseline */
 }
 
 .goal { position: relative; width: 646px; display: flex; flex-direction: column; gap: 12px; }
