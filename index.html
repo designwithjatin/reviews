@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=36">
+  <link rel="stylesheet" href="styles.css?v=37">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -738,8 +738,8 @@
         <div class="gauth__side">
           <ul class="gauth__list">
             <li><button class="gauth__account" type="button" data-account>
-              <img src="assets/avatar.png" alt="" width="28" height="28">
-              <span><b>Jatin Solanki</b><small>jatinsolanki@socialpilot.co</small></span>
+              <span class="gauth__avatar" id="gauth-initial" aria-hidden="true"></span>
+              <span><b id="gauth-name"></b><small id="gauth-email"></small></span>
             </button></li>
             <li><button class="gauth__account" type="button" data-account>
               <span class="gauth__other" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9.2" stroke="#444746" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="#444746" stroke-width="1.6"/><path d="M6.5 18.2c1.3-2 3.2-3 5.5-3s4.2 1 5.5 3" stroke="#444746" stroke-width="1.6"/></svg></span>
@@ -1615,6 +1615,10 @@
     // A stand-in for Google's account chooser. No real auth: picking any row continues.
     const gauth = document.getElementById('gauth');
     function openGauth() {
+      // The account is the business's own: its name, the email on the profile, a letter avatar
+      document.getElementById('gauth-name').textContent = picked.name;
+      document.getElementById('gauth-email').textContent = document.getElementById('form-email').value;
+      document.getElementById('gauth-initial').textContent = picked.name.charAt(0).toUpperCase();
       gauth.hidden = false;
       fade(gauth, 0, 1, motion(T3.modalIn));
       fade(gauth.querySelector('.gauth__card'), 0, 1, motion(T3.modalIn + 80),
