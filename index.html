@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=29">
+  <link rel="stylesheet" href="styles.css?v=30">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -1623,8 +1623,9 @@
           <span class="review-card__stars" role="img" aria-label="${r.stars} out of 5 stars">${starsHTML(r.stars)}</span>
           <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
         </div>
-        <p class="review-card__text">${r.text}</p>
+        <p class="review-card__text"><span>${r.text}</span><button class="link-underline link-underline--btn review-card__more" type="button" data-act="more">Read more</button></p>
         <div class="review-card__reply">
+          <span class="review-card__reply-icon" aria-hidden="true"><img src="assets/reply.svg" alt="" width="16" height="16"></span>
           <span class="review-card__label">Draft</span><span class="dot" aria-hidden="true"></span>
           <span class="review-card__draft">${r.reply}</span>
           <span class="review-card__actions">
@@ -1988,17 +1989,28 @@
     });
 
     // Edit a draft in place; Send Reply sends just that one
-    function markReplied(card) {
+    // Replied state (Figma "Reply Status=Replied"): the reply drops below a divider,
+    // the review text clamps to two lines with "Read more"
+    function markReplied(card, delay = 0) {
+      card.classList.remove('is-editing');
       card.classList.add('is-replied');
       card.querySelector('.review-card__label').textContent = 'Replied';
-      card.querySelector('.review-card__draft').contentEditable = 'false';
+      const draft = card.querySelector('.review-card__draft');
+      draft.contentEditable = 'false';
+      draft.setAttribute('aria-label', 'Your reply');
+      const text = card.querySelector('.review-card__text > span');
+      card.querySelector('.review-card__more').hidden = text.scrollHeight <= text.clientHeight + 1;  // only when clamped
+      fade(card.querySelector('.review-card__reply'), 0, 1, motion(T2.swapIn), { delay: motion(delay), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
     }
     reviewList.addEventListener('click', e => {
       const btn = e.target.closest('[data-act]');
       if (!btn) return;
       const card = btn.closest('.review-card');
       const draft = card.querySelector('.review-card__draft');
-      if (btn.dataset.act === 'edit') {
+      if (btn.dataset.act === 'more') {
+        card.classList.toggle('is-expanded');
+        btn.textContent = card.classList.contains('is-expanded') ? 'Read less' : 'Read more';
+      } else if (btn.dataset.act === 'edit') {
         const editing = card.classList.toggle('is-editing');
         draft.contentEditable = String(editing);
         btn.querySelector('span').textContent = editing ? 'Done' : 'Edit';
@@ -2009,29 +2021,22 @@
       }
     });
 
-    // Send every remaining draft, then offer automation
+    // Send every remaining draft: cards show as replied for a moment, then the next step loads
     sendAll.addEventListener('click', async () => {
-      if (sendAll.dataset.done) return runSocialProof();  // now "Save and Continue"
       const pending = [...reviewList.querySelectorAll('.review-card:not(.is-replied)')];
       const total = reviewList.children.length;
       resetTransition();
       const id = run;
       const live = () => id === run;
       sendAll.disabled = true;
-      pending.forEach(markReplied);
+      pending.forEach((card, i) => markReplied(card, i * 80));
       showToast(`${pending.length} review ${pending.length === 1 ? 'reply' : 'replies'} sent`);
       progressBar.style.width = '184px';
       progressBar.animate([{ width: '120px' }, { width: '184px' }], { duration: motion(600), easing: EASE_IN_OUT });
       addMilestone(`Replied to ${total} Reviews`, 'Ensuring no review goes unanswered!');
       fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN }).finished.then(() => (stepsList.innerHTML = ''), () => {});
-      if (!await hold(400) || !live()) return;
-      if (!await swapPanel(inboxReady, inboxDone) || !live()) return;
-      [...inboxDone.children].forEach((el, i) =>
-        fade(el, 0, 1, motion(T2.formIn), { delay: motion(i * 120), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
-      sendAll.querySelector('img').hidden = true;
-      sendAll.querySelector('span').textContent = 'Save and Continue';
-      sendAll.disabled = false;
-      sendAll.dataset.done = 'true';
+      if (!await hold(1800) || !live()) return;
+      runSocialProof();
     });
 
     // ---- Form interactions ----

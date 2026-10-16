@@ -1340,7 +1340,27 @@ button { font: inherit; color: inherit; }
 .review-card:hover .review-card__actions,
 .review-card:focus-within .review-card__actions,
 .review-card.is-editing .review-card__actions { display: flex; }
-.review-card.is-replied .review-card__reply { border-left-color: #5CB85C; }
+/* Replied (Figma "Reply Status=Replied") */
+.review-card__more, .review-card__reply-icon { display: none; }
+.review-card.is-replied { padding-bottom: 0; overflow: hidden; }
+.review-card.is-replied .review-card__text { display: flex; align-items: flex-end; gap: var(--sp-4); }
+.review-card.is-replied .review-card__text > span { flex: 1; min-width: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.review-card.is-replied.is-expanded .review-card__text > span { display: block; }
+.review-card.is-replied .review-card__more { display: inline; flex-shrink: 0; }
+.review-card.is-replied .review-card__reply {
+  margin: 0 -15px;
+  padding: var(--sp-8) 15px var(--sp-8) var(--sp-8);
+  gap: var(--sp-4);
+  border-left: 0;
+  border-top: 1px solid var(--dvdr-secondary);
+  border-radius: 0;
+  background: none;
+}
+.review-card.is-replied .review-card__reply-icon { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.review-card.is-replied .review-card__label,
+.review-card.is-replied .review-card__reply > .dot,
+.review-card.is-replied .review-card__actions { display: none; }
+.review-card.is-replied .review-card__draft { white-space: normal; font-style: italic; color: var(--txt-secondary); }
 .review-card.is-replied .review-card__actions { display: none; }
 
 /* Loading skeletons for review cards */
