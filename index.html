@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=30">
+  <link rel="stylesheet" href="styles.css?v=31">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -1999,7 +1999,8 @@
       draft.contentEditable = 'false';
       draft.setAttribute('aria-label', 'Your reply');
       const text = card.querySelector('.review-card__text > span');
-      card.querySelector('.review-card__more').hidden = text.scrollHeight <= text.clientHeight + 1;  // only when clamped
+      card.querySelector('.review-card__more').hidden =  // only when something is cut off
+        text.scrollWidth <= text.clientWidth && draft.scrollWidth <= draft.clientWidth;
       fade(card.querySelector('.review-card__reply'), 0, 1, motion(T2.swapIn), { delay: motion(delay), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
     }
     reviewList.addEventListener('click', e => {

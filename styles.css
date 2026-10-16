@@ -1343,9 +1343,11 @@ button { font: inherit; color: inherit; }
 /* Replied (Figma "Reply Status=Replied") */
 .review-card__more, .review-card__reply-icon { display: none; }
 .review-card.is-replied { padding-bottom: 0; overflow: hidden; }
-.review-card.is-replied .review-card__text { display: flex; align-items: flex-end; gap: var(--sp-4); }
-.review-card.is-replied .review-card__text > span { flex: 1; min-width: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.review-card.is-replied.is-expanded .review-card__text > span { display: block; }
+.review-card.is-replied .review-card__text { display: flex; align-items: baseline; gap: var(--sp-8); }
+/* Review and reply each stay on one line until "Read more" */
+.review-card.is-replied .review-card__text > span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.review-card.is-replied.is-expanded .review-card__text > span,
+.review-card.is-replied.is-expanded .review-card__draft { white-space: normal; }
 .review-card.is-replied .review-card__more { display: inline; flex-shrink: 0; }
 .review-card.is-replied .review-card__reply {
   margin: 0 -15px;
@@ -1360,7 +1362,7 @@ button { font: inherit; color: inherit; }
 .review-card.is-replied .review-card__label,
 .review-card.is-replied .review-card__reply > .dot,
 .review-card.is-replied .review-card__actions { display: none; }
-.review-card.is-replied .review-card__draft { white-space: normal; font-style: italic; color: var(--txt-secondary); }
+.review-card.is-replied .review-card__draft { white-space: nowrap; font-style: italic; color: var(--txt-secondary); }
 .review-card.is-replied .review-card__actions { display: none; }
 
 /* Loading skeletons for review cards */
