@@ -1786,9 +1786,9 @@ button { font: inherit; color: inherit; }
 .phone__sig i:nth-child(3) { height: calc(9 * var(--u)); }
 .phone__sig b { width: calc(14 * var(--u)); height: calc(8 * var(--u)); margin-left: calc(3 * var(--u)); border: calc(1.5 * var(--u)) solid var(--txt-disabled); border-radius: calc(2 * var(--u)); }
 
-/* Skeleton text lines */
-.skel { display: flex; flex-direction: column; gap: 5px; }
-.skel i { display: block; height: 4.3px; border-radius: 1.4px; background: var(--dvdr-secondary); }
+/* Static text lines (not the shimmering loader) */
+.art-lines { display: flex; flex-direction: column; gap: 5px; }
+.art-lines i { display: block; height: 4.3px; border-radius: 1.4px; background: var(--dvdr-secondary); }
 
 /* Floating chips */
 .req__contact, .req__sent, .qr__chip, .form__chip { position: absolute; background: var(--srf-card); white-space: nowrap; }
@@ -1799,7 +1799,8 @@ button { font: inherit; color: inherit; }
 .req__from { top: 33.5px; display: flex; align-items: center; gap: 5.7px; }
 .req__badge { display: grid; place-items: center; width: 22.8px; height: 22.8px; border-radius: 5.7px; background: #FFF8ED; }
 .req__badge img { width: 13px; height: 13px; }
-.req__from b { display: block; max-width: 110px; overflow: hidden; text-overflow: ellipsis; font: 600 8.55px/11.4px var(--font); color: var(--txt-primary); }
+.req__from > span:last-child { min-width: 0; }
+.req__from b { display: block; max-width: 110px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font: 600 8.55px/11.4px var(--font); color: var(--txt-primary); }
 .req__from small { font: 7.8px/10px var(--font); color: var(--txt-tertiary); }
 .req__rule { top: 64.1px; width: 139.6px; height: 0.7px; background: var(--dvdr-secondary); }
 .req__hi { top: 72.7px; font: 8.55px/11.4px var(--font); color: var(--txt-primary); }
@@ -1878,8 +1879,8 @@ button { font: inherit; color: inherit; }
 .form__who .req__avatar { width: 18.9px; height: 18.9px; font-size: 11px; }
 .form__who b { flex: 1; font: 600 12px/1.25 var(--font); color: var(--txt-primary); }
 .form__who img { width: 11px; height: 11px; }
-.form__chip .skel { gap: 6.3px; }
-.form__chip .skel i { height: 4.7px; border-radius: 1.6px; }
+.form__chip .art-lines { gap: 6.3px; }
+.form__chip .art-lines i { height: 4.7px; border-radius: 1.6px; }
 /* Description + CTA under each card, revealed on hover (or keyboard focus) */
 .tool__more {
   display: flex;

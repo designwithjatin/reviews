@@ -2,6 +2,7 @@
 
 ## Styling
 - **Class-name collisions.** `.social` already styles the social-link rows in the profile form (`display:flex; align-items:center`). The social-posts panel is therefore `.share-panel`. Before adding a new class, grep `styles.css` for it.
+- **`.skel` is the shimmering loader.** Static placeholder lines in the final-screen tool cards use `.art-lines` instead; reusing `.skel` there made them animate (fixed 2026-10-16).
 - **Cache.** Browsers keep the old `styles.css`. Bump `?v=N` in `index.html` on every CSS change, and use the no-cache preview server.
 - **Inline highlight backgrounds** position relative to the span's content box (~34px for 24px text), not the 46px line box. Measure against the baseline.
 
