@@ -15,7 +15,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-16 · Long business names in the Feedback Form card start right of the John Doe chip and ellipsize** (agent).
 - **2026-10-16 · QR chip labelled "Google"** (agent; Figma says "Facebook" next to a Google icon). Awaiting confirmation.
 
-- **2026-10-16 · Tool-card CTAs: always visible, Figma icons and copy** (owner; Figma 10774:19150). This replaces the hover reveal and applies to both final variants. The per-card descriptions stay the agent-written ones, because Figma still repeats the Quick Review Request text on all three.
+- **2026-10-16 · Tool-card CTAs: Figma icons and copy** (owner; Figma 10774:19150), on both final variants. **Shown only on hover/focus** (owner reversed the brief always-visible version the same day). The per-card descriptions stay the agent-written ones, because Figma still repeats the Quick Review Request text on all three.
 
 ## Widget
 - **2026-10-16 · AI Summary has no gradient** (owner; Figma 10758:17434).

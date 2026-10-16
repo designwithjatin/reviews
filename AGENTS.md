@@ -128,7 +128,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - No side panel, and the header shows the logo only.
 - **Heading highlight:** the "75 more 5-star reviews" yellow bar (30% `#FFCB00`, 9px) sits **behind the bottom of the letters**, from about 3.5px above the baseline to 5.5px below it. It isn't an underline below the text.
 - **Rating bar animation (the owner likes it):** the star **pops in at 1.0**, then **travels to 3.8 together with the bar's fill** on the same curve, so it stays on the end of the bar.
-- **Tool cards** (Quick Review Request, QR Code, Feedback Form) are built in **HTML/CSS, not screenshots**. The **description and CTA are always visible** under each card, not only on hover (Figma 10774:19150). The CTAs are "Send Quick Review Request" (quick-request icon), "Download QR Code" (download icon) and "Preview Feedback Form" (external-link icon). Both final-screen variants share these cards.
+- **Tool cards** (Quick Review Request, QR Code, Feedback Form) are built in **HTML/CSS, not screenshots**. The **description and CTA show only on hover** (or keyboard focus) under each card (owner, 2026-10-16, after briefly trying always-visible). The CTAs are "Send Quick Review Request" (quick-request icon), "Download QR Code" (download icon) and "Preview Feedback Form" (external-link icon). Both final-screen variants share these cards.
 
 ## 5. Local preview
 

@@ -11,7 +11,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-16 | Create-profile path: the steps still say "Found 9 gaps in your business profile" and the milestone says "We have fixed 9 profile gaps!". Should new businesses get their own wording? | Connect is now Google sign-in. |
 | 2026-10-16 | Should the create screen have a way back to the search results? | Figma has none; the header link is the only exit. |
 | 2026-10-16 | Should the left QR-code chip say "Google" (built) or "Facebook" (as in Figma)? | Figma shows the Google icon labelled "Facebook", which looks like a slip. |
-| 2026-10-16 | Real copy for the **QR Code** and **Feedback Form** card **descriptions** | The CTAs are now final (Figma 10774:19150). The descriptions are still agent-written, because Figma repeats the Quick Review Request text. |
+| 2026-10-16 | Real copy for the **QR Code** and **Feedback Form** card **descriptions** | The CTAs are final (Figma 10774:19150) and hover-only. The descriptions are still agent-written, because Figma repeats the Quick Review Request text. |
 | 2026-10-16 | Exact **reply (↳) icon** from Figma | A hand-drawn SVG (`assets/reply.svg`) is used until the owner shares the node. |
 
 ## On hold / backlog
@@ -22,7 +22,8 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
-- 2026-10-16: Final-screen tool cards: description + CTA always visible; Figma icons and copy (Download QR Code, Preview Feedback Form); applies to the new-business final too.
+- 2026-10-16: Tool-card description + CTA back to hover-only (keeps the new icons and copy).
+- 2026-10-16: Final-screen tool cards: Figma icons and copy (Download QR Code, Preview Feedback Form); applies to the new-business final too.
 - 2026-10-16: No form flash after Connect / Google sign-in; the toast shows on the next step.
 - 2026-10-16: Google sign-in account = business name + profile email + letter avatar.
 - 2026-10-16: New business: Google sign-in instead of the Connect modal → listings → Opt-in → "Get your first 100 5 Star Reviews" final screen.
@@ -50,4 +51,5 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-16 | PNG screenshots of the final-screen card illustrations | The owner asked for real HTML/CSS. |
 | 2026-10-16 | Gradient background on the AI Summary card | Figma 10758:17434 is plain white. |
 | 2026-10-16 | 2-line clamp for replied reviews | The owner wants 1 line for both review and reply. |
+| 2026-10-16 | Tool-card description + CTA always visible | The owner wants them on hover only. |
 | 2026-10-16 | Pale-blue (`#C5DBFA`) disabled Share Now | Replaced by 40% opacity of the brand button. |

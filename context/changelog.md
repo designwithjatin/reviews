@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-10-16 · Tool-card CTAs always visible, with Figma icons and copy
+- (pending) · 2026-10-16 · Tool-card description + CTA back to hover-only
+- 066a6aa · 2026-10-16 · Tool-card CTAs always visible, with Figma icons and copy
 - 43f4ebc · 2026-10-16 · Close Connect / Google sign-in straight onto the next step (no form flash)
 - f44a104 · 2026-10-16 · Google sign-in shows the business account with a letter avatar
 - 3fb7ba6 · 2026-10-16 · New business: Google sign-in → listings → first-100-reviews final screen

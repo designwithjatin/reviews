@@ -26,7 +26,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | 17–18 | Social posts / all selected | 10754:16531 / 16648 | `#social`: 3×2 posts built from the top reviews (checkbox on hover), accounts list (10 of 11 preselected), "I'll do it later", Share Now split button | Unchanged |
 | 19 | Website widget | 10758:17323 | `#widget`: browser frame, 5.0 ★ (120), AI Summary (white, yellow border), 3-card review carousel, HTML code card (Copy / Send as Email) | Toast "N Posts Scheduled." (Share Now only). Progress **316** |
 | 20b | Final, new business | 10773:18776 | Same `#screen-final`, `[data-for=new]` head: "Get **your first 100** 5 Star Reviews", star at "Starting out", marks 10 / 50 / 100. Reached from Opt-in (screen 11) on the create path, about 1.2s after the toast | — |
-| 20 | Final | 10758:17527 (cards 10758:17567) | `#screen-final`, no side panel: "Get **75 more 5-star reviews** to reach 4.0 Stars", rating bar (star pops at 1.0, slides with the fill to 3.8), "Go to Dashboard", "Send First Review Request", 3 tool cards, each with its description + CTA always visible (Send Quick Review Request / Download QR Code / Preview Feedback Form) | Header link hidden |
+| 20 | Final | 10758:17527 (cards 10758:17567) | `#screen-final`, no side panel: "Get **75 more 5-star reviews** to reach 4.0 Stars", rating bar (star pops at 1.0, slides with the fill to 3.8), "Go to Dashboard", "Send First Review Request", 3 tool cards; hover reveals each card's description + CTA (Send Quick Review Request / Download QR Code / Preview Feedback Form) | Header link hidden |
 
 ## Copy that the owner set
 - "Back to results" (not "Choose another business").
