@@ -1479,14 +1479,17 @@
       const optIn = document.getElementById('optin-listings').checked;
       await closeModal(connectModal);
       showToast('Business details updated on google');
+      // Once GBP is connected there's no going back to the search results.
+      // Hidden even if the fade gets cancelled by the next phase.
+      const hideBack = () => (backLink.hidden = true);
+      fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);
       if (!optIn) return;  // connected without listings: stay on the profile form
       resetTransition();
       const id = run;
       const live = () => id === run;
       document.getElementById('pub-gbp-name').textContent = loc.name;
 
-      // Left: back link steps aside, progress moves on, gaps milestone + new steps
-      fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(() => (backLink.hidden = true), () => {});
+      // Left: progress moves on, gaps milestone + new steps
       progressBar.style.width = '120px';  // final width set directly so later resets keep it
       progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(600), easing: EASE_IN_OUT });
       addMilestone('We have fixed 9 profile gaps!', 'Your business will be easier to find in Google by your customers.');

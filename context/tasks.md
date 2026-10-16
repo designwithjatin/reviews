@@ -20,6 +20,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-10-16: "Back to results" hidden after connecting GBP (both paths).
 - 2026-10-16: Restored the Writing Style + Automate Replies step (10677:35306) after the temporary replied state; Save and Continue → social posts.
 - 2026-10-16: Agent docs: `AGENTS.md`, `CLAUDE.md`, `context/`, `.vercelignore`.
 - 2026-10-16: Rating star pops in at 1.0 and travels with the bar fill; heading highlight moved behind the text baseline.

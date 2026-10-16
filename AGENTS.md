@@ -71,7 +71,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 **Search and results**
 - Results are generated from **any keyword** typed (name, city, category parsed from the text), in **any city**, not just Jaipur.
 - The result card has a simple hover state: white bg, `--shadow-bottom-sm`, 1px `#698EC4` outline, radius 8.
-- The back link copy is **"Back to results"**.
+- The back link copy is **"Back to results"**. It's **hidden once GBP is connected**, with or without the listings opt-in, and never comes back in later steps.
 
 **Business-select transition**
 - The left panel shrinks, and the selected business card flies to the top of the left panel. Then reasoning starts, with steps stacking one by one.

@@ -28,6 +28,9 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-15 · Share Now disabled until ≥1 post and ≥1 account** (agent; Figma shows it always enabled).
 - **2026-10-15 · "I'll do it later" skips to the widget without the toast** (agent).
 
+## Connect GBP
+- **2026-10-16 · No "Back to results" after connecting GBP** (owner). Applies to both connect paths. The hide doesn't depend on the fade finishing, so a cancelled fade can't bring the link back.
+
 ## Reviews inbox
 - **2026-10-16 · Automate Replies step restored** (owner: "missed one step after replied reviews"). Flow: Send Replies → temporary Replied state (~1.8s) → Writing Style + Automate Replies (10677:35306) → Save and Continue → Creating Social Posts. This supersedes the earlier same-day call to skip it.
 - **2026-10-16 · Replied: review and reply 1 line each** (owner). "Read more" appears only when something is truncated and expands both (agent).
