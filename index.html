@@ -2001,7 +2001,11 @@
     // Edit a draft in place; Send Reply sends just that one
     // Replied state (Figma "Reply Status=Replied"): the reply drops below a divider,
     // the review text clamps to two lines with "Read more"
-    function markReplied(card, delay = 0) {
+    // Resolves when the card has settled (false if interrupted). The card's height
+    // eases from the draft layout to the shorter replied layout instead of jumping.
+    async function markReplied(card, delay = 0) {
+      if (delay && !await hold(motion(delay))) return false;
+      const before = card.offsetHeight;
       card.classList.remove('is-editing');
       card.classList.add('is-replied');
       card.querySelector('.review-card__label').textContent = 'Replied';
@@ -2011,7 +2015,13 @@
       const text = card.querySelector('.review-card__text > span');
       card.querySelector('.review-card__more').hidden =  // only when something is cut off
         text.scrollWidth <= text.clientWidth && draft.scrollWidth <= draft.clientWidth;
-      fade(card.querySelector('.review-card__reply'), 0, 1, motion(T2.swapIn), { delay: motion(delay), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
+      const after = card.offsetHeight;
+      return done([
+        card.animate([{ height: `${before}px`, overflow: 'hidden' }, { height: `${after}px`, overflow: 'hidden' }],
+          { duration: motion(T.stepIn), easing: EASE_IN_OUT }),
+        fade(card.querySelector('.review-card__reply'), 0, 1, motion(T2.swapIn),
+          { delay: motion(120), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } }),
+      ]);
     }
     reviewList.addEventListener('click', e => {
       const btn = e.target.closest('[data-act]');
@@ -2032,8 +2042,12 @@
       }
     });
 
-    // Send every remaining draft: cards show as replied for a moment, then the
-    // writing style + Automate Replies view (Figma 10677:35306) with "Save and Continue"
+    // Send every remaining draft, then hand over to the writing style + Automate
+    // Replies view (Figma 10677:35306) with "Save and Continue":
+    // 1 · cards turn "replied" one by one, top to bottom
+    // 2 · a short beat so the replied state reads
+    // 3 · back to the top; replied cards drop away in turn
+    // 4 · the writing-style card stays put (it's in both views); Automate Replies rises in
     sendAll.addEventListener('click', async () => {
       if (sendAll.dataset.done) return runSocialProof();  // now "Save and Continue"
       const pending = [...reviewList.querySelectorAll('.review-card:not(.is-replied)')];
@@ -2042,16 +2056,31 @@
       const id = run;
       const live = () => id === run;
       sendAll.disabled = true;
-      pending.forEach((card, i) => markReplied(card, i * 80));
+      const cascade = pending.map((card, i) => markReplied(card, i * 140));
       showToast(`${pending.length} review ${pending.length === 1 ? 'reply' : 'replies'} sent`);
       progressBar.style.width = '184px';
       progressBar.animate([{ width: '120px' }, { width: '184px' }], { duration: motion(600), easing: EASE_IN_OUT });
       addMilestone(`Replied to ${total} Reviews`, 'Ensuring no review goes unanswered!');
       fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN }).finished.then(() => (stepsList.innerHTML = ''), () => {});
-      if (!await hold(1800) || !live()) return;
-      if (!await swapPanel(inboxReady, inboxDone) || !live()) return;
-      [...inboxDone.children].forEach((el, i) =>
-        fade(el, 0, 1, motion(T2.formIn), { delay: motion(i * 120), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
+      if ((await Promise.all(cascade)).includes(false) || !live()) return;
+      if (!await hold(900) || !live()) return;
+
+      if (inbox.scrollTop > 0) {
+        inbox.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+        if (!await hold(450) || !live()) return;
+      }
+      const leaving = [...reviewList.children].map((card, i) => fade(card, 1, 0, motion(T2.swapIn),
+        { delay: motion(i * 60), easing: EASE_IN, to: { transform: 'translateY(12px)' } }));
+      if (!await done(leaving) || !live()) return;
+
+      inboxReady.hidden = true;
+      reviewList.querySelectorAll('.review-card').forEach(card => card.getAnimations().forEach(a => a.cancel()));
+      inboxDone.hidden = false;
+      inbox.scrollTop = 0;
+      [...inboxDone.children].slice(1).forEach((el, i) =>  // [0] is the writing-style card: it stays
+        fade(el, 0, 1, motion(T2.formIn + 80), { delay: motion(i * 120), from: { transform: 'translateY(16px)' }, to: { transform: 'none' } }));
+      const label = sendAll.querySelector('span');
+      fade(label, 0, 1, motion(T2.swapIn), { delay: motion(160) });
       sendAll.querySelector('img').hidden = true;
       sendAll.querySelector('span').textContent = 'Save and Continue';
       sendAll.disabled = false;

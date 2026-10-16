@@ -32,6 +32,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-16 · No "Back to results" after connecting GBP** (owner). Applies to both connect paths. The hide doesn't depend on the fade finishing, so a cancelled fade can't bring the link back.
 
 ## Reviews inbox
+- **2026-10-16 · Connected transition from replied cards to Automate Replies** (owner: "feels stuck… no transition"). Replaces a flat 1.8s wait + whole-panel crossfade. The shared writing-style card is the anchor that doesn't move. `markReplied()` is now async and eases card height.
 - **2026-10-16 · Automate Replies step restored** (owner: "missed one step after replied reviews"). Flow: Send Replies → temporary Replied state (~1.8s) → Writing Style + Automate Replies (10677:35306) → Save and Continue → Creating Social Posts. This supersedes the earlier same-day call to skip it.
 - **2026-10-16 · Replied: review and reply 1 line each** (owner). "Read more" appears only when something is truncated and expands both (agent).
 - **2026-10-16 · ↳ reply icon** drawn by hand (agent; awaiting the real Figma icon).

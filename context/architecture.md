@@ -33,7 +33,7 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 6. **Social proof:** `runSocialProof()`, which runs the steps, settles the parent, then shows `#social`.
 7. **Social posts / widget / final:** `renderPosts`, `syncPosts`, `renderAccounts`, `syncAccounts`, `syncShare`, `renderWidget`, `runWidget(scheduled)`, copy/email, `#widget-continue` → final screen (rating bar animation lives here).
 8. **Writing-style modal:** `STYLE`, `styleHTML(loading)`, `skelLines`, `brandHTML`, `showTab`, regenerate.
-9. **Reviews interactions:** `markReplied(card, delay)`, the review list click handler (`more` / `edit` / `send`), the `sendAll` handler: 1st click marks all replied, waits about 1.8s, swaps `#inbox-ready` → `#inbox-done` and relabels the button "Save and Continue" (`dataset.done`); 2nd click → `runSocialProof()`.
+9. **Reviews interactions:** `markReplied(card, delay)` (async, eases the card height, resolves when settled), the review list click handler (`more` / `edit` / `send`), the `sendAll` handler: 1st click cascades the replied state, holds ~0.9s, scrolls to the top, fades the review cards out, then swaps `#inbox-ready` → `#inbox-done` without fading the shared writing-style card and relabels the button "Save and Continue" (`dataset.done`); 2nd click → `runSocialProof()`.
 10. **Form interactions:** pills (All / AI Corrected / Missing), map embed, `markMissing()`.
 11. **`processing`:** IIFE that ports the AI animation (`start`, `stop`, `setPhrases`).
 

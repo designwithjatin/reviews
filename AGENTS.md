@@ -89,7 +89,12 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 
 **Reviews inbox**
 - Order: skeleton loading → AI drafts → **Send Replies**.
-- On **Send Replies**, every card switches to the **Replied** state. This is temporary: after about 2s the inbox swaps to the **Writing Style + Automate Replies** view (Figma 10677:35306), and the button becomes **Save and Continue**, which leads to "Creating Social Posts".
+- On **Send Replies**, every card switches to the **Replied** state, then hands over to the **Writing Style + Automate Replies** view (Figma 10677:35306). The button becomes **Save and Continue**, which leads to "Creating Social Posts".
+- **Transition between the two must feel connected, never a stall** (owner):
+  1. Cards turn replied one by one, top to bottom (~140ms apart), with heights easing as they shrink.
+  2. A short beat (~0.9s).
+  3. Scroll back to the top if needed, then the replied cards fade and drop away in turn.
+  4. The Writing Style card stays put (it's in both views), and Automate Replies + the note rise into the freed space.
 - **Replied card:**
   - The header is unchanged.
   - The review text is **1 line** with an ellipsis, plus "Read more".
