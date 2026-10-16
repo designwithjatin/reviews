@@ -18,11 +18,11 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 | Header | `header.header` | Logo + "I'll Explore Later Myself" link (`exploreLater`, hidden on the final screen) |
 | Screens 1–3 | `main#screen-search` | Left greeting + `#search-form`; right panel states: illustration → searching skeleton → results `.business[data-index]` |
 | Screens 4+ | `main#screen-processing` | `aside.setup-panel` (back link, selected business, `.progress`, `#milestones`, `ol#steps`) + `.workspace` |
-| Workspace panels (one visible at a time) | `#processing` (AI dot-wave animation), `#profile-form`, `#publishers`, `#inbox` (`#inbox-loading` / `#inbox-ready` / `#inbox-done`*), `#social`, `#widget` | Swapped with `swapPanel(from, to)` |
+| Workspace panels (one visible at a time) | `#processing` (AI dot-wave animation), `#profile-form`, `#publishers`, `#inbox` (`#inbox-loading` / `#inbox-ready` / `#inbox-done`), `#social`, `#widget` | Swapped with `swapPanel(from, to)` |
 | Final | `main#screen-final` | Heading + `.goal` rating bar + CTAs + `.tools` cards (HTML illustrations) |
 | Overlays | `#connect-modal`, `#optin-modal`, `#style-modal`, `#toast` | `openModal` / `closeModal`, `showToast` |
 
-\* `#inbox-done` (Writing Style + Automate Replies view) is **no longer reached** in the flow. See `tasks.md` (open question).
+`#inbox-done` is the Writing Style + Automate Replies view shown after the temporary replied state (Figma 10677:35306).
 
 ## Script layout (in order)
 1. **Search:** `CITIES`, `CATEGORIES`, `parseQuery(q)`, `buildResults(q)` (deterministic: same query → same results), `resultRow`.
@@ -33,7 +33,7 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 6. **Social proof:** `runSocialProof()`, which runs the steps, settles the parent, then shows `#social`.
 7. **Social posts / widget / final:** `renderPosts`, `syncPosts`, `renderAccounts`, `syncAccounts`, `syncShare`, `renderWidget`, `runWidget(scheduled)`, copy/email, `#widget-continue` → final screen (rating bar animation lives here).
 8. **Writing-style modal:** `STYLE`, `styleHTML(loading)`, `skelLines`, `brandHTML`, `showTab`, regenerate.
-9. **Reviews interactions:** `markReplied(card, delay)`, the review list click handler (`more` / `edit` / `send`), the `sendAll` handler (marks replied, waits about 1.8s, calls `runSocialProof()`).
+9. **Reviews interactions:** `markReplied(card, delay)`, the review list click handler (`more` / `edit` / `send`), the `sendAll` handler: 1st click marks all replied, waits about 1.8s, swaps `#inbox-ready` → `#inbox-done` and relabels the button "Save and Continue" (`dataset.done`); 2nd click → `runSocialProof()`.
 10. **Form interactions:** pills (All / AI Corrected / Missing), map embed, `markMissing()`.
 11. **`processing`:** IIFE that ports the AI animation (`start`, `stop`, `setPhrases`).
 

@@ -18,8 +18,8 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | 13 | Inbox loading | 10677:34560 | `#inbox-loading` skeleton cards | ✓ "Read all your past review replies" |
 | 14 | Inbox drafts | 10677:34964 | `#inbox-ready`: writing-style card + 6 review cards with Draft replies (Edit / Send Reply on hover) | ✓ "Learnt your writing style", + ✓ "Generated replies to your unanswered reviews", + ✓ "Updated your brand context"; parent → "Learnt your reply pattern and generated replies for 130 reviews" |
 | 14a | Writing-style modal | 10677:35415, 10754:16053 | `#style-modal` with Brand Context / Writing Style tabs; Regenerate → skeleton | — |
-| 15 | **Send Replies → Replied (temporary)** | pasted design (Reply Status=Replied) | Cards switch to the replied state (1-line review + 1-line italic reply under a divider, ↳ icon, "Read more") | Toast "6 review replies sent"; milestone ✓ "Replied to 6 Reviews / Ensuring no review goes unanswered!". Progress **184**. After about 1.8s → screen 16 automatically |
-| ~~15b~~ | ~~Automate Replies + Save and Continue~~ | 10677:35306 | `#inbox-done`, **no longer shown** | — |
+| 15 | **Send Replies → Replied (temporary)** | pasted design (Reply Status=Replied) | Cards switch to the replied state (1-line review + 1-line italic reply under a divider, ↳ icon, "Read more") | Toast "6 review replies sent"; milestone ✓ "Replied to 6 Reviews / Ensuring no review goes unanswered!". Steps clear. Progress **184**. After about 1.8s → 15b automatically |
+| 15b | Writing style + Automate Replies | 10677:35306 | `#inbox-done`: "Your Reply Writing Style" card (View Detailed Writing Style) + Automate Replies (Positive 5★ 4★ Recommends / Negative 1★ 2★ 3★ Does not Recommend, toggles) + note. Button becomes **Save and Continue** → screen 16 | Unchanged |
 | 16 | Creating social proof | 10754:16462 | Animation ("Creating Social Posts") | Steps "Creating Social Proof..." / "Picking your top 6 reviews from your inbox..." / "Getting your posts and website widget ready..." → ✓ "Picked reviews with the strongest praise", ✓ "Created your posts and website widget"; parent → "Turned top Customer Reviews into testimonials". Progress **250** |
 | 17–18 | Social posts / all selected | 10754:16531 / 16648 | `#social`: 3×2 posts built from the top reviews (checkbox on hover), accounts list (10 of 11 preselected), "I'll do it later", Share Now split button | Unchanged |
 | 19 | Website widget | 10758:17323 | `#widget`: browser frame, 5.0 ★ (120), AI Summary (white, yellow border), 3-card review carousel, HTML code card (Copy / Send as Email) | Toast "N Posts Scheduled." (Share Now only). Progress **316** |
@@ -33,7 +33,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 ## Interactions per screen
 - **Results:** click a card → card-flight transition (`list` click handler).
 - **Form:** pills switch views; the Missing view lists only empty slots (`markMissing`); lat/lng auto-filled from the map.
-- **Inbox (drafts):** Edit toggles inline editing; Send Reply marks one card replied; Send Replies marks all and moves on.
+- **Inbox (drafts):** Edit toggles inline editing; Send Reply marks one card replied; Send Replies marks all, shows the replied state, then the Automate view; **Save and Continue** (same button, `sendAll.dataset.done`) → `runSocialProof()`.
 - **Posts:** clicking a post toggles it; Select All / Clear All; the accounts Select All link appears for partial selections; Share Now is disabled (40% opacity) until ≥1 post and ≥1 account.
 - **Widget:** arrows cycle the reviews; Copy → clipboard + toast; Send as Email → `mailto:` draft; Continue → final.
 - **Final:** "Go to Dashboard" and the card links are **not wired** (no destination yet).
