@@ -1107,7 +1107,7 @@
       set('form-lng', b.lng);
       updateMap(b.lat && b.lng ? `${b.lat},${b.lng}` : b.address);
       set('form-email', `${slug}@gmail.com`);
-      set('form-website', `www.${slug}.com`);
+      set('form-website', b.isNew ? '' : `www.${slug}.com`);  // a brand-new business has no website yet
       set('secondary-cat', b.category);
       document.querySelector('#primary-cat option').textContent = b.category;
       document.getElementById('note-primary').textContent =
@@ -2235,6 +2235,29 @@
     };
     const searchedCity = () => lastSearch?.parsed.city || '';
 
+    // Address lookup (OpenStreetMap Nominatim, no key needed): the typed street
+    // gives back its real locality, city, state, PIN and coordinates, the way
+    // a map search would. Cached per query; null if it can't be found or fetched.
+    const geoCache = new Map();
+    let geo = null;  // result for the address currently in the field
+    async function locate(where) {
+      const q = where.trim();
+      if (!geoCache.has(q)) {
+        geoCache.set(q, fetch('https://nominatim.openstreetmap.org/search?' + new URLSearchParams(
+          { q, format: 'jsonv2', addressdetails: '1', countrycodes: 'in', limit: '1' }))
+          .then(r => (r.ok ? r.json() : []))
+          .then(([hit]) => hit && {
+            area: hit.address.suburb || hit.address.neighbourhood || '',
+            city: hit.address.city || hit.address.town || hit.address.village || hit.address.state_district || '',
+            state: hit.address.state || '', zip: hit.address.postcode || '',
+            lat: (+hit.lat).toFixed(4), lng: (+hit.lon).toFixed(4),
+          })
+          .catch(() => null));
+      }
+      return geoCache.get(q);
+    }
+    const pinGeo = g => showCreateMap(`${g.lat},${g.lng}`, 16);
+
     list.addEventListener('click', async e => {
       if (!e.target.closest('.business--create') || flying) return;
       resetTransition();
@@ -2254,28 +2277,45 @@
     // Both answers are needed before a profile can be built
     const syncCreate = () => (createGo.disabled = !createDesc.value.trim() || !createWhere.value.trim());
     [createDesc, createWhere].forEach(el => el.addEventListener('input', syncCreate));
-    document.getElementById('create-search').addEventListener('submit', e => {
+    createWhere.addEventListener('input', () => (geo = null));  // typed something new: look it up again
+    document.getElementById('create-search').addEventListener('submit', async e => {
       e.preventDefault();
       const where = createWhere.value.trim();
       if (!where) return createWhere.focus();
-      const city = searchedCity();
+      const found = await locate(where);
+      if (createWhere.value.trim() !== where) return;  // changed while we were looking
+      geo = found;
+      if (geo) return pinGeo(geo);
+      const city = searchedCity();  // not found: let the map search the text itself
       showCreateMap(city && !where.toLowerCase().includes(city.toLowerCase()) ? `${where}, ${city}` : where);
     });
 
     // The new business: name from the search, category from the description
     // (falling back to the search), address and city from the location typed
+    // City, state, PIN and coordinates come from the address lookup (`geo`);
+    // without a match we fall back to what the search told us.
     function businessFromCreate() {
       const where = createWhere.value.trim();
       const searched = lastSearch?.parsed;
       const fromDesc = parseQuery(createDesc.value.trim());
-      const fromWhere = parseQuery(where);
       const kind = fromDesc.category !== 'Local Business' || !searched ? fromDesc : searched;
+      const base = { name: searched?.name || 'Your Business', category: kind.category, noun: kind.noun, platform: 'gbp', isNew: true };
+      if (geo) {
+        // Keep exactly what they typed (minus city/state, which have their own fields),
+        // then add the locality and city the lookup found if they're missing
+        const own = where.split(',').map(t => t.trim())
+          .filter(t => t && ![geo.city, geo.state, 'India'].some(x => x && t.toLowerCase() === x.toLowerCase()))
+          .join(', ');
+        const extra = [geo.area, geo.city].filter(x => x && !own.toLowerCase().includes(x.toLowerCase()));
+        return { ...base, address: [own, ...extra].join(', '),
+          city: geo.city, state: geo.state, zip: geo.zip, lat: geo.lat, lng: geo.lng };
+      }
+      const fromWhere = parseQuery(where);
       const city = fromWhere.city || searchedCity();
       const info = CITIES[city];
       const centre = (fromWhere.area && AREA_COORDS[fromWhere.area]) || COORDS[city];
       const [lat, lng] = centre ? centre.map(v => v.toFixed(4)) : ['', ''];
-      return {
-        name: searched?.name || 'Your Business', category: kind.category, noun: kind.noun, platform: 'gbp',
+      return { ...base,
         address: city && !where.toLowerCase().includes(city.toLowerCase()) ? `${where}, ${city}` : where,
         city, state: info?.state || '', zip: info ? info.pin + String(100 + (hash(where) % 900)) : '', lat, lng,
       };
@@ -2283,13 +2323,19 @@
 
     createGo.addEventListener('click', async () => {
       if (createGo.disabled || flying) return;
+      if (!geo) {  // they didn't press search: look the address up now
+        createGo.disabled = true;
+        geo = await locate(createWhere.value);
+        syncCreate();
+        if (geo) pinGeo(geo);
+      }
       resetTransition();
       resetProcessingScreen();
       const id = run;
       cameFrom = 'create';
       const created = businessFromCreate();
       fillSelected(created);
-      updateMap(created.address);  // the street they pinned, not the city centre
+      if (!geo) updateMap(created.address);  // no coordinates: let the map find the street
       backLink.querySelector('.link-underline').textContent = 'Back to profile details';
 
       // Create screen steps aside; the left panel and AI animation settle in,

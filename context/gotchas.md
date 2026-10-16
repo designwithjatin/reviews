@@ -19,6 +19,8 @@
 ## Maps
 - The preview pane doesn't render Google Maps embeds (all map iframes are blank there, including the old profile-form map). They work on the live site. Don't chase it as a bug.
 
+- **Nominatim** (address lookup) allows about 1 request/sec. Rapid repeated tests can get an empty result, and then the fallback fills an approximate city/PIN. Results are cached per query string.
+
 ## Figma
 - Large nodes exceed the MCP output limit, so the result is saved to a file: `jq -r '.[0].text' file`, or fetch child nodes.
 - Asset URLs expire after 7 days, so download them locally.

@@ -22,6 +22,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-10-16: Create profile: city/state/PIN/lat-lng from an address lookup; website empty for new profiles.
 - 2026-10-16: "I don't see my business" → Create a new profile screen → same flow (steps, form, Connect, publishers).
 - 2026-10-16: Send Replies → Automate Replies transition rebuilt (cascade, beat, cards drop away, Automate rises in under the fixed writing-style card). Real-time feel not yet seen in the preview pane (it froze); the order was verified.
 - 2026-10-16: "Back to results" hidden after connecting GBP (both paths).

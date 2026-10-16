@@ -76,8 +76,9 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 **"I don't see my business" → Create a new profile** (Figma 10768:18579)
 - A full-width screen (no side panel) with "Tell us what your business does" and "Where is it located?" (search + "Pin your location" live map).
 - **Create Profile** stays at 40% opacity until both are filled. It then joins the **same flow** as a found business: reasoning steps → location details form → Connect GBP → listing publishers → and on.
-- The new business is built from the inputs: the name from the search, the category from the description, and the address and city from the location.
-- The form's map pins the typed street. The back link reads **"Back to profile details"** and returns to the filled-in create screen.
+- The new business is built from the inputs: the name from the search and the category from the description.
+- **City, state, PIN and coordinates come from the address lookup** (OpenStreetMap Nominatim), the way a map search would, not from the search query. The typed street is kept as written, with the locality and city added if missing. The form's map pins the exact coordinates.
+- **New profiles have no website**: the Website field stays empty. The back link reads **"Back to profile details"** and returns to the filled-in create screen.
 
 **Business-select transition**
 - The left panel shrinks, and the selected business card flies to the top of the left panel. Then reasoning starts, with steps stacking one by one.

@@ -31,7 +31,9 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 ## Create a new profile
 - **2026-10-16 · "I don't see my business" opens a create screen, then the same flow until publishers and beyond** (owner; Figma 10768:18579).
 - **2026-10-16 · Create Profile disabled (40%) until both fields are filled** (agent; Figma shows it enabled).
-- **2026-10-16 · Name from the search, category from the description, address/city from the location; the form map pins the typed street** (agent).
+- **2026-10-16 · Name from the search, category from the description** (agent).
+- **2026-10-16 · City/state/PIN/coordinates from a real address lookup, not the search** (owner: "city state you can get from the map results itself"). Uses OpenStreetMap Nominatim (Google's geocoder needs an API key). The typed street is kept, the locality and city are appended if missing, and it falls back to heuristics if the lookup finds nothing.
+- **2026-10-16 · New profiles have no website** (owner).
 - **2026-10-16 · Back link on this path reads "Back to profile details" and returns to the create screen with inputs kept** (agent).
 - **2026-10-16 · No way back from the create screen to the results** (agent; Figma has none). Flagged to the owner.
 
