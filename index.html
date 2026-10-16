@@ -1556,15 +1556,28 @@
     document.getElementById('connect-btn').addEventListener('click', async () => {
       const loc = locationsFor(groupIndex)[selectedLoc];
       const optIn = document.getElementById('optin-listings').checked;
+      if (optIn) coverForListings();  // closing the modal reveals the next step, not the form
       await closeModal(connectModal);
       showToast('Business details updated on google');
-      // Once GBP is connected there's no going back to the search results.
-      // Hidden even if the fade gets cancelled by the next phase.
+      if (optIn) return startListings(loc.name);
+      // Connected without listings: stay on the form. Once GBP is connected there's
+      // no going back to the search results (hidden even if the fade gets cancelled).
       const hideBack = () => (backLink.hidden = true);
       fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);
-      if (!optIn) return;  // connected without listings: stay on the profile form
-      startListings(loc.name);
     });
+
+    // Behind a modal: swap the form for the AI animation, so the modal closes
+    // straight onto the next step instead of flashing the form for a moment
+    const listingPhrases = () => ['Finding relevant listing publishers..', 'Matching your category with local publishers ...',
+      `Checking where ${picked.noun} in ${picked.city} are listed ...`];
+    function coverForListings() {
+      backLink.hidden = true;  // connected: no going back to the search results
+      profileForm.hidden = true;
+      animPanel.getAnimations().forEach(a => a.cancel());  // drop the fade-out it was left with
+      animPanel.hidden = false;
+      processing.setPhrases(listingPhrases());
+      processing.start();
+    }
 
     // Connected → AI finds publishers → listings screen (shared by both connect paths)
     async function startListings(gbpName) {
@@ -1582,11 +1595,12 @@
         { icon: 'step-brand.svg', label: 'updating your brand context ...' },
       ]);
 
-      // Right: form steps aside, the AI animation comes back
-      processing.setPhrases(['Finding relevant listing publishers..', `Matching your category with local publishers ...`,
-        `Checking where ${picked.noun} in ${picked.city} are listed ...`]);
-      if (!await swapPanel(profileForm, animPanel) || !live()) return;
-      processing.start();
+      // Right: the AI animation (already in place if a modal covered the swap)
+      if (!profileForm.hidden) {
+        processing.setPhrases(listingPhrases());
+        if (!await swapPanel(profileForm, animPanel) || !live()) return;
+        processing.start();
+      }
       if (!await stepsIn || !await hold(T3.phase) || !live()) return;
 
       // Skeleton while publishers load
@@ -1627,13 +1641,12 @@
     }
     gauth.addEventListener('click', async e => {
       if (!e.target.closest('[data-account]')) return;
+      coverForListings();  // the sign-in page fades straight onto the next step
       await done([fade(gauth, 1, 0, motion(T3.modalOut), { easing: EASE_IN })]);
       gauth.hidden = true;
       gauth.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
       gauth.getAnimations().forEach(a => a.cancel());
       showToast('Your Google Business Profile has been created');
-      const hideBack = () => (backLink.hidden = true);
-      fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);
       startListings(picked.name);
     });
 

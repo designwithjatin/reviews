@@ -22,6 +22,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-10-16: No form flash after Connect / Google sign-in; the toast shows on the next step.
 - 2026-10-16: Google sign-in account = business name + profile email + letter avatar.
 - 2026-10-16: New business: Google sign-in instead of the Connect modal → listings → Opt-in → "Get your first 100 5 Star Reviews" final screen.
 - 2026-10-16: Create profile: city/state/PIN/lat-lng from an address lookup; website empty for new profiles.

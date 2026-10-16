@@ -41,6 +41,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-16 · No way back from the create screen to the results** (agent; Figma has none). Flagged to the owner.
 
 ## Connect GBP
+- **2026-10-16 · No form flash after Connect / Google sign-in** (owner). `coverForListings()` swaps the form for the AI animation behind the modal or sign-in page, which then closes straight onto the listings step. The toast shows there.
 - **2026-10-16 · No "Back to results" after connecting GBP** (owner). Applies to both connect paths. The hide doesn't depend on the fade finishing, so a cancelled fade can't bring the link back.
 
 ## Reviews inbox

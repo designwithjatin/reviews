@@ -63,6 +63,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - **Feel natural, not fast.** The owner asked twice to slow transitions down. Phases **overlap** so nothing comes to a dead stop.
 - **Reasoning steps arrive one below the other**, about 400–800ms apart. They never appear all at once.
 - **Parent (AI) task:** when a phase finishes, the parent step **moves all the way down to the bottom** of the list, then its label changes to the finished message (in italics). Every phase does this.
+- **Never flash the previous screen when a modal closes.** If closing a modal or overlay leads to a new step, swap the screen behind it first (see `coverForListings()`), so it closes straight onto the next step. Show the toast there.
 - Respect `prefers-reduced-motion` (the `motion(ms)` helper returns 0).
 - Use the WAAPI helpers (`fade`, `done`, `hold`) and the run-id cancellation pattern. See `context/architecture.md`.
 
