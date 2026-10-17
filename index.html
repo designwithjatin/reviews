@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=40">
+  <link rel="stylesheet" href="styles.css?v=41">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -1473,14 +1473,37 @@
     }
 
     // A finished milestone ("✓ We have fixed 9 profile gaps!") pinned above the steps
+    // The check pops in and draws its tick, a soft ring ripples out, then the text
+    // follows (title, then subtitle). Resolves once the subtitle has landed.
     function addMilestone(title, sub) {
       const block = document.createElement('div');
       block.className = 'milestone';
-      block.innerHTML = `<img src="assets/done-filled.svg" alt="" width="20" height="20">
+      block.innerHTML = `<span class="milestone__check" aria-hidden="true">
+          <svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="7.92" fill="#5CB85C"/>
+            <path class="milestone__tick" d="M6.4 10.3 8.8 12.7 13.6 7.9" fill="none" stroke="#FFF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <i class="milestone__ripple"></i></span>
         <div><p class="milestone__title">${title}</p><p class="milestone__sub">${sub}</p></div>`;
       milestones.append(block);
-      return fade(block, 0, 1, motion(T.stepIn), { from: { transform: 'translateY(-8px)' }, to: { transform: 'none' } });
+      const svg = block.querySelector('svg');
+      const tick = block.querySelector('.milestone__tick');
+      const len = tick.getTotalLength();
+      tick.style.strokeDasharray = len;
+      return done([
+        svg.animate([{ transform: 'scale(0.4)', opacity: 0 }, { transform: 'scale(1)', opacity: 1 }],
+          { duration: motion(M.pop), easing: EASE_OUT_BACK, fill: 'both' }),
+        tick.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+          { duration: motion(M.draw), delay: motion(M.pop * 0.6), easing: EASE_OUT, fill: 'both' }),
+        block.querySelector('.milestone__ripple').animate(
+          [{ transform: 'scale(0.6)', opacity: 0.5 }, { transform: 'scale(2.4)', opacity: 0 }],
+          { duration: motion(M.ripple), delay: motion(M.pop * 0.7), easing: EASE_OUT, fill: 'both' }),
+        fade(block.querySelector('.milestone__title'), 0, 1, motion(M.textIn),
+          { delay: motion(M.pop * 0.9), from: { transform: 'translateY(6px)' }, to: { transform: 'none' } }),
+        fade(block.querySelector('.milestone__sub'), 0, 1, motion(M.textIn),
+          { delay: motion(M.pop * 0.9 + 120), from: { transform: 'translateY(6px)' }, to: { transform: 'none' } }),
+      ]);
     }
+    // Milestone timings. The progress bar fills once the check has landed (M.bar).
+    const M = { pop: 360, draw: 260, ripple: 560, textIn: 360, bar: { delay: 420, duration: 800 } };
 
     // Right side: fade one panel out and another in
     async function swapPanel(from, to) {
@@ -1588,7 +1611,7 @@
 
       // Left: progress moves on, gaps milestone + new steps
       progressBar.style.width = '120px';  // final width set directly so later resets keep it
-      progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
       addMilestone('We have fixed 9 profile gaps!', 'Your business will be easier to find in Google by your customers.');
       const stepsIn = showSteps([
         { ai: true, label: 'Finding most relevant publishers for your business...' },
@@ -1809,7 +1832,7 @@
       const live = () => id === run;
       sendAll.disabled = true;
       progressBar.style.width = '250px';
-      progressBar.animate([{ width: '184px' }, { width: '250px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      progressBar.animate([{ width: '184px' }, { width: '250px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
       stepsList.getAnimations().forEach(a => a.cancel());
       const stepsIn = showSteps([
         { ai: true, label: 'Creating Social Proof...' },
@@ -1982,7 +2005,7 @@
       shareNow.disabled = true;
       if (scheduled) showToast(`${scheduled} Post${scheduled === 1 ? '' : 's'} Scheduled.`);
       progressBar.style.width = '316px';
-      progressBar.animate([{ width: '250px' }, { width: '316px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      progressBar.animate([{ width: '250px' }, { width: '316px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
       wgtStart = 0;
       document.getElementById('wgt-summary').textContent =
         `Customers frequently rave about ${picked.name}, noting its inviting atmosphere, exceptional coffee, and attentive service. Reviewers often emphasise the cozy seating arrangements, delightful ambiance, and thoughtfully crafted food options that enhance their experience. Many appreciate the attention to detail in both the decor and the menu, making it a perfect spot for relaxation or socializing.`;
@@ -2191,7 +2214,7 @@
       const cascade = pending.map((card, i) => markReplied(card, i * 140));
       showToast(`${pending.length} review ${pending.length === 1 ? 'reply' : 'replies'} sent`);
       progressBar.style.width = '184px';
-      progressBar.animate([{ width: '120px' }, { width: '184px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      progressBar.animate([{ width: '120px' }, { width: '184px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
       addMilestone(`Replied to ${total} Reviews`, 'Ensuring no review goes unanswered!');
       fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN }).finished.then(() => (stepsList.innerHTML = ''), () => {});
       if ((await Promise.all(cascade)).includes(false) || !live()) return;

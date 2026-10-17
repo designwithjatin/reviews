@@ -43,7 +43,7 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 ## Core patterns (reuse these)
 - **Animations = WAAPI.** `fade(el, from, to, ms, {from, to, delay, easing})` uses `fill: both`. `done(anims)` resolves `true`, or `false` if cancelled. `hold(ms)` is a timer that runs on the animation clock (so it pauses with the tab).
 - **Cancellation:** `resetTransition()` bumps `run` and cancels non-CSS animations. Every async phase captures `id = run` and checks `live()` after each `await`, bailing if stale.
-- **Left panel:** `showSteps([{ai, icon, label}])` replaces the list. `finishStep(step, label)` swaps to a ✓. `settleParent(aiStep, others, text)` moves the AI step to the bottom and sets the final italic text. `addMilestone(title, sub)` pins a ✓ block above.
+- **Left panel:** `showSteps([{ai, icon, label}])` replaces the list. `finishStep(step, label)` swaps to a ✓. `settleParent(aiStep, others, text)` moves the AI step to the bottom and sets the final italic text. `addMilestone(title, sub)` pins a ✓ block above: inline SVG check (pop + drawn tick + ripple), then title and subtitle; timings in `M`. The progress-bar `animate()` calls use `delay: M.bar.delay` so the fill follows the check.
 - **Progress bar widths:** 70 (start) → 120 (publishers) → 184 (replied) → 250 (social) → 316 (widget). Set `progressBar.style.width` and animate from the previous value.
 - `motion(ms)` → 0 under reduced motion.
 

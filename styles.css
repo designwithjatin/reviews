@@ -1007,7 +1007,9 @@ button { font: inherit; color: inherit; }
   padding: var(--sp-4) 0 var(--sp-16);
   border-bottom: 1px solid var(--dvdr-secondary);
 }
-.milestone img { flex-shrink: 0; }
+.milestone__check { position: relative; flex-shrink: 0; width: 20px; height: 20px; }
+.milestone__check svg { display: block; transform-origin: center; }
+.milestone__ripple { position: absolute; inset: 0; border: 1.5px solid #5CB85C; border-radius: 50%; opacity: 0; pointer-events: none; }
 .milestone__title { font: var(--body-sm); color: var(--txt-primary); }
 .milestone__sub { margin-top: var(--sp-4); font: var(--body-xs); color: var(--txt-secondary); }
 
