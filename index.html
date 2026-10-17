@@ -1473,9 +1473,7 @@
     }
 
     // A finished milestone ("✓ We have fixed 9 profile gaps!") pinned above the steps
-    // The check fades in and grows gently, draws its tick, then the title and
-    // subtitle rise in after it. It waits a beat (M.lead) so the finished steps
-    // have left first. Resolves once the subtitle has landed.
+    // The block fades in as before; inside it the check grows gently and draws its tick
     function addMilestone(title, sub) {
       const block = document.createElement('div');
       block.className = 'milestone';
@@ -1488,24 +1486,16 @@
       const tick = block.querySelector('.milestone__tick');
       const len = tick.getTotalLength();
       tick.style.strokeDasharray = len;
-      const at = ms => motion(M.lead + ms);
-      // Text is wiped in left to right from the check (clip-path), with a slight drift
-      const textIn = (el, delay) => el.animate(
-        [{ clipPath: 'inset(0 100% 0 0)', transform: 'translateX(-6px)' }, { clipPath: 'inset(0 0 0 0)', transform: 'none' }],
-        { duration: motion(M.textIn), delay, easing: EASE_OUT_QUINT, fill: 'both' });
       return done([
-        svg.animate([{ transform: 'scale(0.7)', opacity: 0 }, { opacity: 1, offset: 0.45 }, { transform: 'scale(1)', opacity: 1 }],
-          { duration: motion(M.pop), delay: at(0), easing: EASE_OUT_SOFT, fill: 'both' }),
+        fade(block, 0, 1, motion(T.stepIn), { from: { transform: 'translateY(-8px)' }, to: { transform: 'none' } }),
+        svg.animate([{ transform: 'scale(0.7)' }, { transform: 'scale(1)' }],
+          { duration: motion(M.pop), easing: EASE_OUT_SOFT, fill: 'both' }),
         tick.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
-          { duration: motion(M.draw), delay: at(M.pop * 0.45), easing: EASE_OUT, fill: 'both' }),
-        textIn(block.querySelector('.milestone__title'), at(M.pop * 0.5)),
-        textIn(block.querySelector('.milestone__sub'), at(M.pop * 0.5 + 120)),
+          { duration: motion(M.draw), delay: motion(M.pop * 0.45), easing: EASE_OUT, fill: 'both' }),
       ]);
     }
-    // Milestone timings. The progress bar fills once the check has landed (M.bar).
-    const M = { lead: 200, pop: 520, draw: 380, textIn: 650, bar: { delay: 700, duration: 900 } };
+    const M = { pop: 520, draw: 380 };
     const EASE_OUT_SOFT = 'cubic-bezier(0.34, 1.25, 0.64, 1)';  // gentler overshoot than the step checks
-    const EASE_OUT_QUINT = 'cubic-bezier(0.19, 1, 0.22, 1)';    // fast start, long glide to a stop
 
     // Right side: fade one panel out and another in
     async function swapPanel(from, to) {
@@ -1613,7 +1603,7 @@
 
       // Left: progress moves on, gaps milestone + new steps
       progressBar.style.width = '120px';  // final width set directly so later resets keep it
-      progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
+      progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(600), easing: EASE_IN_OUT });
       addMilestone('We have fixed 9 profile gaps!', 'Your business will be easier to find in Google by your customers.');
       const stepsIn = showSteps([
         { ai: true, label: 'Finding most relevant publishers for your business...' },
@@ -1834,7 +1824,7 @@
       const live = () => id === run;
       sendAll.disabled = true;
       progressBar.style.width = '250px';
-      progressBar.animate([{ width: '184px' }, { width: '250px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
+      progressBar.animate([{ width: '184px' }, { width: '250px' }], { duration: motion(600), easing: EASE_IN_OUT });
       stepsList.getAnimations().forEach(a => a.cancel());
       const stepsIn = showSteps([
         { ai: true, label: 'Creating Social Proof...' },
@@ -2007,7 +1997,7 @@
       shareNow.disabled = true;
       if (scheduled) showToast(`${scheduled} Post${scheduled === 1 ? '' : 's'} Scheduled.`);
       progressBar.style.width = '316px';
-      progressBar.animate([{ width: '250px' }, { width: '316px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
+      progressBar.animate([{ width: '250px' }, { width: '316px' }], { duration: motion(600), easing: EASE_IN_OUT });
       wgtStart = 0;
       document.getElementById('wgt-summary').textContent =
         `Customers frequently rave about ${picked.name}, noting its inviting atmosphere, exceptional coffee, and attentive service. Reviewers often emphasise the cozy seating arrangements, delightful ambiance, and thoughtfully crafted food options that enhance their experience. Many appreciate the attention to detail in both the decor and the menu, making it a perfect spot for relaxation or socializing.`;
@@ -2216,7 +2206,7 @@
       const cascade = pending.map((card, i) => markReplied(card, i * 140));
       showToast(`${pending.length} review ${pending.length === 1 ? 'reply' : 'replies'} sent`);
       progressBar.style.width = '184px';
-      progressBar.animate([{ width: '120px' }, { width: '184px' }], { duration: motion(M.bar.duration), delay: motion(M.bar.delay), easing: EASE_IN_OUT, fill: 'backwards' });
+      progressBar.animate([{ width: '120px' }, { width: '184px' }], { duration: motion(600), easing: EASE_IN_OUT });
       addMilestone(`Replied to ${total} Reviews`, 'Ensuring no review goes unanswered!');
       fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN }).finished.then(() => (stepsList.innerHTML = ''), () => {});
       if ((await Promise.all(cascade)).includes(false) || !live()) return;

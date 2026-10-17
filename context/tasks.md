@@ -22,7 +22,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
-- 2026-10-17: Milestone check animation (pop, drawn tick, ripple, text stagger, delayed progress fill). Owner to judge the feel.
+- 2026-10-17: Milestone check grows gently and draws its tick. Text and progress timing stay as they were.
 - 2026-10-16: Tool-card description + CTA back to hover-only (keeps the new icons and copy).
 - 2026-10-16: Final-screen tool cards: Figma icons and copy (Download QR Code, Preview Feedback Form); applies to the new-business final too.
 - 2026-10-16: No form flash after Connect / Google sign-in; the toast shows on the next step.
@@ -55,4 +55,5 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-16 | Tool-card description + CTA always visible | The owner wants them on hover only. |
 | 2026-10-17 | Milestone check with ripple ring + strong pop | Felt sudden, not polished. |
 | 2026-10-17 | Blur-in on the milestone text | The owner doesn't like blur. |
+| 2026-10-17 | Slide-in and clip-wipe for the milestone text; 200ms lead-in; progress fill delayed after the check | The owner wants the text and bar as they were; only the check animates. |
 | 2026-10-16 | Pale-blue (`#C5DBFA`) disabled Share Now | Replaced by 40% opacity of the brand button. |

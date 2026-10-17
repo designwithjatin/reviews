@@ -43,7 +43,7 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 ## Core patterns (reuse these)
 - **Animations = WAAPI.** `fade(el, from, to, ms, {from, to, delay, easing})` uses `fill: both`. `done(anims)` resolves `true`, or `false` if cancelled. `hold(ms)` is a timer that runs on the animation clock (so it pauses with the tab).
 - **Cancellation:** `resetTransition()` bumps `run` and cancels non-CSS animations. Every async phase captures `id = run` and checks `live()` after each `await`, bailing if stale.
-- **Left panel:** `showSteps([{ai, icon, label}])` replaces the list. `finishStep(step, label)` swaps to a ✓. `settleParent(aiStep, others, text)` moves the AI step to the bottom and sets the final italic text. `addMilestone(title, sub)` pins a ✓ block above: inline SVG check (gentle pop + drawn tick), then title and subtitle clip-wipe in from the check; timings in `M`, easings `EASE_OUT_SOFT` (check) and `EASE_OUT_QUINT` (text). The progress-bar `animate()` calls use `delay: M.bar.delay` so the fill follows the check.
+- **Left panel:** `showSteps([{ai, icon, label}])` replaces the list. `finishStep(step, label)` swaps to a ✓. `settleParent(aiStep, others, text)` moves the AI step to the bottom and sets the final italic text. `addMilestone(title, sub)` pins a ✓ block above (fades in from -8px); its inline SVG check grows gently and draws its tick, timings in `M`, easing `EASE_OUT_SOFT`.
 - **Progress bar widths:** 70 (start) → 120 (publishers) → 184 (replied) → 250 (social) → 316 (widget). Set `progressBar.style.width` and animate from the previous value.
 - `motion(ms)` → 0 under reduced motion.
 
