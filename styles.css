@@ -1009,7 +1009,6 @@ button { font: inherit; color: inherit; }
 }
 .milestone__check { position: relative; flex-shrink: 0; width: 20px; height: 20px; }
 .milestone__check svg { display: block; transform-origin: center; }
-.milestone__ripple { position: absolute; inset: 0; border: 1.5px solid #5CB85C; border-radius: 50%; opacity: 0; pointer-events: none; }
 .milestone__title { font: var(--body-sm); color: var(--txt-primary); }
 .milestone__sub { margin-top: var(--sp-4); font: var(--body-xs); color: var(--txt-secondary); }
 

@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-10-17 · Milestone check: pop, drawn tick, ripple, staggered text; progress fills after it
+- (pending) · 2026-10-17 · Milestone softened: lead-in, gentler pop, no ripple, blur-in text
+- f4ec1d1 · 2026-10-17 · Milestone check: pop, drawn tick, ripple, staggered text; progress fills after it
 - 0ac788d · 2026-10-16 · Tool-card illustrations: static lines (not shimmer), business name on one line
 - db41b17 · 2026-10-16 · Tool-card description + CTA back to hover-only
 - 066a6aa · 2026-10-16 · Tool-card CTAs always visible, with Figma icons and copy

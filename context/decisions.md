@@ -10,7 +10,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Build from Figma data, not screenshots** (owner, 2026-10-16).
 
 ## Left panel milestones
-- **2026-10-17 · Milestone check is a small "win" moment** (agent, trying something for the owner): the green check pops in with overshoot, draws its tick, a faint green ring ripples out, then the title and subtitle follow; the progress bar fills only after the check has landed (~420ms later, 800ms). Timings in `M` next to `addMilestone()`. Awaiting the owner's verdict.
+- **2026-10-17 · Milestone check is a small "win" moment** (agent, trying something for the owner): the green check pops in with overshoot, draws its tick, a faint green ring ripples out, then the title and subtitle rise in from slightly out of focus (blur-in); the progress bar fills only after the check has landed. The first version (scale from 0.4, strong overshoot, ripple ring) felt sudden to the owner, so it was softened: 200ms lead-in, scale from 0.7, gentler overshoot, no ripple, longer eases. Timings in `M` next to `addMilestone()`. Awaiting the owner's verdict on the blur-in text.
 
 ## Final screen
 - **2026-10-16 · Star travels from 1.0 with the bar** (owner): it pops in at the left, then slides to 3.8 on the same curve as the fill. Implemented with the `translate` + `scale` properties so the pop can't distort the slide (see gotchas).
