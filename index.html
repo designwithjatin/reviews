@@ -1489,22 +1489,23 @@
       const len = tick.getTotalLength();
       tick.style.strokeDasharray = len;
       const at = ms => motion(M.lead + ms);
-      // Text rises in from slightly out of focus
+      // Text slides in from the check (shared axis) on a long decelerating curve
       const textIn = (el, delay) => el.animate(
-        [{ opacity: 0, transform: 'translateY(8px)', filter: 'blur(4px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }],
-        { duration: motion(M.textIn), delay, easing: EASE_OUT, fill: 'both' });
+        [{ opacity: 0, transform: 'translateX(-12px)' }, { opacity: 1, transform: 'none' }],
+        { duration: motion(M.textIn), delay, easing: EASE_OUT_QUINT, fill: 'both' });
       return done([
         svg.animate([{ transform: 'scale(0.7)', opacity: 0 }, { opacity: 1, offset: 0.45 }, { transform: 'scale(1)', opacity: 1 }],
           { duration: motion(M.pop), delay: at(0), easing: EASE_OUT_SOFT, fill: 'both' }),
         tick.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
           { duration: motion(M.draw), delay: at(M.pop * 0.45), easing: EASE_OUT, fill: 'both' }),
         textIn(block.querySelector('.milestone__title'), at(M.pop * 0.5)),
-        textIn(block.querySelector('.milestone__sub'), at(M.pop * 0.5 + 140)),
+        textIn(block.querySelector('.milestone__sub'), at(M.pop * 0.5 + 120)),
       ]);
     }
     // Milestone timings. The progress bar fills once the check has landed (M.bar).
-    const M = { lead: 200, pop: 520, draw: 380, textIn: 480, bar: { delay: 700, duration: 900 } };
+    const M = { lead: 200, pop: 520, draw: 380, textIn: 700, bar: { delay: 700, duration: 900 } };
     const EASE_OUT_SOFT = 'cubic-bezier(0.34, 1.25, 0.64, 1)';  // gentler overshoot than the step checks
+    const EASE_OUT_QUINT = 'cubic-bezier(0.19, 1, 0.22, 1)';    // fast start, long glide to a stop
 
     // Right side: fade one panel out and another in
     async function swapPanel(from, to) {

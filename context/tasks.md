@@ -53,4 +53,6 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-16 | Gradient background on the AI Summary card | Figma 10758:17434 is plain white. |
 | 2026-10-16 | 2-line clamp for replied reviews | The owner wants 1 line for both review and reply. |
 | 2026-10-16 | Tool-card description + CTA always visible | The owner wants them on hover only. |
+| 2026-10-17 | Milestone check with ripple ring + strong pop | Felt sudden, not polished. |
+| 2026-10-17 | Blur-in on the milestone text | The owner doesn't like blur. |
 | 2026-10-16 | Pale-blue (`#C5DBFA`) disabled Share Now | Replaced by 40% opacity of the brand button. |
