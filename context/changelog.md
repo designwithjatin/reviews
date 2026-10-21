@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-10-17 · Milestone: revert text and progress timing, keep the check pop + drawn tick
+- (pending) · 2026-10-21 · Search box submit icon button
+- dcd9114 · 2026-10-17 · Milestone: revert text and progress timing, keep the check pop + drawn tick
 - e622d41 · 2026-10-17 · Milestone text clip-wipes in from the check
 - 362ff75 · 2026-10-17 · Milestone text slides in from the check on ease-out-quint (blur dropped)
 - 8686ad8 · 2026-10-17 · Milestone softened: lead-in, gentler pop, no ripple, blur-in text

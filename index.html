@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=42">
+  <link rel="stylesheet" href="styles.css?v=43">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -29,11 +29,13 @@
       </div>
 
       <form class="search-field" id="search-form">
-        <button class="search-field__submit" type="submit" aria-label="Search">
-          <img src="assets/search.svg" alt="" width="24" height="24">
-        </button>
+        <img class="search-field__icon" src="assets/search.svg" alt="" width="24" height="24">
         <textarea id="query" name="query" autofocus aria-label="Search your business"
           placeholder="Search your business by name and tell me a little about your business."></textarea>
+        <!-- Submit (Figma 10785:8965 empty → 10785:9079 typed) -->
+        <button class="search-field__submit" id="search-submit" type="submit" aria-label="Search" disabled>
+          <img src="assets/arrow-submit.svg" alt="" width="16" height="16">
+        </button>
       </form>
 
       <div class="footer">
@@ -1089,6 +1091,12 @@
         list.innerHTML = results.map(resultRow).join('') + createRow;
       }, SEARCH_DELAY);
     });
+
+    // The submit button wakes up once there's something to search
+    const searchSubmit = document.getElementById('search-submit');
+    const syncSearchSubmit = () => (searchSubmit.disabled = !query.value.trim());
+    query.addEventListener('input', syncSearchSubmit);
+    syncSearchSubmit();
 
     // Enter searches, Shift+Enter adds a new line
     query.addEventListener('keydown', e => {

@@ -57,6 +57,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-15 · Regenerate Writing Style shows a skeleton loader**: headings, stars and tag stay; bullets and pattern become grey bars (owner).
 
 ## Profile & search (earlier)
+- **2026-10-21 · Submit icon button in the search box** (owner: "for better usability"; Figma 10785:8965 / 9079). It's disabled until there's non-space text. The left magnifier is no longer a button (agent).
 - **Progress bar doesn't move during the first step** (owner).
 - **Parent task moves down and shows the finished message** in every phase (owner).
 - **The last working step is "Updating your business profile with optimized content"** (owner).

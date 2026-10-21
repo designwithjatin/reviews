@@ -107,6 +107,7 @@ button { font: inherit; color: inherit; }
 
 /* Search field — Active input state (white, #89B9FF border, ShadowBottomSm) */
 .search-field {
+  position: relative;
   width: 614px;
   height: 120px;
   display: flex;
@@ -119,16 +120,30 @@ button { font: inherit; color: inherit; }
   box-shadow: var(--shadow-bottom-sm);
   cursor: text;
 }
+.search-field__icon { flex-shrink: 0; }
+/* Icon button · bottom-right of the field: subtle while empty, brand once there's text */
 .search-field__submit {
-  flex-shrink: 0;
+  position: absolute;
+  right: var(--sp-16);
+  bottom: var(--sp-16);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   border: 0;
-  background: none;
+  border-radius: 2px;
+  background: var(--brand-primary);
   cursor: pointer;
+  transition: background-color 150ms ease;
 }
+.search-field__submit:hover { background: #004FD2; }
+.search-field__submit:active { background: #0037BA; }
+.search-field__submit:disabled { background: var(--brand-primary-subtle); cursor: default; }
 .search-field textarea {
   flex: 1;
-  height: 100%;
+  height: calc(100% - 32px);  /* keeps the text clear of the submit button */
   padding: 2px 0 0;
   border: 0;
   outline: 0;

@@ -70,6 +70,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 ## 4. Component and screen direction (owner's decisions so far)
 
 **Search and results**
+- The search box has a **submit icon button** bottom-right (Figma 10785:8965 / 10785:9079): 24px, 2px radius, white arrow. It's disabled on `#ECF3FD` while empty (or only spaces) and brand blue once there's text. Enter still searches; the magnifier on the left is just an icon.
 - Results are generated from **any keyword** typed (name, city, category parsed from the text), in **any city**, not just Jaipur.
 - The result card has a simple hover state: white bg, `--shadow-bottom-sm`, 1px `#698EC4` outline, radius 8.
 - The back link copy is **"Back to results"**. It's **hidden once GBP is connected**, with or without the listings opt-in, and never comes back in later steps.

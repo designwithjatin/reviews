@@ -5,7 +5,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 
 | # | Screen | Figma | Right panel | Left panel / progress |
 |---|---|---|---|---|
-| 1 | Search: empty | 10657:4151 | Illustration (updated 10673:3461) | Greeting "Hi John!" + search textarea |
+| 1 | Search: empty | 10657:4151, button 10785:8965 | Illustration (updated 10673:3461) | Greeting "Hi John!" + search textarea |
 | 2 | Searching | 10657:4266 | Skeleton rows | — |
 | 3 | Results | 10657:4329 | `.business` cards (hover: shadow + `#698EC4` outline) | — |
 | 3b | Create a new profile ("I don't see my business") | 10768:18579 | `main#screen-create`, full width: description textarea, location search + live map (opens on the searched city). **Create Profile** (disabled until both filled) → screen 4, then the normal flow | No side panel. Back link on later screens = "Back to profile details" → returns here |
