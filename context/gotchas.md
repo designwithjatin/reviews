@@ -31,4 +31,5 @@
 - Figma often has placeholder data (repeated copy, celebrity names, a mislabelled chip). Choose sensibly, then flag and log the choice.
 
 ## Search
+- **Category keywords must match whole words.** `CATEGORIES` used to be bare substrings, so "co working **spa**ce" became Beauty Salon (and "c**hair**" would too). Use the `words(...)` helper, which allows plurals and blocks partial-word hits. Order matters: the first match wins (Coworking is checked first, Hotel before Clothing so "boutique hotel" is a hotel).
 - A query without a category keyword (e.g. "Third Wave") gets "Local Business" (`parseQuery` fallback). Known, parked.

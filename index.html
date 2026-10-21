@@ -932,18 +932,21 @@
     // With no location in the query, results spread across these
     const MAJOR_CITIES = ['Bangalore', 'Mumbai', 'New Delhi', 'Pune', 'Hyderabad', 'Chennai'];
 
+    // Whole words only (plurals allowed), so "space" isn't read as "spa" or "chair" as "hair"
+    const words = (...w) => new RegExp(`(?<![a-z])(?:${w.join('|')})(?:e?s)?(?![a-z])`);
     const CATEGORIES = [
-      { match: /coffee|caf[eé]|espresso|brew/, category: 'Coffee Shop', noun: 'cafés' },
-      { match: /ice ?cream|icecream|gelato|dessert|waffle|sweet/, category: 'Dessert Shop', noun: 'dessert shops' },
-      { match: /bakery|bake|cake|patisserie|bread/, category: 'Bakery', noun: 'bakeries' },
-      { match: /pizza|burger|restaurant|kitchen|biryani|dhaba|bistro|diner|food|eatery/, category: 'Restaurant', noun: 'restaurants' },
-      { match: /salon|hair|spa|beauty|nail|barber/, category: 'Beauty Salon', noun: 'salons' },
-      { match: /gym|fitness|yoga|crossfit|pilates/, category: 'Fitness Centre', noun: 'gyms' },
-      { match: /clinic|dental|dentist|doctor|physio|hospital/, category: 'Medical Clinic', noun: 'clinics' },
-      { match: /boutique|clothing|fashion|apparel|saree|wear/, category: 'Clothing Store', noun: 'stores' },
-      { match: /candle|gift|decor|craft/, category: 'Gift Shop', noun: 'gift shops' },
-      { match: /hotel|stay|resort|hostel|homestay/, category: 'Hotel', noun: 'hotels' },
-      { match: /school|academy|class|coaching|tuition/, category: 'Coaching Centre', noun: 'coaching centres' },
+      { match: words('co-? ?working', 'cowork', 'workspace', 'shared office', 'office space', 'hot ?desk'), category: 'Coworking Space', noun: 'coworking spaces' },
+      { match: words('coffee', 'caf[eé]', 'espresso', 'brew'), category: 'Coffee Shop', noun: 'cafés' },
+      { match: words('ice ?cream', 'gelato', 'dessert', 'waffle', 'sweet'), category: 'Dessert Shop', noun: 'dessert shops' },
+      { match: words('bakery', 'bakeries', 'bake', 'cake', 'patisserie', 'bread'), category: 'Bakery', noun: 'bakeries' },
+      { match: words('pizza', 'burger', 'restaurant', 'kitchen', 'biryani', 'dhaba', 'bistro', 'diner', 'food', 'eatery', 'eateries'), category: 'Restaurant', noun: 'restaurants' },
+      { match: words('salon', 'hair', 'spa', 'beauty', 'nail', 'barber'), category: 'Beauty Salon', noun: 'salons' },
+      { match: words('gym', 'fitness', 'yoga', 'crossfit', 'pilates'), category: 'Fitness Centre', noun: 'gyms' },
+      { match: words('clinic', 'dental', 'dentist', 'doctor', 'physio', 'hospital'), category: 'Medical Clinic', noun: 'clinics' },
+      { match: words('hotel', 'stay', 'resort', 'hostel', 'homestay'), category: 'Hotel', noun: 'hotels' },
+      { match: words('boutique', 'clothing', 'fashion', 'apparel', 'saree', 'wear'), category: 'Clothing Store', noun: 'stores' },
+      { match: words('candle', 'gift', 'decor', 'craft'), category: 'Gift Shop', noun: 'gift shops' },
+      { match: words('school', 'academy', 'class', 'coaching', 'tuition'), category: 'Coaching Centre', noun: 'coaching centres' },
     ];
     const STREETS = ['Main Road', '100 Feet Road', 'Ring Road', 'Station Road', 'Market Street', 'Park Avenue', 'Link Road'];
     const PLATFORM = { gbp: 'Google', facebook: 'Facebook' };
