@@ -1631,8 +1631,7 @@
 
     // Behind a modal: swap the form for the AI animation, so the modal closes
     // straight onto the next step instead of flashing the form for a moment
-    const listingPhrases = () => ['Finding relevant listing publishers..', 'Updating Brand Context', 'Matching your category with local publishers ...',
-      `Checking where ${picked.noun} in ${picked.city} are listed ...`];
+    const listingPhrases = () => ['Finding relevant listing publishers', 'Updating brand context'];
     function coverForListings() {
       backLink.hidden = true;  // connected: no going back to the search results
       profileForm.hidden = true;
