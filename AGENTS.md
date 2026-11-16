@@ -102,7 +102,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The profile form header shows **I'll do it later** + **Connect Google & Continue** (it used to say "& Publish").
 - "I'll do it later" skips Google entirely. The profile fixes stay **drafted**, shown as a pending milestone (dashed ring + icon, not the green check): "9 Profile fixes drafted. You can apply changes once you connect your business profile".
 - **Listings work without auth** (we have the business details). The header is "Found 7 Publishers…" with **I'll do it later** + **Get Listed in All**, and there's no Active Listings / Google card. Opting in → toast + "Opted in!". "I'll do it later" → pending milestone "Found 7 Relevant Publishers".
-- **Inbox = 5 recent reviews, read-only.** It has a "Connect Google Account · To See and Reply to 130 more Reviews" banner, cards with hover actions (open, copy, reply), "View all 130 reviews", and **Continue** (no Send Replies, no drafts).
+- **Inbox = 5 recent reviews, read-only.** It has a "Connect Google Account · To See and Reply to 130 more Reviews" banner, cards with hover actions (open, copy, reply), and **Continue** (no Send Replies, no drafts).
 - **Posts:** pending milestone "Read your past reviews", then **2 posts at 322px** built from the best recent reviews. Share Now / I'll do it later go **straight to the final "75 more 5-star reviews" screen** (no widget).
 - The connected path is unchanged.
 

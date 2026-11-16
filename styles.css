@@ -2047,8 +2047,6 @@ button { font: inherit; color: inherit; }
 .review-card--recent:hover .recent-actions,
 .review-card--recent:focus-within .recent-actions { opacity: 1; }
 .recent-actions .icon-btn { width: 24px; height: 24px; }
-.view-all { display: flex; justify-content: center; }
-.view-all .link-btn { height: 22px; padding: 2px 4px; background: var(--srf-page); }
 
 /* Two big posts instead of six */
 .posts__grid--big { grid-template-columns: repeat(auto-fill, 322px); }

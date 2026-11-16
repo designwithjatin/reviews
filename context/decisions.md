@@ -52,7 +52,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Counts follow the prototype, not the Figma placeholders** (agent): "9 Profile fixes drafted" (Figma says 6; the steps say "Found 9 gaps"), "Found 7 Publishers / 7 Relevant Publishers" (Figma says 7 in one frame and 9 in another; there are 7 publishers). The drafted subtext stays "once you connect your business profile" everywhere (the Figma inbox frame says "later in the product").
 - **Opting in on this path shows ✓ "Opted in!"**; only skipping the listings shows the pending "Found 7 Relevant Publishers" (agent).
 - **Posts on this path: the 2 best of the 5 recent reviews**; Share Now and I'll do it later both go straight to the final screen (no widget) (owner: "the last step").
-- **Not wired yet**: the inbox's "Connect Google Account" link, "View all 130 reviews", and the card's open/reply actions (copy works). The listings' "I'll do it later" goes to the inbox (agent reading).
+- **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
 ## Connect GBP
 - **2026-10-16 · No form flash after Connect / Google sign-in** (owner). `coverForListings()` swaps the form for the AI animation behind the modal or sign-in page, which then closes straight onto the listings step. The toast shows there.
