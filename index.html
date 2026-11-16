@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=43">
+  <link rel="stylesheet" href="styles.css?v=45">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -249,11 +249,16 @@
             <button class="pill" type="button" aria-pressed="false" data-view="ai">AI Corrected</button>
             <button class="pill" type="button" aria-pressed="false" data-view="missing">Missing</button>
           </div>
-          <button class="btn-primary" type="button" id="connect-open">
-            <span class="btn-primary__g"><img src="assets/google-g-color.svg" alt=""></span>
-            Connect Google &amp; Publish
-            <img src="assets/arrow-right.svg" alt="" width="20" height="20">
-          </button>
+          <!-- Actions (Figma Lfz2oHviZXGc9NDmp8JEpq 8812:16306) -->
+          <div class="profile-form__actions">
+            <!-- What "later" leads to is still to be defined by the owner -->
+            <button class="link-btn link-btn--32" type="button" id="connect-later">I’ll do it later</button>
+            <button class="btn-primary" type="button" id="connect-open">
+              <span class="btn-primary__g"><img src="assets/google-g-color.svg" alt=""></span>
+              Connect Google &amp; Continue
+              <img src="assets/arrow-right.svg" alt="" width="20" height="20">
+            </button>
+          </div>
         </div>
 
         <section class="form-card">
@@ -398,10 +403,11 @@
       <!-- Screens 13–15 · Reviews Inbox: loading (Figma 10677:34560) → drafts (10677:34964) → automate (10677:35306) -->
       <section class="inbox" id="inbox" hidden>
         <div class="inbox__head">
-          <p class="inbox__title">Reviews Inbox<span class="dot" aria-hidden="true"></span><span class="inbox__count">130 Reviews</span></p>
+          <p class="inbox__title">Reviews Inbox<span class="inbox__count-wrap"><span class="dot" aria-hidden="true"></span><span class="inbox__count">130 Reviews</span></span></p>
           <button class="btn-primary btn-primary--md inbox__send" type="button" id="send-replies" disabled>
             <img src="assets/send.svg" alt="" width="20" height="20"><span>Send Replies</span>
           </button>
+          <button class="btn-primary" type="button" id="inbox-continue" hidden>Continue<img src="assets/arrow-right.svg" alt="" width="20" height="20"></button>
         </div>
 
         <div class="inbox__view" id="inbox-loading">
@@ -445,6 +451,17 @@
             </ul>
           </div>
           <div class="review-list" id="review-list"></div>
+        </div>
+
+        <!-- Skip-auth path: 5 recent reviews, read-only (Figma Lfz2oHviZXGc9NDmp8JEpq 8812:49960) -->
+        <div class="inbox__view" id="inbox-recent" hidden>
+          <div class="connect-banner">
+            <img src="assets/google-g-color.svg" alt="" width="14" height="15">
+            <button class="link-btn" type="button" id="recent-connect">Connect Google Account</button>
+            <span class="connect-banner__note">To See and Reply to 130 more Reviews</span>
+          </div>
+          <div class="review-list" id="recent-list"></div>
+          <div class="view-all"><button class="link-btn" type="button">View all 130 reviews</button></div>
         </div>
 
         <div class="inbox__view" id="inbox-done" hidden>
@@ -508,12 +525,16 @@
 
         <div class="publishers__view" id="pub-ready" hidden>
           <div class="publishers__head">
-            <h2>Found 10 Publishers relevant to your business</h2>
-            <button class="btn-primary btn-primary--md" type="button" id="list-all">
-              <img src="assets/listings.svg" alt="" width="20" height="20">Get Listed in All<img src="assets/arrow-right.svg" alt="" width="20" height="20">
-            </button>
+            <h2 id="pub-title">Found 10 Publishers relevant to your business</h2>
+            <div class="profile-form__actions">
+              <!-- Skip-auth path only (Figma Lfz2oHviZXGc9NDmp8JEpq 8711:46830) -->
+              <button class="link-btn link-btn--32" type="button" id="list-later" hidden>I’ll do it later</button>
+              <button class="btn-primary btn-primary--md" type="button" id="list-all">
+                <img src="assets/listings.svg" alt="" width="20" height="20">Get Listed in All<img src="assets/arrow-right.svg" alt="" width="20" height="20">
+              </button>
+            </div>
           </div>
-          <div class="pub-group">
+          <div class="pub-group" id="pub-active">
             <div class="pub-group__head">Active Listings</div>
             <div class="pub-card pub-card--lead">
               <img src="assets/platform-gbp.svg" alt="" width="24" height="24">
@@ -1378,6 +1399,14 @@
       widget.hidden = true;
       screenFinal.hidden = true;
       exploreLater.hidden = false;
+      skipAuth = false;
+      document.getElementById('pub-title').textContent = 'Found 10 Publishers relevant to your business';
+      document.getElementById('pub-active').hidden = false;
+      document.getElementById('list-later').hidden = true;
+      document.getElementById('inbox-recent').hidden = true;
+      inboxContinue.hidden = true;
+      sendAll.hidden = false;
+      inbox.querySelector('.inbox__count-wrap').hidden = false;
       delete sendAll.dataset.done;
       sendAll.querySelector('img').hidden = false;
       sendAll.querySelector('span').textContent = 'Send Replies';
@@ -1506,6 +1535,15 @@
       ]);
     }
     const M = { pop: 520, draw: 380 };
+    // Pending milestone (skip-auth path): dashed ring + icon, no check animation
+    function addDraftMilestone(title, sub, icon) {
+      const block = document.createElement('div');
+      block.className = 'milestone milestone--draft';
+      block.innerHTML = `<span class="milestone__draft" aria-hidden="true"><img src="assets/${icon}" alt="" width="16" height="16"></span>
+        <div><p class="milestone__title">${title}</p><p class="milestone__sub">${sub}</p></div>`;
+      milestones.append(block);
+      return done([fade(block, 0, 1, motion(T.stepIn), { from: { transform: 'translateY(-8px)' }, to: { transform: 'none' } })]);
+    }
     const EASE_OUT_SOFT = 'cubic-bezier(0.34, 1.25, 0.64, 1)';  // gentler overshoot than the step checks
 
     // Right side: fade one panel out and another in
@@ -1615,7 +1653,13 @@
       // Left: progress moves on, gaps milestone + new steps
       progressBar.style.width = '120px';  // final width set directly so later resets keep it
       progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(600), easing: EASE_IN_OUT });
-      addMilestone('We have fixed 9 profile gaps!', 'Your business will be easier to find in Google by your customers.');
+      if (skipAuth) addDraftMilestone('9 Profile fixes drafted.', 'You can apply changes once you connect your business profile', 'draft-16.svg');
+      else addMilestone('We have fixed 9 profile gaps!', 'Your business will be easier to find in Google by your customers.');
+      // Not connected: no Google listing to show, and the user can skip this step too
+      document.getElementById('pub-title').textContent =
+        `Found ${skipAuth ? PUBLISHERS.length : 10} Publishers relevant to your business`;
+      document.getElementById('pub-active').hidden = skipAuth;
+      document.getElementById('list-later').hidden = !skipAuth;
       const stepsIn = showSteps([
         { ai: true, label: 'Finding most relevant publishers for your business...' },
         { icon: 'step-brand.svg', label: 'updating your brand context ...' },
@@ -1726,6 +1770,7 @@
         if (!await hold(1200) || !live()) return;
         return showFinal(true);
       }
+      if (skipAuth) return runRecentReviews(id);  // not connected: public reviews only
       const stepsIn = showSteps([
         { ai: true, label: 'Learning from your reviews' },
         { icon: 'step-brand.svg', label: 'Reading your past reviews...' },
@@ -1791,9 +1836,96 @@
         </div>
       </article>`;
 
+    // =====================================================================
+    // Skip-auth path: "I'll do it later" on the profile form
+    // (Figma Lfz2oHviZXGc9NDmp8JEpq 8812:16256 → 8711:46830 → 8812:49960 → 8726:89182 → 8726:90220)
+    // No Google sign-in: profile fixes stay drafted, listings opt-in still works
+    // (we have the business details), the inbox shows 5 recent public reviews
+    // read-only, then posts, then the final screen.
+    // =====================================================================
+    let skipAuth = false;
+    const inboxRecent = document.getElementById('inbox-recent');
+    const recentList = document.getElementById('recent-list');
+    const inboxContinue = document.getElementById('inbox-continue');
+    const recentReviews = () => REVIEWS.slice(0, 5);
+
+    document.getElementById('connect-later').addEventListener('click', () => {
+      skipAuth = true;
+      const hideBack = () => (backLink.hidden = true);
+      fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);
+      startListings(picked.name);
+    });
+    document.getElementById('list-later').addEventListener('click', () => {
+      resetTransition();
+      runRecentReviews(run, { skippedListings: true });
+    });
+    inboxContinue.addEventListener('click', () => runSocialProof());
+
+    const recentHTML = r => `
+      <article class="review-card review-card--recent">
+        <div class="review-card__profile">
+          <img src="assets/platform-gbp.svg" alt="Google" width="24" height="24">
+          <span class="review-card__name">${esc(r.name)}</span><span class="dot" aria-hidden="true"></span>
+          <span class="review-card__when">${esc(r.when)}</span><span class="dot" aria-hidden="true"></span>
+          <span class="review-card__stars" role="img" aria-label="${r.stars} out of 5 stars">${starsHTML(r.stars)}</span>
+          <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
+          <span class="recent-actions">
+            <button class="icon-btn" type="button" aria-label="Open on Google"><img src="assets/external-link-16.svg" alt="" width="16" height="16"></button>
+            <button class="icon-btn" type="button" data-copy aria-label="Copy review"><img src="assets/copy-16.svg" alt="" width="16" height="16"></button>
+            <button class="icon-btn" type="button" aria-label="Reply"><img src="assets/reply-16.svg" alt="" width="16" height="16"></button>
+          </span>
+        </div>
+        <p class="review-card__text">${esc(r.text)}</p>
+      </article>`;
+    recentList.addEventListener('click', async e => {
+      const btn = e.target.closest('[data-copy]');
+      if (!btn) return;
+      try { await navigator.clipboard.writeText(btn.closest('.review-card').querySelector('.review-card__text').textContent); } catch { /* blocked: still confirm */ }
+      showToast('Review copied');
+    });
+
+    async function runRecentReviews(id, { skippedListings = false } = {}) {
+      const live = () => id === run;
+      if (skippedListings) addDraftMilestone(`Found ${PUBLISHERS.length} Relevant Publishers`, 'Apple, Bing, Tripadvisor and more', 'listings-16.svg');
+      const stepsIn = showSteps([
+        { ai: true, label: 'Bringing in your latest Google reviews...' },
+        { icon: 'step-brand.svg', label: 'Finding your reviews on Google...' },
+        { icon: 'step-profile.svg', label: 'updating your brand context ...' },
+      ]);
+      processing.setPhrases(['Bringing in your latest reviews ...', 'Reading your Google reviews ...', 'Updating your brand context ...']);
+      if (!await swapPanel(publishers, animPanel) || !live()) return;
+      processing.start();
+      if (!await stepsIn || !await hold(T3.phase) || !live()) return;
+
+      // Inbox: skeleton, then the 5 most recent reviews (no drafts: replying needs Google)
+      inboxLoading.hidden = false;
+      inboxReady.hidden = true;
+      inboxDone.hidden = true;
+      inboxRecent.hidden = true;
+      sendAll.hidden = true;
+      inbox.querySelector('.inbox__count-wrap').hidden = true;
+      inboxContinue.hidden = false;
+      inboxContinue.disabled = true;
+      processing.stop();
+      if (!await swapPanel(animPanel, inbox) || !live()) return;
+      const [aiStep, findStep, brandStep] = stepsList.children;
+      if (!await finishStep(findStep, 'Found 130 reviews on Google') || !live()) return;
+      if (!await hold(T3.loading) || !live()) return;
+
+      recentList.innerHTML = recentReviews().map(recentHTML).join('');
+      if (!await swapPanel(inboxLoading, inboxRecent) || !live()) return;
+      [...inboxRecent.children, ...recentList.children].forEach((el, i) =>
+        fade(el, 0, 1, motion(T2.formIn), { delay: motion(i * T3.rowStagger * 1.5), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
+      inboxContinue.disabled = false;
+
+      if (!await finishStep(brandStep, 'Updated your brand context') || !live()) return;
+      await settleParent(aiStep, [findStep, brandStep], 'Brought in your latest Google reviews. Take a look at what your customers are saying.');
+    }
+
     async function runReviews(id) {
       const live = () => id === run;
       // Reviews start loading; the inbox replaces the animation
+      inboxRecent.hidden = true;
       inboxLoading.hidden = false;
       inboxReady.hidden = true;
       inboxDone.hidden = true;
@@ -1834,12 +1966,13 @@
       const id = run;
       const live = () => id === run;
       sendAll.disabled = true;
+      if (skipAuth) addDraftMilestone('Read your past reviews', 'We’re ready to draft your review replies', 'reviews-16.svg');
       progressBar.style.width = '250px';
-      progressBar.animate([{ width: '184px' }, { width: '250px' }], { duration: motion(600), easing: EASE_IN_OUT });
+      progressBar.animate([{ width: skipAuth ? '120px' : '184px' }, { width: '250px' }], { duration: motion(600), easing: EASE_IN_OUT });
       stepsList.getAnimations().forEach(a => a.cancel());
       const stepsIn = showSteps([
         { ai: true, label: 'Creating Social Proof...' },
-        { icon: 'step-brand.svg', label: 'Picking your top 6 reviews from your inbox...' },
+        { icon: 'step-brand.svg', label: skipAuth ? 'Picking your best recent reviews...' : 'Picking your top 6 reviews from your inbox...' },
         { icon: 'step-profile.svg', label: 'Getting your posts and website widget ready...' },
       ]);
       processing.setPhrases(['Creating Social Posts', 'Picking your top reviews ...', 'Designing your website review widget ...']);
@@ -1884,7 +2017,9 @@
       `<img src="assets/review-star${i <= n ? '' : '-empty'}.svg" alt="">`).join('');
 
     function renderPosts() {
-      postsGrid.innerHTML = topReviews().map((r, i) => `
+      postsGrid.classList.toggle('posts__grid--big', skipAuth);
+      const picks = skipAuth ? [...recentReviews()].sort((a, b) => b.stars - a.stars).slice(0, 2) : topReviews();
+      postsGrid.innerHTML = picks.map((r, i) => `
         <label class="post">
           <input type="checkbox" aria-label="Post ${i + 1}: review by ${esc(r.name)}">
           <div class="post__art" aria-hidden="true">
@@ -2017,8 +2152,8 @@
       [...widget.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * 120), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
     }
-    shareNow.addEventListener('click', () => runWidget(postsGrid.querySelectorAll('input:checked').length));
-    document.getElementById('posts-later').addEventListener('click', () => runWidget(0));
+    shareNow.addEventListener('click', () => (skipAuth ? showFinal(false) : runWidget(postsGrid.querySelectorAll('input:checked').length)));
+    document.getElementById('posts-later').addEventListener('click', () => (skipAuth ? showFinal(false) : runWidget(0)));
 
     // Copy / email the embed code
     const codeText = () => document.getElementById('widget-code').textContent;

@@ -8,6 +8,8 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 ## Open questions (waiting on the owner)
 | Since | Question | Context |
 |---|---|---|
+| 2026-11-16 | Skip-auth inbox: what should "Connect Google Account", "View all 130 reviews" and the card reply action do? | Not wired yet. |
+| 2026-11-16 | Skip-auth path on a **new business** (create path): it currently goes listings → opt-in → "first 100 reviews". Is that right, given there are no reviews to show? | |
 | 2026-10-16 | Create-profile path: the steps still say "Found 9 gaps in your business profile" and the milestone says "We have fixed 9 profile gaps!". Should new businesses get their own wording? | Connect is now Google sign-in. |
 | 2026-10-16 | Should the create screen have a way back to the search results? | Figma has none; the header link is the only exit. |
 | 2026-10-16 | Should the left QR-code chip say "Google" (built) or "Facebook" (as in Figma)? | Figma shows the Google icon labelled "Facebook", which looks like a slip. |
@@ -22,6 +24,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-11-16: Skip-auth path: "I'll do it later" on the form → drafted fixes → listings (no auth) → 5 recent reviews read-only → 2 posts → final. Form button now "Connect Google & Continue".
 - 2026-10-21: Category detection fixed (whole words; "space" no longer reads as "spa") + Coworking Space category.
 - 2026-10-21: Search box submit icon button (disabled when empty, brand when typed).
 - 2026-10-17: Milestone check grows gently and draws its tick. Text and progress timing stay as they were.

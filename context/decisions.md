@@ -45,6 +45,15 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-10-16 · Back link on this path reads "Back to profile details" and returns to the create screen with inputs kept** (agent).
 - **2026-10-16 · No way back from the create screen to the results** (agent; Figma has none). Flagged to the owner.
 
+## Skip-auth path (2026-11-16, owner; Figma file Lfz2oHviZXGc9NDmp8JEpq)
+- **"I'll do it later" on the profile form skips Google sign-in**; the main button reads "Connect Google & Continue".
+- **Listings don't need auth**: opt-in works from the business details (owner).
+- **Then an inbox of 5 recent reviews, read-only, with a Connect Google banner → Continue → posts → final** (owner).
+- **Counts follow the prototype, not the Figma placeholders** (agent): "9 Profile fixes drafted" (Figma says 6; the steps say "Found 9 gaps"), "Found 7 Publishers / 7 Relevant Publishers" (Figma says 7 in one frame and 9 in another; there are 7 publishers). The drafted subtext stays "once you connect your business profile" everywhere (the Figma inbox frame says "later in the product").
+- **Opting in on this path shows ✓ "Opted in!"**; only skipping the listings shows the pending "Found 7 Relevant Publishers" (agent).
+- **Posts on this path: the 2 best of the 5 recent reviews**; Share Now and I'll do it later both go straight to the final screen (no widget) (owner: "the last step").
+- **Not wired yet**: the inbox's "Connect Google Account" link, "View all 130 reviews", and the card's open/reply actions (copy works). The listings' "I'll do it later" goes to the inbox (agent reading).
+
 ## Connect GBP
 - **2026-10-16 · No form flash after Connect / Google sign-in** (owner). `coverForListings()` swaps the form for the AI animation behind the modal or sign-in page, which then closes straight onto the listings step. The toast shows there.
 - **2026-10-16 · No "Back to results" after connecting GBP** (owner). Applies to both connect paths. The hide doesn't depend on the fade finishing, so a cancelled fade can't bring the link back.

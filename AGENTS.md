@@ -81,7 +81,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The new business is built from the inputs: the name from the search and the category from the description.
 - **City, state, PIN and coordinates come from the address lookup** (OpenStreetMap Nominatim), the way a map search would, not from the search query. The typed street is kept as written, with the locality and city added if missing. The form's map pins the exact coordinates.
 - **New profiles have no website**: the Website field stays empty.
-- **Connect = Google sign-in, not the GBP picker** (Figma 10773:18769). "Connect Google & Publish" opens a full-page Google "Choose an account" screen. It's a stand-in only: no real auth, nothing is typed or sent, and either row continues. **The account shown is the business's own**: the business name, the profile's email, and a letter avatar (never a real person's name or photo). Then: toast "Your Google Business Profile has been created" → the listings (publishers) screen.
+- **Connect = Google sign-in, not the GBP picker** (Figma 10773:18769). "Connect Google & Continue" opens a full-page Google "Choose an account" screen. It's a stand-in only: no real auth, nothing is typed or sent, and either row continues. **The account shown is the business's own**: the business name, the profile's email, and a letter avatar (never a real person's name or photo). Then: toast "Your Google Business Profile has been created" → the listings (publishers) screen.
 - **After the listings → "Get your first 100 5 Star Reviews"** final screen (Figma 10773:18776). The star stays at "Starting out", with marks at 10 / 50 / 100. New businesses have no reviews, so the reviews inbox, posts and widget are skipped. The back link reads **"Back to profile details"** and returns to the filled-in create screen.
 
 **Business-select transition**
@@ -97,6 +97,14 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - **Missing** filter: shows only unfilled fields, including Services, Media and Social media.
 - **Auto-fill:** latitude and longitude come from the map location. Don't say "Added from the business details you've shared" on fields that need user input.
 - The map is a live Google map embed.
+
+**Skip-auth path: "I'll do it later" on the profile form** (Figma file `Lfz2oHviZXGc9NDmp8JEpq`: 8812:16256 → 8711:46830 → 8812:49960 → 8726:89182 → 8726:90220)
+- The profile form header shows **I'll do it later** + **Connect Google & Continue** (it used to say "& Publish").
+- "I'll do it later" skips Google entirely. The profile fixes stay **drafted**, shown as a pending milestone (dashed ring + icon, not the green check): "9 Profile fixes drafted. You can apply changes once you connect your business profile".
+- **Listings work without auth** (we have the business details). The header is "Found 7 Publishers…" with **I'll do it later** + **Get Listed in All**, and there's no Active Listings / Google card. Opting in → toast + "Opted in!". "I'll do it later" → pending milestone "Found 7 Relevant Publishers".
+- **Inbox = 5 recent reviews, read-only.** It has a "Connect Google Account · To See and Reply to 130 more Reviews" banner, cards with hover actions (open, copy, reply), "View all 130 reviews", and **Continue** (no Send Replies, no drafts).
+- **Posts:** pending milestone "Read your past reviews", then **2 posts at 322px** built from the best recent reviews. Share Now / I'll do it later go **straight to the final "75 more 5-star reviews" screen** (no widget).
+- The connected path is unchanged.
 
 **Reviews inbox**
 - Order: skeleton loading → AI drafts → **Send Replies**.

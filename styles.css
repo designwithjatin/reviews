@@ -692,6 +692,7 @@ button { font: inherit; color: inherit; }
   justify-content: space-between;
   flex-shrink: 0;
 }
+.profile-form__actions { display: flex; align-items: center; gap: var(--sp-16); }
 .profile-form .pills { gap: var(--sp-8); }
 .profile-form .pill { padding: 0 var(--sp-16); }
 .pill.is-active {
@@ -2008,3 +2009,38 @@ button { font: inherit; color: inherit; }
 .gauth__lang { display: inline-flex; align-items: center; gap: 12px; }
 .gauth__links { display: flex; gap: 32px; }
 .gauth__links a { color: #1F1F1F; }
+
+/* ==========================================================
+   Skip-auth path ("I'll do it later" on the profile form)
+   Figma Lfz2oHviZXGc9NDmp8JEpq 8711:46830 · 8812:49960 · 8726:89182
+   ========================================================== */
+/* Pending milestone: dashed ring + grey icon instead of the green check */
+.milestone__draft {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--brd-surface-primary);
+  border-radius: var(--br-48);
+}
+
+/* Read-only inbox */
+.connect-banner { display: flex; align-items: center; gap: var(--sp-8); padding: var(--sp-16) 15px; border-radius: var(--br-8); background: var(--srf-card); }
+.connect-banner .link-btn { height: 18px; margin-left: -4px; }
+.connect-banner__note { font: 600 12px/16px var(--font); color: var(--txt-secondary); }
+.review-card--recent { padding-bottom: var(--sp-16); }
+.review-card--recent .review-card__profile { min-height: 24px; }
+.recent-actions { margin-left: auto; display: flex; gap: var(--sp-8); opacity: 0; transition: opacity 150ms ease; }
+.review-card--recent:hover .recent-actions,
+.review-card--recent:focus-within .recent-actions { opacity: 1; }
+.recent-actions .icon-btn { width: 24px; height: 24px; }
+.view-all { display: flex; justify-content: center; }
+.view-all .link-btn { height: 22px; padding: 2px 4px; background: var(--srf-page); }
+
+/* Two big posts instead of six */
+.posts__grid--big { grid-template-columns: repeat(auto-fill, 322px); }
+.posts__grid--big .post { width: 322px; height: 322px; }
+.posts__grid--big .post__art { transform: scale(0.7667); }  /* 420 → 322 */
+.inbox__count-wrap { display: inline-flex; align-items: center; gap: var(--sp-8); }
