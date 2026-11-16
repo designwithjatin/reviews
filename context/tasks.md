@@ -24,6 +24,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-11-16: Brand Context tab: Contact Information + Business Description (500 max) inputs, Save.
 - 2026-11-16: Skip-auth path: "I'll do it later" on the form → drafted fixes → listings (no auth) → 5 recent reviews read-only → 2 posts → final. Form button now "Connect Google & Continue".
 - 2026-10-21: Category detection fixed (whole words; "space" no longer reads as "spa") + Coworking Space category.
 - 2026-10-21: Search box submit icon button (disabled when empty, brand when typed).

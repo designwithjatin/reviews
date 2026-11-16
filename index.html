@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=45">
+  <link rel="stylesheet" href="styles.css?v=46">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -854,7 +854,7 @@
         <div class="style-sheet" id="style-sheet" role="tabpanel"></div>
       </div>
       <footer class="modal__foot modal__foot--split">
-        <p class="style-note" id="style-note" hidden><img src="assets/info.svg" alt="" width="20" height="20">Brand context will be used to personalize AI-generated content where applicable.</p>
+        <button class="btn-solid" type="button" id="brand-save" hidden>Save</button>
         <button class="btn-solid btn-solid--icon" type="button" id="regen-style"><img src="assets/ai-filled-white.svg" alt="" width="20" height="20"><span>Regenerate Writing Style</span></button>
       </footer>
     </div>
@@ -2245,17 +2245,36 @@
         <div class="style-sec__pattern"><h4>Typical Reply Pattern</h4>${loading ? '<span class="skel-bar" style="width:70%;margin-top:12px"></span>' : `<p>${esc(sec.pattern)}</p>`}</div>
       </section>`).join('');
     // Brand context: what the AI knows about the business, read from the profile form
+    // Brand context (Figma FHSl3IYwrNTDd0auwgks6q 7422:121796): two editable inputs,
+    // prefilled from the profile form; Save writes them back to the form
+    const BRAND_MAX = 500;
     const brandHTML = () => {
-      const v = id => (document.getElementById(id)?.value || '').trim() || '-';
-      const tags = box => [...box.querySelectorAll('.tag')].map(t => t.textContent.trim()).join(', ') || '-';
-      const [cats, amenities] = document.querySelectorAll('[data-tags]');
-      const block = (title, text) => `<section class="style-sec"><div class="style-sec__head"><h3>${title}</h3></div><p class="style-sec__text">${esc(text)}</p></section>`;
-      return block('Business', `${v('form-name')} · ${v('primary-cat')} · ${v('form-city')}`)
-        + block('Short Description', v('about-short'))
-        + block('Description', v('about-desc'))
-        + block('Additional Categories', tags(cats))
-        + block('Amenities', tags(amenities));
+      const email = document.getElementById('form-email').value.trim();
+      const desc = document.getElementById('about-desc').value.trim().slice(0, BRAND_MAX);
+      return `<div class="brand-form">
+        <div class="brand-field">
+          <label for="brand-contact">Contact Information</label>
+          <input class="brand-input" id="brand-contact" type="text" value="${esc(email)}" placeholder="Email or phone customers can reach you on">
+          <p class="brand-help">Will be used to personalize AI-generated review replies.</p>
+        </div>
+        <div class="brand-field">
+          <label for="brand-desc">Business Description</label>
+          <div class="brand-area">
+            <textarea id="brand-desc" rows="8" maxlength="${BRAND_MAX}" placeholder="What your business does, what makes it special">${esc(desc)}</textarea>
+            <span class="brand-count" id="brand-count">${desc.length}/${BRAND_MAX}</span>
+          </div>
+          <p class="brand-help">Will be used to personalize AI-generated content where applicable.</p>
+        </div>
+      </div>`;
     };
+    styleSheet.addEventListener('input', e => {
+      if (e.target.id === 'brand-desc') document.getElementById('brand-count').textContent = `${e.target.value.length}/${BRAND_MAX}`;
+    });
+    document.getElementById('brand-save').addEventListener('click', () => {
+      document.getElementById('form-email').value = document.getElementById('brand-contact').value.trim();
+      document.getElementById('about-desc').value = document.getElementById('brand-desc').value.trim();
+      showToast('Brand context saved');
+    });
     function showTab(tab) {
       styleModal.querySelectorAll('.tab').forEach(t => {
         const on = t.dataset.tab === tab;
@@ -2264,7 +2283,7 @@
       });
       styleSheet.innerHTML = tab === 'style' ? styleHTML() : brandHTML();
       styleSheet.scrollTop = 0;
-      document.getElementById('style-note').hidden = tab !== 'brand';
+      document.getElementById('brand-save').hidden = tab !== 'brand';
       document.getElementById('regen-style').hidden = tab !== 'style';
     }
     styleModal.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));

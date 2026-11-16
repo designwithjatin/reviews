@@ -1470,7 +1470,18 @@ button { font: inherit; color: inherit; }
 
 .btn-solid--icon { display: inline-flex; align-items: center; gap: var(--sp-4); }
 .btn-solid:disabled { background: var(--brand-primary-disabled); cursor: default; }
-.style-note { display: flex; align-items: center; gap: var(--sp-8); font: var(--body-sm); color: var(--txt-secondary); }
+/* Brand Context tab: two inputs (Figma FHSl3IYwrNTDd0auwgks6q 7422:121828) */
+.brand-form { display: flex; flex-direction: column; gap: var(--sp-16); padding: var(--sp-16) 15px; }
+.brand-field { display: flex; flex-direction: column; gap: var(--sp-4); }
+.brand-field label { font: var(--body-sm); color: var(--txt-primary); }
+.brand-input,
+.brand-area { border: 1px solid var(--srf-input); border-radius: 2px; background: var(--srf-input); }
+.brand-input { height: 32px; padding: 6px 8px; font: var(--body-sm); color: var(--txt-primary); outline: 0; }
+.brand-area { display: flex; flex-direction: column; padding: 6px 8px; }
+.brand-area textarea { border: 0; padding: 0; background: none; resize: none; font: var(--body-sm); color: var(--txt-primary); outline: 0; }
+.brand-input:focus, .brand-area:focus-within { border-color: var(--brd-input-active); }
+.brand-count { align-self: flex-end; font: var(--body-xs); color: var(--txt-secondary); }
+.brand-help { margin-top: var(--sp-4); font: var(--body-xs); color: var(--txt-secondary); }
 
 /* Sections, separated by a 4px divider */
 .style-sheet { flex: 1; min-height: 0; overflow-y: auto; border-radius: var(--br-8); background: var(--srf-card); }
