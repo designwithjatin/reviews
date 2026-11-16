@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-16 · Remove "View all 130 reviews" from the skip-auth inbox
+- (pending) · 2026-11-16 · Listings animation: "Updating Brand Context" as the second phrase
+- f766094 · 2026-11-16 · Remove "View all 130 reviews" from the skip-auth inbox
 - a367b11 · 2026-11-16 · Brand Context tab: two inputs + Save
 - a28f1e7 · 2026-11-16 · Skip-auth path (I'll do it later → listings → recent reviews → posts → final)
 - 3abb50b · 2026-10-21 · Whole-word category matching + Coworking Space category
