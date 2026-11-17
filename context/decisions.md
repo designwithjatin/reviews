@@ -55,6 +55,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
 ## Connect GBP
+- **2026-11-17 · Skip-auth inbox banner note "To See and Reply to 130 more Reviews" = regular, black (`--txt-primary`), 14px** (owner; Figma had 12px semibold grey).
 - **2026-11-17 · Listings groups have no outer border or padding** (owner; Figma Lfz2oHviZXGc9NDmp8JEpq 8711:46871): just the group label row, then the white rounded list 4px below. Applies to every listings screen.
 - **2026-11-16 · Listings AI animation cycles exactly two phrases: "Finding relevant listing publishers" → "Updating brand context"** (owner). Applies to both connect paths and the skip-auth path, via `listingPhrases()`. The category / city phrases were dropped.
 - **2026-10-16 · No form flash after Connect / Google sign-in** (owner). `coverForListings()` swaps the form for the AI animation behind the modal or sign-in page, which then closes straight onto the listings step. The toast shows there.

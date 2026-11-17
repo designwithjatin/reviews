@@ -2040,7 +2040,7 @@ button { font: inherit; color: inherit; }
 /* Read-only inbox */
 .connect-banner { display: flex; align-items: center; gap: var(--sp-8); padding: var(--sp-16) 15px; border-radius: var(--br-8); background: var(--srf-card); }
 .connect-banner .link-btn { height: 18px; margin-left: -4px; }
-.connect-banner__note { font: 600 12px/16px var(--font); color: var(--txt-secondary); }
+.connect-banner__note { font: var(--body-sm); color: var(--txt-primary); }  /* owner: regular, black, 14px */
 .review-card--recent { padding-bottom: var(--sp-16); }
 .review-card--recent .review-card__profile { min-height: 24px; }
 .recent-actions { margin-left: auto; display: flex; gap: var(--sp-8); opacity: 0; transition: opacity 150ms ease; }

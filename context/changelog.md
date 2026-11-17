@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-17 · Listings: drop the outer border around publisher groups
+- (pending) · 2026-11-17 · Inbox banner note: regular, black, 14px
+- db96eb9 · 2026-11-17 · Listings: drop the outer border around publisher groups
 - ee0b4bd · 2026-11-16 · Listings animation: just "Finding relevant listing publishers" → "Updating brand context"
 - 9a94bdf · 2026-11-16 · Listings animation: "Updating Brand Context" as the second phrase
 - f766094 · 2026-11-16 · Remove "View all 130 reviews" from the skip-auth inbox
