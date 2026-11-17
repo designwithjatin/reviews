@@ -1217,7 +1217,7 @@ button { font: inherit; color: inherit; }
 .publishers__view { display: flex; flex-direction: column; gap: var(--sp-16); }
 .publishers__head { display: flex; align-items: center; justify-content: space-between; }
 .publishers__head h2 { font: var(--body-sm); font-weight: 600; color: var(--txt-primary); }
-.pub-group { display: flex; flex-direction: column; gap: var(--sp-4); padding: var(--sp-8); border: 1px solid var(--brd-surface-secondary); border-radius: var(--br-8); }
+.pub-group { display: flex; flex-direction: column; gap: var(--sp-4); }  /* no outer border (Figma Lfz2oHviZXGc9NDmp8JEpq 8711:46871) */
 .pub-group__head { height: 32px; display: flex; align-items: center; padding: 0 var(--sp-4) 0 var(--sp-16); font: var(--body-xs); color: var(--txt-secondary); }
 .pub-group__head--note { font: var(--body-sm); color: var(--txt-tertiary); }
 .pub-card {
