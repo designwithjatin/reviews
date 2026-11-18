@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=53">
+  <link rel="stylesheet" href="styles.css?v=54">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -803,25 +803,25 @@
     </div>
   </div>
 
-  <!-- Facebook login · choose a Page. Prototype only: no real login, nothing is
-       entered or sent; Continue just moves the flow on. -->
-  <div class="fbauth" id="fbauth" hidden>
-    <div class="fbauth__card" role="dialog" aria-modal="true" aria-labelledby="fbauth-title">
-      <div class="fbauth__bar"><img src="assets/platform-facebook.svg" alt="" width="20" height="20">Log in with Facebook</div>
-      <div class="fbauth__body">
-        <img src="assets/socialpilot-wordmark.svg" alt="SocialPilot" width="133" height="31">
-        <h2 id="fbauth-title">Choose the Page you want SocialPilot to manage</h2>
-        <label class="fbauth__page">
-          <input type="radio" name="fb-page" checked>
-          <span class="fbauth__avatar" id="fbauth-initial" aria-hidden="true"></span>
-          <span><b id="fbauth-name"></b><small id="fbauth-category"></small></span>
-        </label>
-        <p class="fbauth__note">SocialPilot will be able to read and reply to your Page’s recommendations, and update your Page details.</p>
+  <!-- Connect Facebook · choose a Page (Figma Lfz2oHviZXGc9NDmp8JEpq 8845:140826) -->
+  <div class="modal" id="fb-modal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="fb-title">
+      <header class="modal__head">
+        <div class="modal__tab"><span class="modal__tab-label" id="fb-title"><img src="assets/platform-facebook.svg" alt="" width="16" height="16">Connect Facebook</span></div>
+        <div class="modal__actions"><button class="icon-btn" type="button" data-close aria-label="Close"><img src="assets/close-24.svg" alt="" width="24" height="24"></button></div>
+      </header>
+      <div class="modal__body">
+        <div class="connect">
+          <div class="gbp-locations fb-pages">
+            <label class="search-box"><input type="search" id="fb-search" placeholder="Search" aria-label="Search Pages"><img src="assets/search-24.svg" alt="" width="24" height="24"></label>
+            <div class="loc-grid" id="fb-grid" role="radiogroup" aria-label="Facebook Pages"></div>
+          </div>
+        </div>
       </div>
-      <div class="fbauth__foot">
-        <button class="fbauth__cancel" type="button" data-fb-cancel>Cancel</button>
-        <button class="fbauth__go" type="button" data-fb-continue>Continue</button>
-      </div>
+      <footer class="modal__foot">
+        <button class="btn-solid" type="button" id="fb-connect">Connect</button>
+      </footer>
     </div>
   </div>
 
@@ -1521,13 +1521,13 @@
       modal.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
       lastFocus?.focus?.();
     }
-    [connectModal, optinModal].forEach(modal => {
+    [connectModal, optinModal, document.getElementById('fb-modal')].forEach(modal => {
       modal.querySelector('.modal__panel').tabIndex = -1;
       modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(modal)));
     });
     document.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
-      [connectModal, optinModal].forEach(m => !m.hidden && closeModal(m));
+      [connectModal, optinModal, document.getElementById('fb-modal')].forEach(m => !m.hidden && closeModal(m));
     });
 
     const toast = document.getElementById('toast');
@@ -1837,31 +1837,49 @@
       startListings(picked.name);
     });
 
-    // ---- Facebook result: Facebook login stand-in (no real auth) ----
+    // ---- Facebook result: Connect Facebook · choose a Page (Figma 8845:140826) ----
+    // Like the GBP picker, one list of Pages. The picked business first (selected),
+    // then its other Pages tagged "Potential match", then other Pages the account manages.
     const isFB = () => picked?.platform === 'facebook';
-    const fbauth = document.getElementById('fbauth');
+    const fbModal = document.getElementById('fb-modal');
+    let fbSelected = 0;
+    function fbPages() {
+      const seen = new Set();
+      const own = [picked, ...results].map(r => r.name).filter(n => !seen.has(n) && seen.add(n));
+      return [
+        ...own.map((name, i) => ({ name, match: i > 0 })),  // the business's other branches
+        ...GROUPS.map(name => ({ name, match: false })),
+      ];
+    }
+    function renderFbPages() {
+      const q = document.getElementById('fb-search').value.trim().toLowerCase();
+      const pages = fbPages().map((pg, i) => ({ ...pg, i })).filter(pg => !q || pg.name.toLowerCase().includes(q));
+      document.getElementById('fb-grid').innerHTML = pages.length ? pages.map(pg => `
+        <button type="button" class="loc-card fb-page${pg.i === fbSelected ? ' is-selected' : ''}" role="radio" aria-checked="${pg.i === fbSelected}" data-i="${pg.i}">
+          <img src="assets/${pg.i === fbSelected ? 'check-circle-selected.svg' : 'location-photo.png'}" alt="" width="32" height="32">
+          <span class="loc-card__name">${esc(pg.name)}</span>
+          ${pg.match ? '<span class="fb-page__match">Potential match</span>' : ''}
+        </button>`).join('') : '<p class="loc-empty">No Pages match your search.</p>';
+    }
     function openFbauth() {
-      document.getElementById('fbauth-name').textContent = picked.name;
-      document.getElementById('fbauth-category').textContent = `Facebook Page · ${picked.category}`;
-      document.getElementById('fbauth-initial').textContent = picked.name.charAt(0).toUpperCase();
-      fbauth.hidden = false;
-      fade(fbauth, 0, 1, motion(T3.modalIn));
-      fade(fbauth.querySelector('.fbauth__card'), 0, 1, motion(T3.modalIn + 80),
-        { from: { transform: 'translateY(8px)' }, to: { transform: 'none' } });
-      fbauth.querySelector('[data-fb-continue]').focus();
+      fbSelected = 0;
+      document.getElementById('fb-search').value = '';
+      renderFbPages();
+      openModal(fbModal);
     }
-    async function closeFbauth() {
-      await done([fade(fbauth, 1, 0, motion(T3.modalOut), { easing: EASE_IN })]);
-      fbauth.hidden = true;
-      fbauth.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
-      fbauth.getAnimations().forEach(a => a.cancel());
-    }
-    fbauth.querySelector('[data-fb-cancel]').addEventListener('click', closeFbauth);
-    fbauth.querySelector('[data-fb-continue]').addEventListener('click', async () => {
-      coverForListings();  // the login page fades straight onto the next step
-      await closeFbauth();
+    document.getElementById('fb-grid').addEventListener('click', e => {
+      const card = e.target.closest('.fb-page');
+      if (!card) return;
+      fbSelected = +card.dataset.i;
+      renderFbPages();
+    });
+    document.getElementById('fb-search').addEventListener('input', renderFbPages);
+    document.getElementById('fb-connect').addEventListener('click', async () => {
+      const page = fbPages()[fbSelected];
+      coverForListings();  // the modal closes straight onto the next step
+      await closeModal(fbModal);
       showToast('Your Facebook Page is connected');
-      startListings(picked.name);
+      startListings(page.name);
     });
 
     // ---- 3 · Opt-in modal ----

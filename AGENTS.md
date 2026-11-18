@@ -110,7 +110,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The **Google Business Profile** pill on the search screen: Google sign-in (placeholder user, letter avatar) → Connect GBP modal → AI steps → form with **I'll do it later** + **Publish Changes & Continue**. Already connected, so there's no "Back to results". Publishing → listings → the connected flow; "I'll do it later" keeps the fixes drafted but stays connected.
 
 **Facebook result path** (Figma `Lfz2oHviZXGc9NDmp8JEpq`)
-- A **Facebook** search result runs the Facebook version: "Connect Facebook & Continue" → stand-in Facebook Page picker (no real auth, business shown as the Page) → listings → inbox with **Recommends / Does not Recommend** tags instead of stars → replies → automate → posts and widget with Recommends → last step **"Get 50 more recommendations on Facebook"** (count bar 0–200).
+- A **Facebook** search result runs the Facebook version: "Connect Facebook & Continue" → **Connect Facebook** modal like the GBP picker (Figma 8845:140826): Page list, "Potential match" tags, Connect → listings → inbox with **Recommends / Does not Recommend** tags instead of stars → replies → automate → posts and widget with Recommends → last step **"Get 50 more recommendations on Facebook"** (count bar 0–200).
 - **Skipped auth on Facebook** ends on **"Start collecting recommendations"** with **Go to Dashboard only**: no goal bar and no connect nudge. Connecting is nudged later, inside the product.
 - Review requests (Quick Review Request, QR, feedback form) don't need auth: the review link comes from the search result.
 

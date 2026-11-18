@@ -62,12 +62,13 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-11-18 · Facebook inbox: "I'll do it later" sits 16px left of Send Replies** (owner reported the spacing).
 
 ## Facebook result path
+- **2026-11-18 · Connect Facebook = a modal like the GBP picker** (owner; Figma 8845:140826): "Connect Facebook" tab, search, two-column list of Pages, the picked business first and selected, its other branches tagged **Potential match**, then other Pages the account manages; Connect only (no opt-in checkbox). Replaces the Facebook-style login stand-in.
 - **2026-11-18 · Facebook widget card follows Figma 8850:155586** (owner flagged it): name and time on one line, "Recommended" row below, 20px Facebook mark, 16px padding. Avatars stay letters, like the Google widget (agent; Figma uses a stock photo).
 - **2026-11-18 · A Facebook result runs a Facebook version of the flow** (owner). Connect Facebook instead of Google; inbox/posts/widget show Recommends instead of stars (Figma 8848:142623, 8848:143156, 8850:155386, 8850:155509).
 - **2026-11-18 · Last step, connected: "Get 50 more recommendations on Facebook"** with a count bar (owner; Figma 8853:28868). The recommend % line was removed (owner).
 - **2026-11-18 · Last step, skipped auth: "Start collecting recommendations", Go to Dashboard only, no connect nudge** (owner; Figma 8854:32265). The reminder to connect belongs in the dashboard ("Finish setup") and feature-level prompts.
 - **2026-11-18 · Review requests can be sent without auth** (owner): the review link comes from the search result (Google place ID / Facebook Page). Suggested guardrails: verified account email as reply-to, a send cap before connecting (agent).
-- **2026-11-18 · Facebook login stand-in** rebuilt in HTML, Facebook look, business as the Page (agent). The Facebook connected path keeps the widget (owner sent the widget frame).
+- **2026-11-18 · (superseded the same day by the Connect Facebook modal) Facebook login stand-in.** The Facebook connected path keeps the widget (owner sent the widget frame).
 - **2026-11-18 · Facebook "I'll do it later" in the inbox skips to social posts** (agent reading).
 
 ## Connect GBP

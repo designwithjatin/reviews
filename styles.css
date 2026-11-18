@@ -2057,34 +2057,20 @@ button { font: inherit; color: inherit; }
 /* ==========================================================
    Facebook result path (Figma Lfz2oHviZXGc9NDmp8JEpq 8853:28868 · 8854:32265)
    ========================================================== */
-/* Facebook login · choose a Page. Mimics Facebook's dialog; prototype only, no real auth. */
-.fbauth {
-  position: fixed;
-  inset: 0;
-  z-index: 25;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: #F0F2F5;
-  font-family: Helvetica, Arial, sans-serif;
-  color: #1C1E21;
+/* Connect Facebook modal (Figma 8845:140826): one list of Pages, no groups */
+.fb-pages { padding: var(--sp-16) 15px; }
+.fb-page { position: relative; height: 64px; }
+.fb-page__match {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  padding: 4px 8px;
+  border-radius: 0 var(--br-4) 0 var(--br-4);
+  background: #FFEEAA;
+  font: 600 10px/normal var(--font);
+  color: var(--txt-primary);
+  text-transform: uppercase;
 }
-.fbauth__card { width: min(500px, 100%); border-radius: 8px; background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1); overflow: hidden; }
-.fbauth__bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #DADDE1; font-size: 14px; line-height: 20px; color: #606770; }
-.fbauth__body { display: flex; flex-direction: column; gap: 16px; padding: 24px 24px 16px; }
-.fbauth__body h2 { font-size: 20px; line-height: 24px; font-weight: 700; color: #1C1E21; }
-.fbauth__page { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #0866FF; border-radius: 8px; background: #EBF5FF; cursor: pointer; }
-.fbauth__page input { accent-color: #0866FF; margin: 0; }
-.fbauth__page b { display: block; font-size: 15px; line-height: 20px; }
-.fbauth__page small { display: block; font-size: 13px; line-height: 16px; color: #606770; }
-.fbauth__avatar { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #0866FF; color: #fff; font-weight: 700; }
-.fbauth__note { font-size: 13px; line-height: 18px; color: #606770; }
-.fbauth__foot { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 24px 20px; }
-.fbauth__foot button { height: 36px; padding: 0 20px; border: 0; border-radius: 6px; font: 600 15px/1 Helvetica, Arial, sans-serif; cursor: pointer; }
-.fbauth__cancel { background: #E4E6EB; color: #1C1E21; }
-.fbauth__go { background: #0866FF; color: #fff; }
-.fbauth__go:hover { background: #0759E0; }
 
 /* Recommendations goal: count marks, Facebook mark in the marker */
 .goal__labels .goal__c { transform: translateX(-50%); }
