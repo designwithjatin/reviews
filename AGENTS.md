@@ -113,7 +113,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The **Facebook Page** pill does the same with the **Connect Facebook** modal (no sign-in screen first), then the Facebook connected flow.
 
 **Facebook result path** (Figma `Lfz2oHviZXGc9NDmp8JEpq`)
-- A **Facebook** search result runs the Facebook version: "Connect Facebook & Continue" → **Connect Facebook** modal like the GBP picker (Figma 8845:140826): Page list, "Potential match" tags, Connect → listings → inbox with **Recommends / Does not Recommend** tags instead of stars → replies → automate → posts and widget with Recommends → last step **"Get 50 more recommendations on Facebook"** (count bar 0–200).
+- A **Facebook** search result runs the Facebook version: "Connect Facebook & Continue" → **Connect Facebook** modal like the GBP picker (Figma 8845:140826): Page list, "Potential match" tags, Connect → listings → inbox with **Recommends / Does not Recommend** tags instead of stars → replies → automate → posts and widget with Recommends → last step **"To maintain your recommendations, get 50 more on Facebook"** (count bar 0–200).
 - **Skipped auth on Facebook** ends on **"Start collecting recommendations"** with **Go to Dashboard only**: no goal bar and no connect nudge. Connecting is nudged later, inside the product.
 - Review requests (Quick Review Request, QR, feedback form) don't need auth: the review link comes from the search result.
 
