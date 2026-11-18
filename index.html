@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=54">
+  <link rel="stylesheet" href="styles.css?v=55">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -796,6 +796,25 @@
     <div class="gauth__foot">
       <span class="gauth__lang">English (United States)<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 3.5 5 6.5 8 3.5" fill="#444746"/></svg></span>
       <span class="gauth__links"><a href="#" onclick="return false">Help</a><a href="#" onclick="return false">Privacy</a><a href="#" onclick="return false">Terms</a></span>
+    </div>
+  </div>
+
+  <!-- Facebook permission dialog (stand-in, modelled on Facebook's own). Prototype only:
+       no real login, nothing is entered or sent; Continue opens SocialPilot's Page picker. -->
+  <div class="fbperm" id="fbperm" hidden>
+    <div class="fbperm__card" role="dialog" aria-modal="true" aria-labelledby="fbperm-title">
+      <div class="fbperm__main">
+        <span class="fbperm__logo" aria-hidden="true"><img src="assets/sp-mark.svg" alt="" width="72" height="72"></span>
+        <h2 id="fbperm-title">SocialPilot is requesting to:</h2>
+        <p class="fbperm__ask">manage your Page’s recommendations, reply to them, and update your Page details.</p>
+        <button class="fbperm__choose" type="button"><img src="assets/edit.svg" alt="" width="20" height="20">Choose what you allow</button>
+      </div>
+      <p class="fbperm__legal">By continuing, SocialPilot will get ongoing access to the information you share, and Facebook will record when SocialPilot uses it. You can change or remove this access anytime in your Facebook settings.</p>
+      <div class="fbperm__foot">
+        <span>SocialPilot’s <a href="#" onclick="return false">Privacy Policy</a> and <a href="#" onclick="return false">Terms</a></span>
+        <button class="fbperm__cancel" type="button" data-fbperm-cancel>Cancel</button>
+        <button class="fbperm__go" type="button" data-fbperm-continue>Continue</button>
+      </div>
     </div>
   </div>
 
@@ -1695,7 +1714,7 @@
       results = found.list;
       cameFrom = 'pill';
       fillSelected(results.find(r => r.platform === 'facebook') || { ...results[0], platform: 'facebook' });
-      openFbauth();
+      openFbperm();  // Facebook's permission dialog first, then SocialPilot's Page picker
     });
     async function startFromPill() {
       resetTransition();
@@ -1868,6 +1887,26 @@
           ${pg.match ? '<span class="fb-page__match">Potential match</span>' : ''}
         </button>`).join('') : '<p class="loc-empty">No Pages match your search.</p>';
     }
+    // Facebook permission dialog → Continue → SocialPilot's Connect Facebook modal
+    const fbperm = document.getElementById('fbperm');
+    function openFbperm() {
+      fbperm.hidden = false;
+      fade(fbperm, 0, 1, motion(T3.modalIn));
+      fade(fbperm.querySelector('.fbperm__card'), 0, 1, motion(T3.modalIn + 80),
+        { from: { transform: 'translateY(8px)' }, to: { transform: 'none' } });
+      fbperm.querySelector('[data-fbperm-continue]').focus();
+    }
+    async function closeFbperm() {
+      await done([fade(fbperm, 1, 0, motion(T3.modalOut), { easing: EASE_IN })]);
+      fbperm.hidden = true;
+      fbperm.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      fbperm.getAnimations().forEach(a => a.cancel());
+    }
+    fbperm.querySelector('[data-fbperm-cancel]').addEventListener('click', closeFbperm);
+    fbperm.querySelector('[data-fbperm-continue]').addEventListener('click', () => {
+      openFbauth();  // SocialPilot's modal opens behind, then the Facebook dialog fades away
+      closeFbperm();
+    });
     function openFbauth() {
       fbSelected = 0;
       document.getElementById('fb-search').value = '';

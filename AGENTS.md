@@ -110,7 +110,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The **Google Business Profile** pill on the search screen: Google sign-in (placeholder user, letter avatar) → Connect GBP modal → AI steps → form with **I'll do it later** + **Publish Changes & Continue**. Already connected, so there's no "Back to results". Publishing → listings → the connected flow; "I'll do it later" keeps the fixes drafted but stays connected.
 
 - Both pill starts show **I'll do it later** next to Send Replies in the inbox (skips to social posts).
-- The **Facebook Page** pill does the same with the **Connect Facebook** modal (no sign-in screen first), then the Facebook connected flow.
+- The **Facebook Page** pill does the same: a Facebook-style permission dialog stand-in (no real login) → **Connect Facebook** modal → the Facebook connected flow.
 
 **Facebook path** (Figma `Lfz2oHviZXGc9NDmp8JEpq`)
 - **Search shows Google listings only** (we can't search Facebook). Facebook starts only from the **Facebook Page pill**, which runs the Facebook version: "Connect Facebook & Continue" → **Connect Facebook** modal like the GBP picker (Figma 8845:140826): Page list, "Potential match" tags, Connect → listings → inbox with **Recommends / Does not Recommend** tags instead of stars → replies → automate → posts and widget with Recommends → last step **"To maintain your recommendations, get 50 more on Facebook"** (count bar 0–200).

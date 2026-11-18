@@ -2107,3 +2107,33 @@ button { font: inherit; color: inherit; }
 .wgt-review__rec { display: flex; align-items: center; gap: var(--sp-4); font: var(--body-xs); color: var(--txt-secondary); }
 /* Facebook inbox: "I'll do it later" sits 16px left of Send Replies (Figma 8848:142635) */
 #inbox-later { margin-left: auto; margin-right: var(--sp-16); }
+
+/* Facebook permission dialog (stand-in): grey page, white card, Facebook's look */
+.fbperm {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #9C9C9C;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #1C1E21;
+}
+.fbperm__card { width: min(520px, 100%); display: flex; flex-direction: column; border-radius: 3px; background: #fff; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2); }
+.fbperm__main { display: flex; flex-direction: column; align-items: center; padding: 80px 32px 40px; text-align: center; }
+.fbperm__logo { width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #EBF2FD; }
+.fbperm__logo img { width: 40px; height: 40px; }
+.fbperm__main h2 { margin-top: 32px; font: 700 14px/20px Helvetica, Arial, sans-serif; }
+.fbperm__ask { margin-top: 4px; font-size: 14px; line-height: 18px; }
+.fbperm__choose { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 0; border: 0; background: none; font: 14px/20px Helvetica, Arial, sans-serif; color: #4267B2; cursor: pointer; }
+.fbperm__choose img { width: 16px; height: 16px; }
+.fbperm__legal { padding: 0 24px; font-size: 12px; line-height: 18px; color: #606770; text-align: center; }
+.fbperm__foot { display: flex; align-items: center; gap: 4px; padding: 20px 16px 16px; font-size: 12px; }
+.fbperm__foot > span { flex: 1; }
+.fbperm__foot a { color: #4267B2; text-decoration: none; }
+.fbperm__foot button { height: 36px; padding: 0 16px; border: 1px solid #CCD0D5; border-radius: 3px; font: 700 13px/1 Helvetica, Arial, sans-serif; cursor: pointer; }
+.fbperm__cancel { background: #F5F6F7; color: #4B4F56; }
+.fbperm__go { background: #4267B2; border-color: #4267B2 !important; color: #fff; }
+.fbperm__go:hover { background: #365899; }
