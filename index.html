@@ -2137,7 +2137,7 @@
 
     async function runReviews(id) {
       const live = () => id === run;
-      inboxLater.hidden = !(isFB() || cameFrom === 'pill');  // Facebook, and both pill starts (Google / Facebook)
+      inboxLater.hidden = false;  // every connected path: Google search, both pills, create profile
       // Reviews start loading; the inbox replaces the animation
       inboxRecent.hidden = true;
       inboxLoading.hidden = false;
