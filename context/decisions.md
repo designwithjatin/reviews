@@ -54,6 +54,13 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Posts on this path: the 2 best of the 5 recent reviews**; Share Now and I'll do it later both go straight to the final screen (no widget) (owner: "the last step").
 - **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
+## Google pill path
+- **2026-11-18 · Google pill = sign in → pick the profile → AI steps → form with "Publish Changes & Continue"** (owner; Figma 8860:178290).
+- **2026-11-18 · Sign-in shows a placeholder user (John Doe, letter avatar)**, not the business, because the business isn't known yet. Figma shows the owner's own name; never a real person (agent).
+- **2026-11-18 · No "Back to results" on this path** (agent; Figma shows it, but there are no results to go back to).
+- **2026-11-18 · "I'll do it later" on this path keeps the user connected**: fixes stay drafted, listings and the rest of the connected flow continue (agent reading).
+- **2026-11-18 · Facebook inbox: "I'll do it later" sits 16px left of Send Replies** (owner reported the spacing).
+
 ## Facebook result path
 - **2026-11-18 · A Facebook result runs a Facebook version of the flow** (owner). Connect Facebook instead of Google; inbox/posts/widget show Recommends instead of stars (Figma 8848:142623, 8848:143156, 8850:155386, 8850:155509).
 - **2026-11-18 · Last step, connected: "Get 50 more recommendations on Facebook"** with a count bar (owner; Figma 8853:28868). The recommend % line was removed (owner).

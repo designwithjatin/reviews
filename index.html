@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=51">
+  <link rel="stylesheet" href="styles.css?v=52">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -45,7 +45,7 @@
           <span class="divider-text__line"></span>
         </div>
         <div class="pills">
-          <button class="pill" type="button">
+          <button class="pill" type="button" id="pill-google">
             <img src="assets/platform-gbp.svg" alt="" width="20" height="20">
             Google Business Profile
           </button>
@@ -1449,6 +1449,8 @@
       screenFinal.hidden = true;
       exploreLater.hidden = false;
       skipAuth = false;
+      connectedEarly = false;
+      draftFixes = false;
       document.getElementById('pub-title').textContent = 'Found 10 Publishers relevant to your business';
       document.getElementById('pub-active').hidden = false;
       document.getElementById('list-later').hidden = true;
@@ -1656,21 +1658,73 @@
     });
     document.getElementById('loc-search').addEventListener('input', renderLocations);
 
-    document.getElementById('connect-open').addEventListener('click', () => {
-      if (cameFrom === 'create') return openGauth();  // new business: Google sign-in, not the GBP picker
-      if (isFB()) return openFbauth();  // Facebook result: Facebook login, choose the Page
+    function openConnectModal() {
       groupIndex = 0;
       selectedLoc = 0;
       document.getElementById('loc-search').value = '';
       renderGroups();
       renderLocations();
       openModal(connectModal);
+    }
+    document.getElementById('connect-open').addEventListener('click', () => {
+      if (connectedEarly) {  // pill path: already connected, so this publishes the fixes
+        coverForListings();
+        showToast('Business details updated on google');
+        return startListings(picked.name);
+      }
+      if (cameFrom === 'create') return openGauth();  // new business: Google sign-in, not the GBP picker
+      if (isFB()) return openFbauth();  // Facebook result: Facebook login, choose the Page
+      openConnectModal();
     });
+
+    // ---- Google pill: sign in → choose the profile → the same AI steps (Figma 8860:178290) ----
+    // Connected before the form, so the form button publishes ("Publish Changes & Continue").
+    let connectedEarly = false;
+    let draftFixes = false;  // pill path, "I'll do it later": fixes stay drafted, still connected
+    document.getElementById('pill-google').addEventListener('click', () => {
+      if (flying) return;
+      const found = buildResults('Third Wave Coffee Jaipur');  // demo business (Figma: TWC Jaipur)
+      lastSearch = found;
+      results = found.list;
+      cameFrom = 'pill';
+      fillSelected(results[0]);
+      openGauth();
+    });
+    async function startFromPill() {
+      resetTransition();
+      resetProcessingScreen();
+      const id = run;
+      connectedEarly = true;
+      backLink.hidden = true;  // no search results to go back to
+      document.getElementById('connect-open-label').textContent = 'Publish Changes & Continue';
+      const leaving = [...screenSearch.children].map(el => fade(el, 1, 0, motion(T.fadeOut), { easing: EASE_IN }));
+      if (!await done(leaving) || id !== run) return;
+      screenSearch.hidden = true;
+      screenSearch.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      [...screenSearch.children].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      screenProcessing.hidden = false;
+      processing.start();
+      if (reduceMotion.matches) return completeSteps(id);
+      [selCard, progress].forEach((el, i) => fade(el, 0, 1, T.settle,
+        { delay: i * 60, from: { transform: 'translateY(-6px)' }, to: { transform: 'none' } }));
+      fade(animPanel, 0, 1, T.settle * 2);
+      const arrivals = [...stepsList.querySelectorAll('.step')].map((step, i) => fade(step, 0, 1, T.stepIn, {
+        delay: T.settle + i * T.stepGap, from: { transform: 'translateY(-8px)' }, to: { transform: 'none' },
+      }));
+      if (!await done(arrivals) || id !== run) return;
+      completeSteps(id);
+    }
 
     // ---- 2 · Connect → reasoning → loading → publishers ----
     document.getElementById('connect-btn').addEventListener('click', async () => {
       const loc = locationsFor(groupIndex)[selectedLoc];
       const optIn = document.getElementById('optin-listings').checked;
+      if (cameFrom === 'pill') {  // connected first: the picked profile becomes the business
+        if (loc.name !== picked.name) fillSelected({ ...picked, name: loc.name, address: loc.address });
+        await closeModal(connectModal);
+        showToast('Your Google Business Profile is connected');
+        return startFromPill();
+      }
       if (optIn) coverForListings();  // closing the modal reveals the next step, not the form
       await closeModal(connectModal);
       showToast('Business details updated on google');
@@ -1707,6 +1761,7 @@
       document.getElementById('pub-active-icon').src = `assets/platform-${fb ? 'facebook' : 'gbp'}.svg`;
       document.getElementById('pub-active-label').textContent = fb ? 'Facebook Page' : 'Google Business Profile';
       if (skipAuth) addDraftMilestone(`9 ${fb ? 'Page' : 'Profile'} fixes drafted.`, `You can apply changes once you connect your ${fb ? 'Facebook Page' : 'business profile'}`, 'draft-16.svg');
+      else if (draftFixes) addDraftMilestone('9 Profile fixes drafted.', 'You can publish them anytime from your dashboard', 'draft-16.svg');
       else addMilestone(`We have fixed 9 ${fb ? 'Page' : 'profile'} gaps!`, fb ? 'Your Facebook Page is ready for your customers.' : 'Your business will be easier to find in Google by your customers.');
       // Not connected: no Google listing to show, and the user can skip this step too
       document.getElementById('pub-title').textContent =
@@ -1753,9 +1808,10 @@
     const gauth = document.getElementById('gauth');
     function openGauth() {
       // The account is the business's own: its name, the email on the profile, a letter avatar
-      document.getElementById('gauth-name').textContent = picked.name;
-      document.getElementById('gauth-email').textContent = document.getElementById('form-email').value;
-      document.getElementById('gauth-initial').textContent = picked.name.charAt(0).toUpperCase();
+      const own = cameFrom === 'pill';  // pill: the user's own account (placeholder, never a real person)
+      document.getElementById('gauth-name').textContent = own ? 'John Doe' : picked.name;
+      document.getElementById('gauth-email').textContent = own ? 'john.doe@gmail.com' : document.getElementById('form-email').value;
+      document.getElementById('gauth-initial').textContent = own ? 'J' : picked.name.charAt(0).toUpperCase();
       gauth.hidden = false;
       fade(gauth, 0, 1, motion(T3.modalIn));
       fade(gauth.querySelector('.gauth__card'), 0, 1, motion(T3.modalIn + 80),
@@ -1764,6 +1820,14 @@
     }
     gauth.addEventListener('click', async e => {
       if (!e.target.closest('[data-account]')) return;
+      if (cameFrom === 'pill') {  // signed in: now choose the profile
+        openConnectModal();
+        await done([fade(gauth, 1, 0, motion(T3.modalOut), { easing: EASE_IN })]);
+        gauth.hidden = true;
+        gauth.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+        gauth.getAnimations().forEach(a => a.cancel());
+        return;
+      }
       coverForListings();  // the sign-in page fades straight onto the next step
       await done([fade(gauth, 1, 0, motion(T3.modalOut), { easing: EASE_IN })]);
       gauth.hidden = true;
@@ -1944,6 +2008,11 @@
     const recentReviews = () => REVIEWS.slice(0, 5);
 
     document.getElementById('connect-later').addEventListener('click', () => {
+      if (connectedEarly) {  // pill path: connected, just not publishing the fixes yet
+        draftFixes = true;
+        coverForListings();
+        return startListings(picked.name);
+      }
       skipAuth = true;
       const hideBack = () => (backLink.hidden = true);
       fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);

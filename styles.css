@@ -2114,3 +2114,5 @@ button { font: inherit; color: inherit; }
 .reply-gate .link-btn { height: 18px; margin-left: -4px; }
 /* Widget review on the Facebook path: "Recommended" instead of stars (Figma 8850:155591) */
 .wgt-review__rec { display: flex; align-items: center; gap: var(--sp-4); margin-top: 4px; font: var(--body-xs); color: var(--txt-secondary); }
+/* Facebook inbox: "I'll do it later" sits 16px left of Send Replies (Figma 8848:142635) */
+#inbox-later { margin-left: auto; margin-right: var(--sp-16); }

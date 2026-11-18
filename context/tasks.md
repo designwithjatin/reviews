@@ -8,6 +8,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 ## Open questions (waiting on the owner)
 | Since | Question | Context |
 |---|---|---|
+| 2026-11-18 | Google pill path: should "I'll do it later" on the form keep them connected (built) or behave like the skip-auth path? And should the Facebook pill get the same flow? | |
 | 2026-11-18 | Facebook: what does "I'll do it later" in the inbox lead to? | Built as: skip to social posts (agent). Figma shows the button only on the Facebook inbox. |
 | 2026-11-18 | Facebook skipped-auth path has no inbox or posts (we can't read recommendations). Right? | Agent reading of the product discussion. |
 | 2026-11-18 | Facebook numbers (100 today, next 150) are placeholders | Engineering to confirm Meta returns recommendation counts. |
@@ -27,6 +28,8 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-11-18: Google pill path: sign-in → Connect GBP modal → AI steps → form with Publish Changes & Continue / I'll do it later → connected flow.
+- 2026-11-18: Facebook inbox header spacing fixed.
 - 2026-11-18: Facebook result path: Connect Facebook (Page picker stand-in) → listings → Facebook inbox (Recommends tags, I'll do it later) → replies → automate → posts → widget → "Get 50 more recommendations" last step. Skipped auth → "Start collecting recommendations" (Go to Dashboard only).
 - 2026-11-18: Read-only inbox: reply opens a "To view & manage replies, Connect Google Account" note under the card.
 - 2026-11-16: Brand Context tab: Contact Information + Business Description (500 max) inputs, Save.

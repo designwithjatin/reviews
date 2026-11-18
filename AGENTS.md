@@ -106,6 +106,9 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - **Posts:** pending milestone "Read your past reviews", then **2 posts at 322px** built from the best recent reviews. Share Now / I'll do it later go **straight to the final "75 more 5-star reviews" screen** (no widget).
 - The connected path is unchanged.
 
+**Google pill path** (Figma `Lfz2oHviZXGc9NDmp8JEpq` 8860:178290)
+- The **Google Business Profile** pill on the search screen: Google sign-in (placeholder user, letter avatar) → Connect GBP modal → AI steps → form with **I'll do it later** + **Publish Changes & Continue**. Already connected, so there's no "Back to results". Publishing → listings → the connected flow; "I'll do it later" keeps the fixes drafted but stays connected.
+
 **Facebook result path** (Figma `Lfz2oHviZXGc9NDmp8JEpq`)
 - A **Facebook** search result runs the Facebook version: "Connect Facebook & Continue" → stand-in Facebook Page picker (no real auth, business shown as the Page) → listings → inbox with **Recommends / Does not Recommend** tags instead of stars → replies → automate → posts and widget with Recommends → last step **"Get 50 more recommendations on Facebook"** (count bar 0–200).
 - **Skipped auth on Facebook** ends on **"Start collecting recommendations"** with **Go to Dashboard only**: no goal bar and no connect nudge. Connecting is nudged later, inside the product.

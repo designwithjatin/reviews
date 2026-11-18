@@ -40,6 +40,11 @@ Picking a result tagged **Facebook** (`picked.platform === 'facebook'`) switches
 - **Skipped auth** ("I'll do it later" on the form): "9 Page fixes drafted… once you connect your Facebook Page" → listings → opt-in or I'll do it later → last step **"Start collecting recommendations"** with **Go to Dashboard only** (no goal bar, no connect nudge; Figma 8854:32265). No inbox or posts, because we can't read recommendations without the Page.
 - Last step on both: request card button "Recommend us", QR card shows the Facebook chip only, tool descriptions mention Facebook.
 
+## Google pill path (2026-11-18; Figma Lfz2oHviZXGc9NDmp8JEpq 8860:178290)
+**Google Business Profile** pill on the search screen → Google sign-in (the user's own placeholder account: John Doe · john.doe@gmail.com, letter avatar) → **Connect Google Business Profile** modal (demo business "Third Wave Coffee Jaipur", groups + locations, Opt-in for listings) → toast "Your Google Business Profile is connected" → the search screen steps aside, the left panel shows the chosen profile, AI steps run → profile form with **I'll do it later** + **Publish Changes & Continue** (Google icon). No "Back to results" (there are no results).
+- **Publish Changes & Continue** → toast "Business details updated on google" → listings → the connected flow (inbox, posts, widget, final).
+- **I'll do it later** → still connected; pending milestone "9 Profile fixes drafted. You can publish them anytime from your dashboard" → listings → the connected flow.
+
 ## Read-only inbox · reply note (2026-11-18; Figma 8818:89180 / 8818:89672)
 On the Google skip-auth inbox, the reply icon on a card opens a note under the review: Google G + "To view & manage replies, **Connect Google Account**". The card gets the hover border + shadow and the reply icon stays highlighted. Clicking reply again (or another card's) closes it. The link isn't wired yet.
 

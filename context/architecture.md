@@ -44,6 +44,8 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 - **Facebook path** (`isFB()` = `picked.platform === 'facebook'`): `openFbauth()` / `closeFbauth()` (`#fbauth`), `recTagHTML(stars)`, `cardRatingHTML(r)`, `platformIcon()` in the review card; `renderPosts` / `renderWidget` branch on `isFB()`; `#inbox-later` (Facebook only). `showFinal(variant)` takes `'existing' | 'new' | 'fb' | 'fb-skip'` (booleans still work: true = new, false = existing); `#final-first`, `#req-btn`, `#qr-google` and `[data-copy-fb]` descriptions switch per variant.
 - **Read-only inbox reply note:** `gateHTML`, `.is-replying` + `.reply-gate` on `.review-card--recent`.
 
+- **Google pill path:** `#pill-google`, `cameFrom = 'pill'`, `connectedEarly`, `draftFixes`, `openConnectModal()`, `startFromPill()`. `openGauth()` shows a placeholder user account on this path; the gauth and connect-btn handlers branch on `cameFrom === 'pill'`.
+
 ## Core patterns (reuse these)
 - **Animations = WAAPI.** `fade(el, from, to, ms, {from, to, delay, easing})` uses `fill: both`. `done(anims)` resolves `true`, or `false` if cancelled. `hold(ms)` is a timer that runs on the animation clock (so it pauses with the tab).
 - **Cancellation:** `resetTransition()` bumps `run` and cancels non-CSS animations. Every async phase captures `id = run` and checks `live()` after each `await`, bailing if stale.
