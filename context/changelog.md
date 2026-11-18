@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-18 · Google pill path (sign in → pick profile → Publish Changes & Continue) + Facebook inbox header spacing
+- (pending) · 2026-11-18 · Facebook widget card rebuilt to Figma 8850:155586 (name + time on one line, Recommended, 20px Facebook mark, 16px padding)
+- d75e149 · 2026-11-18 · Google pill path (sign in → pick profile → Publish Changes & Continue) + Facebook inbox header spacing
 - 75a3031 · 2026-11-18 · Facebook result path (connect, inbox, posts, widget, two last steps) + read-only inbox reply note
 - 1bb1b60 · 2026-11-17 · Inbox banner note: regular, black, 14px
 - db96eb9 · 2026-11-17 · Listings: drop the outer border around publisher groups

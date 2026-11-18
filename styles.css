@@ -2113,6 +2113,11 @@ button { font: inherit; color: inherit; }
 .reply-gate__g { width: 20px; height: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 40px; background: #fff; }
 .reply-gate .link-btn { height: 18px; margin-left: -4px; }
 /* Widget review on the Facebook path: "Recommended" instead of stars (Figma 8850:155591) */
-.wgt-review__rec { display: flex; align-items: center; gap: var(--sp-4); margin-top: 4px; font: var(--body-xs); color: var(--txt-secondary); }
+/* Facebook widget card (Figma 8850:155586): name + time on one line, "Recommended" below, 20px Facebook mark */
+.wgt-review--fb { padding: var(--sp-16); }
+.wgt-review--fb .wgt-review__head { align-items: center; }
+.wgt-review__details { display: flex; flex-direction: column; justify-content: center; gap: var(--sp-4); }
+.wgt-review__info { display: flex; align-items: center; gap: var(--sp-8); white-space: nowrap; }
+.wgt-review__rec { display: flex; align-items: center; gap: var(--sp-4); font: var(--body-xs); color: var(--txt-secondary); }
 /* Facebook inbox: "I'll do it later" sits 16px left of Send Replies (Figma 8848:142635) */
 #inbox-later { margin-left: auto; margin-right: var(--sp-16); }
