@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=57">
+  <link rel="stylesheet" href="styles.css?v=58">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -2034,6 +2034,11 @@
           <span class="review-card__when">${r.when}</span><span class="dot" aria-hidden="true"></span>
           ${cardRatingHTML(r)}
           <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
+          ${isFB() ? `<span class="recent-actions card-actions">
+            <button class="icon-btn" type="button" aria-label="Open on Facebook"><img src="assets/external-link-16.svg" alt="" width="16" height="16"></button>
+            <button class="icon-btn" type="button" data-act="copy" aria-label="Copy review"><img src="assets/copy-16.svg" alt="" width="16" height="16"></button>
+            <button class="icon-btn" type="button" data-act="edit" aria-label="Reply"><img src="assets/reply-16.svg" alt="" width="16" height="16"></button>
+          </span>` : ''}
         </div>
         <p class="review-card__text"><span>${r.text}</span><button class="link-underline link-underline--btn review-card__more" type="button" data-act="more">Read more</button></p>
         <div class="review-card__reply">
@@ -2602,6 +2607,90 @@
           { delay: motion(120), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } }),
       ]);
     }
+    // ---- Edit reply · overlay editor (Facebook; Figma 8882:71943) ----
+    // Edit or the reply icon expands the card as an overlay on top of the cards below
+    // (nothing below moves). The draft is editable, with a reply toolbar and Send.
+    const AI_EDITS = {
+      rewrite: t => t.replace(/^Thank you( so much)?/i, 'We really appreciate it').replace(/delighted/gi, 'thrilled'),
+      shorten: t => (t.match(/[^.!?]+[.!?]+/g) || [t]).slice(0, 2).join('').trim(),
+      expand: t => `${t.trim()} Our team will be thrilled to hear your kind words, and we can’t wait to welcome you again soon.`,
+    };
+    let editing = null;
+    function openEditor(card) {
+      closeEditor();
+      const draft = card.querySelector('.review-card__draft');
+      const ed = document.createElement('div');
+      ed.className = 'reply-editor';
+      ed.setAttribute('role', 'dialog');
+      ed.setAttribute('aria-label', 'Edit reply');
+      const profile = card.querySelector('.review-card__profile').cloneNode(true);
+      ed.innerHTML = `
+        <div class="reply-editor__review"><p class="reply-editor__text"></p></div>
+        <div class="reply-editor__field">
+          <div class="reply-editor__input" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Your reply"></div>
+          <div class="reply-editor__actions">
+            <div class="reply-editor__tools">
+              <button class="icon-btn reply-editor__icon" type="button" aria-label="Emoji"><img src="assets/emoji-20.svg" alt="" width="20" height="20"></button>
+              <button class="icon-btn reply-editor__icon" type="button" aria-label="Add image"><img src="assets/media-image-20.svg" alt="" width="20" height="20"></button>
+              <button class="icon-btn reply-editor__icon" type="button" aria-label="Add GIF"><img src="assets/media-gif-20.svg" alt="" width="20" height="20"></button>
+              <button class="reply-pill" type="button"><img src="assets/reply-templates-16.svg" alt="" width="16" height="16">Templates</button>
+              <button class="reply-pill" type="button" data-ai="rewrite"><img src="assets/ai-retry-16.svg" alt="" width="16" height="16">Rewrite</button>
+              <button class="reply-pill" type="button" data-ai="shorten"><img src="assets/ai-shorten-16.svg" alt="" width="16" height="16">Shorten</button>
+              <button class="reply-pill" type="button" data-ai="expand"><img src="assets/ai-expand-16.svg" alt="" width="16" height="16">Expand</button>
+              <button class="reply-pill" type="button" data-ai="grammar"><img src="assets/ai-rephrase-16.svg" alt="" width="16" height="16">Grammar</button>
+              <button class="reply-pill" type="button" data-ai="tone"><img src="assets/ai-tone-16.svg" alt="" width="16" height="16">Tone</button>
+            </div>
+            <button class="reply-editor__send" type="button" aria-label="Send reply"><img src="assets/send-20.svg" alt="" width="20" height="20"></button>
+          </div>
+        </div>`;
+      ed.querySelector('.reply-editor__review').prepend(profile);
+      ed.querySelector('.reply-editor__text').textContent = card.querySelector('.review-card__text > span').textContent;
+      ed.querySelector('.reply-editor__input').textContent = draft.textContent;
+      card.append(ed);
+      card.classList.add('has-editor');
+      editing = card;
+      fade(ed, 0, 1, motion(200), { from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
+      const input = ed.querySelector('.reply-editor__input');
+      input.focus();
+      getSelection().selectAllChildren(input);
+      getSelection().collapseToEnd();
+    }
+    function closeEditor(save = true) {
+      if (!editing) return;
+      const card = editing;
+      const ed = card.querySelector('.reply-editor');
+      if (save) card.querySelector('.review-card__draft').textContent = ed.querySelector('.reply-editor__input').textContent.trim();
+      ed.remove();
+      card.classList.remove('has-editor');
+      editing = null;
+    }
+    reviewList.addEventListener('click', e => {
+      const ed = e.target.closest('.reply-editor');
+      if (!ed) return;
+      e.stopPropagation();
+      const input = ed.querySelector('.reply-editor__input');
+      const ai = e.target.closest('[data-ai]');
+      if (ai) {
+        const kind = ai.dataset.ai;
+        if (AI_EDITS[kind]) {
+          input.classList.add('shimmer-text');
+          setTimeout(() => { input.textContent = AI_EDITS[kind](input.textContent); input.classList.remove('shimmer-text'); }, motion(500));
+        } else showToast(kind === 'grammar' ? 'No grammar issues found' : 'Tone kept warm and appreciative');
+        return;
+      }
+      if (e.target.closest('.reply-editor__send')) {
+        const card = editing;
+        closeEditor();
+        markReplied(card);
+        showToast('Review reply sent');
+        return;
+      }
+      if (e.target.closest('[data-act="edit"]')) closeEditor();  // reply icon again closes it
+    }, true);
+    document.addEventListener('pointerdown', e => {
+      if (editing && !e.target.closest('.reply-editor') && !e.target.closest('[data-act="edit"]')) closeEditor();
+    });
+    document.addEventListener('keydown', e => e.key === 'Escape' && editing && closeEditor());
     reviewList.addEventListener('click', e => {
       const btn = e.target.closest('[data-act]');
       if (!btn) return;
@@ -2610,6 +2699,12 @@
       if (btn.dataset.act === 'more') {
         card.classList.toggle('is-expanded');
         btn.textContent = card.classList.contains('is-expanded') ? 'Read less' : 'Read more';
+      } else if (btn.dataset.act === 'copy') {
+        navigator.clipboard?.writeText(card.querySelector('.review-card__text > span').textContent).catch(() => {});
+        showToast('Review copied');
+      } else if (btn.dataset.act === 'edit' && isFB()) {
+        if (card.classList.contains('is-replied')) return;
+        card.querySelector('.reply-editor') ? closeEditor() : openEditor(card);
       } else if (btn.dataset.act === 'edit') {
         const editing = card.classList.toggle('is-editing');
         draft.contentEditable = String(editing);
@@ -2629,9 +2724,10 @@
     // 4 · the writing-style card stays put (it's in both views); Automate Replies rises in
     // Facebook: skip replying for now, straight to social posts
     const inboxLater = document.getElementById('inbox-later');
-    inboxLater.addEventListener('click', () => { inboxLater.hidden = true; runSocialProof(); });
+    inboxLater.addEventListener('click', () => { closeEditor(); inboxLater.hidden = true; runSocialProof(); });
     sendAll.addEventListener('click', async () => {
       if (sendAll.dataset.done) return runSocialProof();  // now "Save and Continue"
+      closeEditor();
       const pending = [...reviewList.querySelectorAll('.review-card:not(.is-replied)')];
       const total = reviewList.children.length;
       resetTransition();

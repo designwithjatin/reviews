@@ -50,6 +50,8 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 
 - `#form-skel` (pill paths, shown in `completeSteps` before the form), `styleSections()` (Facebook = one section), `.inbox__send.is-sending`.
 
+- **Overlay reply editor:** `openEditor(card)` / `closeEditor(save)`, `AI_EDITS`, `.reply-editor` absolutely positioned inside `.review-card.has-editor`; Facebook cards get `.card-actions` (open, copy, reply).
+
 ## Core patterns (reuse these)
 - **Animations = WAAPI.** `fade(el, from, to, ms, {from, to, delay, easing})` uses `fill: both`. `done(anims)` resolves `true`, or `false` if cancelled. `hold(ms)` is a timer that runs on the animation clock (so it pauses with the tab).
 - **Cancellation:** `resetTransition()` bumps `run` and cancels non-CSS animations. Every async phase captures `id = run` and checks `live()` after each `await`, bailing if stale.

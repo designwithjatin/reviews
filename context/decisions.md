@@ -66,6 +66,8 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-11-18 · Facebook inbox: "I'll do it later" sits 16px left of Send Replies** (owner reported the spacing).
 
 ## Facebook result path
+- **2026-11-18 · Edit reply = overlay editor** (owner; Figma 8882:71943 / 8882:71969). On the **Facebook** inbox, **Edit** or the card's **reply icon** expands the card as an overlay over the cards below (nothing moves): the review, a divider, the editable reply, a toolbar (emoji, image, GIF, Templates, Rewrite, Shorten, Expand, Grammar, Tone) and a blue **Send** button. Send marks that card replied; clicking outside, Escape or the reply icon again closes it and keeps the edit. Cards also get hover actions (open, copy, reply). The owner will add a Google case in Figma; the Google inbox keeps inline edit until then.
+- **2026-11-18 · Toolbar copy "Grammar"** (agent; Figma says "Grammer"). Rewrite / Shorten / Expand change the text with simple demo rules; Grammar and Tone show a toast; Templates, emoji, image and GIF do nothing yet (agent).
 - **2026-11-18 · Facebook flow checked against Figma "Start with FB Auth" (8860:192375) and aligned** (owner asked for a full comparison):
   - Pill paths show a **form skeleton** (~1.4s) between the AI steps and the form (8860:200044).
   - Listings: **"Found 7 Publishers…"**, Active Listings label **"Facebook"** (8860:194680).

@@ -22,6 +22,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 ## On hold / backlog
 | Since | Task | Notes |
 |---|---|---|
+| 2026-11-18 | Overlay reply editor for the **Google** inbox | Waiting on the owner's Figma case. Built for Facebook (Figma 8882:71943). |
 | 2026-11-18 | Facebook "new Page, no reviews yet" scenario | Owner will design it in Figma; reuses "Start collecting recommendations" (Figma 8854:32265). |
 | 2026-10-15 | Search with no category word (e.g. "Third Wave") gets the category **"Local Business"** | `parseQuery` falls back when no `CATEGORIES` regex matches. Possible fixes: infer from known brand names, or default to the most common category. The owner hasn't asked for a fix yet. |
 | 2026-10-15 | Wire **Go to Dashboard**, **Send First Review Request** and the tool-card links | No destinations defined in Figma. |
