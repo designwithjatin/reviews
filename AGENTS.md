@@ -119,7 +119,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - Review requests (Quick Review Request, QR, feedback form) don't need auth: the review link comes from the search result.
 
 **Reviews inbox**
-- **Facebook inbox: Edit or the reply icon opens an overlay editor** over the cards below (Figma 8882:71943): editable reply, toolbar (emoji, image, GIF, Templates, Rewrite, Shorten, Expand, Grammar, Tone) and Send. Google keeps inline edit until the owner's Figma case.
+- **Edit or the reply icon opens an overlay editor** over the cards below (Facebook Figma 8882:71943, Google 8882:73241): editable reply, toolbar (emoji, then Templates, Rewrite, Shorten, Expand, Grammar, Tone; Facebook also has image and GIF) and Send. Cards show open / copy / reply on hover.
 - On the read-only (skip-auth) inbox, **reply** opens a note under the card: "To view & manage replies, Connect Google Account" (Figma 8818:89672).
 - **Brand Context tab** (writing-style modal; Figma file `FHSl3IYwrNTDd0auwgks6q` 7422:121796) is **two inputs**: Contact Information (prefilled with the profile email; "Will be used to personalize AI-generated review replies.") and Business Description (prefilled with the About description, 500-character limit with an n/500 counter; "Will be used to personalize AI-generated content where applicable."). The footer has **Save** only, which writes both back to the profile form and shows a toast. Regenerate shows on the Writing Style tab only.
 - Order: skeleton loading → AI drafts → **Send Replies**.

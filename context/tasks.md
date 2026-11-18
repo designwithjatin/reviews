@@ -22,13 +22,13 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 ## On hold / backlog
 | Since | Task | Notes |
 |---|---|---|
-| 2026-11-18 | Overlay reply editor for the **Google** inbox | Waiting on the owner's Figma case. Built for Facebook (Figma 8882:71943). |
 | 2026-11-18 | Facebook "new Page, no reviews yet" scenario | Owner will design it in Figma; reuses "Start collecting recommendations" (Figma 8854:32265). |
 | 2026-10-15 | Search with no category word (e.g. "Third Wave") gets the category **"Local Business"** | `parseQuery` falls back when no `CATEGORIES` regex matches. Possible fixes: infer from known brand names, or default to the most common category. The owner hasn't asked for a fix yet. |
 | 2026-10-15 | Wire **Go to Dashboard**, **Send First Review Request** and the tool-card links | No destinations defined in Figma. |
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-11-18: Overlay reply editor on both inboxes (Facebook 8882:71943, Google 8882:73241).
 - 2026-11-18: Search returns Google listings only; Facebook only via the pill; Facebook skipped-auth last step removed (kept for a future "new Page" scenario).
 - 2026-11-18: Facebook pill path (mirrors the Google pill).
 - 2026-11-18: Google pill path: sign-in → Connect GBP modal → AI steps → form with Publish Changes & Continue / I'll do it later → connected flow.

@@ -2034,11 +2034,11 @@
           <span class="review-card__when">${r.when}</span><span class="dot" aria-hidden="true"></span>
           ${cardRatingHTML(r)}
           <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
-          ${isFB() ? `<span class="recent-actions card-actions">
-            <button class="icon-btn" type="button" aria-label="Open on Facebook"><img src="assets/external-link-16.svg" alt="" width="16" height="16"></button>
+          ${`<span class="recent-actions card-actions">
+            <button class="icon-btn" type="button" aria-label="Open on ${isFB() ? 'Facebook' : 'Google'}"><img src="assets/external-link-16.svg" alt="" width="16" height="16"></button>
             <button class="icon-btn" type="button" data-act="copy" aria-label="Copy review"><img src="assets/copy-16.svg" alt="" width="16" height="16"></button>
             <button class="icon-btn" type="button" data-act="edit" aria-label="Reply"><img src="assets/reply-16.svg" alt="" width="16" height="16"></button>
-          </span>` : ''}
+          </span>`}
         </div>
         <p class="review-card__text"><span>${r.text}</span><button class="link-underline link-underline--btn review-card__more" type="button" data-act="more">Read more</button></p>
         <div class="review-card__reply">
@@ -2607,9 +2607,10 @@
           { delay: motion(120), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } }),
       ]);
     }
-    // ---- Edit reply · overlay editor (Facebook; Figma 8882:71943) ----
+    // ---- Edit reply · overlay editor (Facebook Figma 8882:71943, Google 8882:73241) ----
     // Edit or the reply icon expands the card as an overlay on top of the cards below
     // (nothing below moves). The draft is editable, with a reply toolbar and Send.
+    // Google has no image / GIF buttons (Google replies are text only).
     const AI_EDITS = {
       rewrite: t => t.replace(/^Thank you( so much)?/i, 'We really appreciate it').replace(/delighted/gi, 'thrilled'),
       shorten: t => (t.match(/[^.!?]+[.!?]+/g) || [t]).slice(0, 2).join('').trim(),
@@ -2631,8 +2632,8 @@
           <div class="reply-editor__actions">
             <div class="reply-editor__tools">
               <button class="icon-btn reply-editor__icon" type="button" aria-label="Emoji"><img src="assets/emoji-20.svg" alt="" width="20" height="20"></button>
-              <button class="icon-btn reply-editor__icon" type="button" aria-label="Add image"><img src="assets/media-image-20.svg" alt="" width="20" height="20"></button>
-              <button class="icon-btn reply-editor__icon" type="button" aria-label="Add GIF"><img src="assets/media-gif-20.svg" alt="" width="20" height="20"></button>
+              ${isFB() ? `<button class="icon-btn reply-editor__icon" type="button" aria-label="Add image"><img src="assets/media-image-20.svg" alt="" width="20" height="20"></button>
+              <button class="icon-btn reply-editor__icon" type="button" aria-label="Add GIF"><img src="assets/media-gif-20.svg" alt="" width="20" height="20"></button>` : ''}
               <button class="reply-pill" type="button"><img src="assets/reply-templates-16.svg" alt="" width="16" height="16">Templates</button>
               <button class="reply-pill" type="button" data-ai="rewrite"><img src="assets/ai-retry-16.svg" alt="" width="16" height="16">Rewrite</button>
               <button class="reply-pill" type="button" data-ai="shorten"><img src="assets/ai-shorten-16.svg" alt="" width="16" height="16">Shorten</button>
@@ -2702,14 +2703,9 @@
       } else if (btn.dataset.act === 'copy') {
         navigator.clipboard?.writeText(card.querySelector('.review-card__text > span').textContent).catch(() => {});
         showToast('Review copied');
-      } else if (btn.dataset.act === 'edit' && isFB()) {
+      } else if (btn.dataset.act === 'edit') {  // Facebook + Google: overlay editor
         if (card.classList.contains('is-replied')) return;
         card.querySelector('.reply-editor') ? closeEditor() : openEditor(card);
-      } else if (btn.dataset.act === 'edit') {
-        const editing = card.classList.toggle('is-editing');
-        draft.contentEditable = String(editing);
-        btn.querySelector('span').textContent = editing ? 'Done' : 'Edit';
-        if (editing) draft.focus();
       } else {
         markReplied(card);
         showToast('Review reply sent');

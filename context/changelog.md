@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-18 · Facebook inbox: overlay reply editor (Edit / reply icon) + card hover actions
+- (pending) · 2026-11-18 · Google inbox: overlay reply editor (Figma 8882:73241), replaces inline edit
+- 0029869 · 2026-11-18 · Facebook inbox: overlay reply editor (Edit / reply icon) + card hover actions
 - 1f718ca · 2026-11-18 · Facebook flow matched to Figma "Start with FB Auth" (8860:192375): form skeleton, 7 publishers + "Facebook" listing, one-section writing style, sending state, last-step tools + marker
 - d69d9d1 · 2026-11-18 · Listings "I'll do it later" for every path
 - fd1ffab · 2026-11-18 · Inbox "I'll do it later" for every connected user
