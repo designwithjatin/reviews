@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=56">
+  <link rel="stylesheet" href="styles.css?v=57">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -242,6 +242,17 @@
     </section>
 
       <!-- Screen 6 · generated business profile (Figma 10657:4531) -->
+      <!-- Form skeleton (Figma 8860:200044): pill paths show it before the form -->
+      <div class="form-skel" id="form-skel" hidden aria-hidden="true">
+        <span class="skel-bar form-skel__pills"></span>
+        <div class="form-skel__card">
+          <div class="form-skel__head"><span class="skel-bar" style="width:36%;height:14px"></span></div>
+          <div class="form-skel__grid">
+            <div class="form-skel__col"><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span></div>
+            <div class="form-skel__col"><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__map"></span><span class="skel-bar form-skel__field"></span><span class="skel-bar form-skel__field"></span></div>
+          </div>
+        </div>
+      </div>
       <section class="profile-form" id="profile-form" data-view="all" hidden>
         <div class="profile-form__head">
           <div class="pills" role="group" aria-label="Show fields">
@@ -686,7 +697,7 @@
         <div class="goal__track">
           <span class="goal__fill" style="width:317px"></span>
           <i style="left:158px"></i><i style="left:317px"></i><i style="left:475px"></i>
-          <span class="goal__marker goal__marker--fb" style="left:307px"><img src="assets/platform-facebook.svg" alt="" width="16" height="16"></span>
+          <span class="goal__marker goal__marker--fb" style="left:307px"><img src="assets/reviews-ratings-16.svg" alt="" width="16" height="16"></span>
         </div>
         <div class="goal__labels">
           <span style="left:0">0</span>
@@ -719,7 +730,7 @@
           <div class="req__sent"><img src="assets/done-filled.svg" alt="">Request sent</div>
         </div>
         <div class="tool__more">
-          <p data-copy-google="Send bulk review requests to customers with an intelligent campaign system for quick reviews." data-copy-fb="Send customers a link that opens your Facebook Page’s recommendation box.">Send bulk review requests to customers with an intelligent campaign system for quick reviews.</p>
+          <p>Send bulk review requests to customers with an intelligent campaign system for quick reviews.</p>
           <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Send Quick Review Request</button>
         </div>
       </article>
@@ -734,10 +745,10 @@
             </div>
           </div>
           <div class="qr__chip qr__chip--google" id="qr-google"><img src="assets/platform-gbp.svg" alt=""><span><b>Google</b><span class="qr__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></span></span></div>
-          <div class="qr__chip qr__chip--facebook"><img src="assets/platform-facebook.svg" alt=""><span><b>Facebook</b><span class="qr__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></span></span></div>
+          <div class="qr__chip qr__chip--facebook"><img src="assets/platform-facebook.svg" alt=""><span><b>Facebook</b><span class="qr__rec"><img src="assets/recommend.svg" alt="">Recommends</span></span></div>
         </div>
         <div class="tool__more">
-          <p data-copy-google="Print a QR code for your counter or tables so customers can leave a review in seconds." data-copy-fb="Print a QR code for your counter or tables that opens your Facebook recommendations.">Print a QR code for your counter or tables so customers can leave a review in seconds.</p>
+          <p>Print a QR code for your counter or tables so customers can leave a review in seconds.</p>
           <button class="link-btn" type="button"><img src="assets/download-20.svg" alt="" width="20" height="20">Download QR Code</button>
         </div>
       </article>
@@ -761,7 +772,7 @@
           </div>
         </div>
         <div class="tool__more">
-          <p data-copy-google="Collect private feedback first, and invite happy customers to post it as a public review." data-copy-fb="Collect private feedback first, then invite happy customers to recommend you on Facebook.">Collect private feedback first, and invite happy customers to post it as a public review.</p>
+          <p>Collect private feedback first, and invite happy customers to post it as a public review.</p>
           <button class="link-btn" type="button"><img src="assets/external-link-20.svg" alt="" width="20" height="20">Preview Feedback Form</button>
         </div>
       </article>
@@ -1399,6 +1410,15 @@
       if (!await done([fade(animPanel, 1, 0, motion(300), { easing: EASE_IN })]) || !live()) return;
       processing.stop();
       animPanel.hidden = true;
+      if (cameFrom === 'pill') {  // pill paths: a skeleton of the form first
+        const skel = document.getElementById('form-skel');
+        skel.hidden = false;
+        fade(skel, 0, 1, motion(250));
+        if (!await hold(1400) || !live()) return;
+        if (!await done([fade(skel, 1, 0, motion(200), { easing: EASE_IN })]) || !live()) return;
+        skel.hidden = true;
+        skel.getAnimations().forEach(a => a.cancel());
+      }
       profileForm.hidden = false;
       profileForm.scrollTop = 0;
       [...profileForm.children].forEach((block, i) => fade(block, 0, 1, motion(T2.formIn), {
@@ -1439,6 +1459,7 @@
       progressBar.style.width = '';
       animPanel.hidden = false;
       profileForm.hidden = true;
+      document.getElementById('form-skel').hidden = true;
       publishers.hidden = true;
       inbox.hidden = true;
       social.hidden = true;
@@ -1766,13 +1787,13 @@
       progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(600), easing: EASE_IN_OUT });
       const fb = isFB();
       document.getElementById('pub-active-icon').src = `assets/platform-${fb ? 'facebook' : 'gbp'}.svg`;
-      document.getElementById('pub-active-label').textContent = fb ? 'Facebook Page' : 'Google Business Profile';
+      document.getElementById('pub-active-label').textContent = fb ? 'Facebook' : 'Google Business Profile';
       if (skipAuth) addDraftMilestone(`9 ${fb ? 'Page' : 'Profile'} fixes drafted.`, `You can apply changes once you connect your ${fb ? 'Facebook Page' : 'business profile'}`, 'draft-16.svg');
       else if (draftFixes) addDraftMilestone(`9 ${fb ? 'Page' : 'Profile'} fixes drafted.`, 'You can publish them anytime from your dashboard', 'draft-16.svg');
       else addMilestone(`We have fixed 9 ${fb ? 'Page' : 'profile'} gaps!`, fb ? 'Your Facebook Page is ready for your customers.' : 'Your business will be easier to find in Google by your customers.');
       // Not connected: no Google listing to show, and the user can skip this step too
       document.getElementById('pub-title').textContent =
-        `Found ${skipAuth ? PUBLISHERS.length : 10} Publishers relevant to your business`;
+        `Found ${skipAuth || isFB() ? PUBLISHERS.length : 10} Publishers relevant to your business`;
       document.getElementById('pub-active').hidden = skipAuth;
       document.getElementById('list-later').hidden = false;  // every path can skip listings for now
       const stepsIn = showSteps([
@@ -2428,14 +2449,7 @@
         screenFinal.querySelectorAll('.js-biz-initial').forEach(el => { el.textContent = picked.name.charAt(0).toUpperCase(); });
       }
       screenFinal.querySelectorAll('.final__head').forEach(h => (h.hidden = h.dataset.for !== variant));
-      // Facebook: tools point at Facebook
-      const fb = variant === 'fb';
-      const first = document.getElementById('final-first');
-      first.querySelector('span').textContent = fb ? 'Send First Recommendation Request' : 'Send First Review Request';
-      document.getElementById('req-btn').textContent = fb ? 'Recommend us' : 'Leave a review';
-      document.getElementById('qr-google').hidden = fb;
-      screenFinal.querySelector('.tool__art--qr').classList.toggle('tool__art--fb', fb);
-      screenFinal.querySelectorAll('[data-copy-fb]').forEach(p => (p.textContent = fb ? p.dataset.copyFb : p.dataset.copyGoogle));
+      // The tools are the same on every final screen (Figma 8860:196592)
       window.scrollTo(0, 0);
       [...screenFinal.children].filter(el => !el.hidden).forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * 120), from: { transform: 'translateY(12px)' }, to: { transform: 'none' } }));
@@ -2484,10 +2498,14 @@
     const SKEL_WIDTHS = [58, 75, 69, 75, 60, 75, 69, 75, 58, 44, 75];
     const skelLines = n => `<div class="style-sec__skel" aria-hidden="true">${Array.from({ length: n }, (_, i) =>
       `<span class="skel-bar" style="width:${SKEL_WIDTHS[i % SKEL_WIDTHS.length]}%"></span>`).join('')}</div>`;
-    const styleHTML = (loading = false) => STYLE.map(sec => `
+    const styleSections = () => isFB()
+      ? [{ ...STYLE[0], title: 'Facebook Recommends', stars: 0, fb: true }]
+      : STYLE;
+    const styleHTML = (loading = false) => styleSections().map(sec => `
       <section class="style-sec">
         <div class="style-sec__head">
           <h3>${esc(sec.title)}</h3>
+          ${sec.fb ? '<div class="style-sec__rating"><span class="info-tag info-tag--pill info-tag--success"><img src="assets/recommend.svg" alt="" width="12" height="12">Recommends</span></div>' : ''}
           ${sec.stars ? `<div class="style-sec__rating">${ratingHTML(sec.stars)}${sec.tag ? `<span class="style-sec__slash" aria-hidden="true">/</span><span class="info-tag info-tag--pill${sec.stars === 5 ? ' info-tag--success' : ''}"><img src="assets/recommend.svg" alt="" width="12" height="12">${sec.tag}</span>` : ''}</div>` : ''}
         </div>
         ${loading ? skelLines(sec.points.length + 2) : `<ul class="style-sec__points">${sec.points.map(pt => `<li>${esc(pt)}</li>`).join('')}</ul>`}
@@ -2614,13 +2632,18 @@
     inboxLater.addEventListener('click', () => { inboxLater.hidden = true; runSocialProof(); });
     sendAll.addEventListener('click', async () => {
       if (sendAll.dataset.done) return runSocialProof();  // now "Save and Continue"
-      inboxLater.hidden = true;
       const pending = [...reviewList.querySelectorAll('.review-card:not(.is-replied)')];
       const total = reviewList.children.length;
       resetTransition();
       const id = run;
       const live = () => id === run;
       sendAll.disabled = true;
+      inboxLater.disabled = true;
+      sendAll.classList.add('is-sending');
+      if (!await hold(900) || !live()) return;
+      sendAll.classList.remove('is-sending');
+      inboxLater.hidden = true;
+      inboxLater.disabled = false;
       const cascade = pending.map((card, i) => markReplied(card, i * 140));
       showToast(`${pending.length} review ${pending.length === 1 ? 'reply' : 'replies'} sent`);
       progressBar.style.width = '184px';

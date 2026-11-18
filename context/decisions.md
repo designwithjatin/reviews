@@ -66,6 +66,13 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-11-18 · Facebook inbox: "I'll do it later" sits 16px left of Send Replies** (owner reported the spacing).
 
 ## Facebook result path
+- **2026-11-18 · Facebook flow checked against Figma "Start with FB Auth" (8860:192375) and aligned** (owner asked for a full comparison):
+  - Pill paths show a **form skeleton** (~1.4s) between the AI steps and the form (8860:200044).
+  - Listings: **"Found 7 Publishers…"**, Active Listings label **"Facebook"** (8860:194680).
+  - Writing-style modal: one section, **"Facebook Recommends"** + Recommends tag, no star sections (8860:196213).
+  - **Send Replies sending state**: dots in the button and "I'll do it later" dimmed for ~0.9s before the replied cascade (8860:196341). Applies to every path.
+  - Last step: tools are the **same as Google** ("Leave a review", "Send First Review Request", both QR chips); the QR **Facebook chip shows "Recommends"** on every final screen (Tools component); the goal marker uses the **reviews icon** (8871:60281). Supersedes the Facebook-specific tool copy.
+  - Not changed, flagged to the owner: Figma shows "Back to results" on the pill form (no results exist on that path); Figma's left-panel milestone copy is the Google one ("easier to find in Google"); avatars and "John Doe" names are placeholders.
 - **2026-11-18 · Facebook pill opens SocialPilot's Connect Facebook modal directly** (owner: "we don't even need the connector"). A Facebook-style permission dialog was tried the same day and removed.
 - **2026-11-18 · Search returns Google listings only; Facebook is reached only through the Facebook Page pill** (owner: "we don't get FB search results"). Search status reads "Searching your business on Google …". Each result is a distinct listing (the old Google + Facebook twin of the main listing is now a branch).
 - **2026-11-18 · Facebook skipped-auth last step ("Start collecting recommendations") removed from the prototype** (owner). It'll come back in Figma for a new scenario: a new Facebook Page with no reviews yet. Supersedes the skipped-auth entries below.
