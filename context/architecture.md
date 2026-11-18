@@ -41,6 +41,9 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 10. **Form interactions:** pills (All / AI Corrected / Missing), map embed, `markMissing()`.
 11. **`processing`:** IIFE that ports the AI animation (`start`, `stop`, `setPhrases`).
 
+- **Facebook path** (`isFB()` = `picked.platform === 'facebook'`): `openFbauth()` / `closeFbauth()` (`#fbauth`), `recTagHTML(stars)`, `cardRatingHTML(r)`, `platformIcon()` in the review card; `renderPosts` / `renderWidget` branch on `isFB()`; `#inbox-later` (Facebook only). `showFinal(variant)` takes `'existing' | 'new' | 'fb' | 'fb-skip'` (booleans still work: true = new, false = existing); `#final-first`, `#req-btn`, `#qr-google` and `[data-copy-fb]` descriptions switch per variant.
+- **Read-only inbox reply note:** `gateHTML`, `.is-replying` + `.reply-gate` on `.review-card--recent`.
+
 ## Core patterns (reuse these)
 - **Animations = WAAPI.** `fade(el, from, to, ms, {from, to, delay, easing})` uses `fill: both`. `done(anims)` resolves `true`, or `false` if cancelled. `hold(ms)` is a timer that runs on the animation clock (so it pauses with the tab).
 - **Cancellation:** `resetTransition()` bumps `run` and cancels non-CSS animations. Every async phase captures `id = run` and checks `live()` after each `await`, bailing if stale.

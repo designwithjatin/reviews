@@ -8,7 +8,10 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 ## Open questions (waiting on the owner)
 | Since | Question | Context |
 |---|---|---|
-| 2026-11-16 | Skip-auth inbox: what should "Connect Google Account" and the card reply action do? | Not wired yet. |
+| 2026-11-18 | Facebook: what does "I'll do it later" in the inbox lead to? | Built as: skip to social posts (agent). Figma shows the button only on the Facebook inbox. |
+| 2026-11-18 | Facebook skipped-auth path has no inbox or posts (we can't read recommendations). Right? | Agent reading of the product discussion. |
+| 2026-11-18 | Facebook numbers (100 today, next 150) are placeholders | Engineering to confirm Meta returns recommendation counts. |
+| 2026-11-16 | Skip-auth inbox: what should "Connect Google Account" (banner + reply note) do? | The reply action now opens the note (2026-11-18); the link isn't wired. |
 | 2026-11-16 | Skip-auth path on a **new business** (create path): it currently goes listings → opt-in → "first 100 reviews". Is that right, given there are no reviews to show? | |
 | 2026-10-16 | Create-profile path: the steps still say "Found 9 gaps in your business profile" and the milestone says "We have fixed 9 profile gaps!". Should new businesses get their own wording? | Connect is now Google sign-in. |
 | 2026-10-16 | Should the create screen have a way back to the search results? | Figma has none; the header link is the only exit. |
@@ -24,6 +27,8 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-11-18: Facebook result path: Connect Facebook (Page picker stand-in) → listings → Facebook inbox (Recommends tags, I'll do it later) → replies → automate → posts → widget → "Get 50 more recommendations" last step. Skipped auth → "Start collecting recommendations" (Go to Dashboard only).
+- 2026-11-18: Read-only inbox: reply opens a "To view & manage replies, Connect Google Account" note under the card.
 - 2026-11-16: Brand Context tab: Contact Information + Business Description (500 max) inputs, Save.
 - 2026-11-16: Skip-auth path: "I'll do it later" on the form → drafted fixes → listings (no auth) → 5 recent reviews read-only → 2 posts → final. Form button now "Connect Google & Continue".
 - 2026-10-21: Category detection fixed (whole words; "space" no longer reads as "spa") + Coworking Space category.

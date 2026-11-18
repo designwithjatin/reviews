@@ -54,7 +54,16 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Posts on this path: the 2 best of the 5 recent reviews**; Share Now and I'll do it later both go straight to the final screen (no widget) (owner: "the last step").
 - **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
+## Facebook result path
+- **2026-11-18 · A Facebook result runs a Facebook version of the flow** (owner). Connect Facebook instead of Google; inbox/posts/widget show Recommends instead of stars (Figma 8848:142623, 8848:143156, 8850:155386, 8850:155509).
+- **2026-11-18 · Last step, connected: "Get 50 more recommendations on Facebook"** with a count bar (owner; Figma 8853:28868). The recommend % line was removed (owner).
+- **2026-11-18 · Last step, skipped auth: "Start collecting recommendations", Go to Dashboard only, no connect nudge** (owner; Figma 8854:32265). The reminder to connect belongs in the dashboard ("Finish setup") and feature-level prompts.
+- **2026-11-18 · Review requests can be sent without auth** (owner): the review link comes from the search result (Google place ID / Facebook Page). Suggested guardrails: verified account email as reply-to, a send cap before connecting (agent).
+- **2026-11-18 · Facebook login stand-in** rebuilt in HTML, Facebook look, business as the Page (agent). The Facebook connected path keeps the widget (owner sent the widget frame).
+- **2026-11-18 · Facebook "I'll do it later" in the inbox skips to social posts** (agent reading).
+
 ## Connect GBP
+- **2026-11-18 · Read-only inbox reply → connect note under the card** (owner; Figma 8818:89672).
 - **2026-11-17 · Skip-auth inbox banner note "To See and Reply to 130 more Reviews" = regular, black (`--txt-primary`), 14px** (owner; Figma had 12px semibold grey).
 - **2026-11-17 · Listings groups have no outer border or padding** (owner; Figma Lfz2oHviZXGc9NDmp8JEpq 8711:46871): just the group label row, then the white rounded list 4px below. Applies to every listings screen.
 - **2026-11-16 · Listings AI animation cycles exactly two phrases: "Finding relevant listing publishers" → "Updating brand context"** (owner). Applies to both connect paths and the skip-auth path, via `listingPhrases()`. The category / city phrases were dropped.

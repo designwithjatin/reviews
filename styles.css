@@ -2053,3 +2053,64 @@ button { font: inherit; color: inherit; }
 .posts__grid--big .post { width: 322px; height: 322px; }
 .posts__grid--big .post__art { transform: scale(0.7667); }  /* 420 → 322 */
 .inbox__count-wrap { display: inline-flex; align-items: center; gap: var(--sp-8); }
+
+/* ==========================================================
+   Facebook result path (Figma Lfz2oHviZXGc9NDmp8JEpq 8853:28868 · 8854:32265)
+   ========================================================== */
+/* Facebook login · choose a Page. Mimics Facebook's dialog; prototype only, no real auth. */
+.fbauth {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #F0F2F5;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #1C1E21;
+}
+.fbauth__card { width: min(500px, 100%); border-radius: 8px; background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1); overflow: hidden; }
+.fbauth__bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #DADDE1; font-size: 14px; line-height: 20px; color: #606770; }
+.fbauth__body { display: flex; flex-direction: column; gap: 16px; padding: 24px 24px 16px; }
+.fbauth__body h2 { font-size: 20px; line-height: 24px; font-weight: 700; color: #1C1E21; }
+.fbauth__page { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #0866FF; border-radius: 8px; background: #EBF5FF; cursor: pointer; }
+.fbauth__page input { accent-color: #0866FF; margin: 0; }
+.fbauth__page b { display: block; font-size: 15px; line-height: 20px; }
+.fbauth__page small { display: block; font-size: 13px; line-height: 16px; color: #606770; }
+.fbauth__avatar { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #0866FF; color: #fff; font-weight: 700; }
+.fbauth__note { font-size: 13px; line-height: 18px; color: #606770; }
+.fbauth__foot { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 24px 20px; }
+.fbauth__foot button { height: 36px; padding: 0 20px; border: 0; border-radius: 6px; font: 600 15px/1 Helvetica, Arial, sans-serif; cursor: pointer; }
+.fbauth__cancel { background: #E4E6EB; color: #1C1E21; }
+.fbauth__go { background: #0866FF; color: #fff; }
+.fbauth__go:hover { background: #0759E0; }
+
+/* Recommendations goal: count marks, Facebook mark in the marker */
+.goal__labels .goal__c { transform: translateX(-50%); }
+.goal__marker--fb { display: flex; align-items: center; justify-content: center; }
+
+/* QR card on the Facebook path: Facebook chip only */
+.tool__art--fb .qr__chip--facebook { left: 50%; top: 172px; transform: translateX(-50%); }
+
+/* Read-only inbox · reply opens a connect note (Figma 8818:89672) */
+.review-card--recent.is-replying { border-color: var(--brd-hover); box-shadow: 0 8px 12px rgba(0, 0, 0, 0.12); }
+.review-card--recent.is-replying .recent-actions { opacity: 1; }
+.review-card--recent.is-replying [data-reply] { background: var(--brand-primary-subtle); }
+.reply-gate {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  height: 32px;
+  margin-top: var(--sp-8);  /* 16px from the review, with the card's 8px gap */
+  padding: 6px var(--sp-8);
+  border-left: 2px solid #89B9FF;
+  border-radius: 2px;
+  background: var(--srf-input);
+  font: var(--body-sm);
+  color: var(--txt-primary);
+}
+.reply-gate__g { width: 20px; height: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 40px; background: #fff; }
+.reply-gate .link-btn { height: 18px; margin-left: -4px; }
+/* Widget review on the Facebook path: "Recommended" instead of stars (Figma 8850:155591) */
+.wgt-review__rec { display: flex; align-items: center; gap: var(--sp-4); margin-top: 4px; font: var(--body-xs); color: var(--txt-secondary); }

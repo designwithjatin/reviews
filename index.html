@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=48">
+  <link rel="stylesheet" href="styles.css?v=51">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -254,8 +254,8 @@
             <!-- What "later" leads to is still to be defined by the owner -->
             <button class="link-btn link-btn--32" type="button" id="connect-later">I’ll do it later</button>
             <button class="btn-primary" type="button" id="connect-open">
-              <span class="btn-primary__g"><img src="assets/google-g-color.svg" alt=""></span>
-              Connect Google &amp; Continue
+              <span class="btn-primary__g"><img src="assets/google-g-color.svg" alt="" id="connect-open-icon"></span>
+              <span id="connect-open-label">Connect Google &amp; Continue</span>
               <img src="assets/arrow-right.svg" alt="" width="20" height="20">
             </button>
           </div>
@@ -404,6 +404,7 @@
       <section class="inbox" id="inbox" hidden>
         <div class="inbox__head">
           <p class="inbox__title">Reviews Inbox<span class="inbox__count-wrap"><span class="dot" aria-hidden="true"></span><span class="inbox__count">130 Reviews</span></span></p>
+          <button class="link-btn link-btn--32" type="button" id="inbox-later" hidden>I’ll do it later</button>
           <button class="btn-primary btn-primary--md inbox__send" type="button" id="send-replies" disabled>
             <img src="assets/send.svg" alt="" width="20" height="20"><span>Send Replies</span>
           </button>
@@ -536,9 +537,9 @@
           <div class="pub-group" id="pub-active">
             <div class="pub-group__head">Active Listings</div>
             <div class="pub-card pub-card--lead">
-              <img src="assets/platform-gbp.svg" alt="" width="24" height="24">
+              <img src="assets/platform-gbp.svg" alt="" width="24" height="24" id="pub-active-icon">
               <div>
-                <p class="pub-name">Google Business Profile <a class="pub-ext" href="#" aria-label="Open Google Business Profile"><img src="assets/external-16.svg" alt="" width="16" height="16"></a></p>
+                <p class="pub-name"><span id="pub-active-label">Google Business Profile</span> <a class="pub-ext" href="#" aria-label="Open the connected listing"><img src="assets/external-16.svg" alt="" width="16" height="16"></a></p>
                 <p class="pub-sub" id="pub-gbp-name">TWC Jaipur</p>
               </div>
             </div>
@@ -676,9 +677,33 @@
         </div>
       </div>
     </div>
+    <!-- Facebook Page connected: recommendations goal (Figma Lfz2oHviZXGc9NDmp8JEpq 8853:28868) -->
+    <div class="final__head" data-for="fb" hidden>
+      <h2 class="final__title">Get <span class="final__hl">50 more recommendations</span> on Facebook</h2>
+      <div class="goal goal--count" role="img" aria-label="100 recommendations today. Next milestone: 150 recommendations.">
+        <span class="goal__note" style="left:270px">Recommendations today</span>
+        <span class="goal__note" style="left:440px; color:var(--txt-primary)">Next milestone!</span>
+        <div class="goal__track">
+          <span class="goal__fill" style="width:317px"></span>
+          <i style="left:158px"></i><i style="left:317px"></i><i style="left:475px"></i>
+          <span class="goal__marker goal__marker--fb" style="left:307px"><img src="assets/platform-facebook.svg" alt="" width="16" height="16"></span>
+        </div>
+        <div class="goal__labels">
+          <span style="left:0">0</span>
+          <span class="goal__c" style="left:158px">50</span>
+          <span class="goal__c goal__strong" style="left:317px">100</span>
+          <span class="goal__c goal__strong" style="left:475px">150<img src="assets/goal-flag.svg" alt="" width="12" height="12"></span>
+          <span style="right:0">200</span>
+        </div>
+      </div>
+    </div>
+    <!-- Facebook, auth skipped: no goal, we can't read recommendations yet (Figma 8854:32265) -->
+    <div class="final__head" data-for="fb-skip" hidden>
+      <h2 class="final__title">Start <span class="final__hl">collecting recommendations</span></h2>
+    </div>
     <div class="final__ctas">
       <button class="btn-outline btn-outline--wide" type="button">Go to Dashboard</button>
-      <button class="link-btn link-btn--32" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Send First Review Request</button>
+      <button class="link-btn link-btn--32" type="button" id="final-first"><img src="assets/quick-request.svg" alt="" width="20" height="20"><span>Send First Review Request</span></button>
     </div>
     <div class="tools">
       <article class="tool">
@@ -690,7 +715,7 @@
             <i class="req__rule"></i>
             <p class="req__hi">Hi John,</p>
             <span class="art-lines req__l1"><i style="width:139.6px"></i><i style="width:122.5px"></i></span>
-            <span class="req__btn">Leave a review</span>
+            <span class="req__btn" id="req-btn">Leave a review</span>
             <span class="art-lines req__l2"><i style="width:125.4px"></i><i style="width:67px"></i></span>
           </div>
           <img class="req__arrow" src="assets/tool-dotted-arrow.svg" alt="">
@@ -698,7 +723,7 @@
           <div class="req__sent"><img src="assets/done-filled.svg" alt="">Request sent</div>
         </div>
         <div class="tool__more">
-          <p>Send bulk review requests to customers with an intelligent campaign system for quick reviews.</p>
+          <p data-copy-google="Send bulk review requests to customers with an intelligent campaign system for quick reviews." data-copy-fb="Send customers a link that opens your Facebook Page’s recommendation box.">Send bulk review requests to customers with an intelligent campaign system for quick reviews.</p>
           <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Send Quick Review Request</button>
         </div>
       </article>
@@ -712,11 +737,11 @@
               <i class="qr__corner qr__corner--tl"></i><i class="qr__corner qr__corner--tr"></i><i class="qr__corner qr__corner--bl"></i><i class="qr__corner qr__corner--br"></i>
             </div>
           </div>
-          <div class="qr__chip qr__chip--google"><img src="assets/platform-gbp.svg" alt=""><span><b>Google</b><span class="qr__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></span></span></div>
+          <div class="qr__chip qr__chip--google" id="qr-google"><img src="assets/platform-gbp.svg" alt=""><span><b>Google</b><span class="qr__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></span></span></div>
           <div class="qr__chip qr__chip--facebook"><img src="assets/platform-facebook.svg" alt=""><span><b>Facebook</b><span class="qr__stars"><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""><img src="assets/star-yellow.svg" alt="" class=""></span></span></div>
         </div>
         <div class="tool__more">
-          <p>Print a QR code for your counter or tables so customers can leave a review in seconds.</p>
+          <p data-copy-google="Print a QR code for your counter or tables so customers can leave a review in seconds." data-copy-fb="Print a QR code for your counter or tables that opens your Facebook recommendations.">Print a QR code for your counter or tables so customers can leave a review in seconds.</p>
           <button class="link-btn" type="button"><img src="assets/download-20.svg" alt="" width="20" height="20">Download QR Code</button>
         </div>
       </article>
@@ -740,7 +765,7 @@
           </div>
         </div>
         <div class="tool__more">
-          <p>Collect private feedback first, and invite happy customers to post it as a public review.</p>
+          <p data-copy-google="Collect private feedback first, and invite happy customers to post it as a public review." data-copy-fb="Collect private feedback first, then invite happy customers to recommend you on Facebook.">Collect private feedback first, and invite happy customers to post it as a public review.</p>
           <button class="link-btn" type="button"><img src="assets/external-link-20.svg" alt="" width="20" height="20">Preview Feedback Form</button>
         </div>
       </article>
@@ -775,6 +800,28 @@
     <div class="gauth__foot">
       <span class="gauth__lang">English (United States)<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 3.5 5 6.5 8 3.5" fill="#444746"/></svg></span>
       <span class="gauth__links"><a href="#" onclick="return false">Help</a><a href="#" onclick="return false">Privacy</a><a href="#" onclick="return false">Terms</a></span>
+    </div>
+  </div>
+
+  <!-- Facebook login · choose a Page. Prototype only: no real login, nothing is
+       entered or sent; Continue just moves the flow on. -->
+  <div class="fbauth" id="fbauth" hidden>
+    <div class="fbauth__card" role="dialog" aria-modal="true" aria-labelledby="fbauth-title">
+      <div class="fbauth__bar"><img src="assets/platform-facebook.svg" alt="" width="20" height="20">Log in with Facebook</div>
+      <div class="fbauth__body">
+        <img src="assets/socialpilot-wordmark.svg" alt="SocialPilot" width="133" height="31">
+        <h2 id="fbauth-title">Choose the Page you want SocialPilot to manage</h2>
+        <label class="fbauth__page">
+          <input type="radio" name="fb-page" checked>
+          <span class="fbauth__avatar" id="fbauth-initial" aria-hidden="true"></span>
+          <span><b id="fbauth-name"></b><small id="fbauth-category"></small></span>
+        </label>
+        <p class="fbauth__note">SocialPilot will be able to read and reply to your Page’s recommendations, and update your Page details.</p>
+      </div>
+      <div class="fbauth__foot">
+        <button class="fbauth__cancel" type="button" data-fb-cancel>Cancel</button>
+        <button class="fbauth__go" type="button" data-fb-continue>Continue</button>
+      </div>
     </div>
   </div>
 
@@ -1174,6 +1221,9 @@
       document.getElementById('sel-category').textContent = b.category;
       document.getElementById('sel-address').textContent = b.address;
       picked = b;
+      const fb = b.platform === 'facebook';
+      document.getElementById('connect-open-label').textContent = fb ? 'Connect Facebook & Continue' : 'Connect Google & Continue';
+      document.getElementById('connect-open-icon').src = fb ? 'assets/platform-facebook.svg' : 'assets/google-g-color.svg';
       const slug = b.name.toLowerCase().replace(/[^a-z0-9]+/g, '');
       const set = (id, v) => (document.getElementById(id).value = v);
       set('form-name', b.name);
@@ -1404,6 +1454,7 @@
       document.getElementById('list-later').hidden = true;
       document.getElementById('inbox-recent').hidden = true;
       inboxContinue.hidden = true;
+      document.getElementById('inbox-later').hidden = true;
       sendAll.hidden = false;
       inbox.querySelector('.inbox__count-wrap').hidden = false;
       delete sendAll.dataset.done;
@@ -1607,6 +1658,7 @@
 
     document.getElementById('connect-open').addEventListener('click', () => {
       if (cameFrom === 'create') return openGauth();  // new business: Google sign-in, not the GBP picker
+      if (isFB()) return openFbauth();  // Facebook result: Facebook login, choose the Page
       groupIndex = 0;
       selectedLoc = 0;
       document.getElementById('loc-search').value = '';
@@ -1651,8 +1703,11 @@
       // Left: progress moves on, gaps milestone + new steps
       progressBar.style.width = '120px';  // final width set directly so later resets keep it
       progressBar.animate([{ width: '70px' }, { width: '120px' }], { duration: motion(600), easing: EASE_IN_OUT });
-      if (skipAuth) addDraftMilestone('9 Profile fixes drafted.', 'You can apply changes once you connect your business profile', 'draft-16.svg');
-      else addMilestone('We have fixed 9 profile gaps!', 'Your business will be easier to find in Google by your customers.');
+      const fb = isFB();
+      document.getElementById('pub-active-icon').src = `assets/platform-${fb ? 'facebook' : 'gbp'}.svg`;
+      document.getElementById('pub-active-label').textContent = fb ? 'Facebook Page' : 'Google Business Profile';
+      if (skipAuth) addDraftMilestone(`9 ${fb ? 'Page' : 'Profile'} fixes drafted.`, `You can apply changes once you connect your ${fb ? 'Facebook Page' : 'business profile'}`, 'draft-16.svg');
+      else addMilestone(`We have fixed 9 ${fb ? 'Page' : 'profile'} gaps!`, fb ? 'Your Facebook Page is ready for your customers.' : 'Your business will be easier to find in Google by your customers.');
       // Not connected: no Google listing to show, and the user can skip this step too
       document.getElementById('pub-title').textContent =
         `Found ${skipAuth ? PUBLISHERS.length : 10} Publishers relevant to your business`;
@@ -1718,6 +1773,33 @@
       startListings(picked.name);
     });
 
+    // ---- Facebook result: Facebook login stand-in (no real auth) ----
+    const isFB = () => picked?.platform === 'facebook';
+    const fbauth = document.getElementById('fbauth');
+    function openFbauth() {
+      document.getElementById('fbauth-name').textContent = picked.name;
+      document.getElementById('fbauth-category').textContent = `Facebook Page · ${picked.category}`;
+      document.getElementById('fbauth-initial').textContent = picked.name.charAt(0).toUpperCase();
+      fbauth.hidden = false;
+      fade(fbauth, 0, 1, motion(T3.modalIn));
+      fade(fbauth.querySelector('.fbauth__card'), 0, 1, motion(T3.modalIn + 80),
+        { from: { transform: 'translateY(8px)' }, to: { transform: 'none' } });
+      fbauth.querySelector('[data-fb-continue]').focus();
+    }
+    async function closeFbauth() {
+      await done([fade(fbauth, 1, 0, motion(T3.modalOut), { easing: EASE_IN })]);
+      fbauth.hidden = true;
+      fbauth.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      fbauth.getAnimations().forEach(a => a.cancel());
+    }
+    fbauth.querySelector('[data-fb-cancel]').addEventListener('click', closeFbauth);
+    fbauth.querySelector('[data-fb-continue]').addEventListener('click', async () => {
+      coverForListings();  // the login page fades straight onto the next step
+      await closeFbauth();
+      showToast('Your Facebook Page is connected');
+      startListings(picked.name);
+    });
+
     // ---- 3 · Opt-in modal ----
     let optinFor = [];
     function openOptin(ids) {
@@ -1768,6 +1850,10 @@
         if (!await hold(1200) || !live()) return;
         return showFinal(true);
       }
+      if (isFB() && skipAuth) {  // Facebook, not connected: we can't read recommendations
+        if (!await hold(1200) || !live()) return;
+        return showFinal('fb-skip');
+      }
       if (skipAuth) return runRecentReviews(id);  // not connected: public reviews only
       const stepsIn = showSteps([
         { ai: true, label: 'Learning from your reviews' },
@@ -1813,13 +1899,23 @@
     ];
     const starsHTML = n => [1, 2, 3, 4, 5].map(i =>
       `<img src="assets/review-star${i <= n ? '' : '-empty'}.svg" alt="" class="review-card__star">`).join('');
+    // Facebook has no stars: 4–5 reads as "Recommends", 1–3 as "Does not Recommend" (Figma 8848:142635)
+    const recTagHTML = n => n >= 4
+      ? '<span class="info-tag info-tag--success info-tag--pill"><img src="assets/recommend.svg" alt="" width="12" height="12">Recommends</span>'
+      : '<span class="info-tag info-tag--pill"><img src="assets/recommend.svg" alt="" width="12" height="12">Does not Recommend</span>';
+    const cardRatingHTML = r => isFB()
+      ? recTagHTML(r.stars)
+      : `<span class="review-card__stars" role="img" aria-label="${r.stars} out of 5 stars">${starsHTML(r.stars)}</span>`;
+    const platformIcon = () => isFB()
+      ? '<img src="assets/platform-facebook.svg" alt="Facebook" width="24" height="24">'
+      : '<img src="assets/platform-gbp.svg" alt="Google" width="24" height="24">';
     const reviewHTML = (r, i) => `
       <article class="review-card" data-i="${i}">
         <div class="review-card__profile">
-          <img src="assets/platform-gbp.svg" alt="Google" width="24" height="24">
+          ${platformIcon()}
           <span class="review-card__name">${r.name}</span><span class="dot" aria-hidden="true"></span>
           <span class="review-card__when">${r.when}</span><span class="dot" aria-hidden="true"></span>
-          <span class="review-card__stars" role="img" aria-label="${r.stars} out of 5 stars">${starsHTML(r.stars)}</span>
+          ${cardRatingHTML(r)}
           <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
         </div>
         <p class="review-card__text"><span>${r.text}</span><button class="link-underline link-underline--btn review-card__more" type="button" data-act="more">Read more</button></p>
@@ -1855,6 +1951,10 @@
     });
     document.getElementById('list-later').addEventListener('click', () => {
       resetTransition();
+      if (isFB()) {
+        addDraftMilestone(`Found ${PUBLISHERS.length} Relevant Publishers`, 'Apple, Bing, Tripadvisor and more', 'listings-16.svg');
+        return hold(1200).then(ok => ok && showFinal('fb-skip'));
+      }
       runRecentReviews(run, { skippedListings: true });
     });
     inboxContinue.addEventListener('click', () => runSocialProof());
@@ -1870,11 +1970,34 @@
           <span class="recent-actions">
             <button class="icon-btn" type="button" aria-label="Open on Google"><img src="assets/external-link-16.svg" alt="" width="16" height="16"></button>
             <button class="icon-btn" type="button" data-copy aria-label="Copy review"><img src="assets/copy-16.svg" alt="" width="16" height="16"></button>
-            <button class="icon-btn" type="button" aria-label="Reply"><img src="assets/reply-16.svg" alt="" width="16" height="16"></button>
+            <button class="icon-btn" type="button" data-reply aria-label="Reply" aria-expanded="false"><img src="assets/reply-16.svg" alt="" width="16" height="16"></button>
           </span>
         </div>
         <p class="review-card__text">${esc(r.text)}</p>
       </article>`;
+    // Reply on a read-only card: replies need Google, so the card opens a note
+    // with the connect link instead of a reply box (Figma 8818:89672)
+    const gateHTML = `<div class="reply-gate">
+        <span class="reply-gate__g"><img src="assets/google-g-color.svg" alt="" width="14" height="14"></span>
+        <span>To view &amp; manage replies,</span>
+        <button class="link-btn" type="button">Connect Google Account</button>
+      </div>`;
+    recentList.addEventListener('click', e => {
+      const btn = e.target.closest('[data-reply]');
+      if (!btn) return;
+      const card = btn.closest('.review-card');
+      const open = !card.classList.contains('is-replying');
+      recentList.querySelectorAll('.review-card.is-replying').forEach(c => {
+        c.classList.remove('is-replying');
+        c.querySelector('[data-reply]').setAttribute('aria-expanded', 'false');
+        c.querySelector('.reply-gate')?.remove();
+      });
+      if (!open) return;
+      card.classList.add('is-replying');
+      btn.setAttribute('aria-expanded', 'true');
+      card.insertAdjacentHTML('beforeend', gateHTML);
+      fade(card.lastElementChild, 0, 1, motion(200), { from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
+    });
     recentList.addEventListener('click', async e => {
       const btn = e.target.closest('[data-copy]');
       if (!btn) return;
@@ -1922,6 +2045,7 @@
 
     async function runReviews(id) {
       const live = () => id === run;
+      inboxLater.hidden = !isFB();
       // Reviews start loading; the inbox replaces the animation
       inboxRecent.hidden = true;
       inboxLoading.hidden = false;
@@ -2021,9 +2145,9 @@
         <label class="post">
           <input type="checkbox" aria-label="Post ${i + 1}: review by ${esc(r.name)}">
           <div class="post__art" aria-hidden="true">
-            <img src="assets/platform-gbp.svg" alt="">
+            <img src="assets/platform-${isFB() ? 'facebook' : 'gbp'}.svg" alt="">
             <p class="post__name">${esc(r.name)}</p>
-            <span class="post__stars">${smallStars(r.stars)}</span>
+            ${isFB() ? '<span class="post__tag"><img src="assets/recommend.svg" alt="">Recommends</span>' : `<span class="post__stars">${smallStars(r.stars)}</span>`}
             <p class="post__quote">“${esc(r.text)}”</p>
             <p class="post__when">${esc(r.when)}</p>
           </div>
@@ -2118,10 +2242,12 @@
               <div>
                 <p class="wgt-review__name">${esc(r.name)}</p>
                 <p class="wgt-review__when">${esc(r.when.toLowerCase())}</p>
-                <span class="wgt-review__stars" role="img" aria-label="${r.stars} out of 5 stars">${smallStars(r.stars)}</span>
+                ${isFB()
+                  ? '<span class="wgt-review__rec"><img src="assets/recommend-16.svg" alt="" width="16" height="16">Recommended</span>'
+                  : `<span class="wgt-review__stars" role="img" aria-label="${r.stars} out of 5 stars">${smallStars(r.stars)}</span>`}
               </div>
             </div>
-            <img src="assets/platform-gbp.svg" alt="Google" width="16" height="16">
+            ${isFB() ? '<img src="assets/platform-facebook.svg" alt="Facebook" width="16" height="16">' : '<img src="assets/platform-gbp.svg" alt="Google" width="16" height="16">'}
           </div>
           <p class="wgt-review__text">${esc(r.text)}</p>
         </article>`).join('');
@@ -2168,10 +2294,12 @@
     });
 
     // ---- Continue → final screen (no side panel) ----
-    document.getElementById('widget-continue').addEventListener('click', () => showFinal(false));
+    document.getElementById('widget-continue').addEventListener('click', () => showFinal(isFB() ? 'fb' : 'existing'));
 
-    // isNew: the "first 100 reviews" variant (Figma 10773:18776) for a business created from scratch
-    async function showFinal(isNew) {
+    // Variants: 'existing' (Google), 'new' ("first 100 reviews", Figma 10773:18776),
+    // 'fb' (Facebook Page connected) and 'fb-skip' (Facebook, auth skipped). true/false = new/existing.
+    async function showFinal(variant) {
+      if (typeof variant === 'boolean') variant = variant ? 'new' : 'existing';
       resetTransition();
       const id = run;
       hideToast(true);
@@ -2184,13 +2312,23 @@
         screenFinal.querySelectorAll('.js-biz-name').forEach(el => { el.textContent = picked.name; });
         screenFinal.querySelectorAll('.js-biz-initial').forEach(el => { el.textContent = picked.name.charAt(0).toUpperCase(); });
       }
-      screenFinal.querySelectorAll('.final__head').forEach(h => (h.hidden = h.dataset.for !== (isNew ? 'new' : 'existing')));
+      screenFinal.querySelectorAll('.final__head').forEach(h => (h.hidden = h.dataset.for !== variant));
+      // Facebook: tools point at Facebook; skipped auth has Go to Dashboard only
+      const fb = variant.startsWith('fb');
+      const first = document.getElementById('final-first');
+      first.hidden = variant === 'fb-skip';
+      first.querySelector('span').textContent = fb ? 'Send First Recommendation Request' : 'Send First Review Request';
+      document.getElementById('req-btn').textContent = fb ? 'Recommend us' : 'Leave a review';
+      document.getElementById('qr-google').hidden = fb;
+      screenFinal.querySelector('.tool__art--qr').classList.toggle('tool__art--fb', fb);
+      screenFinal.querySelectorAll('[data-copy-fb]').forEach(p => (p.textContent = fb ? p.dataset.copyFb : p.dataset.copyGoogle));
       window.scrollTo(0, 0);
       [...screenFinal.children].filter(el => !el.hidden).forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * 120), from: { transform: 'translateY(12px)' }, to: { transform: 'none' } }));
       // The star pops in at 1.0, then travels to today's 3.8 with the bar filling
       // behind it (fill width and star move on the same curve so they stay together)
       const goal = screenFinal.querySelector('.final__head:not([hidden]) .goal');
+      if (!goal) return;  // Facebook, auth skipped: no goal to animate
       const marker = goal.querySelector('.goal__marker');
       const travel = marker.offsetLeft;  // 347px from the start of the track to 3.8 (0 when starting out)
       const goalFill = goal.querySelector('.goal__fill');
@@ -2358,8 +2496,12 @@
     // 2 · a short beat so the replied state reads
     // 3 · back to the top; replied cards drop away in turn
     // 4 · the writing-style card stays put (it's in both views); Automate Replies rises in
+    // Facebook: skip replying for now, straight to social posts
+    const inboxLater = document.getElementById('inbox-later');
+    inboxLater.addEventListener('click', () => { inboxLater.hidden = true; runSocialProof(); });
     sendAll.addEventListener('click', async () => {
       if (sendAll.dataset.done) return runSocialProof();  // now "Save and Continue"
+      inboxLater.hidden = true;
       const pending = [...reviewList.querySelectorAll('.review-card:not(.is-replied)')];
       const total = reviewList.children.length;
       resetTransition();

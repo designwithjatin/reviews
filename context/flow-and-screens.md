@@ -33,6 +33,16 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | S5 | Skip-auth: final | Lfz2…/8726:90220 | Existing final ("75 more 5-star reviews"); widget skipped | — |
 | 20 | Final | 10758:17527 (cards 10758:17567) | `#screen-final`, no side panel: "Get **75 more 5-star reviews** to reach 4.0 Stars", rating bar (star pops at 1.0, slides with the fill to 3.8), "Go to Dashboard", "Send First Review Request", 3 tool cards; hover reveals each card's description + CTA (Send Quick Review Request / Download QR Code / Preview Feedback Form) | Header link hidden |
 
+## Facebook result path (2026-11-18; Figma Lfz2oHviZXGc9NDmp8JEpq)
+Picking a result tagged **Facebook** (`picked.platform === 'facebook'`) switches the flow:
+- **Profile form:** "Connect Facebook & Continue" with the Facebook icon. It opens a stand-in **Facebook login · choose a Page** screen (`#fbauth`): the business as the Page, Continue / Cancel. No real auth.
+- **Connected:** toast "Your Facebook Page is connected" → listings (Active Listings card = Facebook Page; milestone "We have fixed 9 Page gaps! / Your Facebook Page is ready for your customers.") → opt-in → **Facebook inbox** (8848:142623): Facebook icon, **Recommends / Does not Recommend** tags instead of stars (4–5 = Recommends), and **I'll do it later** next to Send Replies (skips to social posts) → replied state → automate replies (8848:143156) → **posts** with the Facebook icon + Recommends tag (8850:155386) → **widget** cards with "Recommended" + Facebook icon (8850:155509) → last step **"Get 50 more recommendations on Facebook"** (0/50/100/150/200 count bar, Facebook mark in the marker; Figma 8853:28868).
+- **Skipped auth** ("I'll do it later" on the form): "9 Page fixes drafted… once you connect your Facebook Page" → listings → opt-in or I'll do it later → last step **"Start collecting recommendations"** with **Go to Dashboard only** (no goal bar, no connect nudge; Figma 8854:32265). No inbox or posts, because we can't read recommendations without the Page.
+- Last step on both: request card button "Recommend us", QR card shows the Facebook chip only, tool descriptions mention Facebook.
+
+## Read-only inbox · reply note (2026-11-18; Figma 8818:89180 / 8818:89672)
+On the Google skip-auth inbox, the reply icon on a card opens a note under the review: Google G + "To view & manage replies, **Connect Google Account**". The card gets the hover border + shadow and the reply icon stays highlighted. Clicking reply again (or another card's) closes it. The link isn't wired yet.
+
 ## Copy that the owner set
 - "Back to results" (not "Choose another business").
 - The Missing view must not say "Added from the business details you've shared" on empty fields.

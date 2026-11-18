@@ -106,7 +106,13 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - **Posts:** pending milestone "Read your past reviews", then **2 posts at 322px** built from the best recent reviews. Share Now / I'll do it later go **straight to the final "75 more 5-star reviews" screen** (no widget).
 - The connected path is unchanged.
 
+**Facebook result path** (Figma `Lfz2oHviZXGc9NDmp8JEpq`)
+- A **Facebook** search result runs the Facebook version: "Connect Facebook & Continue" → stand-in Facebook Page picker (no real auth, business shown as the Page) → listings → inbox with **Recommends / Does not Recommend** tags instead of stars → replies → automate → posts and widget with Recommends → last step **"Get 50 more recommendations on Facebook"** (count bar 0–200).
+- **Skipped auth on Facebook** ends on **"Start collecting recommendations"** with **Go to Dashboard only**: no goal bar and no connect nudge. Connecting is nudged later, inside the product.
+- Review requests (Quick Review Request, QR, feedback form) don't need auth: the review link comes from the search result.
+
 **Reviews inbox**
+- On the read-only (skip-auth) inbox, **reply** opens a note under the card: "To view & manage replies, Connect Google Account" (Figma 8818:89672).
 - **Brand Context tab** (writing-style modal; Figma file `FHSl3IYwrNTDd0auwgks6q` 7422:121796) is **two inputs**: Contact Information (prefilled with the profile email; "Will be used to personalize AI-generated review replies.") and Business Description (prefilled with the About description, 500-character limit with an n/500 counter; "Will be used to personalize AI-generated content where applicable."). The footer has **Save** only, which writes both back to the profile form and shows a toast. Regenerate shows on the Writing Style tab only.
 - Order: skeleton loading → AI drafts → **Send Replies**.
 - On **Send Replies**, every card switches to the **Replied** state, then hands over to the **Writing Style + Automate Replies** view (Figma 10677:35306). The button becomes **Save and Continue**, which leads to "Creating Social Posts".
