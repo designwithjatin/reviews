@@ -45,6 +45,9 @@ Picking a result tagged **Facebook** (`picked.platform === 'facebook'`) switches
 - **Publish Changes & Continue** → toast "Business details updated on google" → listings → the connected flow (inbox, posts, widget, final).
 - **I'll do it later** → still connected; pending milestone "9 Profile fixes drafted. You can publish them anytime from your dashboard" → listings → the connected flow.
 
+## Facebook pill path (2026-11-18)
+**Facebook Page** pill on the search screen → **Connect Facebook** modal straight away (no sign-in screen; demo business "Third Wave Coffee Jaipur") → toast "Your Facebook Page is connected" → AI steps → form with **I'll do it later** + **Publish Changes & Continue** (Facebook icon), no "Back to results". Publish → toast "Page details updated on Facebook" → listings → the Facebook connected flow (Recommends inbox, posts, widget, "Get 50 more recommendations"). I'll do it later → "9 Page fixes drafted. You can publish them anytime from your dashboard", still connected.
+
 ## Read-only inbox · reply note (2026-11-18; Figma 8818:89180 / 8818:89672)
 On the Google skip-auth inbox, the reply icon on a card opens a note under the review: Google G + "To view & manage replies, **Connect Google Account**". The card gets the hover border + shadow and the reply icon stays highlighted. Clicking reply again (or another card's) closes it. The link isn't wired yet.
 

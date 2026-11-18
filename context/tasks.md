@@ -28,6 +28,7 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-11-18: Facebook pill path (mirrors the Google pill).
 - 2026-11-18: Google pill path: sign-in → Connect GBP modal → AI steps → form with Publish Changes & Continue / I'll do it later → connected flow.
 - 2026-11-18: Facebook inbox header spacing fixed.
 - 2026-11-18: Facebook result path: Connect Facebook (Page picker stand-in) → listings → Facebook inbox (Recommends tags, I'll do it later) → replies → automate → posts → widget → "Get 50 more recommendations" last step. Skipped auth → "Start collecting recommendations" (Go to Dashboard only).

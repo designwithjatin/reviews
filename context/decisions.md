@@ -55,6 +55,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
 ## Google pill path
+- **2026-11-18 · Facebook pill mirrors the Google pill** (owner): Connect Facebook modal → AI steps → Publish Changes & Continue → the Facebook connected flow. No separate sign-in screen before the modal (agent; the Google pill has one because Figma shows it).
 - **2026-11-18 · Google pill = sign in → pick the profile → AI steps → form with "Publish Changes & Continue"** (owner; Figma 8860:178290).
 - **2026-11-18 · Sign-in shows a placeholder user (John Doe, letter avatar)**, not the business, because the business isn't known yet. Figma shows the owner's own name; never a real person (agent).
 - **2026-11-18 · No "Back to results" on this path** (agent; Figma shows it, but there are no results to go back to).
