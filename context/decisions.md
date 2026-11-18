@@ -55,6 +55,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
 ## Google pill path
+- **2026-11-18 · Skipping the drafts still offers Automate Replies** (owner). Inbox "I'll do it later" → pending milestone → the review cards drop away → Writing Style + Automate Replies → **Save and Continue** → social posts. Automation is about future reviews, so it applies even when today's drafts aren't sent.
 - **2026-11-18 · Connected users (Google or Facebook) who click the inbox "I'll do it later"** get a pending milestone in the sidebar, in the skip-auth style (Figma 8818:89951): **"Read your past reviews · We’ve drafted replies to your reviews"** (owner; the skip-auth path keeps "We’re ready to draft your review replies"). The progress bar moves on from where the inbox left it.
 - **2026-11-18 · Listings "I'll do it later" shows on every path** (owner), next to Get Listed in All. Connected users: pending milestone "Found 7 Relevant Publishers", then learning from reviews → the inbox (create-profile path → its final screen). Skipped auth: unchanged (recent reviews).
 - **2026-11-18 · Inbox "I'll do it later" shows for every connected user** (owner), not just the pill starts and Facebook. It skips to social posts. Supersedes the entry below.

@@ -1478,6 +1478,7 @@
       sendAll.hidden = false;
       inbox.querySelector('.inbox__count-wrap').hidden = false;
       delete sendAll.dataset.done;
+      draftsSkipped = false;
       sendAll.querySelector('img').hidden = false;
       sendAll.querySelector('span').textContent = 'Send Replies';
       closeModal(connectModal, true);
@@ -2222,7 +2223,6 @@
       const live = () => id === run;
       sendAll.disabled = true;
       if (skipAuth) addDraftMilestone('Read your past reviews', 'We’re ready to draft your review replies', 'reviews-16.svg');
-      else if (draftsPending) addDraftMilestone('Read your past reviews', 'We’ve drafted replies to your reviews', 'reviews-16.svg');
       progressBar.style.width = '250px';
       progressBar.animate([{ width: skipAuth || draftsPending ? '120px' : '184px' }, { width: '250px' }], { duration: motion(600), easing: EASE_IN_OUT });
       stepsList.getAnimations().forEach(a => a.cancel());
@@ -2723,9 +2723,22 @@
     // 4 · the writing-style card stays put (it's in both views); Automate Replies rises in
     // Facebook: skip replying for now, straight to social posts
     const inboxLater = document.getElementById('inbox-later');
-    inboxLater.addEventListener('click', () => { closeEditor(); inboxLater.hidden = true; runSocialProof({ draftsPending: true }); });
+    let draftsSkipped = false;
+    inboxLater.addEventListener('click', async () => {
+      closeEditor();
+      resetTransition();
+      const id = run;
+      const live = () => id === run;
+      draftsSkipped = true;
+      inboxLater.hidden = true;
+      sendAll.disabled = true;
+      addDraftMilestone('Read your past reviews', 'We’ve drafted replies to your reviews', 'reviews-16.svg');
+      fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN }).finished.then(() => (stepsList.innerHTML = ''), () => {});
+      if (!await hold(400) || !live()) return;
+      showAutomate(live);  // automation still applies to future reviews
+    });
     sendAll.addEventListener('click', async () => {
-      if (sendAll.dataset.done) return runSocialProof();  // now "Save and Continue"
+      if (sendAll.dataset.done) return runSocialProof({ draftsPending: draftsSkipped });  // now "Save and Continue"
       closeEditor();
       const pending = [...reviewList.querySelectorAll('.review-card:not(.is-replied)')];
       const total = reviewList.children.length;
@@ -2747,7 +2760,12 @@
       fade(stepsList, 1, 0, motion(T2.swapOut), { easing: EASE_IN }).finished.then(() => (stepsList.innerHTML = ''), () => {});
       if ((await Promise.all(cascade)).includes(false) || !live()) return;
       if (!await hold(900) || !live()) return;
+      showAutomate(live);
+    });
 
+    // Review cards drop away; the writing-style card stays and Automate Replies rises
+    // in under it; the button becomes "Save and Continue"
+    async function showAutomate(live) {
       if (inbox.scrollTop > 0) {
         inbox.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
         if (!await hold(450) || !live()) return;
@@ -2768,7 +2786,7 @@
       sendAll.querySelector('span').textContent = 'Save and Continue';
       sendAll.disabled = false;
       sendAll.dataset.done = 'true';
-    });
+    }
 
     // ---- Form interactions ----
     profileForm.querySelectorAll('.pills .pill').forEach(pill => pill.addEventListener('click', () => {
