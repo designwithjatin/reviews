@@ -55,6 +55,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
 ## Google pill path
+- **2026-11-18 · Listings "I'll do it later" shows on every path** (owner), next to Get Listed in All. Connected users: pending milestone "Found 7 Relevant Publishers", then learning from reviews → the inbox (create-profile path → its final screen). Skipped auth: unchanged (recent reviews).
 - **2026-11-18 · Inbox "I'll do it later" shows for every connected user** (owner), not just the pill starts and Facebook. It skips to social posts. Supersedes the entry below.
 - **2026-11-18 · Inbox "I'll do it later" shows on both pill starts** (Google and Facebook), as well as for any Facebook result (owner). Search-result Google path keeps Send Replies only.
 - **2026-11-18 · Facebook pill mirrors the Google pill** (owner): Connect Facebook modal → AI steps → Publish Changes & Continue → the Facebook connected flow. No separate sign-in screen before the modal (agent; the Google pill has one because Figma shows it).

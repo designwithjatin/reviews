@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-18 · Inbox "I'll do it later" for every connected user
+- (pending) · 2026-11-18 · Listings "I'll do it later" for every path
+- fd1ffab · 2026-11-18 · Inbox "I'll do it later" for every connected user
 - 7c36364 · 2026-11-18 · Remove the Facebook permission dialog: the Facebook pill opens the Connect Facebook modal directly
 - 775de49 · 2026-11-18 · Facebook permission dialog: remove "Choose what you allow"
 - d5175e5 · 2026-11-18 · Facebook permission dialog before the Connect Facebook modal (pill path)

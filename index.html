@@ -1774,7 +1774,7 @@
       document.getElementById('pub-title').textContent =
         `Found ${skipAuth ? PUBLISHERS.length : 10} Publishers relevant to your business`;
       document.getElementById('pub-active').hidden = skipAuth;
-      document.getElementById('list-later').hidden = !skipAuth;
+      document.getElementById('list-later').hidden = false;  // every path can skip listings for now
       const stepsIn = showSteps([
         { ai: true, label: 'Finding most relevant publishers for your business...' },
         { icon: 'step-brand.svg', label: 'updating your brand context ...' },
@@ -1946,6 +1946,11 @@
         return showFinal(true);
       }
       if (skipAuth) return runRecentReviews(id);  // not connected: public reviews only
+      learnFromReviews(id);
+    });
+    // Connected: learn from the reviews, then the inbox with drafted replies
+    async function learnFromReviews(id) {
+      const live = () => id === run;
       const stepsIn = showSteps([
         { ai: true, label: 'Learning from your reviews' },
         { icon: 'step-brand.svg', label: 'Reading your past reviews...' },
@@ -1956,7 +1961,7 @@
       processing.start();
       if (!await stepsIn || !await hold(T3.phase) || !live()) return;
       runReviews(id);
-    });
+    }
 
     // =====================================================================
     // Reviews: load → AI drafts replies → send → automate  (Figma 10677:34560 … 35306)
@@ -2045,9 +2050,17 @@
       fade(backLink, 1, 0, motion(200), { easing: EASE_IN }).finished.then(hideBack, hideBack);
       startListings(picked.name);
     });
-    document.getElementById('list-later').addEventListener('click', () => {
+    document.getElementById('list-later').addEventListener('click', async () => {
       resetTransition();
-      runRecentReviews(run, { skippedListings: true });
+      const id = run;
+      if (skipAuth) return runRecentReviews(id, { skippedListings: true });
+      // Connected: publishers stay pending, then on to the reviews as after opting in
+      addDraftMilestone(`Found ${PUBLISHERS.length} Relevant Publishers`, 'Apple, Bing, Tripadvisor and more', 'listings-16.svg');
+      if (cameFrom === 'create') {  // brand-new business: no reviews yet
+        if (!await hold(1200) || id !== run) return;
+        return showFinal(true);
+      }
+      learnFromReviews(id);
     });
     inboxContinue.addEventListener('click', () => runSocialProof());
 

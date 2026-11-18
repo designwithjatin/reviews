@@ -46,6 +46,8 @@ Hosting: GitHub `designwithjatin/reviews` (`main`) → Vercel (Hobby, framework 
 
 - **Google pill path:** `#pill-google`, `cameFrom = 'pill'`, `connectedEarly`, `draftFixes`, `openConnectModal()`, `startFromPill()`. `openGauth()` shows a placeholder user account on this path; the gauth and connect-btn handlers branch on `cameFrom === 'pill'`.
 
+- `learnFromReviews(id)`: the "Learning from your reviews" steps → `runReviews`. Used after opting in and after the listings "I'll do it later" on connected paths.
+
 ## Core patterns (reuse these)
 - **Animations = WAAPI.** `fade(el, from, to, ms, {from, to, delay, easing})` uses `fill: both`. `done(anims)` resolves `true`, or `false` if cancelled. `hold(ms)` is a timer that runs on the animation clock (so it pauses with the tab).
 - **Cancellation:** `resetTransition()` bumps `run` and cancels non-CSS animations. Every async phase captures `id = run` and checks `live()` after each `await`, bailing if stale.

@@ -110,6 +110,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The **Google Business Profile** pill on the search screen: Google sign-in (placeholder user, letter avatar) → Connect GBP modal → AI steps → form with **I'll do it later** + **Publish Changes & Continue**. Already connected, so there's no "Back to results". Publishing → listings → the connected flow; "I'll do it later" keeps the fixes drafted but stays connected.
 
 - Every connected user sees **I'll do it later** next to Send Replies in the inbox (skips to social posts).
+- **Listings** show **I'll do it later** next to Get Listed in All on every path. Connected: publishers stay pending ("Found 7 Relevant Publishers") and the flow moves on to learning from reviews.
 - The **Facebook Page** pill does the same: **Connect Facebook** modal straight away (no Facebook login screen) → the Facebook connected flow.
 
 **Facebook path** (Figma `Lfz2oHviZXGc9NDmp8JEpq`)
