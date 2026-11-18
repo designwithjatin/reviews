@@ -10,7 +10,6 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 |---|---|---|
 | 2026-11-18 | Google pill path: should "I'll do it later" on the form keep them connected (built) or behave like the skip-auth path? And should the Facebook pill get the same flow? | |
 | 2026-11-18 | Facebook: what does "I'll do it later" in the inbox lead to? | Built as: skip to social posts (agent). Figma shows the button only on the Facebook inbox. |
-| 2026-11-18 | Facebook skipped-auth path has no inbox or posts (we can't read recommendations). Right? | Agent reading of the product discussion. |
 | 2026-11-18 | Facebook numbers (100 today, next 150) are placeholders | Engineering to confirm Meta returns recommendation counts. |
 | 2026-11-16 | Skip-auth inbox: what should "Connect Google Account" (banner + reply note) do? | The reply action now opens the note (2026-11-18); the link isn't wired. |
 | 2026-11-16 | Skip-auth path on a **new business** (create path): it currently goes listings → opt-in → "first 100 reviews". Is that right, given there are no reviews to show? | |
@@ -23,11 +22,13 @@ Update this file whenever a task starts, finishes, is parked or is dropped. Date
 ## On hold / backlog
 | Since | Task | Notes |
 |---|---|---|
+| 2026-11-18 | Facebook "new Page, no reviews yet" scenario | Owner will design it in Figma; reuses "Start collecting recommendations" (Figma 8854:32265). |
 | 2026-10-15 | Search with no category word (e.g. "Third Wave") gets the category **"Local Business"** | `parseQuery` falls back when no `CATEGORIES` regex matches. Possible fixes: infer from known brand names, or default to the most common category. The owner hasn't asked for a fix yet. |
 | 2026-10-15 | Wire **Go to Dashboard**, **Send First Review Request** and the tool-card links | No destinations defined in Figma. |
 | 2026-10-15 | Reviews and the widget AI summary are always café-themed | Fine for the café demo. Would need per-category content for other business types. |
 
 ## Done (recent first)
+- 2026-11-18: Search returns Google listings only; Facebook only via the pill; Facebook skipped-auth last step removed (kept for a future "new Page" scenario).
 - 2026-11-18: Facebook pill path (mirrors the Google pill).
 - 2026-11-18: Google pill path: sign-in → Connect GBP modal → AI steps → form with Publish Changes & Continue / I'll do it later → connected flow.
 - 2026-11-18: Facebook inbox header spacing fixed.

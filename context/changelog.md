@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-18 · Facebook last step heading: "To maintain your recommendations, get 50 more on Facebook"
+- (pending) · 2026-11-18 · Search returns Google listings only; Facebook only via the pill; Facebook skipped-auth last step removed
+- 889323b · 2026-11-18 · Facebook last step heading: "To maintain your recommendations, get 50 more on Facebook"
 - e04f175 · 2026-11-18 · Inbox "I'll do it later" on both pill starts (Google and Facebook)
 - b447127 · 2026-11-18 · Facebook pill path (Connect Facebook modal → steps → Publish Changes & Continue)
 - ed28d75 · 2026-11-18 · Connect Facebook modal (Page picker like the GBP one) replaces the Facebook login stand-in

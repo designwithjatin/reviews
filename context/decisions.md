@@ -64,6 +64,8 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-11-18 · Facebook inbox: "I'll do it later" sits 16px left of Send Replies** (owner reported the spacing).
 
 ## Facebook result path
+- **2026-11-18 · Search returns Google listings only; Facebook is reached only through the Facebook Page pill** (owner: "we don't get FB search results"). Search status reads "Searching your business on Google …". Each result is a distinct listing (the old Google + Facebook twin of the main listing is now a branch).
+- **2026-11-18 · Facebook skipped-auth last step ("Start collecting recommendations") removed from the prototype** (owner). It'll come back in Figma for a new scenario: a new Facebook Page with no reviews yet. Supersedes the skipped-auth entries below.
 - **2026-11-18 · Facebook connected last step heading = "To maintain your recommendations, get **50 more** on Facebook"** (owner). Highlight on "50 more". Updated in the prototype and in Figma 8853:28868 / 8868:221566.
 - **2026-11-18 · Connect Facebook = a modal like the GBP picker** (owner; Figma 8845:140826): "Connect Facebook" tab, search, two-column list of Pages, the picked business first and selected, its other branches tagged **Potential match**, then other Pages the account manages; Connect only (no opt-in checkbox). Replaces the Facebook-style login stand-in.
 - **2026-11-18 · Facebook widget card follows Figma 8850:155586** (owner flagged it): name and time on one line, "Recommended" row below, 20px Facebook mark, 16px padding. Avatars stay letters, like the Google widget (agent; Figma uses a stock photo).

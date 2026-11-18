@@ -697,10 +697,6 @@
         </div>
       </div>
     </div>
-    <!-- Facebook, auth skipped: no goal, we can't read recommendations yet (Figma 8854:32265) -->
-    <div class="final__head" data-for="fb-skip" hidden>
-      <h2 class="final__title">Start <span class="final__hl">collecting recommendations</span></h2>
-    </div>
     <div class="final__ctas">
       <button class="btn-outline btn-outline--wide" type="button">Go to Dashboard</button>
       <button class="link-btn link-btn--32" type="button" id="final-first"><img src="assets/quick-request.svg" alt="" width="20" height="20"><span>Send First Review Request</span></button>
@@ -1081,16 +1077,17 @@
         return { text: `${unit} ${n}, ${pick(STREETS, h + i)}, ${area}, ${city}${region}`, state: info.state, zip: pin.trim() };
       };
 
-      // Main listing on Google and Facebook, then two more branches. Branch names
+      // Search finds Google listings only (Facebook can't be searched; it's connected
+      // through the Facebook Page pill). Main listing, then more branches. Branch names
       // drop a trailing city ("Third Wave Coffee Jaipur" → "Third Wave Coffee C-Scheme")
       // and use the city when branches are in different cities.
       const cityWords = [...new Set(spots.map(s => s.city))].flatMap(c => [c, ...infoFor(c).aka]);
       const base = p.name.replace(new RegExp(`\\s+(${cityWords.join('|')})$`, 'i'), '');
-      const platforms = ['gbp', 'facebook', 'gbp', 'facebook'];
+      const platforms = ['gbp', 'gbp', 'gbp', 'gbp'];
       return {
         parsed: p,
         list: spots.map((spot, i) => {
-          const addr = address(i < 2 ? 0 : i, spot);
+          const addr = address(i === 0 ? 0 : i, spot);
           const suffix = p.city ? spot.area : spot.city;
           // Pin near the neighbourhood (~400 m) when we know it, else near the city centre (~2 km)
           const known = AREA_COORDS[spot.area];
@@ -1098,9 +1095,9 @@
           const spread = known ? 80 : 400;
           const nudge = k => ((hash(spot.area + k) % (spread * 2)) - spread) / 20000;
           const [lat, lng] = centre ? [centre[0] + nudge('lat'), centre[1] + nudge('lng')].map(v => v.toFixed(4)) : ['', ''];
-          return { name: i < 2 ? p.name : `${base} ${suffix}`, category: p.category, noun: p.noun,
+          return { name: i === 0 ? p.name : `${base} ${suffix}`, category: p.category, noun: p.noun,
             platform: platforms[i], address: addr.text, city: spot.city, state: addr.state, zip: addr.zip, lat, lng };
-        }),
+        }).filter((r, i, all) => all.findIndex(o => o.name === r.name) === i),  // one card per listing
       };
     }
 
@@ -1151,7 +1148,7 @@
       const found = buildResults(q);
       lastSearch = found;
       const where = [found.parsed.name, found.parsed.area, found.parsed.city].filter(Boolean).join(', ');
-      status.textContent = `Searching your business in Google & Facebook “${where}”...`;
+      status.textContent = `Searching your business on Google “${where}”...`;
       list.innerHTML = skeleton().repeat(5);
 
       timer = setTimeout(() => {
@@ -1948,10 +1945,6 @@
         if (!await hold(1200) || !live()) return;
         return showFinal(true);
       }
-      if (isFB() && skipAuth) {  // Facebook, not connected: we can't read recommendations
-        if (!await hold(1200) || !live()) return;
-        return showFinal('fb-skip');
-      }
       if (skipAuth) return runRecentReviews(id);  // not connected: public reviews only
       const stepsIn = showSteps([
         { ai: true, label: 'Learning from your reviews' },
@@ -2054,10 +2047,6 @@
     });
     document.getElementById('list-later').addEventListener('click', () => {
       resetTransition();
-      if (isFB()) {
-        addDraftMilestone(`Found ${PUBLISHERS.length} Relevant Publishers`, 'Apple, Bing, Tripadvisor and more', 'listings-16.svg');
-        return hold(1200).then(ok => ok && showFinal('fb-skip'));
-      }
       runRecentReviews(run, { skippedListings: true });
     });
     inboxContinue.addEventListener('click', () => runSocialProof());
@@ -2410,7 +2399,7 @@
     document.getElementById('widget-continue').addEventListener('click', () => showFinal(isFB() ? 'fb' : 'existing'));
 
     // Variants: 'existing' (Google), 'new' ("first 100 reviews", Figma 10773:18776),
-    // 'fb' (Facebook Page connected) and 'fb-skip' (Facebook, auth skipped). true/false = new/existing.
+    // 'fb' (Facebook Page connected). true/false = new/existing.
     async function showFinal(variant) {
       if (typeof variant === 'boolean') variant = variant ? 'new' : 'existing';
       resetTransition();
@@ -2426,10 +2415,9 @@
         screenFinal.querySelectorAll('.js-biz-initial').forEach(el => { el.textContent = picked.name.charAt(0).toUpperCase(); });
       }
       screenFinal.querySelectorAll('.final__head').forEach(h => (h.hidden = h.dataset.for !== variant));
-      // Facebook: tools point at Facebook; skipped auth has Go to Dashboard only
-      const fb = variant.startsWith('fb');
+      // Facebook: tools point at Facebook
+      const fb = variant === 'fb';
       const first = document.getElementById('final-first');
-      first.hidden = variant === 'fb-skip';
       first.querySelector('span').textContent = fb ? 'Send First Recommendation Request' : 'Send First Review Request';
       document.getElementById('req-btn').textContent = fb ? 'Recommend us' : 'Leave a review';
       document.getElementById('qr-google').hidden = fb;
@@ -2441,7 +2429,6 @@
       // The star pops in at 1.0, then travels to today's 3.8 with the bar filling
       // behind it (fill width and star move on the same curve so they stay together)
       const goal = screenFinal.querySelector('.final__head:not([hidden]) .goal');
-      if (!goal) return;  // Facebook, auth skipped: no goal to animate
       const marker = goal.querySelector('.goal__marker');
       const travel = marker.offsetLeft;  // 347px from the start of the track to 3.8 (0 when starting out)
       const goalFill = goal.querySelector('.goal__fill');
