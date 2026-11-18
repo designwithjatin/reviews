@@ -2127,8 +2127,6 @@ button { font: inherit; color: inherit; }
 .fbperm__logo img { width: 40px; height: 40px; }
 .fbperm__main h2 { margin-top: 32px; font: 700 14px/20px Helvetica, Arial, sans-serif; }
 .fbperm__ask { margin-top: 4px; font-size: 14px; line-height: 18px; }
-.fbperm__choose { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 0; border: 0; background: none; font: 14px/20px Helvetica, Arial, sans-serif; color: #4267B2; cursor: pointer; }
-.fbperm__choose img { width: 16px; height: 16px; }
 .fbperm__legal { padding: 0 24px; font-size: 12px; line-height: 18px; color: #606770; text-align: center; }
 .fbperm__foot { display: flex; align-items: center; gap: 4px; padding: 20px 16px 16px; font-size: 12px; }
 .fbperm__foot > span { flex: 1; }
