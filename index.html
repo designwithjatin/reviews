@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=65">
+  <link rel="stylesheet" href="styles.css?v=66">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -2438,7 +2438,7 @@
       const shown = [0, 1, 2].map(k => pool[(wgtStart + k) % pool.length]);
       document.getElementById('wgt-track').innerHTML = shown.map(r => `
         ${isFB() ? `
-        <article class="wgt-review wgt-review--fb">
+        <article class="wgt-review wgt-review--row wgt-review--fb">
           <div class="wgt-review__head">
             <div class="wgt-review__who">
               <span class="wgt-review__avatar" aria-hidden="true">${esc(r.name[0])}</span>
@@ -2449,17 +2449,16 @@
             </div>
             <img src="assets/platform-facebook.svg" alt="Facebook" width="20" height="20">
           </div>` : `
-        <article class="wgt-review">
+        <article class="wgt-review wgt-review--row">
           <div class="wgt-review__head">
             <div class="wgt-review__who">
               <span class="wgt-review__avatar" aria-hidden="true">${esc(r.name[0])}</span>
-              <div>
-                <p class="wgt-review__name">${esc(r.name)}</p>
-                <p class="wgt-review__when">${esc(r.when.toLowerCase())}</p>
+              <div class="wgt-review__details">
+                <p class="wgt-review__info"><span class="wgt-review__name">${esc(r.name)}</span><span class="wgt-review__when">${esc(r.when.toLowerCase())}</span></p>
                 <span class="wgt-review__stars" role="img" aria-label="${r.stars} out of 5 stars">${smallStars(r.stars)}</span>
               </div>
             </div>
-            <img src="assets/platform-gbp.svg" alt="Google" width="16" height="16">
+            <img src="assets/platform-gbp.svg" alt="Google" width="20" height="20">
           </div>`}
           <p class="wgt-review__text">${esc(r.text)}</p>
         </article>`).join('');

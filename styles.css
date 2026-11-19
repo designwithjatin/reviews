@@ -2123,10 +2123,11 @@ button { font: inherit; color: inherit; }
 }
 .reply-gate__g { width: 20px; height: 20px; flex-shrink: 0; }  /* Figma 8818:89720: white circle + G in one file */
 .reply-gate .link-btn { height: 18px; margin-left: -4px; }
-/* Widget review on the Facebook path: "Recommended" instead of stars (Figma 8850:155591) */
-/* Facebook widget card (Figma 8850:155586): name + time on one line, "Recommended" below, 20px Facebook mark */
-.wgt-review--fb { padding: var(--sp-16); }
-.wgt-review--fb .wgt-review__head { align-items: center; }
+/* Widget review cards (Google Figma 8860:189221, Facebook 8850:155586): name + time on one
+   line, stars (Google) or "Recommended" (Facebook) below, 20px platform mark, 16px padding */
+.wgt-review--row { padding: var(--sp-16); }
+.wgt-review--row .wgt-review__head { align-items: center; }
+.wgt-review--row .wgt-review__stars { margin-top: 0; }
 .wgt-review__details { display: flex; flex-direction: column; justify-content: center; gap: var(--sp-4); }
 .wgt-review__info { display: flex; align-items: center; gap: var(--sp-8); white-space: nowrap; }
 .wgt-review__rec { display: flex; align-items: center; gap: var(--sp-4); font: var(--body-xs); color: var(--txt-secondary); }
