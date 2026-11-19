@@ -2084,7 +2084,7 @@ button { font: inherit; color: inherit; }
   font: var(--body-sm);
   color: var(--txt-primary);
 }
-.reply-gate__g { width: 20px; height: 20px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 40px; background: #fff; }
+.reply-gate__g { width: 20px; height: 20px; flex-shrink: 0; }  /* Figma 8818:89720: white circle + G in one file */
 .reply-gate .link-btn { height: 18px; margin-left: -4px; }
 /* Widget review on the Facebook path: "Recommended" instead of stars (Figma 8850:155591) */
 /* Facebook widget card (Figma 8850:155586): name + time on one line, "Recommended" below, 20px Facebook mark */
