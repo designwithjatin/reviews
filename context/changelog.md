@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-19 · Create-profile screen: two columns, form left + Google Business Profile illustration right (Figma 8818:104432)
+- (pending) · 2026-11-19 · Tool card "Send Quick Review Request" also opens the Quick Review Request modal
+- 9575ab6 · 2026-11-19 · Create-profile screen: two columns, form left + Google Business Profile illustration right (Figma 8818:104432)
 - 50cfb5b · 2026-11-19 · Quick Review Request modal from "Send First Review Request" (Figma 8916:149002); after sending, the last step confirms "First review request sent to …" and Go to Dashboard becomes primary
 - 9c0e692 · 2026-11-19 · Connect banner: crisp Google G (`assets/google-g-mark.svg`, cut from the Figma badge), centred with the link
 - 1f93a2c · 2026-11-19 · Reply note: Google badge from Figma 8818:89720 (`assets/google-g-badge.svg`), centred in its circle

@@ -766,7 +766,7 @@
         </div>
         <div class="tool__more">
           <p>Send bulk review requests to customers with an intelligent campaign system for quick reviews.</p>
-          <button class="link-btn" type="button"><img src="assets/quick-request.svg" alt="" width="20" height="20">Send Quick Review Request</button>
+          <button class="link-btn" type="button" data-open-qrr><img src="assets/quick-request.svg" alt="" width="20" height="20">Send Quick Review Request</button>
         </div>
       </article>
       <article class="tool">
@@ -2701,11 +2701,10 @@
     qrrModal.querySelector('.modal__panel').tabIndex = -1;
     qrrModal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(qrrModal)));
     document.addEventListener('keydown', e => e.key === 'Escape' && !qrrModal.hidden && closeModal(qrrModal));
-    document.getElementById('final-first').addEventListener('click', () => {
-      qrrReset();
-      openModal(qrrModal);
-      qrrFirst.focus();
-    });
+    // Both "Send First Review Request" and the tool card's "Send Quick Review Request" open it
+    const openQrr = () => { qrrReset(); openModal(qrrModal); qrrFirst.focus(); };
+    document.getElementById('final-first').addEventListener('click', openQrr);
+    document.querySelectorAll('[data-open-qrr]').forEach(btn => btn.addEventListener('click', openQrr));
     qrrForm.addEventListener('submit', async e => {
       e.preventDefault();
       if (!qrrReady()) return;
