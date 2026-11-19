@@ -1961,7 +1961,7 @@
 
     // ---- Facebook result: Connect Facebook · choose a Page (Figma 8845:140826) ----
     // Like the GBP picker, one list of Pages. The picked business first (selected),
-    // then its other Pages tagged "Potential match", then other Pages the account manages.
+    // then its other Pages, then other Pages the account manages. No "Potential match" tags (owner).
     const isFB = () => picked?.platform === 'facebook';
     const fbModal = document.getElementById('fb-modal');
     let fbSelected = 0;
@@ -1969,8 +1969,8 @@
       const seen = new Set();
       const own = [picked, ...results].map(r => r.name).filter(n => !seen.has(n) && seen.add(n));
       return [
-        ...own.map((name, i) => ({ name, match: i > 0 })),  // the business's other branches
-        ...GROUPS.map(name => ({ name, match: false })),
+        ...own.map(name => ({ name })),  // the business's other branches
+        ...GROUPS.map(name => ({ name })),
       ];
     }
     function renderFbPages() {
@@ -1980,7 +1980,6 @@
         <button type="button" class="loc-card fb-page${pg.i === fbSelected ? ' is-selected' : ''}" role="radio" aria-checked="${pg.i === fbSelected}" data-i="${pg.i}">
           <img src="assets/${pg.i === fbSelected ? 'check-circle-selected.svg' : 'location-photo.png'}" alt="" width="32" height="32">
           <span class="loc-card__name">${esc(pg.name)}</span>
-          ${pg.match ? '<span class="fb-page__match">Potential match</span>' : ''}
         </button>`).join('') : '<p class="loc-empty">No Pages match your search.</p>';
     }
     function openFbauth() {

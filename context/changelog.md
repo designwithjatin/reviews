@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-19 · Last step after sending matches Figma 8919:151199: toast "Review request sent", line "You’ve sent your first review request! go to dashboard to see what’s next."
+- (pending) · 2026-11-19 · Connect Facebook modal: removed "Potential match" tags
+- 98aa5dd · 2026-11-19 · Last step after sending matches Figma 8919:151199: toast "Review request sent", line "You’ve sent your first review request! go to dashboard to see what’s next."
 - a90bef9 · 2026-11-19 · Go to Dashboard stays secondary after the first request is sent
 - 95ef3e3 · 2026-11-19 · Last step confirmation drops "Track it from your dashboard" → "First review request sent to {name}"
 - 0ad2c4e · 2026-11-19 · Google widget cards match Figma 8860:189144 (name + time on one line, stars below, 20px Google mark, 16px padding)

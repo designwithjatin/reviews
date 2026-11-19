@@ -2082,17 +2082,6 @@ button { font: inherit; color: inherit; }
 /* Connect Facebook modal (Figma 8845:140826): one list of Pages, no groups */
 .fb-pages { padding: var(--sp-16) 15px; }
 .fb-page { position: relative; height: 64px; }
-.fb-page__match {
-  position: absolute;
-  top: -1px;
-  right: -1px;
-  padding: 4px 8px;
-  border-radius: 0 var(--br-4) 0 var(--br-4);
-  background: #FFEEAA;
-  font: 600 10px/normal var(--font);
-  color: var(--txt-primary);
-  text-transform: uppercase;
-}
 
 /* Recommendations goal: count marks, Facebook mark in the marker */
 .goal__labels .goal__c { transform: translateX(-50%); }
