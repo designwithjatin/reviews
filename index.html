@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=64">
+  <link rel="stylesheet" href="styles.css?v=65">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -139,33 +139,67 @@
     </section>
   </main>
 
-  <!-- Screen 3b · "I don't see my business" → create a new profile (Figma 10768:18579) -->
+  <!-- Screen 3b · "I don't see my business" → create a new profile (Figma 8818:104432) -->
   <main class="create" id="screen-create" hidden>
-    <div class="create__head">
-      <h2 class="create__title">Create a new profile</h2>
-      <button class="btn-solid btn-solid--icon create__go" type="button" id="create-go" disabled>
-        <img src="assets/ai-create-white.svg" alt="" width="20" height="20">Create Profile
-      </button>
-    </div>
-    <div class="create__body">
-      <section class="create-card">
-        <label class="create-card__label" for="create-desc">Tell us what your business does</label>
-        <textarea class="create-card__desc" id="create-desc" rows="3" placeholder="eg : We’re a specialty coffee shop"></textarea>
-      </section>
-      <section class="create-card">
-        <label class="create-card__label" for="create-where">Where is it located?</label>
-        <form class="create-search" id="create-search">
-          <input class="create-search__input" id="create-where" type="text" autocomplete="street-address" placeholder="Eg : Sindhu Bhavan Road">
-          <button class="icon-btn" type="submit" aria-label="Find on map"><img src="assets/search-20.svg" alt="" width="20" height="20"></button>
-        </form>
-        <div class="create-map">
-          <p class="create-map__label"><img src="assets/location-16.svg" alt="" width="16" height="16">Pin your location</p>
-          <div class="create-map__frame">
-            <iframe id="create-map" title="Map of your business location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <section class="create__panel">
+      <div class="create__head">
+        <h2 class="create__title">Create a new profile</h2>
+        <button class="btn-solid btn-solid--icon create__go" type="button" id="create-go" disabled>
+          <img src="assets/ai-create-white.svg" alt="" width="20" height="20">Create Profile
+        </button>
+      </div>
+      <div class="create__fields">
+        <div class="create-field">
+          <label class="create-card__label" for="create-desc">Tell us what your business does</label>
+          <textarea class="create-card__desc" id="create-desc" rows="3" placeholder="eg : We’re a specialty coffee shop"></textarea>
+        </div>
+        <div class="create-field">
+          <label class="create-card__label" for="create-where">Where is it located?</label>
+          <form class="create-search" id="create-search">
+            <input class="create-search__input" id="create-where" type="text" autocomplete="street-address" placeholder="Eg : Sindhu Bhavan Road">
+            <button class="icon-btn" type="submit" aria-label="Find on map"><img src="assets/search-20.svg" alt="" width="20" height="20"></button>
+          </form>
+          <div class="create-map">
+            <p class="create-map__label"><img src="assets/location-16.svg" alt="" width="16" height="16">Pin your location</p>
+            <div class="create-map__frame">
+              <iframe id="create-map" title="Map of your business location" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+    <!-- What they'll get: a Google Business Profile in search (illustration) -->
+    <aside class="create__art">
+      <div class="create-art" aria-hidden="true">
+        <div class="create-art__web">
+          <div class="create-art__bar">
+            <img class="create-art__g" src="assets/google-g-mark.svg" alt="" width="20" height="20">
+            <span class="create-art__search">Johnny’s Pizzeria<img src="assets/create-search.svg" alt="" width="10" height="10"></span>
+            <img src="assets/create-apps.svg" alt="" width="10" height="10">
+            <img class="create-art__avatar" src="assets/create-avatar.png" alt="" width="20" height="20">
+          </div>
+          <div class="create-art__tabs"><span>All</span><span>Images</span><span>Shopping</span><span>Videos</span><span>News</span><span class="create-art__more">More</span></div>
+        </div>
+        <div class="create-art__page"><i></i></div>
+        <div class="create-art__gbp">
+          <div class="create-art__top">
+            <div><b>Johnny's Pizzeria</b><small>Pizzeria • Italian Restaurant</small></div>
+            <div class="create-art__rating"><img src="assets/create-stars.svg" alt="" width="94" height="15"><b>4.2</b><span>(1.2k)</span></div>
+          </div>
+          <div class="create-art__photos"><img src="assets/create-photo-1.jpg" alt=""><img src="assets/create-photo-2.jpg" alt=""><img src="assets/create-photo-3.jpg" alt=""><img src="assets/create-photo-4.jpg" alt=""></div>
+          <div class="create-art__lines">
+            <span style="width:330px"><img src="assets/create-line-1.svg" alt=""></span>
+            <span style="width:245px"><img src="assets/create-line-2.svg" alt=""></span>
+            <span style="width:197px"><img src="assets/create-line-3.svg" alt=""></span>
+          </div>
+        </div>
+        <img class="create-art__arrow" src="assets/create-arrow.svg" alt="" width="54" height="85">
+      </div>
+      <div class="create__caption">
+        <p class="create__caption-title">Tell us a bit about your business.</p>
+        <p>We’ll handle the rest!</p>
+      </div>
+    </aside>
   </main>
 
   <!-- Screen 4 · processing (Figma 10657:4415) -->
@@ -3008,7 +3042,7 @@
     });
 
     // =====================================================================
-    // "I don't see my business" → create a new profile (Figma 10768:18579)
+    // "I don't see my business" → create a new profile (Figma 8818:104432; was 10768:18579)
     // The user describes the business and its address, then joins the same
     // flow as a found business: steps → location details form → GBP → publishers.
     // =====================================================================
@@ -3059,7 +3093,7 @@
       [...screenSearch.children].forEach(el => el.getAnimations().forEach(a => a.cancel()));
       screenCreate.hidden = false;
       showCreateMap(searchedCity() || 'India', searchedCity() ? 12 : 4);
-      [...screenCreate.querySelectorAll('.create__head, .create-card')].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
+      [...screenCreate.querySelectorAll('.create__head, .create-field, .create__art')].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * T2.formStagger * 1.5), from: { transform: 'translateY(12px)' }, to: { transform: 'none' } }));
       createDesc.focus();
     });

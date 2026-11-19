@@ -75,7 +75,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - The result card has a simple hover state: white bg, `--shadow-bottom-sm`, 1px `#698EC4` outline, radius 8.
 - The back link copy is **"Back to results"**. It's **hidden once GBP is connected**, with or without the listings opt-in, and never comes back in later steps.
 
-**"I don't see my business" → Create a new profile** (Figma 10768:18579)
+**"I don't see my business" → Create a new profile** (Figma 8818:104432: form on the left, Google Business Profile illustration + "Tell us a bit about your business. We’ll handle the rest!" on the right)
 - A full-width screen (no side panel) with "Tell us what your business does" and "Where is it located?" (search + "Pin your location" live map).
 - **Create Profile** stays at 40% opacity until both are filled. It then joins the **same flow** as a found business: reasoning steps → location details form → Connect GBP → listing publishers → and on.
 - The new business is built from the inputs: the name from the search and the category from the description.
