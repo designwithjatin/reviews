@@ -1395,7 +1395,6 @@ button { font: inherit; color: inherit; }
 .automate__includes { display: flex; align-items: center; gap: var(--sp-8); margin-top: var(--sp-4); font: var(--body-xs); color: var(--txt-tertiary); }
 .automate__includes > span:not(.info-tag) { display: flex; align-items: center; gap: var(--sp-4); }
 .info-tag--success { background: #EDFFEE; }
-.info-tag--danger { background: #FEEFED; }
 .automate__note { display: flex; align-items: center; gap: var(--sp-4); padding: 0 var(--sp-16); font: var(--body-xs); color: var(--txt-secondary); }
 
 /* Toggle · 28×16, brand blue when on */

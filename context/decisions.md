@@ -75,7 +75,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-11-18 · Facebook flow checked against Figma "Start with FB Auth" (8860:192375) and aligned** (owner asked for a full comparison):
   - Pill paths show a **form skeleton** (~1.4s) between the AI steps and the form (8860:200044).
   - Listings: **"Found 7 Publishers…"**, Active Listings label **"Facebook"** (8860:194680).
-  - Writing-style modal: **"Facebook Recommends"** (Recommends tag), **"Facebook Doesn't Recommend"** (Does not Recommend tag, red), then Cross-Rating Behavioral Patterns; no star sections (8879:34179, supersedes 8860:196213 on 2026-11-19).
+  - Writing-style modal: **"Facebook Recommends"** (Recommends tag), **"Facebook Doesn't Recommend"** (Does not Recommend tag, grey like the inbox), then Cross-Rating Behavioral Patterns; no star sections (8879:34179, supersedes 8860:196213 on 2026-11-19).
   - **Send Replies sending state**: dots in the button and "I'll do it later" dimmed for ~0.9s before the replied cascade (8860:196341). Applies to every path.
   - Last step: tools are the **same as Google** ("Leave a review", "Send First Review Request", both QR chips); the QR **Facebook chip shows "Recommends"** on every final screen (Tools component); the goal marker uses the **reviews icon** (8871:60281). Supersedes the Facebook-specific tool copy.
   - Not changed, flagged to the owner: Figma shows "Back to results" on the pill form (no results exist on that path); Figma's left-panel milestone copy is the Google one ("easier to find in Google"); avatars and "John Doe" names are placeholders.

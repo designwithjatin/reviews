@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=60">
+  <link rel="stylesheet" href="styles.css?v=61">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -2517,7 +2517,7 @@
       <section class="style-sec">
         <div class="style-sec__head">
           <h3>${esc(sec.title)}</h3>
-          ${sec.rec ? `<div class="style-sec__rec"><span class="info-tag info-tag--pill info-tag--${sec.rec === 'yes' ? 'success' : 'danger'}"><img src="assets/recommend.svg" alt="" width="12" height="12">${sec.rec === 'yes' ? 'Recommends' : 'Does not Recommend'}</span></div>` : ''}
+          ${sec.rec ? `<div class="style-sec__rec"><span class="info-tag info-tag--pill${sec.rec === 'yes' ? ' info-tag--success' : ''}"><img src="assets/recommend.svg" alt="" width="12" height="12">${sec.rec === 'yes' ? 'Recommends' : 'Does not Recommend'}</span></div>` : ''}
           ${sec.stars ? `<div class="style-sec__rating">${ratingHTML(sec.stars)}</div>` : ''}
         </div>
         ${loading ? skelLines(sec.points.length + 2) : `<ul class="style-sec__points">${sec.points.map(pt => `<li>${esc(pt)}</li>`).join('')}</ul>`}
