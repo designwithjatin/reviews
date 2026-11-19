@@ -2486,8 +2486,8 @@
       [...widget.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * 120), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
     }
-    shareNow.addEventListener('click', () => (skipAuth ? showFinal(false) : runWidget(postsGrid.querySelectorAll('input:checked').length)));
-    document.getElementById('posts-later').addEventListener('click', () => (skipAuth ? showFinal(false) : runWidget(0)));
+    shareNow.addEventListener('click', () => (skipAuth ? showFinal('new') : runWidget(postsGrid.querySelectorAll('input:checked').length)));
+    document.getElementById('posts-later').addEventListener('click', () => (skipAuth ? showFinal('new') : runWidget(0)));
 
     // Copy / email the embed code
     const codeText = () => document.getElementById('widget-code').textContent;
