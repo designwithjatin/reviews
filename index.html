@@ -745,7 +745,7 @@
     <div class="final__ctas">
       <button class="btn-outline btn-outline--wide" type="button" id="final-dash">Go to Dashboard</button>
       <button class="link-btn link-btn--32" type="button" id="final-first"><img src="assets/quick-request.svg" alt="" width="20" height="20"><span>Send First Review Request</span></button>
-      <p class="final__sent" id="final-sent" role="status" hidden><img src="assets/done-filled.svg" alt="" width="16" height="16"><span>First review request sent to <b id="final-sent-name"></b></span></p>
+      <p class="final__sent" id="final-sent" role="status" hidden><img src="assets/done-filled.svg" alt="" width="16" height="16"><span>You’ve sent your first review request! go to dashboard to see what’s next.</span></p>
     </div>
     <div class="tools">
       <article class="tool">
@@ -2708,23 +2708,21 @@
     qrrForm.addEventListener('submit', async e => {
       e.preventDefault();
       if (!qrrReady()) return;
-      const name = [qrrFirst.value.trim(), document.getElementById('qrr-last').value.trim()].filter(Boolean).join(' ');
       const again = document.getElementById('qrr-again').checked;
       qrrSend.disabled = true;
       qrrSend.classList.add('is-sending');
       qrrSend.querySelector('span').textContent = 'Sending...';
       await new Promise(r => setTimeout(r, motion(900)));
-      showToast(`Review request sent to ${name}`);
-      markFirstSent(name);
+      showToast('Review request sent');  // Figma 8919:151585
+      markFirstSent();
       if (again) { qrrReset(); qrrFirst.focus(); return; }
       closeModal(qrrModal);
     });
     // Last step after the first request: the link gives way to a confirmation;
     // Go to Dashboard stays secondary (it's the only action left — owner)
-    function markFirstSent(name) {
+    function markFirstSent() {
       const first = document.getElementById('final-first');
       const sent = document.getElementById('final-sent');
-      document.getElementById('final-sent-name').textContent = name;
       if (!sent.hidden) return;
       first.hidden = true;
       sent.hidden = false;

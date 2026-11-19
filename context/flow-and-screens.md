@@ -66,5 +66,5 @@ On the Google skip-auth inbox, **hovering** a card expands it as an overlay over
 
 ## Last step · first review request (2026-11-19; Figma 8916:149002)
 - **Send First Review Request** opens `#qrr-modal` (Quick Review Request): Add New Contact tab (First Name*, Last Name, Phone, Email), then two options: **New request with template** (Template "🌟 Creative Design" with channel counts, Review Links "All Review Links") or **Add in existing campaign** (Campaign select). Footer: info line, "Send another request" checkbox, **Send Request** (disabled until first name + phone or email + an option).
-- Send → "Sending..." (~0.9s) → toast "Review request sent to {name}" → modal closes (stays open and resets if "Send another request" is ticked).
-- Last step then shows ✓ "First review request sent to **{name}**." in place of the link; Go to Dashboard stays the outline (secondary) button. Reset each time the last step is shown.
+- Send → "Sending..." (~0.9s) → toast "Review request sent" → modal closes (stays open and resets if "Send another request" is ticked).
+- Last step then shows ✓ "You’ve sent your first review request! go to dashboard to see what’s next." (Figma 8919:151199) in place of the link; Go to Dashboard stays the outline (secondary) button. Reset each time the last step is shown.
