@@ -114,7 +114,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Parent task moves down and shows the finished message** in every phase (owner).
 - **The last working step is "Updating your business profile with optimized content"** (owner).
 - **AI Corrected tab shows concise, realistic competitor-based reasoning** (owner).
-- **Missing filter lists every empty field incl. services, media, social; lat/lng auto-filled from the map; no "Added from the business details you've shared" on empty fields** (owner).
+- **Missing filter lists every empty field incl. services, media, social; lat/lng auto-filled from the map** (owner). The "Added from the business details you've shared" header note was later removed everywhere (owner, 2026-11-19).
 - **Search works from any keyword and any city** (owner).
 - **"Back to results"** replaces "Choose another business" (owner).
 - **Transition: left panel shrinks, card flies to top-left, steps stack one by one, slow and natural** (owner; an alternative was rejected).

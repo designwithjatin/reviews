@@ -95,7 +95,7 @@ From the animate skill (`~/Downloads/Skills/animate-skill-main/SKILL.md`) and th
 - **AI Corrected** tab: Claude acts as the AI layer. It shows concise, realistic reasoning for each fix (based on competitor research), e.g. for the About section.
 - **AI notes** also show while scrolling the All Fields tab.
 - **Missing** filter: shows only unfilled fields, including Services, Media and Social media.
-- **Auto-fill:** latitude and longitude come from the map location. Don't say "Added from the business details you've shared" on fields that need user input.
+- **Auto-fill:** latitude and longitude come from the map location. The Basic Details header has no "Added from the business details you've shared" note; don't add it back.
 - The map is a live Google map embed.
 
 **Skip-auth path: "I'll do it later" on the profile form** (Figma file `Lfz2oHviZXGc9NDmp8JEpq`: 8812:16256 → 8711:46830 → 8812:49960 → 8726:89182 → 8726:90220)

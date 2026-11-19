@@ -53,7 +53,7 @@ On the Google skip-auth inbox, the reply icon on a card opens a note under the r
 
 ## Copy that the owner set
 - "Back to results" (not "Choose another business").
-- The Missing view must not say "Added from the business details you've shared" on empty fields.
+- Basic Details header has no "Added from the business details you've shared" note (removed 2026-11-19).
 - The AI Corrected reasoning reads like a concise AI layer that researched competitors (e.g. why the About text changed).
 
 ## Interactions per screen
