@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=63">
+  <link rel="stylesheet" href="styles.css?v=64">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -709,8 +709,9 @@
       </div>
     </div>
     <div class="final__ctas">
-      <button class="btn-outline btn-outline--wide" type="button">Go to Dashboard</button>
+      <button class="btn-outline btn-outline--wide" type="button" id="final-dash">Go to Dashboard</button>
       <button class="link-btn link-btn--32" type="button" id="final-first"><img src="assets/quick-request.svg" alt="" width="20" height="20"><span>Send First Review Request</span></button>
+      <p class="final__sent" id="final-sent" role="status" hidden><img src="assets/done-filled.svg" alt="" width="16" height="16"><span>First review request sent to <b id="final-sent-name"></b>. Track it from your dashboard.</span></p>
     </div>
     <div class="tools">
       <article class="tool">
@@ -909,6 +910,64 @@
       <footer class="modal__foot modal__foot--split">
         <button class="btn-solid" type="button" id="brand-save" hidden>Save</button>
         <button class="btn-solid btn-solid--icon" type="button" id="regen-style"><img src="assets/ai-filled-white.svg" alt="" width="20" height="20"><span>Regenerate Writing Style</span></button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Quick Review Request (Figma 8917:150189 empty, 8917:150857 filled) · opens from "Send First Review Request" -->
+  <div class="modal" id="qrr-modal" hidden>
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__panel modal__panel--qrr" role="dialog" aria-modal="true" aria-labelledby="qrr-title">
+      <header class="qrr__head">
+        <span class="modal__tab"><span class="modal__tab-label" id="qrr-title">Quick Review Request</span></span>
+        <div class="qrr__head-actions">
+          <button class="link-btn qrr__preview" type="button" id="qrr-preview" disabled><img src="assets/campaign-24.svg" alt="" width="24" height="24">Preview in Campaign</button>
+          <button class="icon-btn qrr__close" type="button" data-close aria-label="Close"><img src="assets/close-32.svg" alt="" width="32" height="32"></button>
+        </div>
+      </header>
+      <form class="qrr__body" id="qrr-form" novalidate>
+        <section class="qrr__card">
+          <div class="qrr__tabs" role="tablist">
+            <span class="qrr__tab is-active" role="tab" aria-selected="true">Add New Contact</span>
+            <span class="qrr__tab" role="tab" aria-selected="false">Select Existing Contact</span>
+            <span class="qrr__tab" role="tab" aria-selected="false">Bulk Upload Contacts<span class="qrr__new">New</span></span>
+          </div>
+          <div class="qrr__fields">
+            <label class="field"><span class="field__label">First Name<span aria-hidden="true">*</span></span><input class="input" type="text" id="qrr-first" autocomplete="off"></label>
+            <label class="field"><span class="field__label">Last Name</span><input class="input" type="text" id="qrr-last" autocomplete="off"></label>
+            <label class="field"><span class="field__label">Phone number</span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel" id="qrr-phone" autocomplete="off"></span></label>
+            <label class="field"><span class="field__label">Email</span><input class="input" type="email" id="qrr-email" autocomplete="off"></label>
+          </div>
+        </section>
+        <section class="qrr__opt" data-opt="template">
+          <button class="qrr__opt-head" type="button" aria-expanded="false"><span class="qrr__radio" aria-hidden="true"></span>New request with template</button>
+          <div class="qrr__opt-body" hidden>
+            <div class="field"><span class="field__label">Template*</span>
+              <button class="input qrr__select" type="button"><span>🌟 Creative Design</span><span class="qrr__channels">
+                <span class="qrr__ch"><img src="assets/ch-email-12.svg" alt="Email" width="12" height="12">3</span>
+                <span class="qrr__ch"><img src="assets/ch-sms-12.svg" alt="SMS" width="12" height="12">3</span>
+                <span class="qrr__ch"><img src="assets/ch-whatsapp-12.svg" alt="WhatsApp" width="12" height="12">3</span>
+                <span class="qrr__ch"><img src="assets/ch-other-12.svg" alt="Follow-ups" width="12" height="13">3</span>
+              </span><img class="qrr__chev" src="assets/chevron-16.svg" alt="" width="16" height="16"></button>
+            </div>
+            <div class="field"><span class="field__label">Review Links*</span>
+              <button class="input qrr__select" type="button"><span>All Review Links</span><img class="qrr__chev" src="assets/chevron-16.svg" alt="" width="16" height="16"></button>
+            </div>
+          </div>
+        </section>
+        <section class="qrr__opt" data-opt="campaign">
+          <button class="qrr__opt-head" type="button" aria-expanded="false"><span class="qrr__radio" aria-hidden="true"></span>Add in existing campaign</button>
+          <div class="qrr__opt-body" hidden>
+            <div class="field"><span class="field__label">Campaign*</span>
+              <button class="input qrr__select" type="button"><span>Review Requests · Default</span><img class="qrr__chev" src="assets/chevron-16.svg" alt="" width="16" height="16"></button>
+            </div>
+          </div>
+        </section>
+      </form>
+      <footer class="qrr__foot">
+        <p class="qrr__info" id="qrr-info" hidden><img src="assets/info-16.svg" alt="" width="16" height="16"><span id="qrr-info-text"></span></p>
+        <label class="qrr__again"><input type="checkbox" id="qrr-again">Send another request</label>
+        <button class="btn-solid btn-solid--icon qrr__send" type="submit" form="qrr-form" id="qrr-send" disabled><img src="assets/rocket-24.svg" alt="" width="24" height="24"><span>Send Request</span></button>
       </footer>
     </div>
   </div>
@@ -2431,6 +2490,7 @@
         screenFinal.querySelectorAll('.js-biz-initial').forEach(el => { el.textContent = picked.name.charAt(0).toUpperCase(); });
       }
       screenFinal.querySelectorAll('.final__head').forEach(h => (h.hidden = h.dataset.for !== variant));
+      resetFirstSent();
       // The tools are the same on every final screen (Figma 8860:196592)
       window.scrollTo(0, 0);
       [...screenFinal.children].filter(el => !el.hidden).forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
@@ -2562,6 +2622,88 @@
       btn.disabled = false;
       showToast('Writing style regenerated');
     });
+
+    // ---- Quick Review Request (Figma 8917:150189 / 8917:150857) ----
+    // "Send First Review Request" opens it; sending closes it and the last step
+    // confirms the request went out, with Go to Dashboard as the next step (PM)
+    const qrrModal = document.getElementById('qrr-modal');
+    const qrrForm = document.getElementById('qrr-form');
+    const qrrSend = document.getElementById('qrr-send');
+    const qrrOpts = [...qrrModal.querySelectorAll('.qrr__opt')];
+    const qrrFirst = document.getElementById('qrr-first');
+    const qrrPhone = document.getElementById('qrr-phone');
+    const qrrEmail = document.getElementById('qrr-email');
+    const QRR_INFO = {
+      template: 'This will create a new campaign with the selected template.',
+      campaign: 'This contact will be added to the selected campaign.',
+    };
+    let qrrOpt = null;
+    const qrrReady = () => qrrFirst.value.trim() && (qrrPhone.value.trim() || qrrEmail.value.trim()) && qrrOpt;
+    const qrrUpdate = () => { qrrSend.disabled = !qrrReady(); };
+    function qrrPick(opt) {
+      qrrOpt = opt;
+      qrrOpts.forEach(sec => {
+        const on = sec.dataset.opt === opt;
+        sec.classList.toggle('is-selected', on);
+        sec.querySelector('.qrr__opt-head').setAttribute('aria-expanded', String(on));
+        const body = sec.querySelector('.qrr__opt-body');
+        if (on && body.hidden) { body.hidden = false; fade(body, 0, 1, motion(200), { from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } }); }
+        if (!on) body.hidden = true;
+      });
+      document.getElementById('qrr-preview').disabled = !opt;
+      document.getElementById('qrr-info').hidden = !opt;
+      document.getElementById('qrr-info-text').textContent = opt ? QRR_INFO[opt] : '';
+      qrrUpdate();
+    }
+    function qrrReset() {
+      qrrForm.reset();
+      qrrPick(null);
+      const label = qrrSend.querySelector('span');
+      label.textContent = 'Send Request';
+      qrrSend.classList.remove('is-sending');
+    }
+    qrrOpts.forEach(sec => sec.querySelector('.qrr__opt-head').addEventListener('click', () => qrrPick(sec.dataset.opt)));
+    qrrForm.addEventListener('input', qrrUpdate);
+    qrrModal.querySelector('.modal__panel').tabIndex = -1;
+    qrrModal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeModal(qrrModal)));
+    document.addEventListener('keydown', e => e.key === 'Escape' && !qrrModal.hidden && closeModal(qrrModal));
+    document.getElementById('final-first').addEventListener('click', () => {
+      qrrReset();
+      openModal(qrrModal);
+      qrrFirst.focus();
+    });
+    qrrForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!qrrReady()) return;
+      const name = [qrrFirst.value.trim(), document.getElementById('qrr-last').value.trim()].filter(Boolean).join(' ');
+      const again = document.getElementById('qrr-again').checked;
+      qrrSend.disabled = true;
+      qrrSend.classList.add('is-sending');
+      qrrSend.querySelector('span').textContent = 'Sending...';
+      await new Promise(r => setTimeout(r, motion(900)));
+      showToast(`Review request sent to ${name}`);
+      markFirstSent(name);
+      if (again) { qrrReset(); qrrFirst.focus(); return; }
+      closeModal(qrrModal);
+    });
+    // Last step after the first request: the link gives way to a confirmation,
+    // and Go to Dashboard becomes the primary action
+    function markFirstSent(name) {
+      const first = document.getElementById('final-first');
+      const sent = document.getElementById('final-sent');
+      const dash = document.getElementById('final-dash');
+      document.getElementById('final-sent-name').textContent = name;
+      if (!sent.hidden) return;
+      first.hidden = true;
+      sent.hidden = false;
+      dash.classList.replace('btn-outline', 'btn-solid');
+      fade(sent, 0, 1, motion(300), { delay: motion(200), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
+    }
+    function resetFirstSent() {
+      document.getElementById('final-first').hidden = false;
+      document.getElementById('final-sent').hidden = true;
+      document.getElementById('final-dash').classList.replace('btn-solid', 'btn-outline');
+    }
 
     // Edit a draft in place; Send Reply sends just that one
     // Replied state (Figma "Reply Status=Replied"): the reply drops below a divider,

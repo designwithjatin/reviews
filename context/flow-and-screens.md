@@ -63,3 +63,8 @@ On the Google skip-auth inbox, **hovering** a card expands it as an overlay over
 - **Posts:** clicking a post toggles it; Select All / Clear All; the accounts Select All link appears for partial selections; Share Now is disabled (40% opacity) until ≥1 post and ≥1 account.
 - **Widget:** arrows cycle the reviews; Copy → clipboard + toast; Send as Email → `mailto:` draft; Continue → final.
 - **Final:** "Go to Dashboard" and the card links are **not wired** (no destination yet).
+
+## Last step · first review request (2026-11-19; Figma 8916:149002)
+- **Send First Review Request** opens `#qrr-modal` (Quick Review Request): Add New Contact tab (First Name*, Last Name, Phone, Email), then two options: **New request with template** (Template "🌟 Creative Design" with channel counts, Review Links "All Review Links") or **Add in existing campaign** (Campaign select). Footer: info line, "Send another request" checkbox, **Send Request** (disabled until first name + phone or email + an option).
+- Send → "Sending..." (~0.9s) → toast "Review request sent to {name}" → modal closes (stays open and resets if "Send another request" is ticked).
+- Last step then shows ✓ "First review request sent to **{name}**. Track it from your dashboard." in place of the link, and Go to Dashboard becomes the solid primary button. Reset each time the last step is shown.
