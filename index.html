@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=61">
+  <link rel="stylesheet" href="styles.css?v=62">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -2035,7 +2035,7 @@
           <span class="review-card__when">${r.when}</span><span class="dot" aria-hidden="true"></span>
           ${cardRatingHTML(r)}
           <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
-          ${`<span class="recent-actions card-actions">
+          ${`<span class="card-actions">
             <button class="icon-btn" type="button" aria-label="Open on ${isFB() ? 'Facebook' : 'Google'}"><img src="assets/external-link-16.svg" alt="" width="16" height="16"></button>
             <button class="icon-btn" type="button" data-act="copy" aria-label="Copy review"><img src="assets/copy-16.svg" alt="" width="16" height="16"></button>
             <button class="icon-btn" type="button" data-act="edit" aria-label="Reply"><img src="assets/reply-16.svg" alt="" width="16" height="16"></button>
@@ -2091,6 +2091,13 @@
     });
     inboxContinue.addEventListener('click', () => runSocialProof());
 
+    // Read-only card hover (Figma 8818:89672): replies need Google, so hovering a card
+    // expands it over the next one with a connect note; no action icons
+    const gateHTML = `<div class="reply-gate">
+        <span class="reply-gate__g"><img src="assets/google-g-color.svg" alt="" width="14" height="14"></span>
+        <span>To view &amp; manage replies,</span>
+        <button class="link-btn" type="button">Connect Google Account</button>
+      </div>`;
     const recentHTML = r => `
       <article class="review-card review-card--recent">
         <div class="review-card__profile">
@@ -2099,43 +2106,10 @@
           <span class="review-card__when">${esc(r.when)}</span><span class="dot" aria-hidden="true"></span>
           <span class="review-card__stars" role="img" aria-label="${r.stars} out of 5 stars">${starsHTML(r.stars)}</span>
           <img src="assets/sentiment-${r.stars === 5 ? 'positive' : 'neutral'}.svg" alt="${r.stars === 5 ? 'Positive' : 'Neutral'} sentiment" width="16" height="16">
-          <span class="recent-actions">
-            <button class="icon-btn" type="button" aria-label="Open on Google"><img src="assets/external-link-16.svg" alt="" width="16" height="16"></button>
-            <button class="icon-btn" type="button" data-copy aria-label="Copy review"><img src="assets/copy-16.svg" alt="" width="16" height="16"></button>
-            <button class="icon-btn" type="button" data-reply aria-label="Reply" aria-expanded="false"><img src="assets/reply-16.svg" alt="" width="16" height="16"></button>
-          </span>
         </div>
         <p class="review-card__text">${esc(r.text)}</p>
+        ${gateHTML}
       </article>`;
-    // Reply on a read-only card: replies need Google, so the card opens a note
-    // with the connect link instead of a reply box (Figma 8818:89672)
-    const gateHTML = `<div class="reply-gate">
-        <span class="reply-gate__g"><img src="assets/google-g-color.svg" alt="" width="14" height="14"></span>
-        <span>To view &amp; manage replies,</span>
-        <button class="link-btn" type="button">Connect Google Account</button>
-      </div>`;
-    recentList.addEventListener('click', e => {
-      const btn = e.target.closest('[data-reply]');
-      if (!btn) return;
-      const card = btn.closest('.review-card');
-      const open = !card.classList.contains('is-replying');
-      recentList.querySelectorAll('.review-card.is-replying').forEach(c => {
-        c.classList.remove('is-replying');
-        c.querySelector('[data-reply]').setAttribute('aria-expanded', 'false');
-        c.querySelector('.reply-gate')?.remove();
-      });
-      if (!open) return;
-      card.classList.add('is-replying');
-      btn.setAttribute('aria-expanded', 'true');
-      card.insertAdjacentHTML('beforeend', gateHTML);
-      fade(card.lastElementChild, 0, 1, motion(200), { from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
-    });
-    recentList.addEventListener('click', async e => {
-      const btn = e.target.closest('[data-copy]');
-      if (!btn) return;
-      try { await navigator.clipboard.writeText(btn.closest('.review-card').querySelector('.review-card__text').textContent); } catch { /* blocked: still confirm */ }
-      showToast('Review copied');
-    });
 
     async function runRecentReviews(id, { skippedListings = false } = {}) {
       const live = () => id === run;

@@ -2032,10 +2032,6 @@ button { font: inherit; color: inherit; }
 .connect-banner__note { font: var(--body-sm); color: var(--txt-primary); }  /* owner: regular, black, 14px */
 .review-card--recent { padding-bottom: var(--sp-16); }
 .review-card--recent .review-card__profile { min-height: 24px; }
-.recent-actions { margin-left: auto; display: flex; gap: var(--sp-8); opacity: 0; transition: opacity 150ms ease; }
-.review-card--recent:hover .recent-actions,
-.review-card--recent:focus-within .recent-actions { opacity: 1; }
-.recent-actions .icon-btn { width: 24px; height: 24px; }
 
 /* Two big posts instead of six */
 .posts__grid--big { grid-template-columns: repeat(auto-fill, 322px); }
@@ -2066,12 +2062,17 @@ button { font: inherit; color: inherit; }
 .goal__marker--fb { display: flex; align-items: center; justify-content: center; }
 
 
-/* Read-only inbox · reply opens a connect note (Figma 8818:89672) */
-.review-card--recent.is-replying { border-color: var(--brd-hover); box-shadow: 0 8px 12px rgba(0, 0, 0, 0.12); }
-.review-card--recent.is-replying .recent-actions { opacity: 1; }
-.review-card--recent.is-replying [data-reply] { background: var(--brand-primary-subtle); }
+/* Read-only inbox · hover expands the card over the next one with a connect note
+   (Figma 8818:89672). The note adds 48px (8px + card gap 8px + 32px); the negative
+   margin takes it back so the list doesn't move. */
+.review-card--recent { transition: border-color 150ms ease, box-shadow 150ms ease, margin-bottom 0s; }
+.review-card--recent:hover,
+.review-card--recent:focus-within { z-index: 3; margin-bottom: -48px; }
+.review-card--recent:hover .reply-gate,
+.review-card--recent:focus-within .reply-gate { display: flex; animation: gate-in 200ms ease; }
+@keyframes gate-in { from { opacity: 0; transform: translateY(-4px); } }
 .reply-gate {
-  display: flex;
+  display: none;
   align-items: center;
   gap: var(--sp-8);
   height: 32px;
@@ -2118,7 +2119,8 @@ button { font: inherit; color: inherit; }
 .form-skel__map { height: 290px; }
 
 /* Facebook inbox card: open / copy / reply on hover (Figma 8882:71528) */
-.review-card .card-actions { margin-left: auto; }
+.review-card .card-actions { margin-left: auto; display: flex; gap: var(--sp-8); opacity: 0; transition: opacity 150ms ease; }
+.card-actions .icon-btn { width: 24px; height: 24px; }
 .review-card:hover .card-actions,
 .review-card:focus-within .card-actions { opacity: 1; }
 

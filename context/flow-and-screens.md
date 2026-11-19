@@ -48,8 +48,8 @@ Search returns **Google listings only**. Facebook is reached only through the **
 ## Facebook pill path (2026-11-18)
 **Facebook Page** pill on the search screen → **Connect Facebook** modal straight away (no Facebook login screen; demo business "Third Wave Coffee Jaipur") → toast "Your Facebook Page is connected" → AI steps → form with **I'll do it later** + **Publish Changes & Continue** (Facebook icon), no "Back to results". Publish → toast "Page details updated on Facebook" → listings → the Facebook connected flow (Recommends inbox, posts, widget, "Get 50 more recommendations"). I'll do it later → "9 Page fixes drafted. You can publish them anytime from your dashboard", still connected.
 
-## Read-only inbox · reply note (2026-11-18; Figma 8818:89180 / 8818:89672)
-On the Google skip-auth inbox, the reply icon on a card opens a note under the review: Google G + "To view & manage replies, **Connect Google Account**". The card gets the hover border + shadow and the reply icon stays highlighted. Clicking reply again (or another card's) closes it. The link isn't wired yet.
+## Read-only inbox · hover (2026-11-19; Figma 8818:89180 / 8818:89672)
+On the Google skip-auth inbox, **hovering** a card expands it as an overlay over the card below (nothing moves): hover border + shadow, and a note under the review: Google G + "To view & manage replies, **Connect Google Account**". No action icons (open / copy / reply) on these cards. The link isn't wired yet.
 
 ## Copy that the owner set
 - "Back to results" (not "Choose another business").

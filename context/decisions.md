@@ -93,6 +93,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-11-18 · Facebook "I'll do it later" in the inbox skips to social posts** (agent reading).
 
 ## Connect GBP
+- **2026-11-19 · Read-only inbox: hover expands the card as an overlay with the connect note; no action icons** (owner; Figma 8818:89180). Supersedes the 2026-11-18 click-reply version.
 - **2026-11-18 · Read-only inbox reply → connect note under the card** (owner; Figma 8818:89672).
 - **2026-11-17 · Skip-auth inbox banner note "To See and Reply to 130 more Reviews" = regular, black (`--txt-primary`), 14px** (owner; Figma had 12px semibold grey).
 - **2026-11-17 · Listings groups have no outer border or padding** (owner; Figma Lfz2oHviZXGc9NDmp8JEpq 8711:46871): just the group label row, then the white rounded list 4px below. Applies to every listings screen.

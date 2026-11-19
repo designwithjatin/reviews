@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-19 · Writing style: Does not Recommend tag is grey (owner, 8880:35120)
+- (pending) · 2026-11-19 · Read-only inbox: hover expands the card as an overlay with the connect note, no action icons (Figma 8818:89180)
+- 8c3a059 · 2026-11-19 · Writing style: Does not Recommend tag is grey (owner, 8880:35120)
 - 92d8efa · 2026-11-19 · Writing-style modal split by platform: Google 5★–1★ + Cross-Rating; Facebook Recommends / Doesn't Recommend + Cross-Rating (Figma 8879:34179)
 - 7fd1402 · 2026-11-19 · Basic Details header: removed "Added from the business details you’ve shared." note (prototype + Figma Ready for Dev)
 - 36af63d · 2026-11-18 · Inbox "I'll do it later" still shows Automate Replies before posts
