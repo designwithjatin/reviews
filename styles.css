@@ -2285,4 +2285,3 @@ button { font: inherit; color: inherit; }
 /* Last step after the first request is sent */
 .final__sent { display: flex; align-items: center; gap: var(--sp-8); height: 32px; font: var(--body-sm); color: var(--txt-primary); }
 .final__sent b { font-weight: 600; }
-.btn-solid.btn-outline--wide { width: 292px; height: 32px; border-radius: var(--br-4); }

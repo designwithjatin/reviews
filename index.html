@@ -2719,23 +2719,20 @@
       if (again) { qrrReset(); qrrFirst.focus(); return; }
       closeModal(qrrModal);
     });
-    // Last step after the first request: the link gives way to a confirmation,
-    // and Go to Dashboard becomes the primary action
+    // Last step after the first request: the link gives way to a confirmation;
+    // Go to Dashboard stays secondary (it's the only action left — owner)
     function markFirstSent(name) {
       const first = document.getElementById('final-first');
       const sent = document.getElementById('final-sent');
-      const dash = document.getElementById('final-dash');
       document.getElementById('final-sent-name').textContent = name;
       if (!sent.hidden) return;
       first.hidden = true;
       sent.hidden = false;
-      dash.classList.replace('btn-outline', 'btn-solid');
       fade(sent, 0, 1, motion(300), { delay: motion(200), from: { transform: 'translateY(-4px)' }, to: { transform: 'none' } });
     }
     function resetFirstSent() {
       document.getElementById('final-first').hidden = false;
       document.getElementById('final-sent').hidden = true;
-      document.getElementById('final-dash').classList.replace('btn-solid', 'btn-outline');
     }
 
     // Edit a draft in place; Send Reply sends just that one
