@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=59">
+  <link rel="stylesheet" href="styles.css?v=60">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -2481,7 +2481,7 @@
     const styleModal = document.getElementById('style-modal');
     const styleSheet = document.getElementById('style-sheet');
     const STYLE = [
-      { title: '5-Star Reviews / Facebook Recommends', stars: 5, tag: 'Recommends',
+      { title: '5-Star Reviews', stars: 5,
         points: ['User prefers warm, appreciative responses without sounding overly excited.', 'Frequently thanks customers by name when available.', 'Avoids generic phrases like "We value your business."', 'Likes acknowledging a specific compliment mentioned in the review.', 'Keeps replies concise, typically 2-4 sentences.', 'Prefers ending with an invitation to return rather than promotional messaging.', 'Avoids excessive punctuation, emojis, and exclamation marks.', 'Uses phrases such as: "We\'re glad you enjoyed..." "Thank you for sharing your experience..." "It means a lot to hear..."', 'Rarely mentions management or ownership teams.'],
         pattern: 'Thank → Recognize positive feedback → Address improvement opportunity → Invite them back' },
       { title: '4-Star Reviews', stars: 4,
@@ -2493,7 +2493,7 @@
       { title: '2-Star Reviews', stars: 2,
         points: ['User prefers a calm, professional tone.', 'Begins with an apology when a clear service issue exists.', 'Focuses on understanding the issue rather than defending the business.', 'Avoids challenging customer claims publicly.', 'Often invites the customer to continue the conversation offline.', 'Does not offer compensation publicly.', 'Uses phrases such as: "We\'re sorry to hear about your experience." "This isn\'t the standard we aim to provide." "We\'d appreciate the opportunity to learn more."'],
         pattern: 'Apologize → Acknowledge issue → State commitment to improvement → Invite direct contact' },
-      { title: '1-Star Reviews / Facebook Doesn\'t Recommend', stars: 1, tag: 'Does not Recommend',
+      { title: '1-Star Reviews', stars: 1,
         points: ['User prioritises professionalism regardless of review sentiment.', 'Avoids emotional or defensive language.', 'Never argues with reviewers in public responses.', 'Prefers concise replies rather than lengthy explanations.', 'Acknowledges the customer\'s dissatisfaction even when details are limited.', 'Requests offline follow-up whenever possible.', 'Avoids admitting fault before facts are confirmed.', 'Uses phrases such as: "We\'re sorry your experience did not meet expectations." "We take feedback seriously." "We\'d welcome the opportunity to discuss this further."', 'If the review appears unfair or lacks context, user still prefers a respectful response rather than disputing the review publicly.'],
         pattern: 'Apologize → Acknowledge issue → State commitment to improvement → Invite direct contact' },
       { title: 'Cross-Rating Behavioral Patterns',
@@ -2506,15 +2506,19 @@
     const SKEL_WIDTHS = [58, 75, 69, 75, 60, 75, 69, 75, 58, 44, 75];
     const skelLines = n => `<div class="style-sec__skel" aria-hidden="true">${Array.from({ length: n }, (_, i) =>
       `<span class="skel-bar" style="width:${SKEL_WIDTHS[i % SKEL_WIDTHS.length]}%"></span>`).join('')}</div>`;
+    // Figma 8879:34179 — Google: one section per star rating; Facebook: Recommends,
+    // Doesn't Recommend, then the shared cross-rating patterns
     const styleSections = () => isFB()
-      ? [{ ...STYLE[0], title: 'Facebook Recommends', stars: 0, fb: true }]
+      ? [{ ...STYLE[0], title: 'Facebook Recommends', stars: 0, rec: 'yes' },
+         { ...STYLE[4], title: 'Facebook Doesn\'t Recommend', stars: 0, rec: 'no' },
+         STYLE[5]]
       : STYLE;
     const styleHTML = (loading = false) => styleSections().map(sec => `
       <section class="style-sec">
         <div class="style-sec__head">
           <h3>${esc(sec.title)}</h3>
-          ${sec.fb ? '<div class="style-sec__rating"><span class="info-tag info-tag--pill info-tag--success"><img src="assets/recommend.svg" alt="" width="12" height="12">Recommends</span></div>' : ''}
-          ${sec.stars ? `<div class="style-sec__rating">${ratingHTML(sec.stars)}${sec.tag ? `<span class="style-sec__slash" aria-hidden="true">/</span><span class="info-tag info-tag--pill${sec.stars === 5 ? ' info-tag--success' : ''}"><img src="assets/recommend.svg" alt="" width="12" height="12">${sec.tag}</span>` : ''}</div>` : ''}
+          ${sec.rec ? `<div class="style-sec__rec"><span class="info-tag info-tag--pill info-tag--${sec.rec === 'yes' ? 'success' : 'danger'}"><img src="assets/recommend.svg" alt="" width="12" height="12">${sec.rec === 'yes' ? 'Recommends' : 'Does not Recommend'}</span></div>` : ''}
+          ${sec.stars ? `<div class="style-sec__rating">${ratingHTML(sec.stars)}</div>` : ''}
         </div>
         ${loading ? skelLines(sec.points.length + 2) : `<ul class="style-sec__points">${sec.points.map(pt => `<li>${esc(pt)}</li>`).join('')}</ul>`}
         <div class="style-sec__pattern"><h4>Typical Reply Pattern</h4>${loading ? '<span class="skel-bar" style="width:70%;margin-top:12px"></span>' : `<p>${esc(sec.pattern)}</p>`}</div>

@@ -55,6 +55,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Not wired yet**: the inbox's "Connect Google Account" link and the card's open/reply actions (copy works). "View all 130 reviews" was removed (owner, 2026-11-16). The listings' "I'll do it later" goes to the inbox (agent reading).
 
 ## Google pill path
+- **2026-11-19 · Writing style split by platform** (owner, Figma 8879:34179). Google: 5-Star … 1-Star sections with stars only (no Facebook tags) + Cross-Rating. Facebook: Recommends + Doesn't Recommend + Cross-Rating.
 - **2026-11-18 · Skipping the drafts still offers Automate Replies** (owner). Inbox "I'll do it later" → pending milestone → the review cards drop away → Writing Style + Automate Replies → **Save and Continue** → social posts. Automation is about future reviews, so it applies even when today's drafts aren't sent.
 - **2026-11-18 · Connected users (Google or Facebook) who click the inbox "I'll do it later"** get a pending milestone in the sidebar, in the skip-auth style (Figma 8818:89951): **"Read your past reviews · We’ve drafted replies to your reviews"** (owner; the skip-auth path keeps "We’re ready to draft your review replies"). The progress bar moves on from where the inbox left it.
 - **2026-11-18 · Listings "I'll do it later" shows on every path** (owner), next to Get Listed in All. Connected users: pending milestone "Found 7 Relevant Publishers", then learning from reviews → the inbox (create-profile path → its final screen). Skipped auth: unchanged (recent reviews).
@@ -74,7 +75,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **2026-11-18 · Facebook flow checked against Figma "Start with FB Auth" (8860:192375) and aligned** (owner asked for a full comparison):
   - Pill paths show a **form skeleton** (~1.4s) between the AI steps and the form (8860:200044).
   - Listings: **"Found 7 Publishers…"**, Active Listings label **"Facebook"** (8860:194680).
-  - Writing-style modal: one section, **"Facebook Recommends"** + Recommends tag, no star sections (8860:196213).
+  - Writing-style modal: **"Facebook Recommends"** (Recommends tag), **"Facebook Doesn't Recommend"** (Does not Recommend tag, red), then Cross-Rating Behavioral Patterns; no star sections (8879:34179, supersedes 8860:196213 on 2026-11-19).
   - **Send Replies sending state**: dots in the button and "I'll do it later" dimmed for ~0.9s before the replied cascade (8860:196341). Applies to every path.
   - Last step: tools are the **same as Google** ("Leave a review", "Send First Review Request", both QR chips); the QR **Facebook chip shows "Recommends"** on every final screen (Tools component); the goal marker uses the **reviews icon** (8871:60281). Supersedes the Facebook-specific tool copy.
   - Not changed, flagged to the owner: Figma shows "Back to results" on the pill form (no results exist on that path); Figma's left-panel milestone copy is the Google one ("easier to find in Google"); avatars and "John Doe" names are placeholders.

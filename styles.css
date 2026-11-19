@@ -1395,6 +1395,7 @@ button { font: inherit; color: inherit; }
 .automate__includes { display: flex; align-items: center; gap: var(--sp-8); margin-top: var(--sp-4); font: var(--body-xs); color: var(--txt-tertiary); }
 .automate__includes > span:not(.info-tag) { display: flex; align-items: center; gap: var(--sp-4); }
 .info-tag--success { background: #EDFFEE; }
+.info-tag--danger { background: #FEEFED; }
 .automate__note { display: flex; align-items: center; gap: var(--sp-4); padding: 0 var(--sp-16); font: var(--body-xs); color: var(--txt-secondary); }
 
 /* Toggle · 28×16, brand blue when on */
@@ -1482,7 +1483,7 @@ button { font: inherit; color: inherit; }
 .style-sec__stars { display: flex; gap: var(--sp-4); }
 .style-sec__star { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
 .style-sec__star img { width: 19.3px; height: 18px; }
-.style-sec__slash { font: var(--body-sm); color: var(--txt-disabled); }
+.style-sec__rec { display: flex; align-items: center; height: 16px; }
 .info-tag--pill { border-radius: var(--br-48); color: var(--txt-primary); }
 .style-sec__points { margin: 0; padding: 0 0 var(--sp-8) 21px; border-bottom: 1px solid var(--dvdr-secondary); font: 14px/20px var(--font); color: var(--txt-secondary); }
 .style-sec__pattern h4 { font: var(--body-sm); font-weight: 400; color: var(--txt-primary); }
