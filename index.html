@@ -2339,12 +2339,13 @@
     const smallStars = n => [1, 2, 3, 4, 5].map(i =>
       `<img src="assets/review-star${i <= n ? '' : '-empty'}.svg" alt="">`).join('');
 
+    // Every post starts selected, so Share Now is ready to go (owner)
     function renderPosts() {
       postsGrid.classList.toggle('posts__grid--big', skipAuth);
       const picks = skipAuth ? [...recentReviews()].sort((a, b) => b.stars - a.stars).slice(0, 2) : topReviews();
       postsGrid.innerHTML = picks.map((r, i) => `
         <label class="post">
-          <input type="checkbox" aria-label="Post ${i + 1}: review by ${esc(r.name)}">
+          <input type="checkbox" checked aria-label="Post ${i + 1}: review by ${esc(r.name)}">
           <div class="post__art" aria-hidden="true">
             <img src="assets/platform-${isFB() ? 'facebook' : 'gbp'}.svg" alt="">
             <p class="post__name">${esc(r.name)}</p>
