@@ -313,13 +313,12 @@
           </header>
           <div class="form-card__body">
             <div class="form-row"><label class="field"><span class="field__label">Name<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-name" value="TWC Jaipur"></label><label class="field"><span class="field__label">Website<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-website" value="www.tcb.com"></label></div>
-            <div class="form-row"><label class="field"><span class="field__label">Phone Number<span aria-hidden="true">*</span></span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel" id="form-phone"></span></label><label class="field"><span class="field__label">Alternative Phone Number</span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel" id="form-phone-alt"></span></label></div>
             <div class="form-row">
               <div class="form-col">
                 <label class="field"><span class="field__label">Email</span><input class="input" type="text" id="form-email" value="twcjaipur@gmail.com"></label>
+                <label class="field"><span class="field__label">Country<span aria-hidden="true">*</span></span><select class="input input--select"><option>India</option></select></label>
                 <label class="field"><span class="field__label">Street Address<span aria-hidden="true">*</span></span><textarea class="input input--address" id="form-address">Ground Floor, Fort Anandam, Plot No 3, near Mercedes Benz, D-Block, Sector 4, Jaipur, Rajasthan 302017</textarea></label>
                 <label class="field"><span class="field__label">City<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-city" value="Jaipur"></label>
-                <label class="field"><span class="field__label">State/Region<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-state" value="Rajasthan"></label>
               </div>
               <div class="field">
                 <span class="field__label field__label--split"><span class="field__label">Map Location<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></span><button class="link-btn" type="button"><img src="assets/edit.svg" alt="" width="16" height="16">Adjust</button></span>
@@ -330,8 +329,23 @@
                 </div>
               </div>
             </div>
-            <div class="form-row"><label class="field "><span class="field__label">Country<span aria-hidden="true">*</span></span><select class="input input--select"><option>India</option></select></label><label class="field"><span class="field__label">Latitude</span><input class="input" type="text" id="form-lat" value="26.8553"></label></div>
+            <div class="form-row"><label class="field"><span class="field__label">State/Region<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-state" value="Rajasthan"></label><label class="field"><span class="field__label">Latitude</span><input class="input" type="text" id="form-lat" value="26.8553"></label></div>
             <div class="form-row"><label class="field"><span class="field__label">ZIP/Post Code<span aria-hidden="true">*</span></span><input class="input" type="text" id="form-zip" value="302012"></label><label class="field"><span class="field__label">Longitude</span><input class="input" type="text" id="form-lng" value="75.8053"></label></div>
+            <div class="form-row"><label class="field"><span class="field__label">Phone Number<span aria-hidden="true">*</span></span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel" id="form-phone"></span></label><label class="field"><span class="field__label">Alternative Phone Number</span><span class="input input--phone"><span class="phone__country" aria-label="Country code"><img src="assets/flag.svg" alt="" width="24" height="18"><img src="assets/dropdown.svg" alt="" width="24" height="24"></span><input type="tel" id="form-phone-alt"></span></label></div>
+          </div>
+        </section>
+
+        <section class="form-card" data-ai-corrected>
+          <header class="form-card__head">
+            <div class="form-card__title"><h2>Category</h2></div>
+            <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse Category"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
+          </header>
+          <div class="form-card__body">
+            <div class="form-row form-row--loose">
+              <div class="field"><label class="field__label" for="primary-cat">Primary Business Category<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></label><select class="input input--select" id="primary-cat"><option>Coffee Shop</option></select><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span><span id="note-primary">Kept “Coffee Shop” as your primary category. 8 of the 10 top-ranked cafés in Jaipur use it, so it’s what nearby searches match first.</span></span></p></div>
+              <div class="field"><label class="field__label" for="secondary-cat">Secondary Business Category<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></label><input class="input input--plain" id="secondary-cat" type="text" value="Coffee Shop"></div>
+            </div>
+            <div class="field form-loose"><span class="field__label">Additional Categories<img src="assets/info.svg" alt="" width="16" height="16"></span><div class="input input--tags" data-tags><span class="tag">Coffee Roasters<button type="button" aria-label="Remove Coffee Roasters"><img src="assets/clear.svg" alt="" width="16" height="16"></button></span><input type="text" aria-label="Add category"></div><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span>Added “Coffee Roasters” because you roast in-house. Only 2 of your 10 closest competitors list it, so it sets you apart in “fresh roasted coffee” searches.</span></p></div>
           </div>
         </section>
 
@@ -341,11 +355,6 @@
             <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse About"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
           </header>
           <div class="form-card__body">
-            <div class="form-row form-row--loose">
-              <div class="field"><label class="field__label" for="primary-cat">Primary Business Category<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></label><select class="input input--select" id="primary-cat"><option>Coffee Shop</option></select><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span><span id="note-primary">Kept “Coffee Shop” as your primary category. 8 of the 10 top-ranked cafés in Jaipur use it, so it’s what nearby searches match first.</span></span></p></div>
-              <div class="field"><label class="field__label" for="secondary-cat">Secondary Business Category<span aria-hidden="true">*</span><img src="assets/info.svg" alt="" width="16" height="16"></label><input class="input input--plain" id="secondary-cat" type="text" value="Coffee Shop"></div>
-            </div>
-            <div class="field form-loose"><span class="field__label">Additional Categories<img src="assets/info.svg" alt="" width="16" height="16"></span><div class="input input--tags" data-tags><span class="tag">Coffee Roasters<button type="button" aria-label="Remove Coffee Roasters"><img src="assets/clear.svg" alt="" width="16" height="16"></button></span><input type="text" aria-label="Add category"></div><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span>Added “Coffee Roasters” because you roast in-house. Only 2 of your 10 closest competitors list it, so it sets you apart in “fresh roasted coffee” searches.</span></p></div>
             <div class="field field--area"><label class="field__label" for="about-desc">Description<img src="assets/info.svg" alt="" width="16" height="16"></label><span class="input input--area input--area-lg"><textarea id="about-desc" data-count>Third Wave Coffee is a specialty coffee shop dedicated to thoughtfully sourced beans, precise brewing, and warm hospitality. From bright pour-overs to silky espresso drinks, every cup is crafted to highlight the character of its origin in a relaxed, welcoming space.</textarea><span class="char-count">0</span></span><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span>Your profile had no description. This one leads with sourcing, brewing and a calm place to sit — the three things reviewers praise most at <span class="js-city">Jaipur</span>’s top specialty cafés.</span></p></div>
             <div class="field field--area"><label class="field__label" for="about-short">Short Description<img src="assets/info.svg" alt="" width="16" height="16"></label><span class="input input--area input--area-sm"><textarea id="about-short" data-count maxlength="150">Ethically sourced, freshly roasted specialty coffee, brewed with care and served in a relaxed space made for slowing down.</textarea><span class="char-count">0</span></span><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span>Kept under 150 characters so Google doesn’t cut it off in search results. Ethical sourcing comes first because it runs through your competitors’ best-rated reviews.</span></p></div>
             <div class="field form-loose"><span class="field__label">Amenities<img src="assets/info.svg" alt="" width="16" height="16"></span><div class="input input--tags" data-tags><span class="tag">Parking<button type="button" aria-label="Remove Parking"><img src="assets/clear.svg" alt="" width="16" height="16"></button></span><span class="tag">Free Wi-Fi<button type="button" aria-label="Remove Free Wi-Fi"><img src="assets/clear.svg" alt="" width="16" height="16"></button></span><input type="text" aria-label="Add amenity"></div><p class="ai-note"><img src="assets/ai-filled.svg" alt="" width="16" height="16"><span>Added Parking and Free Wi-Fi. They’re the questions people ask most on nearby cafés’ profiles, and 7 of your 10 closest competitors list both.</span></p></div>
@@ -2029,11 +2038,11 @@
       const field = (label, value, cls = '') => `<div class="optin-field ${cls}"><dt>${label}</dt><dd>${esc(value)}</dd></div>`;
       document.getElementById('optin-fields').innerHTML =
         field('Name', v('form-name')) + field('Website', v('form-website'))
-        + field('Phone Number', v('form-phone')) + field('Alternative Phone Number', v('form-phone-alt'))
-        + `<div class="optin-col">${field('Email', v('form-email'))}${field('Street Address', v('form-address'))}${field('City', v('form-city'))}${field('State/Region', v('form-state'))}</div>`
+        + `<div class="optin-col">${field('Email', v('form-email'))}${field('Country', document.querySelector('#profile-form select:not(#primary-cat):not(#about-lang)').value)}${field('Street Address', v('form-address'))}${field('City', v('form-city'))}</div>`
         + `<div class="optin-field"><dt>Map Location</dt><dd><div class="geo-map"><iframe title="Map of the business location" loading="lazy" src="${document.getElementById('form-map').src}"></iframe></div></dd></div>`
-        + field('Country', document.querySelector('#profile-form select:not(#primary-cat):not(#about-lang)').value) + field('Latitude', v('form-lat'))
+        + field('State/Region', v('form-state')) + field('Latitude', v('form-lat'))
         + field('ZIP/Post Code', v('form-zip')) + field('Longitude', v('form-lng'))
+        + field('Phone Number', v('form-phone')) + field('Alternative Phone Number', v('form-phone-alt'))
         + field('Business Category', v('primary-cat')) + field('Additional Categories', tags('#tags-categories'))
         + field('Amenities', tags('#tags-amenities')) + field('Language', v('about-lang'))
         + field('Description', v('about-desc'), 'optin-field--wide');

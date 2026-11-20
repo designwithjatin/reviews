@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-19 · Skip-auth final shows "Get your first 100 5 Star Reviews" (Surbhi; Figma 8923:152632 header swapped to the first-100 version)
+- (pending) · 2026-11-20 · Profile form matches Figma Ready for Dev: Basic Details order Name/Website → Email, Country, Street, City beside Map → State/Latitude → ZIP/Longitude → Phone/Alt Phone; Category is its own section before About (opt-in summary follows the same order)
+- 4311829 · 2026-11-19 · Skip-auth final shows "Get your first 100 5 Star Reviews" (Surbhi; Figma 8923:152632 header swapped to the first-100 version)
 - 8665876 · 2026-11-19 · Connect Facebook modal: removed "Potential match" tags
 - 98aa5dd · 2026-11-19 · Last step after sending matches Figma 8919:151199: toast "Review request sent", line "You’ve sent your first review request! go to dashboard to see what’s next."
 - a90bef9 · 2026-11-19 · Go to Dashboard stays secondary after the first request is sent

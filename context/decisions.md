@@ -125,3 +125,4 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **"Back to results"** replaces "Choose another business" (owner).
 - **Transition: left panel shrinks, card flies to top-left, steps stack one by one, slow and natural** (owner; an alternative was rejected).
 - **Skip-auth final shows "Get your first 100 5 Star Reviews"**, not "75 more to reach 4.0": without a connection we don’t know their rating (Surbhi).
+- **Category is its own section, before About**; Basic Details order is Name/Website → Email, Country, Street, City (beside Map) → State/Latitude → ZIP/Longitude → Phone/Alt Phone (owner, Figma 8812:16327 / 8812:51928).

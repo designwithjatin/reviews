@@ -54,6 +54,7 @@ On the Google skip-auth inbox, **hovering** a card expands it as an overlay over
 ## Copy that the owner set
 - "Back to results" (not "Choose another business").
 - Basic Details header has no "Added from the business details you've shared" note (removed 2026-11-19).
+- Profile form sections: Basic Details → **Category** (Primary/Secondary + Additional Categories, AI notes) → About → Hours → Services → Media → Social Media. Basic Details order: Name/Website → Email, Country, Street, City beside Map → State/Latitude → ZIP/Longitude → Phone/Alt Phone. The opt-in summary uses the same order.
 - The AI Corrected reasoning reads like a concise AI layer that researched competitors (e.g. why the About text changed).
 
 ## Interactions per screen
