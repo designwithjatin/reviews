@@ -1294,7 +1294,8 @@ button { font: inherit; color: inherit; }
   padding: var(--sp-4) var(--sp-16);
   border-bottom: 1px solid var(--dvdr-secondary);
 }
-.automate .style-card__head { border-bottom: 0; }
+/* Automate Replies (Figma 8814:70669): 24px header with a divider, rules straight in the card */
+.automate .style-card__head { height: auto; padding: var(--sp-16) 24px; }
 .style-card__title { display: flex; align-items: center; gap: var(--sp-4); font: var(--body-xs); color: var(--txt-primary); }
 .style-card__list { margin: 0; padding: 12px var(--sp-16) 12px 34px; font: 12px/22px var(--font); color: var(--txt-secondary); }
 
@@ -1387,11 +1388,12 @@ button { font: inherit; color: inherit; }
 
 /* Automate replies */
 .automate { display: flex; flex-direction: column; gap: var(--sp-8); }
-.automate__body { padding: 0 var(--sp-16) 12px; }
-.automate__box { display: flex; flex-direction: column; gap: var(--sp-8); padding: var(--sp-16); border: 1px solid var(--brd-surface-secondary); border-radius: var(--br-4); }
-.automate__row { display: flex; align-items: center; justify-content: space-between; }
-.automate__row + .automate__row { padding-top: var(--sp-8); border-top: 1px solid var(--dvdr-secondary); }
-.automate__title { font: var(--body-xs); color: var(--txt-primary); }
+.automate__body { padding: 0; }
+.automate__box { display: flex; flex-direction: column; }
+.automate__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: var(--sp-16) 24px; }
+.automate__row + .automate__row { position: relative; }
+.automate__row + .automate__row::before { content: ''; position: absolute; top: 0; left: var(--sp-16); right: var(--sp-16); border-top: 1px solid var(--dvdr-secondary); }
+.automate__title { font: var(--body-sm); color: var(--txt-primary); }
 .automate__includes { display: flex; align-items: center; gap: var(--sp-8); margin-top: var(--sp-4); font: var(--body-xs); color: var(--txt-tertiary); }
 .automate__includes > span:not(.info-tag) { display: flex; align-items: center; gap: var(--sp-4); }
 .info-tag--success { background: #EDFFEE; }
