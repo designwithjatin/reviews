@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=68">
+  <link rel="stylesheet" href="styles.css?v=69">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -155,10 +155,15 @@
         </div>
         <div class="create-field">
           <label class="create-card__label" for="create-where">Where is it located?</label>
-          <form class="create-search" id="create-search">
-            <input class="create-search__input" id="create-where" type="text" autocomplete="street-address" placeholder="Eg : Sindhu Bhavan Road">
-            <button class="icon-btn" type="submit" aria-label="Find on map"><img src="assets/search-20.svg" alt="" width="20" height="20"></button>
-          </form>
+          <div class="create-where">
+            <form class="create-search" id="create-search" autocomplete="off">
+              <input class="create-search__input" id="create-where" type="text" autocomplete="off" spellcheck="false" placeholder="Eg : Sindhu Bhavan Road"
+                role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="create-suggest">
+              <button class="icon-btn create-search__go" type="submit" aria-label="Find on map"><img src="assets/search-20.svg" alt="" width="20" height="20"></button>
+              <button class="icon-btn create-search__clear" type="button" aria-label="Clear location" hidden><span><img src="assets/clear.svg" alt="" width="14" height="14"></span></button>
+            </form>
+            <ul class="create-suggest" id="create-suggest" role="listbox" aria-label="Address suggestions" hidden></ul>
+          </div>
           <div class="create-map">
             <p class="create-map__label"><img src="assets/location-16.svg" alt="" width="16" height="16">Pin your location</p>
             <div class="create-map__frame">
@@ -308,7 +313,7 @@
 
         <section class="form-card">
           <header class="form-card__head">
-            <div class="form-card__title"><h2>Basic Details</h2></div>
+            <div class="form-card__title"><h2>Basic Details</h2><span class="form-card__divider" data-new-only hidden></span><span class="form-card__note" data-new-only hidden><img src="assets/ai-filled.svg" alt="" width="16" height="16">Added from the business details you’ve shared.</span></div>
             <button class="icon-btn form-card__toggle" type="button" aria-expanded="true" aria-label="Collapse Basic Details"><img src="assets/arrow-up.svg" alt="" width="20" height="20"></button>
           </header>
           <div class="form-card__body">
@@ -1343,9 +1348,13 @@
       set('form-zip', b.zip);
       set('form-lat', b.lat);
       set('form-lng', b.lng);
+      // Country from the address lookup (new business anywhere); India otherwise
+      document.querySelector('#profile-form .form-card__body select:not(#primary-cat):not(#about-lang) option').textContent = b.country || 'India';
       updateMap(b.lat && b.lng ? `${b.lat},${b.lng}` : b.address);
       set('form-email', `${slug}@gmail.com`);
       set('form-website', b.isNew ? '' : `www.${slug}.com`);  // a brand-new business has no website yet
+      // New business (Figma 8818:93695): the details came from what they told us
+      document.querySelectorAll('[data-new-only]').forEach(el => (el.hidden = !b.isNew));
       set('secondary-cat', b.category);
       document.querySelector('#primary-cat option').textContent = b.category;
       document.getElementById('note-primary').textContent =
@@ -3121,24 +3130,40 @@
     // Address lookup (OpenStreetMap Nominatim, no key needed): the typed street
     // gives back its real locality, city, state, PIN and coordinates, the way
     // a map search would. Cached per query; null if it can't be found or fetched.
+    // Worldwide (not only India); the searched city, if any, is tried first so
+    // "Sindhu Bhavan Road" finds the one in Ahmedabad.
     const geoCache = new Map();
     let geo = null;  // result for the address currently in the field
-    async function locate(where) {
+    const toGeo = hit => {
+      const a = hit.address || {};
+      const street = [a.house_number, a.road].filter(Boolean).join(' ');
+      const city = a.city || a.town || a.village || a.state_district || a.county || '';
+      return {
+        street, area: a.suburb || a.neighbourhood || a.quarter || '', city,
+        state: a.state || '', zip: a.postcode || '', country: a.country || '',
+        lat: (+hit.lat).toFixed(4), lng: (+hit.lon).toFixed(4),
+        // Two-line label for the suggestions list
+        title: street || hit.name || hit.display_name.split(',')[0],
+        sub: [a.suburb || a.neighbourhood, city, a.state, a.country].filter(Boolean).filter((v, i, arr) => arr.indexOf(v) === i).join(', '),
+      };
+    };
+    function lookup(where, limit = 5) {
       const q = where.trim();
-      if (!geoCache.has(q)) {
-        geoCache.set(q, fetch('https://nominatim.openstreetmap.org/search?' + new URLSearchParams(
-          { q, format: 'jsonv2', addressdetails: '1', countrycodes: 'in', limit: '1' }))
-          .then(r => (r.ok ? r.json() : []))
-          .then(([hit]) => hit && {
-            area: hit.address.suburb || hit.address.neighbourhood || '',
-            city: hit.address.city || hit.address.town || hit.address.village || hit.address.state_district || '',
-            state: hit.address.state || '', zip: hit.address.postcode || '',
-            lat: (+hit.lat).toFixed(4), lng: (+hit.lon).toFixed(4),
-          })
-          .catch(() => null));
+      const key = `${limit}|${q}`;
+      if (!geoCache.has(key)) {
+        const ask = text => fetch('https://nominatim.openstreetmap.org/search?' + new URLSearchParams(
+          { q: text, format: 'jsonv2', addressdetails: '1', limit: String(limit) }))
+          .then(r => (r.ok ? r.json() : [])).catch(() => []);
+        const city = searchedCity();
+        const near = city && !q.toLowerCase().includes(city.toLowerCase());
+        geoCache.set(key, (near ? ask(`${q}, ${city}`) : Promise.resolve([]))
+          .then(hits => (hits.length ? hits : ask(q)))
+          .then(hits => hits.map(toGeo).filter((g, i, all) =>  // the same place can come back twice
+            all.findIndex(o => o.title === g.title && o.sub === g.sub) === i)));
       }
-      return geoCache.get(q);
+      return geoCache.get(key);
     }
+    const locate = where => lookup(where, 1).then(([g]) => g || null);
     const pinGeo = g => showCreateMap(`${g.lat},${g.lng}`, 16);
 
     list.addEventListener('click', async e => {
@@ -3160,17 +3185,91 @@
     // Both answers are needed before a profile can be built
     const syncCreate = () => (createGo.disabled = !createDesc.value.trim() || !createWhere.value.trim());
     [createDesc, createWhere].forEach(el => el.addEventListener('input', syncCreate));
-    createWhere.addEventListener('input', () => (geo = null));  // typed something new: look it up again
+    // Suggestions as they type (debounced), like a map search box. Picking one fills
+    // the field and pins the map; Enter or the search button takes the first match.
+    const suggestBox = document.getElementById('create-suggest');
+    let suggestions = [];
+    let activeSuggest = -1;
+    let suggestTimer = 0;
+    const closeSuggest = () => {
+      suggestBox.hidden = true;
+      suggestBox.innerHTML = '';
+      suggestions = [];
+      activeSuggest = -1;
+      createWhere.setAttribute('aria-expanded', 'false');
+      createWhere.removeAttribute('aria-activedescendant');
+    };
+    function renderSuggest() {
+      suggestBox.innerHTML = suggestions.map((g, i) => `
+        <li class="create-suggest__item${i === activeSuggest ? ' is-active' : ''}" role="option" id="create-suggest-${i}" aria-selected="${i === activeSuggest}" data-i="${i}">
+          <span><b>${esc(g.title)}</b><small>${esc(g.sub)}</small></span>
+        </li>`).join('');
+      suggestBox.hidden = !suggestions.length;
+      createWhere.setAttribute('aria-expanded', String(!!suggestions.length));
+      if (activeSuggest >= 0) createWhere.setAttribute('aria-activedescendant', `create-suggest-${activeSuggest}`);
+      else createWhere.removeAttribute('aria-activedescendant');
+    }
+    function pickSuggest(g) {
+      createWhere.value = [g.title, g.sub].filter(Boolean).join(', ');
+      geo = g;
+      pinGeo(g);
+      closeSuggest();
+      syncWhereIcon();
+      syncCreate();
+    }
+    // Input-Search (design system): search icon while empty, clear (×) once filled
+    const whereGo = document.querySelector('.create-search__go');
+    const whereClear = document.querySelector('.create-search__clear');
+    const syncWhereIcon = () => { const has = !!createWhere.value; whereGo.hidden = has; whereClear.hidden = !has; };
+    whereClear.addEventListener('click', () => {
+      createWhere.value = '';
+      geo = null;
+      closeSuggest();
+      syncWhereIcon();
+      syncCreate();
+      createWhere.focus();
+    });
+    createWhere.addEventListener('input', () => {
+      syncWhereIcon();
+      geo = null;  // typed something new: look it up again
+      clearTimeout(suggestTimer);
+      const where = createWhere.value.trim();
+      if (where.length < 3) return closeSuggest();
+      suggestTimer = setTimeout(async () => {
+        const found = await lookup(where);
+        if (createWhere.value.trim() !== where || document.activeElement !== createWhere) return;  // moved on
+        suggestions = found;
+        activeSuggest = -1;
+        renderSuggest();
+      }, 400);
+    });
+    createWhere.addEventListener('keydown', e => {
+      if (suggestBox.hidden) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const n = suggestions.length;
+        activeSuggest = e.key === 'ArrowDown' ? (activeSuggest + 1) % n : (activeSuggest - 1 + n) % n;
+        renderSuggest();
+      } else if (e.key === 'Escape') closeSuggest();
+    });
+    createWhere.addEventListener('blur', () => setTimeout(closeSuggest, 150));
+    suggestBox.addEventListener('mousedown', e => e.preventDefault());  // keep focus in the field
+    suggestBox.addEventListener('click', e => {
+      const item = e.target.closest('.create-suggest__item');
+      if (item) pickSuggest(suggestions[+item.dataset.i]);
+    });
     document.getElementById('create-search').addEventListener('submit', async e => {
       e.preventDefault();
+      clearTimeout(suggestTimer);
+      if (!suggestBox.hidden && suggestions.length) return pickSuggest(suggestions[Math.max(activeSuggest, 0)]);
       const where = createWhere.value.trim();
       if (!where) return createWhere.focus();
       const found = await locate(where);
       if (createWhere.value.trim() !== where) return;  // changed while we were looking
+      closeSuggest();
       geo = found;
       if (geo) return pinGeo(geo);
-      const city = searchedCity();  // not found: let the map search the text itself
-      showCreateMap(city && !where.toLowerCase().includes(city.toLowerCase()) ? `${where}, ${city}` : where);
+      showCreateMap(where);  // not found: let the map search the text itself
     });
 
     // The new business: name from the search, category from the description
@@ -3187,11 +3286,11 @@
         // Keep exactly what they typed (minus city/state, which have their own fields),
         // then add the locality and city the lookup found if they're missing
         const own = where.split(',').map(t => t.trim())
-          .filter(t => t && ![geo.city, geo.state, 'India'].some(x => x && t.toLowerCase() === x.toLowerCase()))
+          .filter(t => t && ![geo.city, geo.state, geo.country].some(x => x && t.toLowerCase() === x.toLowerCase()))
           .join(', ');
         const extra = [geo.area, geo.city].filter(x => x && !own.toLowerCase().includes(x.toLowerCase()));
         return { ...base, address: [own, ...extra].join(', '),
-          city: geo.city, state: geo.state, zip: geo.zip, lat: geo.lat, lng: geo.lng };
+          city: geo.city, state: geo.state, zip: geo.zip, lat: geo.lat, lng: geo.lng, country: geo.country };
       }
       const fromWhere = parseQuery(where);
       const city = fromWhere.city || searchedCity();

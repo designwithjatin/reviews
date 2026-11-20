@@ -8,7 +8,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | 1 | Search: empty | 10657:4151, button 10785:8965 | Illustration (updated 10673:3461) | Greeting "Hi John!" + search textarea |
 | 2 | Searching | 10657:4266 | Skeleton rows | — |
 | 3 | Results | 10657:4329 | `.business` cards (hover: shadow + `#698EC4` outline) | — |
-| 3b | Create a new profile ("I don't see my business") | 8818:104432 (was 10768:18579) | `main#screen-create`, two columns: **left panel** (696px, white) with description (90px box), location search + live map (opens on the searched city); **right** (#F8F9FA) illustration of a Google search showing a finished Business Profile card ("Johnny's Pizzeria", 4.2 ★, photos) with a dotted arrow, captioned "Tell us a bit about your business. / We’ll handle the rest!". **Create Profile** (disabled until both filled) → screen 4, then the normal flow | No side panel. Back link on later screens = "Back to profile details" → returns here |
+| 3b | Create a new profile ("I don't see my business") | 8818:104432 (was 10768:18579) | `main#screen-create`, two columns: **left panel** (696px, white) with description (90px box), location search (Input-Search: suggestions as you type, worldwide; Figma 8939:257 shows the open dropdown) + live map (opens on the searched city, pins the picked address); **right** (#F8F9FA) illustration of a Google search showing a finished Business Profile card ("Johnny's Pizzeria", 4.2 ★, photos) with a dotted arrow, captioned "Tell us a bit about your business. / We’ll handle the rest!". **Create Profile** (disabled until both filled) → screen 4, then the normal flow | No side panel. Back link on later screens = "Back to profile details" → returns here |
 | 3c | Google sign-in (new business only) | 10773:18769 | `#gauth`, a full-page Google-style account chooser opened by "Connect Google & Continue" when `cameFrom === 'create'`. Picking a row → toast "Your Google Business Profile has been created" → screens 8–10 (listings) | Back link hidden |
 | 4 | Processing | 10657:4415 | AI dot-wave animation | Card flies to top-left; panel shrinks 716→386; steps stack in one by one. Progress **70 (unchanged on purpose)** |
 | 5 | Steps completing | 10657:4470 | Animation | Competitor ✓ "Learnt what your competitors are doing." → Brand ✓ "Updated the brand context for your business." → slides in ✓ "Found 9 gaps in your business profile" |
@@ -53,7 +53,7 @@ On the Google skip-auth inbox, **hovering** a card expands it as an overlay over
 
 ## Copy that the owner set
 - "Back to results" (not "Choose another business").
-- Basic Details header has no "Added from the business details you've shared" note (removed 2026-11-19).
+- Basic Details header shows "Added from the business details you've shared." only for a new business (create path, Figma 8818:93695).
 - Profile form sections: Basic Details → **Category** (Primary/Secondary + Additional Categories, AI notes) → About → Hours → Services → Media → Social Media. Basic Details order: Name/Website → Email, Country, Street, City beside Map → State/Latitude → ZIP/Longitude → Phone/Alt Phone. The opt-in summary uses the same order.
 - The AI Corrected reasoning reads like a concise AI layer that researched competitors (e.g. why the About text changed).
 

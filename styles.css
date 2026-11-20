@@ -1976,8 +1976,10 @@ button { font: inherit; color: inherit; }
   outline: 0;
 }
 .create-card__desc:focus { background: var(--srf-card); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); }
-.create-card__desc::placeholder, .create-search__input::placeholder { color: var(--txt-disabled); }
+.create-card__desc::placeholder { color: var(--txt-disabled); }
+.create-search__input::placeholder { color: var(--txt-secondary); }  /* Input-Search (Figma 8818:104448) */
 .create-card__desc:focus, .create-search:focus-within { border-color: var(--brd-input-active); }
+.create-search:focus-within { background: var(--srf-card); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12); }
 .create-search {
   height: 32px;
   display: flex;
@@ -1989,7 +1991,37 @@ button { font: inherit; color: inherit; }
   background: var(--srf-input);
 }
 .create-search__input { flex: 1; min-width: 0; border: 0; background: none; font: var(--body-sm); color: var(--txt-primary); outline: 0; }
-.create-search .icon-btn { width: 28px; height: 28px; }
+.create-search .icon-btn { width: 32px; height: 32px; margin-right: -4px; border-radius: 2px; }
+/* No browser autofill tint (it painted a light-blue box over the field) */
+.create-search__input:-webkit-autofill,
+.create-search__input:-webkit-autofill:hover,
+.create-search__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--txt-primary);
+  -webkit-box-shadow: 0 0 0 40px var(--srf-input) inset;
+  transition: background-color 9999s;
+}
+.create-where { position: relative; }
+.create-search__clear span { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+.create-search .icon-btn[hidden] { display: none; }
+/* Address suggestions: design-system dropdown (white, Shadow/Bottom/Sm, 4px radius) */
+.create-suggest {
+  position: absolute; z-index: 5; top: calc(100% + 4px); left: 0; right: 0;
+  margin: 0; padding: var(--sp-4) 0; list-style: none;
+  background: var(--srf-card); border-radius: var(--br-4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  max-height: 240px; overflow-y: auto;
+}
+.create-suggest__item { display: flex; align-items: flex-start; gap: var(--sp-8); padding: var(--sp-8) 12px; cursor: pointer; }
+.create-suggest__item span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.create-suggest__item b { font: var(--body-sm); color: var(--txt-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.create-suggest__item small { font: var(--body-xs); color: var(--txt-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.create-suggest__item:hover, .create-suggest__item.is-active { background: #F8F9FA; }
+/* "Added from the business details you’ve shared." (new business only, Figma 8818:93695) */
+.form-card__divider { width: 1px; height: 20px; background: var(--dvdr-secondary); }
+.form-card__note { display: flex; align-items: center; gap: var(--sp-8); font: italic var(--body-xs); color: var(--txt-secondary); }
+.form-card__divider[hidden], .form-card__note[hidden] { display: none; }
+.profile-form[data-view="missing"] .form-card__divider,
+.profile-form[data-view="missing"] .form-card__note { display: none; }
 .create-map { display: flex; flex-direction: column; gap: var(--sp-8); padding: var(--sp-4) 0; margin-top: var(--sp-8); }
 .create-map__label { display: flex; align-items: center; gap: var(--sp-4); font: var(--body-sm); color: var(--txt-secondary); }
 .create-map__frame { height: 200px; border-radius: var(--br-8); overflow: hidden; background: var(--srf-input); }
