@@ -63,6 +63,7 @@ On the Google skip-auth inbox, **hovering** a card expands it as an overlay over
 - **Inbox (drafts):** Edit toggles inline editing; Send Reply marks one card replied; Send Replies marks all, shows the replied state, then the Automate view; **Save and Continue** (same button, `sendAll.dataset.done`) → `runSocialProof()`.
 - **Posts:** clicking a post toggles it; Select All / Clear All; the accounts Select All link appears for partial selections; Share Now is disabled (40% opacity) until ≥1 post and ≥1 account.
 - **Widget:** arrows cycle the reviews; Copy → clipboard + toast; Send as Email → `mailto:` draft; Continue → final.
+- **Header "I’ll Explore Later Myself":** from any screen (modals close) → final. Facebook Page → recommendations goal; new business, skip-auth or nothing picked yet → "first 100"; otherwise the Google rating goal. Hidden on the final screen.
 - **Final:** "Go to Dashboard" and the card links are **not wired** (no destination yet).
 
 ## Last step · first review request (2026-11-19; Figma 8916:149002)

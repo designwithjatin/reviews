@@ -2560,7 +2560,8 @@
       resetTransition();
       const id = run;
       hideToast(true);
-      if (!await done([fade(screenProcessing, 1, 0, motion(250), { easing: EASE_IN })]) || id !== run) return;
+      // (Explore later from the search or create screen: nothing to fade)
+      if (!screenProcessing.hidden && (!await done([fade(screenProcessing, 1, 0, motion(250), { easing: EASE_IN })]) || id !== run)) return;
       screenProcessing.hidden = true;
       screenProcessing.getAnimations().forEach(a => a.cancel());
       exploreLater.hidden = true;
@@ -3088,6 +3089,25 @@
     // =====================================================================
     let cameFrom = 'search';
     const screenCreate = document.getElementById('screen-create');
+
+    // "I’ll Explore Later Myself" (header): from any step, for every kind of user, jump
+    // straight to the last step. The goal matches what we know: Facebook Page →
+    // recommendations; new business, not connected or nothing picked yet → first 100;
+    // otherwise the Google rating goal.
+    exploreLater.addEventListener('click', e => {
+      e.preventDefault();
+      if (!screenFinal.hidden) return;
+      [connectModal, fbModal, optinModal, styleModal, qrrModal].forEach(m => { if (!m.hidden) closeModal(m, true); });
+      gauth.hidden = true;
+      gauth.getAnimations().forEach(a => a.cancel());
+      [screenSearch, screenCreate].forEach(sc => {
+        sc.hidden = true;
+        sc.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      });
+      processing.stop();
+      const variant = isFB() ? 'fb' : (!picked || cameFrom === 'create' || skipAuth) ? 'new' : 'existing';
+      showFinal(variant);
+    });
     const createDesc = document.getElementById('create-desc');
     const createWhere = document.getElementById('create-where');
     const createGo = document.getElementById('create-go');

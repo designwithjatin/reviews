@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-20 · Automate Replies card matches Figma 8814:69700: header 16/24 with divider, rules straight in the card (no inner box), 14px rule titles, 24px row padding, inset divider between rules
+- (pending) · 2026-11-20 · "I’ll Explore Later Myself" jumps to the last step from anywhere (closes any modal); goal = Facebook recommendations for a Page, "first 100" for a new business / not connected / nothing picked, else the Google rating goal
+- 405a9b1 · 2026-11-20 · Automate Replies card matches Figma 8814:69700: header 16/24 with divider, rules straight in the card (no inner box), 14px rule titles, 24px row padding, inset divider between rules
 - e3d5e16 · 2026-11-20 · Read-only inbox: "Connect Google Account" (banner or card hover) opens the connect modal (no opt-in checkbox); after connecting, the AI learns from the reviews again and the connected flow continues from the inbox (drafted replies → send → posts → widget → final)
 - 22fb618 · 2026-11-20 · Profile form matches Figma Ready for Dev: Basic Details order Name/Website → Email, Country, Street, City beside Map → State/Latitude → ZIP/Longitude → Phone/Alt Phone; Category is its own section before About (opt-in summary follows the same order)
 - 4311829 · 2026-11-19 · Skip-auth final shows "Get your first 100 5 Star Reviews" (Surbhi; Figma 8923:152632 header swapped to the first-100 version)
