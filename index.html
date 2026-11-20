@@ -157,12 +157,9 @@
           <label class="create-card__label" for="create-where">Where is it located?</label>
           <div class="create-where">
             <form class="create-search" id="create-search" autocomplete="off">
-              <input class="create-search__input" id="create-where" type="text" autocomplete="off" spellcheck="false" placeholder="Eg : Sindhu Bhavan Road"
-                role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="create-suggest">
-              <button class="icon-btn create-search__go" type="submit" aria-label="Find on map"><img src="assets/search-20.svg" alt="" width="20" height="20"></button>
-              <button class="icon-btn create-search__clear" type="button" aria-label="Clear location" hidden><span><img src="assets/clear.svg" alt="" width="14" height="14"></span></button>
+              <input class="create-search__input" id="create-where" type="text" autocomplete="off" spellcheck="false" placeholder="Eg : Sindhu Bhavan Road">
+              <button class="icon-btn" type="submit" aria-label="Show on map"><img src="assets/search-20.svg" alt="" width="20" height="20"></button>
             </form>
-            <ul class="create-suggest" id="create-suggest" role="listbox" aria-label="Address suggestions" hidden></ul>
           </div>
           <div class="create-map">
             <p class="create-map__label"><img src="assets/location-16.svg" alt="" width="16" height="16">Pin your location</p>
@@ -3142,12 +3139,9 @@
         street, area: a.suburb || a.neighbourhood || a.quarter || '', city,
         state: a.state || '', zip: a.postcode || '', country: a.country || '',
         lat: (+hit.lat).toFixed(4), lng: (+hit.lon).toFixed(4),
-        // Two-line label for the suggestions list
-        title: street || hit.name || hit.display_name.split(',')[0],
-        sub: [a.suburb || a.neighbourhood, city, a.state, a.country].filter(Boolean).filter((v, i, arr) => arr.indexOf(v) === i).join(', '),
       };
     };
-    function lookup(where, limit = 5) {
+    function lookup(where, limit = 1) {
       const q = where.trim();
       const key = `${limit}|${q}`;
       if (!geoCache.has(key)) {
@@ -3158,8 +3152,7 @@
         const near = city && !q.toLowerCase().includes(city.toLowerCase());
         geoCache.set(key, (near ? ask(`${q}, ${city}`) : Promise.resolve([]))
           .then(hits => (hits.length ? hits : ask(q)))
-          .then(hits => hits.map(toGeo).filter((g, i, all) =>  // the same place can come back twice
-            all.findIndex(o => o.title === g.title && o.sub === g.sub) === i)));
+          .then(hits => hits.map(toGeo)));
       }
       return geoCache.get(key);
     }
@@ -3185,88 +3178,14 @@
     // Both answers are needed before a profile can be built
     const syncCreate = () => (createGo.disabled = !createDesc.value.trim() || !createWhere.value.trim());
     [createDesc, createWhere].forEach(el => el.addEventListener('input', syncCreate));
-    // Suggestions as they type (debounced), like a map search box. Picking one fills
-    // the field and pins the map; Enter or the search button takes the first match.
-    const suggestBox = document.getElementById('create-suggest');
-    let suggestions = [];
-    let activeSuggest = -1;
-    let suggestTimer = 0;
-    const closeSuggest = () => {
-      suggestBox.hidden = true;
-      suggestBox.innerHTML = '';
-      suggestions = [];
-      activeSuggest = -1;
-      createWhere.setAttribute('aria-expanded', 'false');
-      createWhere.removeAttribute('aria-activedescendant');
-    };
-    function renderSuggest() {
-      suggestBox.innerHTML = suggestions.map((g, i) => `
-        <li class="create-suggest__item${i === activeSuggest ? ' is-active' : ''}" role="option" id="create-suggest-${i}" aria-selected="${i === activeSuggest}" data-i="${i}">
-          <span><b>${esc(g.title)}</b><small>${esc(g.sub)}</small></span>
-        </li>`).join('');
-      suggestBox.hidden = !suggestions.length;
-      createWhere.setAttribute('aria-expanded', String(!!suggestions.length));
-      if (activeSuggest >= 0) createWhere.setAttribute('aria-activedescendant', `create-suggest-${activeSuggest}`);
-      else createWhere.removeAttribute('aria-activedescendant');
-    }
-    function pickSuggest(g) {
-      createWhere.value = [g.title, g.sub].filter(Boolean).join(', ');
-      geo = g;
-      pinGeo(g);
-      closeSuggest();
-      syncWhereIcon();
-      syncCreate();
-    }
-    // Input-Search (design system): search icon while empty, clear (×) once filled
-    const whereGo = document.querySelector('.create-search__go');
-    const whereClear = document.querySelector('.create-search__clear');
-    const syncWhereIcon = () => { const has = !!createWhere.value; whereGo.hidden = has; whereClear.hidden = !has; };
-    whereClear.addEventListener('click', () => {
-      createWhere.value = '';
-      geo = null;
-      closeSuggest();
-      syncWhereIcon();
-      syncCreate();
-      createWhere.focus();
-    });
-    createWhere.addEventListener('input', () => {
-      syncWhereIcon();
-      geo = null;  // typed something new: look it up again
-      clearTimeout(suggestTimer);
-      const where = createWhere.value.trim();
-      if (where.length < 3) return closeSuggest();
-      suggestTimer = setTimeout(async () => {
-        const found = await lookup(where);
-        if (createWhere.value.trim() !== where || document.activeElement !== createWhere) return;  // moved on
-        suggestions = found;
-        activeSuggest = -1;
-        renderSuggest();
-      }, 400);
-    });
-    createWhere.addEventListener('keydown', e => {
-      if (suggestBox.hidden) return;
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        const n = suggestions.length;
-        activeSuggest = e.key === 'ArrowDown' ? (activeSuggest + 1) % n : (activeSuggest - 1 + n) % n;
-        renderSuggest();
-      } else if (e.key === 'Escape') closeSuggest();
-    });
-    createWhere.addEventListener('blur', () => setTimeout(closeSuggest, 150));
-    suggestBox.addEventListener('mousedown', e => e.preventDefault());  // keep focus in the field
-    suggestBox.addEventListener('click', e => {
-      const item = e.target.closest('.create-suggest__item');
-      if (item) pickSuggest(suggestions[+item.dataset.i]);
-    });
+    // Type, then Enter or the search icon: the address is looked up and shown on the map
+    createWhere.addEventListener('input', () => (geo = null));  // typed something new: look it up again
     document.getElementById('create-search').addEventListener('submit', async e => {
       e.preventDefault();
-      clearTimeout(suggestTimer);
-      if (!suggestBox.hidden && suggestions.length) return pickSuggest(suggestions[Math.max(activeSuggest, 0)]);
       const where = createWhere.value.trim();
       if (!where) return createWhere.focus();
       const found = await locate(where);
       if (createWhere.value.trim() !== where) return;  // changed while we were looking
-      closeSuggest();
       geo = found;
       if (geo) return pinGeo(geo);
       showCreateMap(where);  // not found: let the map search the text itself

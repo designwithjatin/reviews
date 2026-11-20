@@ -2000,22 +2000,6 @@ button { font: inherit; color: inherit; }
   -webkit-box-shadow: 0 0 0 40px var(--srf-input) inset;
   transition: background-color 9999s;
 }
-.create-where { position: relative; }
-.create-search__clear span { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
-.create-search .icon-btn[hidden] { display: none; }
-/* Address suggestions: design-system dropdown (white, Shadow/Bottom/Sm, 4px radius) */
-.create-suggest {
-  position: absolute; z-index: 5; top: calc(100% + 4px); left: 0; right: 0;
-  margin: 0; padding: var(--sp-4) 0; list-style: none;
-  background: var(--srf-card); border-radius: var(--br-4);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  max-height: 240px; overflow-y: auto;
-}
-.create-suggest__item { display: flex; align-items: flex-start; gap: var(--sp-8); padding: var(--sp-8) 12px; cursor: pointer; }
-.create-suggest__item span { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.create-suggest__item b { font: var(--body-sm); color: var(--txt-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.create-suggest__item small { font: var(--body-xs); color: var(--txt-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.create-suggest__item:hover, .create-suggest__item.is-active { background: #F8F9FA; }
 /* "Added from the business details you’ve shared." (new business only, Figma 8818:93695) */
 .form-card__divider { width: 1px; height: 20px; background: var(--dvdr-secondary); }
 .form-card__note { display: flex; align-items: center; gap: var(--sp-8); font: italic var(--body-xs); color: var(--txt-secondary); }

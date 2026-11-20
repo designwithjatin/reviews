@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-20 · Create path: location search works worldwide with live suggestions (design-system dropdown, Figma 8939:257), Input-Search styling (search icon empty / clear when filled, no browser autofill tint), Country filled from the lookup; Basic Details shows "Added from the business details you’ve shared." for new businesses only (Figma 8818:93695)
+- (pending) · 2026-11-20 · Create path: no suggestions list; type, then Enter or the search icon shows the address on the map (Figma 8939:257 updated: no dropdown, search icon)
+- d4f6d8e · 2026-11-20 · Create path: location search works worldwide with live suggestions (design-system dropdown, Figma 8939:257), Input-Search styling (search icon empty / clear when filled, no browser autofill tint), Country filled from the lookup; Basic Details shows "Added from the business details you’ve shared." for new businesses only (Figma 8818:93695)
 - 8c49a42 · 2026-11-20 · Skip-auth posts keep the standard 210px size whatever the count (Figma 8818:90899); removed the 322px `.posts__grid--big` layout
 - 46566a1 · 2026-11-20 · "I’ll Explore Later Myself" jumps to the last step from anywhere (closes any modal); goal = Facebook recommendations for a Page, "first 100" for a new business / not connected / nothing picked, else the Google rating goal
 - 405a9b1 · 2026-11-20 · Automate Replies card matches Figma 8814:69700: header 16/24 with divider, rules straight in the card (no inner box), 14px rule titles, 24px row padding, inset divider between rules
