@@ -3152,9 +3152,26 @@
         const near = city && !q.toLowerCase().includes(city.toLowerCase());
         geoCache.set(key, (near ? ask(`${q}, ${city}`) : Promise.resolve([]))
           .then(hits => (hits.length ? hits : ask(q)))
-          .then(hits => hits.map(toGeo)));
+          .then(hits => (hits.length ? hits.map(toGeo) : fuzzy(near ? `${q}, ${city}` : q).then(g => (g ? [g] : []))
+            .then(gs => gs.length || !near ? gs : fuzzy(q).then(g => (g ? [g] : []))))));
       }
       return geoCache.get(key);
+    }
+    // Typos ("Siddhu Bhavan Road"): Nominatim needs exact names, so fall back to Photon
+    // (typo-tolerant search on the same OpenStreetMap data), then ask Nominatim what's
+    // at that point for the full address (city, state, PIN) and the correct street name.
+    function fuzzy(q) {
+      return fetch('https://photon.komoot.io/api/?' + new URLSearchParams({ q, limit: '1' }))
+        .then(r => (r.ok ? r.json() : { features: [] }))
+        .then(({ features: [hit] = [] }) => {
+          if (!hit) return null;
+          const [lon, lat] = hit.geometry.coordinates;
+          return fetch('https://nominatim.openstreetmap.org/reverse?' + new URLSearchParams(
+            { lat, lon, format: 'jsonv2', addressdetails: '1' }))
+            .then(r => (r.ok ? r.json() : null))
+            .then(rev => rev && rev.address && { ...toGeo({ ...rev, lat, lon }), corrected: true });
+        })
+        .catch(() => null);
     }
     const locate = where => lookup(where, 1).then(([g]) => g || null);
     const pinGeo = g => showCreateMap(`${g.lat},${g.lng}`, 16);
@@ -3204,7 +3221,10 @@
       if (geo) {
         // Keep exactly what they typed (minus city/state, which have their own fields),
         // then add the locality and city the lookup found if they're missing
-        const own = where.split(',').map(t => t.trim())
+        // A typo was corrected: the found street replaces the first part they typed
+        const typed = geo.corrected && geo.street
+          ? [geo.street, ...where.split(',').slice(1)].join(',') : where;
+        const own = typed.split(',').map(t => t.trim())
           .filter(t => t && ![geo.city, geo.state, geo.country].some(x => x && t.toLowerCase() === x.toLowerCase()))
           .join(', ');
         const extra = [geo.area, geo.city].filter(x => x && !own.toLowerCase().includes(x.toLowerCase()));

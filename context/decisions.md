@@ -130,3 +130,4 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **"I’ll Explore Later Myself" always goes to the last step**, from any screen and for every type of user (owner).
 - **Post previews are always 210px**, however many reviews are picked, including for non-auth users (owner, Figma 8818:90899).
 - **New-business location search**: type, then Enter or the search icon → the address is looked up (worldwide, searched city first) and pinned on the map. No suggestions list (owner). Basic Details shows the "Added from the business details you’ve shared." tagline only for new businesses (owner).
+- **Location typos are corrected**: if the exact lookup finds nothing, a typo-tolerant search finds the place and the form gets the corrected street, city, state and PIN (owner).
