@@ -126,3 +126,4 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Transition: left panel shrinks, card flies to top-left, steps stack one by one, slow and natural** (owner; an alternative was rejected).
 - **Skip-auth final shows "Get your first 100 5 Star Reviews"**, not "75 more to reach 4.0": without a connection we don’t know their rating (Surbhi).
 - **Category is its own section, before About**; Basic Details order is Name/Website → Email, Country, Street, City (beside Map) → State/Latitude → ZIP/Longitude → Phone/Alt Phone (owner, Figma 8812:16327 / 8812:51928).
+- **Skip-auth users can connect from the read-only inbox**: connect → AI reasoning again → normal connected flow from the inbox onward. The drafted-fixes note changes to "You can publish them anytime from your dashboard" (owner).

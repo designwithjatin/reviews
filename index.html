@@ -1569,6 +1569,8 @@
       screenFinal.hidden = true;
       exploreLater.hidden = false;
       skipAuth = false;
+      connectFromInbox = false;
+      document.getElementById('optin-listings').closest('label').hidden = false;
       connectedEarly = false;
       draftFixes = false;
       document.getElementById('pub-title').textContent = 'Found 10 Publishers relevant to your business';
@@ -1785,6 +1787,8 @@
       document.getElementById('loc-search').value = '';
       renderGroups();
       renderLocations();
+      // From the read-only inbox the listings step is already behind the user
+      document.getElementById('optin-listings').closest('label').hidden = connectFromInbox;
       openModal(connectModal);
     }
     document.getElementById('connect-open').addEventListener('click', () => {
@@ -1850,6 +1854,11 @@
     document.getElementById('connect-btn').addEventListener('click', async () => {
       const loc = locationsFor(groupIndex)[selectedLoc];
       const optIn = document.getElementById('optin-listings').checked;
+      if (connectFromInbox) {  // read-only inbox: connect, then learn from the reviews
+        await closeModal(connectModal);
+        showToast('Your Google Business Profile is connected');
+        return resumeConnected();
+      }
       if (cameFrom === 'pill') {  // connected first: the picked profile becomes the business
         if (loc.name !== picked.name) fillSelected({ ...picked, name: loc.name, address: loc.address });
         await closeModal(connectModal);
@@ -2006,6 +2015,11 @@
     document.getElementById('fb-search').addEventListener('input', renderFbPages);
     document.getElementById('fb-connect').addEventListener('click', async () => {
       const page = fbPages()[fbSelected];
+      if (connectFromInbox) {  // read-only inbox: connect, then learn from the reviews
+        await closeModal(fbModal);
+        showToast('Your Facebook Page is connected');
+        return resumeConnected();
+      }
       if (cameFrom === 'pill') {  // connected first: the chosen Page becomes the business
         if (page.name !== picked.name) fillSelected({ ...picked, name: page.name });
         await closeModal(fbModal);
@@ -2072,7 +2086,7 @@
       learnFromReviews(id);
     });
     // Connected: learn from the reviews, then the inbox with drafted replies
-    async function learnFromReviews(id) {
+    async function learnFromReviews(id, from = publishers) {
       const live = () => id === run;
       const stepsIn = showSteps([
         { ai: true, label: 'Learning from your reviews' },
@@ -2080,7 +2094,7 @@
         { icon: 'step-profile.svg', label: 'Learning your reply pattern...' },
       ]);
       processing.setPhrases(['Learning from your reviews...', 'Reading your past reviews ...', 'Learning your reply pattern ...']);
-      if (!await swapPanel(publishers, animPanel) || !live()) return;
+      if (!await swapPanel(from, animPanel) || !live()) return;
       processing.start();
       if (!await stepsIn || !await hold(T3.phase) || !live()) return;
       runReviews(id);
@@ -2191,6 +2205,30 @@
       learnFromReviews(id);
     });
     inboxContinue.addEventListener('click', () => runSocialProof());
+
+    // Read-only inbox → "Connect Google Account" (banner or a card's hover note):
+    // the usual connect modal, then the AI learns from the reviews again and the
+    // connected flow carries on from the inbox (drafted replies, send, posts, widget, final)
+    let connectFromInbox = false;
+    inboxRecent.addEventListener('click', e => {
+      if (!e.target.closest('.link-btn')) return;
+      connectFromInbox = true;
+      if (isFB()) return openFbauth();
+      openConnectModal();
+    });
+    async function resumeConnected() {
+      connectFromInbox = false;
+      resetTransition();
+      const id = run;
+      skipAuth = false;
+      // The drafted fixes can now be published (connected), so the note changes
+      const fixes = milestones.querySelector('.milestone--draft .milestone__sub');
+      if (fixes) fixes.textContent = 'You can publish them anytime from your dashboard';
+      inboxContinue.hidden = true;
+      sendAll.hidden = false;
+      inbox.querySelector('.inbox__count-wrap').hidden = false;
+      learnFromReviews(id, inbox);
+    }
 
     // Read-only card hover (Figma 8818:89672): replies need Google, so hovering a card
     // expands it over the next one with a connect note; no action icons
