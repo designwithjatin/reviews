@@ -2072,10 +2072,6 @@ button { font: inherit; color: inherit; }
 .review-card--recent { padding-bottom: var(--sp-16); }
 .review-card--recent .review-card__profile { min-height: 24px; }
 
-/* Two big posts instead of six */
-.posts__grid--big { grid-template-columns: repeat(auto-fill, 322px); }
-.posts__grid--big .post { width: 322px; height: 322px; }
-.posts__grid--big .post__art { transform: scale(0.7667); }  /* 420 → 322 */
 .inbox__count-wrap { display: inline-flex; align-items: center; gap: var(--sp-8); }
 
 /* ==========================================================

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=67">
+  <link rel="stylesheet" href="styles.css?v=68">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -2387,7 +2387,6 @@
 
     // Every post starts selected, so Share Now is ready to go (owner)
     function renderPosts() {
-      postsGrid.classList.toggle('posts__grid--big', skipAuth);
       const picks = skipAuth ? [...recentReviews()].sort((a, b) => b.stars - a.stars).slice(0, 2) : topReviews();
       postsGrid.innerHTML = picks.map((r, i) => `
         <label class="post">

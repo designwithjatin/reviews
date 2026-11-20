@@ -128,3 +128,4 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Category is its own section, before About**; Basic Details order is Name/Website → Email, Country, Street, City (beside Map) → State/Latitude → ZIP/Longitude → Phone/Alt Phone (owner, Figma 8812:16327 / 8812:51928).
 - **Skip-auth users can connect from the read-only inbox**: connect → AI reasoning again → normal connected flow from the inbox onward. The drafted-fixes note changes to "You can publish them anytime from your dashboard" (owner).
 - **"I’ll Explore Later Myself" always goes to the last step**, from any screen and for every type of user (owner).
+- **Post previews are always 210px**, however many reviews are picked, including for non-auth users (owner, Figma 8818:90899).
