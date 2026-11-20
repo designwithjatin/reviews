@@ -131,3 +131,4 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Post previews are always 210px**, however many reviews are picked, including for non-auth users (owner, Figma 8818:90899).
 - **New-business location search**: type, then Enter or the search icon → the address is looked up (worldwide, searched city first) and pinned on the map. No suggestions list (owner). Basic Details shows the "Added from the business details you’ve shared." tagline only for new businesses (owner).
 - **Location typos are corrected**: if the exact lookup finds nothing, a typo-tolerant search finds the place and the form gets the corrected street, city, state and PIN (owner).
+- **View All Publishers shows only the first 20** of the other publishers, not the whole list (owner, Figma 8902:98605). Their Opt-in button appears on hover, as in the design; "Opt-in All" sits in the header row. Apple Maps and Bing Maps are hidden in the design, so they are skipped.

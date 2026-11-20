@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mapbox_logo.svg">
+<g clip-path="url(#clip0_0_7)">
+<rect width="24" height="24" rx="12" fill="white"/>
+<path id="Union" d="M12 0C18.6277 0 24 5.37233 24 12C24 18.6277 18.6277 24 12 24C5.37233 24 0 18.6277 0 12C7.75741e-06 5.37234 5.37233 1.99269e-05 12 0ZM17.5078 6.49316C15.1186 4.1175 11.3389 4.02261 9.05762 6.30371C4.95786 10.4035 6.25275 17.6755 6.26367 17.7363C6.32102 17.7465 13.609 19.0297 17.6963 14.9424C19.9773 12.6613 19.8965 8.86886 17.5078 6.49316ZM14.5518 9.44922L16.9678 10.623L14.5518 11.7979L13.377 14.2139L12.2031 11.7979L9.78711 10.623L12.2031 9.44922L13.377 7.03223L14.5518 9.44922Z" fill="black"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_7">
+<rect width="24" height="24" rx="12" fill="white"/>
+</clipPath>
+</defs>
+</svg>

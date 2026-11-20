@@ -51,6 +51,9 @@ Search returns **Google listings only**. Facebook is reached only through the **
 ## Read-only inbox · hover (2026-11-19; Figma 8818:89180 / 8818:89672)
 On the Google skip-auth inbox, **hovering** a card expands it as an overlay over the card below (nothing moves): hover border + shadow, and a note under the review: Google G + "To view & manage replies, **Connect Google Account**". No action icons (open / copy / reply) on these cards. The link isn't wired yet.
 
+## Publishers list · View All Publishers (2026-11-20; Figma 8902:98605)
+On the listings screen, the "Opt-in into more platforms later in the product" card (logo stack + **+94**) has **View All Publishers ↓**. It opens the card into a list in place (`#pub-more-list`): the button becomes **Hide Publishers ↑**, **Opt-in All** appears on the right of that header row, and the **first 20** publishers follow (Yahoo, Safari, Apple Siri, Microsoft Cortana, DuckDuckGo Via 3rd party, Esri, Garmin, Glympse, Here we go city, Jorcecisely, Kanzi Maps, Magellan, Mapbox, Mapquest, Mapquest Maps, NavInfo, OpenStreetMap, Simacan, SimpliRoute, Sygic; Apple Maps and Bing Maps are hidden in the design). Logos are grayscale in the list, full colour in the opt-in modal (`assets/pub-x-*`). Each row's **Opt-in** appears on hover and opens the same opt-in modal; **Opt-in All** opens it for all 20. Resets to collapsed with the rest of the screen.
+
 ## Copy that the owner set
 - "Back to results" (not "Choose another business").
 - Basic Details header shows "Added from the business details you've shared." only for a new business (create path, Figma 8818:93695).

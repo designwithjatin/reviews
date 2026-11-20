@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=Spline+Sans+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=69">
+  <link rel="stylesheet" href="styles.css?v=70">
 </head>
 <body>
   <!-- Figma 10657:4151 · Onboarding -->
@@ -606,12 +606,17 @@
           </div>
           <div class="pub-group">
             <div class="pub-group__head pub-group__head--note">Opt-in into more platforms later in the product</div>
-            <div class="pub-card pub-card--lead pub-card--more">
-              <span class="logo-stack" aria-hidden="true">
-                <img src="assets/more-1.svg" alt=""><img src="assets/more-2.svg" alt=""><img src="assets/more-3b.png" alt="">
-                <span class="logo-stack__mq"><img src="assets/more-4.svg" alt=""></span><span class="logo-stack__more">+94</span>
-              </span>
-              <button class="link-btn" type="button">View All Publishers<img src="assets/arrow-down.svg" alt="" width="20" height="20"></button>
+            <!-- View All Publishers (Figma 8902:98605): the card opens into the list, first 20 only -->
+            <div class="pub-more" id="pub-more">
+              <div class="pub-card pub-card--lead pub-card--more">
+                <span class="logo-stack" aria-hidden="true">
+                  <img src="assets/more-1.svg" alt=""><img src="assets/more-2.svg" alt=""><img src="assets/more-3b.png" alt="">
+                  <span class="logo-stack__mq"><img src="assets/more-4.svg" alt=""></span><span class="logo-stack__more">+94</span>
+                </span>
+                <button class="link-btn" type="button" id="pub-more-toggle" aria-expanded="false" aria-controls="pub-more-list"><span>View All Publishers</span><img src="assets/arrow-down.svg" alt="" width="20" height="20"></button>
+                <button class="link-btn pub-more__all" type="button" id="pub-more-all" hidden>Opt-in All</button>
+              </div>
+              <div class="pub-list pub-list--more" id="pub-more-list" hidden></div>
             </div>
           </div>
         </div>
@@ -1582,6 +1587,7 @@
       document.getElementById('pub-title').textContent = 'Found 10 Publishers relevant to your business';
       document.getElementById('pub-active').hidden = false;
       document.getElementById('list-later').hidden = true;
+      collapseMore();
       document.getElementById('inbox-recent').hidden = true;
       inboxContinue.hidden = true;
       document.getElementById('inbox-later').hidden = true;
@@ -1625,6 +1631,70 @@
       { id: 'tripadvisor', name: 'Tripadvisor' }, { id: 'uber', name: 'Uber' }, { id: 'here', name: 'Here' },
       { id: 'angi', name: 'Angi' },
     ];
+    // "View All Publishers" (Figma 8902:98605): the first 20 of the +94 other publishers.
+    // Logos are drawn in grayscale in the list (full colour in the opt-in modal).
+    const xl = f => `<img src="assets/${f}" alt="" width="24" height="24">`;
+    const MORE_PUBLISHERS = [
+      { id: 'x-yahoo', name: 'Yahoo', logo: xl('pub-x-yahoo.svg') },
+      { id: 'x-safari', name: 'Safari', logo: xl('pub-x-safari.svg') },
+      { id: 'x-siri', name: 'Apple Siri', logo: xl('pub-x-siri-1.svg') + xl('pub-x-siri-2.png') },
+      { id: 'x-cortana', name: 'Microsoft Cortana', logo: xl('pub-x-cortana-base.svg')
+        + '<span class="pub-logo-x__mask" style="-webkit-mask-image:url(assets/pub-x-cortana-mask.svg);mask-image:url(assets/pub-x-cortana-mask.svg)"><img src="assets/pub-x-cortana-fill.svg" alt=""></span>' },
+      { id: 'x-duckduckgo', name: 'DuckDuckGo Via 3rd party', logo: xl('pub-x-duckduckgo.svg') },
+      { id: 'x-esri', name: 'Esri', logo: xl('pub-x-esri.png') },
+      { id: 'x-garmin', name: 'Garmin', logo: xl('pub-x-garmin.svg') },
+      { id: 'x-glympse', name: 'Glympse', logo: xl('pub-x-glympse.png') },
+      { id: 'x-herewego', name: 'Here we go city', logo: xl('pub-x-herewego.svg'), shape: 'wide' },
+      { id: 'x-jorcecisely', name: 'Jorcecisely', logo: xl('pub-x-jorcecisely.svg') },
+      { id: 'x-kanzi', name: 'Kanzi Maps', logo: xl('pub-x-kanzi.png') },
+      { id: 'x-magellan', name: 'Magellan', logo: xl('pub-x-magellan.png') },
+      { id: 'x-mapbox', name: 'Mapbox', logo: xl('pub-x-mapbox.svg') },
+      { id: 'x-mapquest', name: 'Mapquest', logo: xl('pub-x-mapquest.svg') },
+      { id: 'x-mapquest-maps', name: 'Mapquest Maps', logo: xl('pub-x-mapquest-maps.svg') },
+      { id: 'x-navinfo', name: 'NavInfo', logo: xl('pub-x-navinfo.png') },
+      { id: 'x-osm', name: 'OpenStreetMap', logo: xl('pub-x-osm.png') },
+      { id: 'x-simacan', name: 'Simacan', logo: xl('pub-x-simacan.png') },
+      { id: 'x-simpliroute', name: 'SimpliRoute', logo: xl('pub-x-simpliroute.png') },
+      { id: 'x-sygic', name: 'Sygic', logo: xl('pub-x-sygic.svg'), shape: 'sygic' },
+    ];
+    const ALL_PUBLISHERS = [...PUBLISHERS, ...MORE_PUBLISHERS];
+    const moreLogo = (pb, color = false) =>
+      `<span class="pub-logo-x${pb.shape ? ` pub-logo-x--${pb.shape}` : ''}${color ? ' pub-logo-x--color' : ''}" aria-hidden="true">${pb.logo}</span>`;
+    const pubMore = document.getElementById('pub-more');
+    const pubMoreList = document.getElementById('pub-more-list');
+    const pubMoreToggle = document.getElementById('pub-more-toggle');
+    const pubMoreAll = document.getElementById('pub-more-all');
+    function collapseMore() {  // back to "View All Publishers" (also on every reset)
+      pubMore.classList.remove('is-open');
+      pubMoreList.hidden = true;
+      pubMoreAll.hidden = true;
+      pubMoreToggle.setAttribute('aria-expanded', 'false');
+      pubMoreToggle.querySelector('span').textContent = 'View All Publishers';
+      pubMoreToggle.querySelector('img').src = 'assets/arrow-down.svg';
+    }
+    pubMoreToggle.addEventListener('click', async () => {
+      const open = pubMoreList.hidden;  // currently closed → open it
+      if (!open) {
+        await done([fade(pubMoreList, 1, 0, motion(160), { easing: EASE_IN })]);
+        pubMoreList.getAnimations().forEach(a => a.cancel());
+        return collapseMore();
+      }
+      if (!pubMoreList.children.length) {
+        pubMoreList.innerHTML = MORE_PUBLISHERS.map(pb => `
+          <div class="pub-row">
+            <span class="pub-row__name">${moreLogo(pb)}${pb.name}</span>
+            <button class="link-btn" type="button" data-pub="${pb.id}" aria-label="Opt-in to ${pb.name}">Opt-in</button>
+          </div>`).join('');
+      }
+      pubMore.classList.add('is-open');
+      pubMoreList.hidden = false;
+      pubMoreAll.hidden = false;
+      pubMoreToggle.setAttribute('aria-expanded', 'true');
+      pubMoreToggle.querySelector('span').textContent = 'Hide Publishers';
+      pubMoreToggle.querySelector('img').src = 'assets/arrow-up.svg';
+      [...pubMoreList.children].forEach((row, i) => fade(row, 0, 1, motion(T2.formIn),
+        { delay: motion(Math.min(i, 12) * 25), from: { transform: 'translateY(6px)' }, to: { transform: 'none' } }));
+    });
     const GROUPS = ['Barista Coffee', 'Nothing Before Coffee', 'Sleepy Owl Coffee', 'Blue Tokai Coffee', 'Chaayos'];
 
     // ---- Modal + toast helpers ----
@@ -2041,10 +2111,10 @@
     // ---- 3 · Opt-in modal ----
     let optinFor = [];
     function openOptin(ids) {
-      optinFor = PUBLISHERS.filter(pb => ids.includes(pb.id));
+      optinFor = ALL_PUBLISHERS.filter(pb => ids.includes(pb.id));
       document.getElementById('optin-icons').innerHTML =
         '<img src="assets/gbp-location.svg" alt="Google Business Profile" width="24" height="24"><span class="optin-arrow" aria-hidden="true"><img src="assets/sync-arrow.svg" alt=""></span>'
-        + optinFor.map(pb => `<img src="assets/pub-${pb.id}.svg" alt="${pb.name}" class="pub-logo pub-logo--color">`).join('');
+        + optinFor.map(pb => pb.logo ? moreLogo(pb, true) : `<img src="assets/pub-${pb.id}.svg" alt="${pb.name}" class="pub-logo pub-logo--color">`).join('');
       const now = new Date();
       const pad = n => String(n).padStart(2, '0');
       document.getElementById('optin-edited').textContent =
@@ -2070,10 +2140,11 @@
       openModal(optinModal);
     }
     document.getElementById('list-all').addEventListener('click', () => openOptin(PUBLISHERS.map(pb => pb.id)));
-    pubList.addEventListener('click', e => {
+    [pubList, pubMoreList].forEach(list => list.addEventListener('click', e => {
       const btn = e.target.closest('[data-pub]');
       if (btn) openOptin([btn.dataset.pub]);
-    });
+    }));
+    pubMoreAll.addEventListener('click', () => openOptin(MORE_PUBLISHERS.map(pb => pb.id)));
 
     // ---- 4 · Opt-in → learning from reviews ----
     document.getElementById('optin-btn').addEventListener('click', async () => {

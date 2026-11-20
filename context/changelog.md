@@ -2,7 +2,8 @@
 
 One line per commit, newest first: `hash · date · summary`. Add the line in the same piece of work as the commit. A commit can't contain its own hash, so write `(pending)` and fill it in with the next commit.
 
-- (pending) · 2026-11-20 · Create path: typos in the location ("Siddhu Bhavan Road") still fill the form: Photon fuzzy search, then Nominatim reverse for city/state/PIN and the corrected street name
+- (pending) · 2026-11-20 · Publishers: "View All Publishers" opens the card into a list of the first 20 of the other publishers (Yahoo … Sygic) with grayscale logos, "Opt-in" on hover, "Opt-in All" and "Hide Publishers" (Figma 8902:98605); opt-in modal handles any publisher
+- 313bf2f · 2026-11-20 · Create path: typos in the location ("Siddhu Bhavan Road") still fill the form: Photon fuzzy search, then Nominatim reverse for city/state/PIN and the corrected street name
 - bf1bc1e · 2026-11-20 · Create path: no suggestions list; type, then Enter or the search icon shows the address on the map (Figma 8939:257 updated: no dropdown, search icon)
 - d4f6d8e · 2026-11-20 · Create path: location search works worldwide with live suggestions (design-system dropdown, Figma 8939:257), Input-Search styling (search icon empty / clear when filled, no browser autofill tint), Country filled from the lookup; Basic Details shows "Added from the business details you’ve shared." for new businesses only (Figma 8818:93695)
 - 8c49a42 · 2026-11-20 · Skip-auth posts keep the standard 210px size whatever the count (Figma 8818:90899); removed the 322px `.posts__grid--big` layout
