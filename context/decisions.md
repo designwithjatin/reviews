@@ -124,7 +124,7 @@ Newest first. Each entry: **date · decision**, why, and who decided (owner = Ja
 - **Search works from any keyword and any city** (owner).
 - **"Back to results"** replaces "Choose another business" (owner).
 - **Transition: left panel shrinks, card flies to top-left, steps stack one by one, slow and natural** (owner; an alternative was rejected).
-- **Skip-auth final shows "Get your first 100 5 Star Reviews"**, not "75 more to reach 4.0": without a connection we don’t know their rating (Surbhi).
+- **Skip-auth final shows the rating goal** ("Get 75 more 5-star reviews to reach 4.0 Stars"), like any existing business: the public rating is known without connecting (owner, 2026-11-21). "First 100" is only for a new business.
 - **Category is its own section, before About**; Basic Details order is Name/Website → Email, Country, Street, City (beside Map) → State/Latitude → ZIP/Longitude → Phone/Alt Phone (owner, Figma 8812:16327 / 8812:51928).
 - **Skip-auth users can connect from the read-only inbox**: connect → AI reasoning again → normal connected flow from the inbox onward. The drafted-fixes note changes to "You can publish them anytime from your dashboard" (owner).
 - **"I’ll Explore Later Myself" always goes to the last step**, from any screen and for every type of user (owner).

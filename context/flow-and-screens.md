@@ -30,7 +30,7 @@ Left = `aside.setup-panel` (steps). Right = `.workspace` panel. "Parent" = the A
 | S2 | Skip-auth: listings | Lfz2…/8711:46830 | `#publishers` with "Found 7 Publishers…", `#list-later` shown, `#pub-active` hidden; opt-in works | ◌ "9 Profile fixes drafted." Progress **120** |
 | S3 | Skip-auth: inbox | Lfz2…/8812:49960 | `#inbox-recent`: connect banner, 5 read-only cards (hover expands the card with a connect note); `#inbox-continue`. **Connect Google Account** (banner or card) → connect modal without the opt-in checkbox (Facebook result: Connect Facebook) → toast → AI "Learning from your reviews" steps → connected inbox (screen 13 onward) | ◌ "Found 7 Relevant Publishers" (only if listings were skipped; opting in gives ✓ "Opted in!"); steps ✓ "Found 130 reviews on Google", ✓ "Updated your brand context", AI "Brought in your latest Google reviews. Take a look at what your customers are saying." |
 | S4 | Skip-auth: posts | Lfz2…/8818:90899 | `#social` with the best recent reviews as posts, same 210px size as the connected flow whatever the count | ◌ "Read your past reviews"; same steps as screen 16. Progress **250** |
-| S5 | Skip-auth: final | Lfz2…/8923:152632 | `[data-for=new]` head: "Get **your first 100** 5 Star Reviews" (no rating known without connecting); widget skipped | — |
+| S5 | Skip-auth: final | Lfz2…/8726:90220 | Same as the connected "existing" final: "Get **75 more 5-star reviews** to reach 4.0 Stars" (the public rating is known); widget skipped | — |
 | 20 | Final | 10758:17527 (cards 10758:17567) | `#screen-final`, no side panel: "Get **75 more 5-star reviews** to reach 4.0 Stars", rating bar (star pops at 1.0, slides with the fill to 3.8), "Go to Dashboard", "Send First Review Request", 3 tool cards; hover reveals each card's description + CTA (Send Quick Review Request / Download QR Code / Preview Feedback Form) | Header link hidden |
 
 ## Facebook path (2026-11-18; Figma Lfz2oHviZXGc9NDmp8JEpq)
@@ -66,7 +66,7 @@ On the listings screen, the "Opt-in into more platforms later in the product" ca
 - **Inbox (drafts):** Edit toggles inline editing; Send Reply marks one card replied; Send Replies marks all, shows the replied state, then the Automate view; **Save and Continue** (same button, `sendAll.dataset.done`) → `runSocialProof()`.
 - **Posts:** clicking a post toggles it; Select All / Clear All; the accounts Select All link appears for partial selections; Share Now is disabled (40% opacity) until ≥1 post and ≥1 account.
 - **Widget:** arrows cycle the reviews; Copy → clipboard + toast; Send as Email → `mailto:` draft; Continue → final.
-- **Header "I’ll Explore Later Myself":** from any screen (modals close) → final. Facebook Page → recommendations goal; new business, skip-auth or nothing picked yet → "first 100"; otherwise the Google rating goal. Hidden on the final screen.
+- **Header "I’ll Explore Later Myself":** from any screen (modals close) → final. Facebook Page → recommendations goal; new business or nothing picked yet → "first 100"; otherwise the Google rating goal (skip-auth included). Hidden on the final screen.
 - **Final:** "Go to Dashboard" and the card links are **not wired** (no destination yet).
 
 ## Last step · first review request (2026-11-19; Figma 8916:149002)

@@ -2609,8 +2609,8 @@
       [...widget.children].forEach((el, i) => fade(el, 0, 1, motion(T2.formIn),
         { delay: motion(i * 120), from: { transform: 'translateY(10px)' }, to: { transform: 'none' } }));
     }
-    shareNow.addEventListener('click', () => (skipAuth ? showFinal('new') : runWidget(postsGrid.querySelectorAll('input:checked').length)));
-    document.getElementById('posts-later').addEventListener('click', () => (skipAuth ? showFinal('new') : runWidget(0)));
+    shareNow.addEventListener('click', () => (skipAuth ? showFinal('existing') : runWidget(postsGrid.querySelectorAll('input:checked').length)));
+    document.getElementById('posts-later').addEventListener('click', () => (skipAuth ? showFinal('existing') : runWidget(0)));
 
     // Copy / email the embed code
     const codeText = () => document.getElementById('widget-code').textContent;
@@ -3168,8 +3168,8 @@
 
     // "I’ll Explore Later Myself" (header): from any step, for every kind of user, jump
     // straight to the last step. The goal matches what we know: Facebook Page →
-    // recommendations; new business, not connected or nothing picked yet → first 100;
-    // otherwise the Google rating goal.
+    // recommendations; new business or nothing picked yet → first 100; otherwise the
+    // Google rating goal (also when not connected: the public rating is known).
     exploreLater.addEventListener('click', e => {
       e.preventDefault();
       if (!screenFinal.hidden) return;
@@ -3181,7 +3181,7 @@
         sc.querySelectorAll('*').forEach(el => el.getAnimations().forEach(a => a.cancel()));
       });
       processing.stop();
-      const variant = isFB() ? 'fb' : (!picked || cameFrom === 'create' || skipAuth) ? 'new' : 'existing';
+      const variant = isFB() ? 'fb' : (!picked || cameFrom === 'create') ? 'new' : 'existing';
       showFinal(variant);
     });
     const createDesc = document.getElementById('create-desc');
